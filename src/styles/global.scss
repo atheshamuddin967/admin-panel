@@ -1,0 +1,27 @@
+
+@import"./variables.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.main{
+  font-family: "Inter",sans-serif;
+  background-color:$main-bg
+}
+.containers{
+  display: flex;
+}
+.menuContainer{
+  width: 256px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.contentContainer{
+  width: 100%;
+
+}

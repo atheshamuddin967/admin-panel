@@ -1,0 +1,54 @@
+@import"../../styles/variables.scss";
+.heading{
+    font-family: "poppins";
+    font-size: 20px;
+    font-weight: 500px;
+    color: $sider-color;
+}
+
+.boxitem{
+padding: 10px;
+border-radius: 12px;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 5px 0px;
+}
+.details h5{
+    font-weight: 500;
+    font-size: 29px;
+    margin-bottom: -5px !important;
+    font-family: $Montserrat-family;
+    color:$text-color;
+}
+.details h6{
+    color: $sider-color;
+    font-size: 16px;
+//   line-height: 24px;
+    font-family: $Montserrat-family;
+
+}
+.details p{
+    color: $sider-color;
+    font-size: 12px;
+    font-family:$Montserrat-family ;
+    margin-bottom: 0px !important;
+}
+.box-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    // padding: 11px;
+    text-align: center;
+    align-items: center;
+    line-height: 40px;
+    // background-color: aqua;
+img{
+    max-width: "100%";
+}
+}
+.box-icon img{
+    width: 24px;
+}

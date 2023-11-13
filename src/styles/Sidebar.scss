@@ -1,0 +1,46 @@
+.menu-item {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter";
+    color: green;
+  }
+  .css-1t8x7v1 > .ps-menu-button:hover {
+    background-color: #e6e6e6 !important;
+  }
+  .css-1t8x7v1 > .ps-menu-button {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* -webkit-align-items: center; */
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    height: 48px !important;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-left: 20px;
+    /* font-weight: 400; */
+    /* font-family: "Inter" !important; */
+  }
+  .icons-side {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }
+  :where(.css-dev-only-do-not-override-1adbn6x)[class^="ant-layout"],
+  :where(.css-dev-only-do-not-override-1adbn6x)[class*=" ant-layout"] {
+    font-family: "Inter";
+    font-size: 16px;
+    box-sizing: border-box;
+    font-weight: 400;
+    color: #686868 !important;
+  }
+  .ps-menu-label {
+    align-items: center !important;
+    display: flex;
+  }
+  
