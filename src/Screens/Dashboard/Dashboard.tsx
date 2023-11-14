@@ -18,9 +18,50 @@ function Dashboard() {
         </div>
         <div className="row">
           <div className="col-sm-6">
-            <Charts />
+            <div className="chart-section">
+              <div className="flex-box">
+                <div className="month">
+                  <p>
+                    <span>
+                      <i className="fa-solid fa-arrow-up"></i>3.46
+                    </span>
+                    since last month
+                  </p>
+                </div>
+                <div className="year">
+                  <p>
+                    Yearly <i className="fa-solid fa-chevron-down"></i>
+                  </p>
+                </div>
+              </div>
+              <div className="chart-detail">
+                <h6>Connected device</h6>
+                <h5>220</h5>
+              </div>
+              <Charts />
+            </div>
           </div>
-          <div className="col-sm-6"></div>
+          <div className="col-sm-6">
+            <div className="chart-section">
+              <div className="flex-box">
+                <div className="chart-detail">
+                  <h6>Total</h6>
+                  <h5>300</h5>
+                </div>
+                <div className="month">
+                  <p>Impliment Device</p>
+                </div>
+
+                <div className="year">
+                  <p>
+                    Yearly <i className="fa-solid fa-chevron-down"></i>
+                  </p>
+                </div>
+              </div>
+
+              <Charts />
+            </div>
+          </div>
         </div>
       </div>
     </div>

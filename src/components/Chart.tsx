@@ -11,7 +11,9 @@ function Charts() {
           labels: ["2016", "2017", "2019", "2020", "2021", "2021", "2023"],
           datasets: [
             {
-              label: "",
+              // label: "",
+
+              // borderCapStyle: 'none',
               backgroundColor: "#25CD25",
               borderColor: "rgba(220, 220, 220, 1)",
               pointBackgroundColor: "#25CD25",
@@ -24,28 +26,28 @@ function Charts() {
           plugins: {
             legend: {
               labels: {
-                // color: getStyle("--cui-body-color"),
+                color: "#25CD25",
               },
             },
           },
-          // scales: {
-          //   x: {
-          //     grid: {
-          //       color: getStyle("--cui-border-color-translucent"),
-          //     },
-          //     ticks: {
-          //       color: getStyle("--cui-body-color"),
-          //     },
-          //   },
-          //   y: {
-          //     grid: {
-          //       color: getStyle("--cui-border-color-translucent"),
-          //     },
-          //     ticks: {
-          //       color: getStyle("--cui-body-color"),
-          //     },
-          //   },
-          // },
+          scales: {
+            x: {
+              grid: {
+                color: "#25CD25",
+              },
+              ticks: {
+                color: "#25CD25",
+              },
+            },
+            y: {
+              grid: {
+                color: "#25CD25",
+              },
+              ticks: {
+                color: "#25CD25",
+              },
+            },
+          },
         }}
       />
     </div>

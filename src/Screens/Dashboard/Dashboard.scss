@@ -36,6 +36,10 @@ margin: 5px 0px;
     font-family:$Montserrat-family ;
     margin-bottom: 0px !important;
 }
+.details p i{
+    transform: rotate(40deg);
+    margin-right: 5px;
+}
 .box-icon {
     width: 40px;
     height: 40px;
@@ -51,4 +55,51 @@ img{
 }
 .box-icon img{
     width: 24px;
+}
+.flex-box{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.month p{
+    font-size: 12px;
+    font-family: $Montserrat-family;
+    color: $sider-color;
+    margin-bottom: 0;
+}
+.year p{
+    font-size: 16px;
+    color: #454545;
+    font-family: "Inter";
+    margin-bottom: 0;
+}
+.month p span{
+    color: #27AE60;
+}
+.month p i{
+    transform: rotate(40deg);
+    margin-right: 5px;
+    
+}
+.chart-detail h6{
+    font-family: "inter";
+    color: $sider-color;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0  !important;
+}
+.chart-detail h5{
+    font-family: "inter";
+   color: $text-color;
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -2px;
+    margin-bottom: 0;
+}
+.chart-section{
+    padding: 10px;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: 10px 0;
 }

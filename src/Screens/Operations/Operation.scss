@@ -1,0 +1,141 @@
+@import "../../styles/variables.scss";
+.maps-box{
+    border-radius: 16px;
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+.flex ul{
+    margin: 0 0;
+    padding: 0 0;
+    li{
+        list-style: none;
+        display: inline-block;
+        margin: 0 5px;
+        img{width: 12px;}
+    }
+}
+
+.dragitem{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    .itemslist{
+        padding: 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        width: calc(50% - 5px);
+        margin-right: 5px;
+        margin-bottom: 5px;
+        p{text-align: center;
+        font-family: "poppins";
+    font-size: 10px;
+    margin-bottom: 0;
+    
+    color:$sider-color;}
+        border-radius: 5px;
+        box-sizing: border-box;
+    
+    }
+}
+.flex2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    p{font-family: "poppins";
+    font-size: 16px;
+font-weight: 600;
+color: $sider-color;
+margin: 2px;}
+}
+.dragbox{
+    padding: 10px ;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 16px;
+    margin-top: 5px;
+    h3{
+font-family:"inter";
+font-weight: 400;
+font-size: 20px;
+color: $sider-color;
+text-align: center;
+margin: 0 0;
+    }
+}
+.empty-box{
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: 300px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+   margin-top: 5px;
+
+    h3{
+        font-family: "poppins";
+        color: $sider-color;
+        font-size: 25px;
+        font-weight: 400;
+        align-items: center;
+        text-align: center;
+        line-height: 300px;
+        
+    }
+}
+.imgbox{
+    width: 100%;
+    height: 100vh;
+    position:fixed;
+    background-color: rgba(0, 0, 0, 0.9);
+    top: 0%;
+    left: 0;
+    z-index: 10000;
+    
+}
+.close-btns2{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    z-index: 100;
+    // background-color: aliceblue;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+    i{
+        font-size: 30px;
+        color: #fff;
+    }
+}
+.secondbox{
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+    top: 10%;
+}
+.bottom{
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+    // text-align: center;
+    ul{margin: 0 auto   ;
+    padding: 0 0;
+}
+li{list-style: none;
+display: inline-flex;
+margin: 0 5px;
+// width: 30px;
+height: 30px;
+overflow: hidden;
+}
+p{float: right;
+margin-right: 10px;
+color: #ffff;}
+}

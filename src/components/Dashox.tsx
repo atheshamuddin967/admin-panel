@@ -7,7 +7,10 @@ function Dashbox({ data }: any) {
           <h5>{data.clints}</h5>
           <h6>{data.heading}</h6>
           <p>
-            <span style={{ color: data.perColor }}>{data.todaypercent}%</span>{" "}
+            <span style={{ color: data.perColor }}>
+              <i className="fa-solid fa-arrow-up"></i>
+              {data.todaypercent}%
+            </span>{" "}
             Today
           </p>
         </div>

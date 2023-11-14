@@ -9,6 +9,7 @@ import Sider from "./components/Sider";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
 import Navbar from "./components/Navbar";
+import Operations from "./Screens/Operations/Operations";
 function App() {
   const Layout = () => {
     return (
@@ -33,6 +34,7 @@ function App() {
       children: [
         { path: "/", element: <Home /> },
         { path: "/Dashboard", element: <Dashboard /> },
+        { path: "/Operators", element: <Operations /> },
       ],
     },
   ]);
