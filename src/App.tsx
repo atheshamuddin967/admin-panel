@@ -10,6 +10,7 @@ import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
 import Navbar from "./components/Navbar";
 import Operations from "./Screens/Operations/Operations";
+import Monitoring from "./Screens/Monitoring/Monitoring";
 function App() {
   const Layout = () => {
     return (
@@ -35,6 +36,7 @@ function App() {
         { path: "/", element: <Home /> },
         { path: "/Dashboard", element: <Dashboard /> },
         { path: "/Operators", element: <Operations /> },
+        { path: "/Monitoring", element: <Monitoring /> },
       ],
     },
   ]);

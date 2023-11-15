@@ -139,3 +139,44 @@ p{float: right;
 margin-right: 10px;
 color: #ffff;}
 }
+.search{width: 70%;
+margin: 0 auto;
+padding: 10px 0;}
+.searchbox{
+    background-color: #ffff;
+    border-radius: 12px;
+    border: 1px solid #C2C2C2;
+    padding: 5px;
+    position: relative;
+    button{
+        background-color: transparent;
+        border: 0px;
+        position: absolute;
+        right: 10px;
+        i{
+            color: $sider-color;
+            font-size: 20px;
+        }
+    }
+    input{
+        border: 0;
+        width: 100%;
+        
+    }
+    input:focus-visible {
+        outline-offset: 0px !important;
+    }
+    input:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px !important;
+    }
+}
+.filterbox{
+    button{
+        background-color: transparent;
+        border: 0px;
+        i{
+            color: $sider-color;
+            font-size: 20px;
+        }
+    }
+}

@@ -6,20 +6,20 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useState, useEffect } from "react";
 import Images from "../../images/Images";
+import Search from "../../components/Search";
+import FullImage from "../../components/FullImage";
 
 function Operations() {
   const [droppedItem, setDroppedItem] = useState(null);
   const [isImgboxVisible, setIsImgboxVisible] = useState(false);
-
+  const [filteredItems, setFilteredItems] = useState(Items);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [imgboxVideoSrc, setImgboxVideoSrc] = useState("");
   useEffect(() => {
-    // Update the current date and time every second
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
 
-    // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
   const handleViewImageClick = (videoSrc: any) => {
@@ -35,9 +35,18 @@ function Operations() {
     console.log(item);
     setDroppedItem(item);
   };
-  useEffect(() => {
-    console.log(droppedItem);
-  }, [droppedItem]);
+  useEffect(() => {}, [droppedItem]);
+  const handleSearch = (searchTerm: string) => {
+    const filtered =
+      searchTerm.trim() !== ""
+        ? Items.filter((item) =>
+            item.id.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : Items;
+
+    setFilteredItems(filtered);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="container">
@@ -50,8 +59,12 @@ function Operations() {
             <Dragbox item={droppedItem} onDrop={handleDrop} />
           </div>
           <div className="col-sm-5">
+            <div className="search">
+              <Search onChange={handleSearch} />
+            </div>
+
             <div className="dragitem">
-              {Items.map((item) => (
+              {filteredItems.map((item) => (
                 <Dragitem
                   key={item.id}
                   item={item}
@@ -62,36 +75,12 @@ function Operations() {
             </div>
           </div>
         </div>
-        {isImgboxVisible && (
-          <div className="imgbox">
-            <div className="secondbox">
-              <video width="100%" height="" controls>
-                <source src={imgboxVideoSrc} type="video/mp4" />
-              </video>
-              <div className="close-btns2" onClick={handleHideImageClick}>
-                <i className="fas fa-times"></i>
-              </div>
-              <div className="bottom">
-                <ul className="text-center">
-                  <li>
-                    <img src={Images.wmovie} alt="/" />
-                  </li>
-                  <li>
-                    <li>
-                      <img src={Images.wmic} alt="/" />
-                    </li>
-                    <img src={Images.bcam} alt="/" />
-                  </li>
-
-                  <li>
-                    <img src={Images.fcam} alt="/" />
-                  </li>
-                </ul>
-                <p>{currentDateTime.toLocaleString()}</p>
-              </div>
-            </div>
-          </div>
-        )}
+        <FullImage
+          imgboxVideoSrc={imgboxVideoSrc}
+          handleHideImageClick={handleHideImageClick}
+          isImgboxVisible={isImgboxVisible}
+          currentDateTime={currentDateTime}
+        />
       </div>
     </DndProvider>
   );

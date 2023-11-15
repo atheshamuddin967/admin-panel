@@ -41,7 +41,7 @@ function Sider() {
             <img src={operations} alt="demo" className="icons-side" />{" "}
             Operations
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
+          <MenuItem component={<Link to="/Monitoring" />}>
             <img src={monitor} alt="demo" className="icons-side" /> Monitoring
           </MenuItem>
           <MenuItem component={<Link to="/documentation" />}>

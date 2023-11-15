@@ -11,14 +11,15 @@ function Charts() {
           labels: ["2016", "2017", "2019", "2020", "2021", "2021", "2023"],
           datasets: [
             {
+              borderDashOffset: 0.0,
               // label: "",
-
-              // borderCapStyle: 'none',
-              backgroundColor: "#25CD25",
+              fill: false,
+              backgroundColor: "green",
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
               borderColor: "rgba(220, 220, 220, 1)",
               pointBackgroundColor: "#25CD25",
               pointBorderColor: "#fff",
-              data: [0, 100, 200, 225, 275, 290, 300],
+              data: [0, 100, 150, 180, 200, 225, 270, 290],
             },
           ],
         }}
@@ -33,7 +34,7 @@ function Charts() {
           scales: {
             x: {
               grid: {
-                color: "#25CD25",
+                color: "",
               },
               ticks: {
                 color: "#25CD25",
@@ -41,7 +42,7 @@ function Charts() {
             },
             y: {
               grid: {
-                color: "#25CD25",
+                color: "",
               },
               ticks: {
                 color: "#25CD25",
