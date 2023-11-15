@@ -4,7 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import Home from "./Home/Home";
+// import Home from "./Home/Home";
 import Sider from "./components/Sider";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
