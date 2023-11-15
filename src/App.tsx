@@ -36,7 +36,7 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <Home /> },
+        { path: "/", element: <Dashboard /> },
         { path: "/Dashboard", element: <Dashboard /> },
         { path: "/Operators", element: <Operations /> },
         { path: "/Monitoring", element: <Monitoring /> },
