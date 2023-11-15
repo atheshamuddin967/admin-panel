@@ -1,18 +1,7 @@
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import "../styles/Sidebar.scss";
-import Dashboard from "../images/dashboard.png";
-import operations from "../images/operators.png";
-import monitor from "../images/laptop.png";
-import map from "../images/map.png";
-import straen from "../images/strean.png";
-import alarm from "../images/noti.png";
-import car from "../images/car.png";
-import device from "../images/device.png";
-import messages from "../images/messages.png";
-import events from "../images/events.png";
-import media from "../images/media.png";
-import user from "../images/management.png";
+import Images from "../images/Images";
 function Sider() {
   return (
     <aside>
@@ -30,62 +19,155 @@ function Sider() {
           }}
         >
           <MenuItem
-            // className="menu-item"
-            // icon={<LuLayoutDashboard />}
             component={<Link to="/Dashboard" />}
+            icon={
+              <img src={Images.Dashboard} alt="demo" className="icons-side" />
+            }
           >
-            <img src={Dashboard} alt="demo" className="icons-side" />
             Dashboard
           </MenuItem>
-          <MenuItem component={<Link to="/Operators" />}>
-            <img src={operations} alt="demo" className="icons-side" />{" "}
+          <MenuItem
+            component={<Link to="/Operators" />}
+            icon={<img src={Images.serach} alt="demo" className="icons-side" />}
+          >
+            Serach
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Operators" />}
+            icon={
+              <img src={Images.operations} alt="demo" className="icons-side" />
+            }
+          >
             Operations
           </MenuItem>
-          <MenuItem component={<Link to="/Monitoring" />}>
-            <img src={monitor} alt="demo" className="icons-side" /> Monitoring
+          <MenuItem
+            component={<Link to="/Monitoring" />}
+            icon={
+              <img src={Images.monitor} alt="demo" className="icons-side" />
+            }
+          >
+            Monitoring
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={map} alt="demo" className="icons-side" />
+          <MenuItem
+            component={<Link to="/Map" />}
+            icon={<img src={Images.map} alt="demo" className="icons-side" />}
+          >
             Map View
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={straen} alt="demo" className="icons-side" />
+          <MenuItem
+            component={<Link to="/Stream" />}
+            icon={<img src={Images.straen} alt="demo" className="icons-side" />}
+          >
             Stream
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={alarm} alt="demo" className="icons-side" />
-            Alarm
-          </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={car} alt="demo" className="icons-side" />
-            Vehicles
-          </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={device} alt="demo" className="icons-side" />
-            Device
-          </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={messages} alt="demo" className="icons-side" />
+          <SubMenu
+            label="Alarm"
+            icon={<img src={Images.alarm} alt="demo" className="icons-side" />}
+          >
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.semergency} alt="demo" className="" />}
+            >
+              Emergency
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.scam} alt="demo" className="" />}
+            >
+              Motion Detection{" "}
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.slisence} alt="demo" className="" />}
+            >
+              License plate Alerts
+            </MenuItem>
+
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.smap} alt="demo" className="" />}
+            >
+              Juricdiction{" "}
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            label="Vehicle"
+            icon={<img src={Images.car} alt="demo" className="icons-side" />}
+          >
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.palte} alt="demo" className="" />}
+            >
+              Plates
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.block} alt="demo" className="" />}
+            >
+              Blocked
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            label="Device"
+            icon={<img src={Images.device} alt="demo" className="icons-side" />}
+          >
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.vediosvg} alt="demo" className="" />}
+            >
+              Vedio
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.audiosvg} alt="demo" className="" />}
+            >
+              Audio
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.smap} alt="demo" className="" />}
+            >
+              Tracking
+            </MenuItem>
+          </SubMenu>
+
+          <MenuItem
+            component={<Link to="/documentation" />}
+            icon={
+              <img src={Images.messages} alt="demo" className="icons-side" />
+            }
+          >
             Messages
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={events} alt="demo" className="icons-side" />
+          <MenuItem
+            component={<Link to="/documentation" />}
+            icon={<img src={Images.events} alt="demo" className="icons-side" />}
+          >
             Events
           </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            {" "}
-            <img src={media} alt="demo" className="icons-side" />
-            Media
-          </MenuItem>
-          <MenuItem component={<Link to="/documentation" />}>
-            <img src={user} alt="demo" className="icons-side" /> User Management
+          <SubMenu
+            label="Media"
+            icon={<img src={Images.media} alt="demo" className="icons-side" />}
+          >
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.photos} alt="demo" className="" />}
+            >
+              Photos
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.movies} alt="demo" className="" />}
+            >
+              Videos
+            </MenuItem>
+          </SubMenu>
+
+          <MenuItem
+            component={<Link to="/documentation" />}
+            icon={<img src={Images.user} alt="demo" className="icons-side" />}
+          >
+            User Management
           </MenuItem>
         </Menu>
       </Sidebar>

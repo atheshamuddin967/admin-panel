@@ -1,5 +1,5 @@
 import "../Screens/Operations/Operation.scss";
-import Images from "../images/Images";
+// import Images from "../images/Images";
 function MonitorItem({ item, onViewImageClick }: any) {
   return (
     <div>
@@ -9,9 +9,9 @@ function MonitorItem({ item, onViewImageClick }: any) {
         </video>
         <div className="flex">
           <p>
-            Vehicle id: <span>{item.id} </span>
+            Vehicle id: <span>{item.vehicleId} </span>
           </p>
-          <div onClick={() => onViewImageClick(item.video)}>
+          <div className="click" onClick={() => onViewImageClick(item.video)}>
             <p>view</p>
           </div>
         </div>

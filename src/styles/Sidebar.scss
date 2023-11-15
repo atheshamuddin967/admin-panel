@@ -1,9 +1,4 @@
-.menu-item {
-    font-size: 16px;
-    font-weight: 400;
-    font-family: "Inter";
-    color: green;
-  }
+
   .css-1t8x7v1 > .ps-menu-button:hover {
     background-color: #e6e6e6 !important;
   }
@@ -12,7 +7,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    /* -webkit-align-items: center; */
+    
     -webkit-box-align: center;
     -ms-flex-align: center;
     height: 48px !important;
@@ -23,13 +18,37 @@
     cursor: pointer;
     padding-right: 20px;
     padding-left: 20px;
-    /* font-weight: 400; */
-    /* font-family: "Inter" !important; */
+  
   }
+
+  .css-1tqrhto >.ps-menu-button {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    /* align-items: center; */
+    height: 50px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-left: 26px !important;
+}
+
   .icons-side {
     width: 16px;
     height: 16px;
     margin-right: 5px;
+  }
+  .icons-sid {
+    width: 16px;
+    height: 16px;
+    // margin-right: 5px;
   }
   :where(.css-dev-only-do-not-override-1adbn6x)[class^="ant-layout"],
   :where(.css-dev-only-do-not-override-1adbn6x)[class*=" ant-layout"] {
@@ -43,4 +62,29 @@
     align-items: center !important;
     display: flex;
   }
-  
+  .css-honxw6 {
+    display: inline-block;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    border-right: 3px solid #686868 ;
+    border-bottom: 3px solid #686868 ;
+    width: 12px !important;
+    height: 12px !important;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.css-jn69v9 {
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  border-right: 3px solid currentcolor !important;
+  border-bottom: 3px solid currentcolor !important;
+  width: 12px !important;
+  height: 12px !important;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

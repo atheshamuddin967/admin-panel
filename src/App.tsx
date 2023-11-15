@@ -11,6 +11,9 @@ import "./styles/global.scss";
 import Navbar from "./components/Navbar";
 import Operations from "./Screens/Operations/Operations";
 import Monitoring from "./Screens/Monitoring/Monitoring";
+import Mapview from "./Screens/Mapview/Mapview";
+import Alarms from "./Screens/Alarms/Alarms";
+import Stream from "./Screens/Stream/Stream";
 function App() {
   const Layout = () => {
     return (
@@ -37,6 +40,9 @@ function App() {
         { path: "/Dashboard", element: <Dashboard /> },
         { path: "/Operators", element: <Operations /> },
         { path: "/Monitoring", element: <Monitoring /> },
+        { path: "/Map", element: <Mapview /> },
+        { path: "/Alarm", element: <Alarms /> },
+        { path: "/Stream", element: <Stream /> },
       ],
     },
   ]);

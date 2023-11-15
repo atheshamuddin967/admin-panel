@@ -5,7 +5,7 @@ import Googlemap from "../../components/Googlemap";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useState, useEffect } from "react";
-import Images from "../../images/Images";
+
 import Search from "../../components/Search";
 import FullImage from "../../components/FullImage";
 
@@ -53,7 +53,7 @@ function Operations() {
         <div className="row ">
           <div className="col-sm-7">
             <div className="maps-box">
-              <Googlemap />
+              <Googlemap style={{ borderRadius: "16px" }} height={"300px"} />
             </div>
 
             <Dragbox item={droppedItem} onDrop={handleDrop} />

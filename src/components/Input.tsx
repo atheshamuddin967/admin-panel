@@ -1,11 +1,11 @@
 import "../Screens/Operations/Operation.scss";
-function Input({ onChange }: any) {
+function Input({ onChange, placeholder }: any) {
   return (
     <div>
       <div className="searchbox">
         <input
           type="text"
-          placeholder="Search Device"
+          placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
         />
         <button>
