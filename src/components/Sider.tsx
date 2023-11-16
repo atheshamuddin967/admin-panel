@@ -61,6 +61,7 @@ function Sider() {
             Stream
           </MenuItem>
           <SubMenu
+            component={<Link to="/Alarm" />}
             label="Alarm"
             icon={<img src={Images.alarm} alt="demo" className="icons-side" />}
           >
@@ -71,20 +72,20 @@ function Sider() {
               Emergency
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/MotionAlarm" />}
               icon={<img src={Images.scam} alt="demo" className="" />}
             >
               Motion Detection{" "}
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/Lisence" />}
               icon={<img src={Images.slisence} alt="demo" className="" />}
             >
               License plate Alerts
             </MenuItem>
 
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/Juricdiction" />}
               icon={<img src={Images.smap} alt="demo" className="" />}
             >
               Juricdiction{" "}

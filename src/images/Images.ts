@@ -41,6 +41,7 @@ import block from "../images/blocked.svg";
 import movies from "../images/movies.svg";
 import photos from "../images/photos.svg";
 import car2 from "../images/car2.svg";
+import medias from "../images/medias.svg";
 const Images = {
   Dashboard,
   operations,
@@ -85,5 +86,6 @@ const Images = {
   photos,
   serach,
   car2,
+  medias,
 };
 export default Images;

@@ -10,6 +10,7 @@ const Items = [
     status: "online",
     video: Images.vid,
     vehicleId: "ABC-001",
+    icon: Images.car2,
   },
   {
     id: "#2346",
@@ -18,9 +19,10 @@ const Items = [
     location: "Latitude: 37.7749, Longitude: -122.4194",
     lastupdate: "just now",
     alert: "none",
-    status: "online",
+    status: "ofline",
     video: Images.vid2,
     vehicleId: "LTS-693",
+    icon: Images.car2,
   },
   {
     id: "#2347",
@@ -32,6 +34,7 @@ const Items = [
     status: "online",
     video: Images.vid,
     vehicleId: "LKI-256",
+    icon: Images.car2,
   },
   {
     id: "#2348",
@@ -43,6 +46,7 @@ const Items = [
     status: "online",
     video: Images.vid2,
     vehicleId: "POS-967",
+    icon: Images.car2,
   },
   {
     id: "#2349",
@@ -54,6 +58,7 @@ const Items = [
     status: "online",
     video: Images.vid,
     vehicleId: "LKS-367",
+    icon: Images.car2,
   },
   {
     id: "#2350",
@@ -65,6 +70,7 @@ const Items = [
     status: "online",
     video: Images.vid2,
     vehicleId: "MON-564",
+    icon: Images.car2,
   },
   {
     id: "#2351",
@@ -76,6 +82,7 @@ const Items = [
     status: "online",
     video: Images.vid,
     vehicleId: "LGI-256",
+    icon: Images.car2,
   },
   {
     id: "#2342",
@@ -87,6 +94,7 @@ const Items = [
     status: "online",
     video: Images.vid2,
     vehicleId: "POS-987",
+    icon: Images.car2,
   },
   {
     id: "#2353",
@@ -98,6 +106,7 @@ const Items = [
     status: "online",
     video: Images.vid,
     vehicleId: "LKM-367",
+    icon: Images.car2,
   },
   {
     id: "#2354",
@@ -109,6 +118,7 @@ const Items = [
     status: "online",
     video: Images.vid2,
     vehicleId: "MSN-562",
+    icon: Images.car2,
   },
 ];
 export default Items;

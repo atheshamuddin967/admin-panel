@@ -8,7 +8,7 @@ function Dragitem({ item, onViewImageClick }: any) {
     type: ItemTypes.DRAGGABLE_ITEM,
     item: { id: item.id, ...item },
   });
-
+  console.log(item);
   return (
     <div ref={drag} className="itemslist">
       <p>Device id {item.id}</p>
