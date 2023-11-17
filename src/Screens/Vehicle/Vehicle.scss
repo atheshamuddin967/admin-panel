@@ -1,0 +1,99 @@
+@import "../../styles/variables.scss";
+
+.add{
+    background-color: transparent;
+    border: 1px solid $sider-color;
+    padding: 2px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.block{
+    background-color: black;
+    border: 1px solid $sider-color;
+    padding: 2px 15px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 10px;
+}
+.tr-vehicle{
+    box-shadow: 0 4px 8px rgba(5, 5, 5, 0.2);
+    margin: 10px 0;
+td{
+    padding: 10px 0;
+}
+
+}
+.vehicle-table{
+    margin: 20px 0;
+    padding: 0 20px;
+}
+.input{
+    max-width: 250px;
+ 
+}
+.fromLayout{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 5, 0.9);
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+}
+.formbg{
+    background-color: #ffff;
+    width: 600px;
+    // height: 500px;
+    border-radius: 20px;
+    top: 10%;
+    left: 30%;
+    position: absolute;
+}
+.formData{
+    padding:  20px 30px;
+    position: relative;
+    h6{
+        text-align: center;
+        font-family: "poppins";
+        font-weight: 600;
+        font-size: 22px;
+    }
+    input{
+        padding: 5px 10px;
+        background-color: #F0F0F0;
+        border: 0;
+        margin: 20px 0;
+        border-radius: 5px;
+    }
+    label{
+        font-family: "poppins";
+        font-size: 22px;
+        font-weight: 400;
+        margin: 20px 0;
+    }
+    input:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px;
+    } button{
+        float: right;
+        margin: 10px 0;
+        background-color: black;
+        padding: 2px 15px;
+        color: white;
+border: 0;
+border-radius: 5px;
+
+    }
+    .closebtn{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        button{
+            background-color: transparent;
+            border: 0;
+            color: black;
+        }
+        i{
+            font-size: 25px;
+        }
+    }
+}

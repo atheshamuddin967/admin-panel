@@ -1,7 +1,6 @@
-import Images from "../images/Images";
 import { useNavigate } from "react-router-dom";
 
-function AlarmTable({ data, icon, bg }: any) {
+function VehiclePlatesTable({ data, icon, bg }: any) {
   const navigate = useNavigate();
 
   const handleTrackOnMapClick = (item: string) => {
@@ -14,17 +13,16 @@ function AlarmTable({ data, icon, bg }: any) {
 
   return (
     <div className="table-responsive">
-      <table className="custom-table table table-hover">
+      <table className="custom-table table table-hover text-center">
         <thead>
           <tr>
             <th></th>
-            <th>Alarm Id</th>
-            <th>Device Id</th>
-            <th>Timing</th>
-            <th>Location</th>
-            <th>Alarm Type</th>
-            <th>Operation information</th>
-            <th>Media</th>
+            <th>License Plate</th>
+            <th>Vehicle Type</th>
+            <th>Gps</th>
+            <th>Vehicle Operator</th>
+            <th>Alerts</th>
+            <th>Vehicle status</th>
           </tr>
         </thead>
 
@@ -36,28 +34,21 @@ function AlarmTable({ data, icon, bg }: any) {
                   <img src={icon} alt="alarm" />
                 </div>
               </td>
-              <td> {item.id}</td>
-              <td>{item.deviceid}</td>
-              <td>{item.time}</td>
-              <td>{item.location}</td>
-              <td>{item.type}</td>
-              <td>
-                {item.operator}
+              <td> {item.vehicleId}</td>
+              <td>{item.vehicleType}</td>
+              <td>{item.gps}</td>
+              <td>{item.operator}</td>
+              <td>{item.alert}</td>
+              <td className="table-end">
+                {item.status}
                 <br />
 
                 <button
-                  className="btns"
+                  className=""
                   onClick={() => handleTrackOnMapClick(item)}
                 >
                   Track on map
                 </button>
-              </td>
-              <td className="table-end">
-                <div>
-                  <img src={Images.medias} alt="media" />
-                </div>
-                <br />
-                <button className="btns">Resolve</button>
               </td>
             </tr>
           ))}
@@ -67,4 +58,4 @@ function AlarmTable({ data, icon, bg }: any) {
   );
 }
 
-export default AlarmTable;
+export default VehiclePlatesTable;

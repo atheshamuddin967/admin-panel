@@ -17,6 +17,17 @@ import Stream from "./Screens/Stream/Stream";
 import MotionAlarms from "./Screens/Alarms/MotionAlarms";
 import Lisence from "./Screens/Alarms/Lisence";
 import Juricdiction from "./Screens/Alarms/Juricdiction";
+import VehiclePlates from "./Screens/Vehicle/Plates";
+import Vehicle from "./Screens/Vehicle/Vehicle";
+import Block from "./Screens/Vehicle/Block";
+import Device from "./Screens/Device/Device";
+import VideoDevice from "./Screens/Device/VideoDevice";
+import AudioDevice from "./Screens/Device/AudioDevice";
+import TrackingDevice from "./Screens/Device/TrackingDevice";
+import Event from "./Screens/Events/Event";
+import Media from "./Screens/Media/Media";
+import Photos from "./Screens/Media/Photos";
+import Mediavideos from "./Screens/Media/mediavideos";
 function App() {
   const Layout = () => {
     return (
@@ -49,6 +60,17 @@ function App() {
         { path: "/MotionAlarm", element: <MotionAlarms /> },
         { path: "/Lisence", element: <Lisence /> },
         { path: "/Juricdiction", element: <Juricdiction /> },
+        { path: "/VehiclePlates", element: <VehiclePlates /> },
+        { path: "/Vehicle", element: <Vehicle /> },
+        { path: "/Block", element: <Block /> },
+        { path: "/Device", element: <Device /> },
+        { path: "/VideoDevice", element: <VideoDevice /> },
+        { path: "/AudioDevice", element: <AudioDevice /> },
+        { path: "/TrackingDevice", element: <TrackingDevice /> },
+        { path: "/Events", element: <Event /> },
+        { path: "/Media", element: <Media /> },
+        { path: "/Photos", element: <Photos /> },
+        { path: "/MediaVideos", element: <Mediavideos /> },
       ],
     },
   ]);

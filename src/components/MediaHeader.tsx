@@ -1,14 +1,14 @@
 import Input from "../components/Input";
 import Dropdown from "../components/Dropdown";
-function AlarmHeader() {
+function MediaHeader() {
   return (
     <div>
       <div className="flex">
-        <Input placeholder={"Serach Alarm"} />
+        <Input placeholder={"Search Media"} />
         <Dropdown label={"Alarm type"} />
       </div>
     </div>
   );
 }
 
-export default AlarmHeader;
+export default MediaHeader;

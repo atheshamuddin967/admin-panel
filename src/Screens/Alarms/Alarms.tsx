@@ -4,7 +4,7 @@ import AlarmsData from "../../Data/Alarm";
 import Images from "../../images/Images";
 function Alarms() {
   const emergencyAlarms = AlarmsData.filter(
-    (alarm) => alarm.type === "emergency"
+    (item) => item.type === "emergency"
   );
 
   return (

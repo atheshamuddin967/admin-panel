@@ -94,15 +94,16 @@ function Sider() {
           <SubMenu
             label="Vehicle"
             icon={<img src={Images.car} alt="demo" className="icons-side" />}
+            component={<Link to="/Vehicle" />}
           >
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/VehiclePlates" />}
               icon={<img src={Images.palte} alt="demo" className="" />}
             >
               Plates
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/Block" />}
               icon={<img src={Images.block} alt="demo" className="" />}
             >
               Blocked
@@ -111,21 +112,22 @@ function Sider() {
           <SubMenu
             label="Device"
             icon={<img src={Images.device} alt="demo" className="icons-side" />}
+            component={<Link to="/Device" />}
           >
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/VideoDevice" />}
               icon={<img src={Images.vediosvg} alt="demo" className="" />}
             >
-              Vedio
+              Video
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/AudioDevice" />}
               icon={<img src={Images.audiosvg} alt="demo" className="" />}
             >
               Audio
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/TrackingDevice" />}
               icon={<img src={Images.smap} alt="demo" className="" />}
             >
               Tracking
@@ -141,7 +143,7 @@ function Sider() {
             Messages
           </MenuItem>
           <MenuItem
-            component={<Link to="/documentation" />}
+            component={<Link to="/Events" />}
             icon={<img src={Images.events} alt="demo" className="icons-side" />}
           >
             Events
@@ -149,15 +151,16 @@ function Sider() {
           <SubMenu
             label="Media"
             icon={<img src={Images.media} alt="demo" className="icons-side" />}
+            component={<Link to="/Media" />}
           >
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/Photos" />}
               icon={<img src={Images.photos} alt="demo" className="" />}
             >
               Photos
             </MenuItem>
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/MediaVideos" />}
               icon={<img src={Images.movies} alt="demo" className="" />}
             >
               Videos

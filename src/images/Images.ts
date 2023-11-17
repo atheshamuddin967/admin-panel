@@ -11,18 +11,18 @@ import messages from "../images/messages.svg";
 import events from "../images/events.svg";
 import media from "../images/media.svg";
 import user from "../images/management.svg";
-import conected from "../images/conected.png";
+import conected from "../images/devices.svg";
 import logo from "../images/logo.png";
 import cam from "../images/cam.png";
 import video from "../images/video.png";
-import plates from "../images/plates.png";
+import plates from "../images/plates.svg";
 import operators from "../images/operator.png";
 import profile from "../images/profile.png";
 import logout from "../images/logout.png";
 import vid from "../images/vid.mp4";
 import front from "../images/front.png";
 import back from "../images/back.png";
-import mic from "../images/mike.png";
+import mic from "../images/audio.svg";
 import view from "../images/full.png";
 import movie from "../images/movie.png";
 import bcam from "../images/bcam.png";
@@ -42,6 +42,10 @@ import movies from "../images/movies.svg";
 import photos from "../images/photos.svg";
 import car2 from "../images/car2.svg";
 import medias from "../images/medias.svg";
+import tracking from "../images/tracking.svg";
+import media2 from "../images/media2.svg";
+import driving from "../images/drivingimg.jpg";
+import driving2 from "../images/driving2.jpeg";
 const Images = {
   Dashboard,
   operations,
@@ -87,5 +91,9 @@ const Images = {
   serach,
   car2,
   medias,
+  tracking,
+  media2,
+  driving,
+  driving2,
 };
 export default Images;
