@@ -46,6 +46,10 @@ import tracking from "../images/tracking.svg";
 import media2 from "../images/media2.svg";
 import driving from "../images/drivingimg.jpg";
 import driving2 from "../images/driving2.jpeg";
+import setings from "../images/settings.svg";
+import filter from "../images/filter.svg";
+import proficon from "../images/proficon.svg";
+import group from "../images/groups.svg";
 const Images = {
   Dashboard,
   operations,
@@ -95,5 +99,9 @@ const Images = {
   media2,
   driving,
   driving2,
+  setings,
+  filter,
+  proficon,
+  group,
 };
 export default Images;

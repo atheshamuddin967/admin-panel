@@ -12,8 +12,10 @@
 }
 .custom-table {
     width: 1024px;
-    // border-collapse: collapse; 
-  
+    // border-spacing: 10px !important;
+    border-collapse: collapse; 
+
+    // border-collapse: separate;
      td {
 vertical-align: baseline;
 font-family:"poppins";
@@ -25,6 +27,7 @@ margin: 10px 0;
 
     }
     th{
+   
         font-family: "poppins";
         color: $sider-color;
         font-size: 16px;
@@ -90,3 +93,7 @@ border-radius: 100%;}
     }
   
 }
+.custom-table tr {
+    margin-bottom: 10px;
+  }
+  

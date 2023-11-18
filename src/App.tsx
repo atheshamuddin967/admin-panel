@@ -28,7 +28,16 @@ import Event from "./Screens/Events/Event";
 import Media from "./Screens/Media/Media";
 import Photos from "./Screens/Media/Photos";
 import Mediavideos from "./Screens/Media/mediavideos";
+import Management from "./Screens/Management/management";
+import ManagementGroup from "./Screens/Management/ManagementGroup";
+import { useState, createContext, useContext } from "react";
+const AppContext = createContext({
+  selectedOption: "",
+  setSelectedOption: (value: string) => {},
+});
 function App() {
+  const [selectedOption, setSelectedOption] = useState("User");
+  const contextValue = { selectedOption, setSelectedOption };
   const Layout = () => {
     return (
       <div className="main">
@@ -38,7 +47,9 @@ function App() {
             <Sider />
           </div>
           <div className="contentContainer">
-            <Outlet />
+            <AppContext.Provider value={contextValue}>
+              <Outlet />
+            </AppContext.Provider>
           </div>
         </div>
       </div>
@@ -71,6 +82,8 @@ function App() {
         { path: "/Media", element: <Media /> },
         { path: "/Photos", element: <Photos /> },
         { path: "/MediaVideos", element: <Mediavideos /> },
+        { path: "/Management", element: <Management /> },
+        { path: "/ManagementGroup", element: <ManagementGroup /> },
       ],
     },
   ]);

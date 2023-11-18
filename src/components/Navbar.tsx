@@ -4,7 +4,7 @@ import Images from "../images/Images";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-lg fixed-top ">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img src={Images.logo} alt="logo" />

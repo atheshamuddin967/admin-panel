@@ -168,10 +168,18 @@ function Sider() {
           </SubMenu>
 
           <MenuItem
-            component={<Link to="/documentation" />}
+            component={<Link to="/Management" />}
             icon={<img src={Images.user} alt="demo" className="icons-side" />}
           >
             User Management
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Management" />}
+            icon={
+              <img src={Images.setings} alt="demo" className="icons-side" />
+            }
+          >
+            Settings
           </MenuItem>
         </Menu>
       </Sidebar>

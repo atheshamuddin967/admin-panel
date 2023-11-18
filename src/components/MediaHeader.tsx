@@ -5,7 +5,7 @@ function MediaHeader() {
     <div>
       <div className="flex">
         <Input placeholder={"Search Media"} />
-        <Dropdown label={"Alarm type"} />
+        <Dropdown label={"Media Type"} />
       </div>
     </div>
   );

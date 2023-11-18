@@ -6,6 +6,7 @@ function Media() {
   return (
     <div className="container">
       <MediaHeader />
+
       <div className="mediacontainer">
         <div className="headings ">
           <h6>Recent Captured</h6>
