@@ -30,14 +30,14 @@ import Photos from "./Screens/Media/Photos";
 import Mediavideos from "./Screens/Media/mediavideos";
 import Management from "./Screens/Management/management";
 import ManagementGroup from "./Screens/Management/ManagementGroup";
-import { useState, createContext, useContext } from "react";
-const AppContext = createContext({
-  selectedOption: "",
-  setSelectedOption: (value: string) => {},
-});
+// import { useState, createContext} from "react";
+// const AppContext = createContext({
+//   selectedOption: "",
+//   setSelectedOption: (value:any) => void{},
+// });
 function App() {
-  const [selectedOption, setSelectedOption] = useState("User");
-  const contextValue = { selectedOption, setSelectedOption };
+  // const [selectedOption, setSelectedOption] = useState("User");
+  // const contextValue = { selectedOption, setSelectedOption };
   const Layout = () => {
     return (
       <div className="main">
@@ -47,9 +47,9 @@ function App() {
             <Sider />
           </div>
           <div className="contentContainer">
-            <AppContext.Provider value={contextValue}>
-              <Outlet />
-            </AppContext.Provider>
+            {/* <AppContext.Provider value={contextValue}> */}
+            <Outlet />
+            {/* </AppContext.Provider> */}
           </div>
         </div>
       </div>
