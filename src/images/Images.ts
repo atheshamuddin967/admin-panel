@@ -50,6 +50,9 @@ import setings from "../images/settings.svg";
 import filter from "../images/filter.svg";
 import proficon from "../images/proficon.svg";
 import group from "../images/groups.svg";
+import loginimg from "../images/loginimg.png";
+import uicon from "../images/uicon.svg";
+import lock from "../images/lock.svg";
 const Images = {
   Dashboard,
   operations,
@@ -103,5 +106,8 @@ const Images = {
   filter,
   proficon,
   group,
+  loginimg,
+  uicon,
+  lock,
 };
 export default Images;

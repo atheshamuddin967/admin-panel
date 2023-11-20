@@ -1,0 +1,79 @@
+// import PubNub from "pubnub";
+// import { PubNubProvider } from "pubnub-react";
+// import "../Messages/Messages.scss";
+// import MessagesMin from "./MessagesMin";
+
+// // const Channels = [
+// //   { channel: "Channel1", name: "Channel 1" },
+// //   { channel: "Channel2", name: "Channel 2" },
+// //   // Add more channels as needed
+// // ];
+// const pubnub = new PubNub({
+//   publishKey: "pub-c-3cf9798b-87d9-45a7-89f2-c51532dd9718",
+//   subscribeKey: "sub-c-f141574f-a391-45f8-86d4-ec9decafa5a5",
+//   userId: "myFirstUser",
+// });
+// function Messages() {
+//   return (
+//     <div>
+//       <PubNubProvider client={pubnub}>
+//         <MessagesMin />
+//       </PubNubProvider>
+//     </div>
+//   );
+// }
+
+// export default Messages;
+
+// import {
+//     Chat,
+//     MessageList,
+//     MessageInput,
+//     MemberList,
+//     TypingIndicator,
+//     useUsers,
+//   } from "@pubnub/react-chat-components";
+//   import Members from "../../Data/Member";
+//   import { useState } from "react";
+
+//   function MessagesMin() {
+//     const [currentChannel, setCurrentChannel] = useState("Default");
+//     const handleMemberClick = (memberId: any) => {
+//       setCurrentChannel(memberId);
+//     };
+
+//     const theme = "light";
+
+//     const [UserData] = useUsers({});
+
+//     return (
+//       <div>
+//         <Chat currentChannel={currentChannel} theme={theme} users={UserData}>
+//           <div className="container">
+//             <div className="row">
+//               <div className="col-sm-4">
+//                 {" "}
+//                 <MemberList
+//                   members={Members}
+//                   presentMembers={[
+//                     "user_3c4400761cba4b65b77b6cae55fc21eb",
+//                     "user_def709b1adfc4e67b98bb7a820f581b1",
+//                     "user_a56c20222c484ff8987ec9b69b0c8f5b",
+//                   ]}
+//                   onItemClick={handleMemberClick}
+//                 />
+//               </div>
+//               <div className="col-sm-8">
+//                 {" "}
+//                 <MessageList fetchMessages={5} />
+//                 <TypingIndicator />
+//                 <MessageInput typingIndicator senderInfo={true} />
+//               </div>
+//             </div>
+//           </div>
+//         </Chat>
+//       </div>
+//     );
+//   }
+
+//   export default MessagesMin;

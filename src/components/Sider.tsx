@@ -1,21 +1,23 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
 import "../styles/Sidebar.scss";
+// import { useState, useEffect } from "react";
 import Images from "../images/Images";
 function Sider() {
+  const location = useLocation();
+  console.log(location);
   return (
     <aside>
-      <Sidebar backgroundColor="#ffff">
+      <Sidebar backgroundColor="" toggled={true}>
         <Menu
           menuItemStyles={{
-            button: ({ level, active }) => {
-              // only apply styles on first level elements of the tree
-              if (level === 0)
-                return {
-                  // color: disabled ? "#f5d9ff" : "#d359ff",
-                  backgroundColor: active ? "black" : undefined,
-                };
-            },
+            button: ({ active }) => ({
+              [`&.active`]: {
+                backgroundColor: active ? "black" : "",
+                color: active ? "white" : "",
+              },
+            }),
           }}
         >
           <MenuItem
@@ -23,6 +25,7 @@ function Sider() {
             icon={
               <img src={Images.Dashboard} alt="demo" className="icons-side" />
             }
+            active={location.pathname === "/Dashboard"}
           >
             Dashboard
           </MenuItem>
@@ -135,7 +138,7 @@ function Sider() {
           </SubMenu>
 
           <MenuItem
-            component={<Link to="/documentation" />}
+            component={<Link to="/Messages" />}
             icon={
               <img src={Images.messages} alt="demo" className="icons-side" />
             }
@@ -174,7 +177,7 @@ function Sider() {
             User Management
           </MenuItem>
           <MenuItem
-            component={<Link to="/Management" />}
+            component={<Link to="/Singup" />}
             icon={
               <img src={Images.setings} alt="demo" className="icons-side" />
             }

@@ -1,10 +1,4 @@
-import {
-  // BrowserRouter as Router,
-  Outlet,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
-// import Home from "./Home/Home";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Sider from "./components/Sider";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
@@ -30,14 +24,11 @@ import Photos from "./Screens/Media/Photos";
 import Mediavideos from "./Screens/Media/mediavideos";
 import Management from "./Screens/Management/management";
 import ManagementGroup from "./Screens/Management/ManagementGroup";
-// import { useState, createContext} from "react";
-// const AppContext = createContext({
-//   selectedOption: "",
-//   setSelectedOption: (value:any) => void{},
-// });
+import Messages from "./Screens/Messages/Messages";
+import Login from "./Screens/Login/Login";
+import Singup from "./Screens/Login/Singup";
+
 function App() {
-  // const [selectedOption, setSelectedOption] = useState("User");
-  // const contextValue = { selectedOption, setSelectedOption };
   const Layout = () => {
     return (
       <div className="main">
@@ -47,9 +38,7 @@ function App() {
             <Sider />
           </div>
           <div className="contentContainer">
-            {/* <AppContext.Provider value={contextValue}> */}
             <Outlet />
-            {/* </AppContext.Provider> */}
           </div>
         </div>
       </div>
@@ -61,7 +50,7 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <Dashboard /> },
+        { path: "/", element: <Singup /> },
         { path: "/Dashboard", element: <Dashboard /> },
         { path: "/Operators", element: <Operations /> },
         { path: "/Monitoring", element: <Monitoring /> },
@@ -84,6 +73,9 @@ function App() {
         { path: "/MediaVideos", element: <Mediavideos /> },
         { path: "/Management", element: <Management /> },
         { path: "/ManagementGroup", element: <ManagementGroup /> },
+        { path: "/Messages", element: <Messages /> },
+        { path: "/Login", element: <Login /> },
+        { path: "/Singup", element: <Singup /> },
       ],
     },
   ]);
