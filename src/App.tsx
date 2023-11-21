@@ -1,8 +1,16 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import Sider from "./components/Sider";
+import {
+  // Outlet,
+  // RouterProvider,
+  Link,
+  // Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+// import Sider from "./components/Sider";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Operations from "./Screens/Operations/Operations";
 import Monitoring from "./Screens/Monitoring/Monitoring";
 import Mapview from "./Screens/Mapview/Mapview";
@@ -24,62 +32,307 @@ import Photos from "./Screens/Media/Photos";
 import Mediavideos from "./Screens/Media/mediavideos";
 import Management from "./Screens/Management/management";
 import ManagementGroup from "./Screens/Management/ManagementGroup";
-import Messages from "./Screens/Messages/Messages";
+import Images from "./images/Images";
 import Login from "./Screens/Login/Login";
 import Singup from "./Screens/Login/Singup";
-
+import SearchScreeen from "./Screens/Search/SearchScreeen";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  useProSidebar,
+} from "react-pro-sidebar";
+import { useState } from "react";
+import "../src/styles/global.scss";
+import Navbar from "./components/Navbar";
 function App() {
-  const Layout = () => {
-    return (
-      <div className="main">
-        <Navbar />
-        <div className="containers">
-          <div className="menuContainer">
-            <Sider />
-          </div>
-          <div className="contentContainer">
-            <Outlet />
-          </div>
-        </div>
-      </div>
-    );
+  const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
+  const handleMenuItemClick = (path: any) => {
+    setActiveMenuItem(path);
   };
+  const { collapseSidebar } = useProSidebar();
+  return (
+    <div style={{ display: "flex", height: "100vh", marginTop: "70px" }}>
+      <Sidebar className="app" backgroundColor="">
+        <Menu
+          menuItemStyles={{
+            button: ({ level, active }) => {
+              // only apply styles on first level elements of the tree
+              if (level === 0)
+                return {
+                  color: active ? "#686868" : "##686868",
+                  backgroundColor: active ? "#EDEDED" : undefined,
+                };
+            },
+          }}
+        >
+          <MenuItem
+            icon={
+              <MenuRoundedIcon
+                onClick={() => {
+                  collapseSidebar();
+                }}
+              />
+            }
+          >
+            <img src={Images.logo} alt="logo" className="logs" />
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Dashboard" />}
+            icon={
+              <img src={Images.Dashboard} alt="demo" className="icons-side" />
+            }
+            active={activeMenuItem === "/Dashboard"}
+            onClick={() => handleMenuItemClick("/Dashboard")}
+          >
+            <Link to="/Dashboard">Dashboard</Link>
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Search" />}
+            icon={<img src={Images.serach} alt="demo" className="icons-side" />}
+            active={activeMenuItem === "/Search"}
+            onClick={() => handleMenuItemClick("/Search")}
+          >
+            Serach
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Operators" />}
+            icon={
+              <img src={Images.operations} alt="demo" className="icons-side" />
+            }
+            active={activeMenuItem === "/Operators"}
+            onClick={() => handleMenuItemClick("/Operators")}
+          >
+            Operations
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Monitoring" />}
+            icon={
+              <img src={Images.monitor} alt="demo" className="icons-side" />
+            }
+            active={activeMenuItem === "/Monitoring"}
+            onClick={() => handleMenuItemClick("/Monitoring")}
+          >
+            Monitoring
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Map" />}
+            icon={<img src={Images.map} alt="demo" className="icons-side" />}
+            active={activeMenuItem === "/Map"}
+            onClick={() => handleMenuItemClick("/Map")}
+          >
+            Map View
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Stream" />}
+            icon={<img src={Images.straen} alt="demo" className="icons-side" />}
+            active={activeMenuItem === "/stream"}
+            onClick={() => handleMenuItemClick("/Stream")}
+          >
+            Stream
+          </MenuItem>
+          <SubMenu
+            component={<Link to="/Alarm" />}
+            label="Alarm"
+            icon={
+              <img
+                src={Images.notification}
+                alt="demo"
+                className="icons-side"
+              />
+            }
+            active={activeMenuItem === "/Alarm"}
+            onClick={() => handleMenuItemClick("/Alarm")}
+          >
+            <MenuItem
+              component={<Link to="/alarm" />}
+              icon={<img src={Images.semergency} alt="demo" className="" />}
+              active={activeMenuItem === "/Alarm"}
+              onClick={() => handleMenuItemClick("/Alarm")}
+            >
+              Emergency
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/MotionAlarm" />}
+              icon={<img src={Images.scam} alt="demo" className="" />}
+              active={activeMenuItem === "/MotionAlarm"}
+              onClick={() => handleMenuItemClick("/MotionAlarm")}
+            >
+              Motion Detection{" "}
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/Lisence" />}
+              icon={<img src={Images.slisence} alt="demo" className="" />}
+              active={activeMenuItem === "/Lisence"}
+              onClick={() => handleMenuItemClick("/Lisence")}
+            >
+              License plate Alerts
+            </MenuItem>
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        { path: "/", element: <Singup /> },
-        { path: "/Dashboard", element: <Dashboard /> },
-        { path: "/Operators", element: <Operations /> },
-        { path: "/Monitoring", element: <Monitoring /> },
-        { path: "/Map/:item?", element: <Mapview /> },
-        { path: "/Alarm", element: <Alarms /> },
-        { path: "/Stream", element: <Stream /> },
-        { path: "/MotionAlarm", element: <MotionAlarms /> },
-        { path: "/Lisence", element: <Lisence /> },
-        { path: "/Juricdiction", element: <Juricdiction /> },
-        { path: "/VehiclePlates", element: <VehiclePlates /> },
-        { path: "/Vehicle", element: <Vehicle /> },
-        { path: "/Block", element: <Block /> },
-        { path: "/Device", element: <Device /> },
-        { path: "/VideoDevice", element: <VideoDevice /> },
-        { path: "/AudioDevice", element: <AudioDevice /> },
-        { path: "/TrackingDevice", element: <TrackingDevice /> },
-        { path: "/Events", element: <Event /> },
-        { path: "/Media", element: <Media /> },
-        { path: "/Photos", element: <Photos /> },
-        { path: "/MediaVideos", element: <Mediavideos /> },
-        { path: "/Management", element: <Management /> },
-        { path: "/ManagementGroup", element: <ManagementGroup /> },
-        { path: "/Messages", element: <Messages /> },
-        { path: "/Login", element: <Login /> },
-        { path: "/Singup", element: <Singup /> },
-      ],
-    },
-  ]);
-  return <RouterProvider router={router} />;
+            <MenuItem
+              component={<Link to="/Juricdiction" />}
+              icon={<img src={Images.smap} alt="demo" className="" />}
+              active={activeMenuItem === "/Juricdiction"}
+              onClick={() => handleMenuItemClick("/Juricdiction")}
+            >
+              Juricdiction{" "}
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            label="Vehicle"
+            icon={<img src={Images.car} alt="demo" className="icons-side" />}
+            component={<Link to="/Vehicle" />}
+            active={activeMenuItem === "/Vehicle"}
+            onClick={() => handleMenuItemClick("/Vehicle")}
+          >
+            <MenuItem
+              component={<Link to="/VehiclePlates" />}
+              icon={<img src={Images.palte} alt="demo" className="" />}
+              active={activeMenuItem === "/VehiclePlates"}
+              onClick={() => handleMenuItemClick("/VehiclePlates")}
+            >
+              Plates
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/Block" />}
+              icon={<img src={Images.block} alt="demo" className="" />}
+              active={activeMenuItem === "/Block"}
+              onClick={() => handleMenuItemClick("/Block")}
+            >
+              Blocked
+            </MenuItem>
+          </SubMenu>
+          <SubMenu
+            label="Device"
+            icon={<img src={Images.device} alt="demo" className="icons-side" />}
+            component={<Link to="/Device" />}
+            active={activeMenuItem === "/Device"}
+            onClick={() => handleMenuItemClick("/Device")}
+          >
+            <MenuItem
+              component={<Link to="/VideoDevice" />}
+              icon={<img src={Images.vediosvg} alt="demo" className="" />}
+              active={activeMenuItem === "/VideoDevice"}
+              onClick={() => handleMenuItemClick("/VideoDevice")}
+            >
+              Video
+            </MenuItem>
+            <MenuItem
+              // component={<Link to="/AudioDevice" />}
+              icon={<img src={Images.audiosvg} alt="demo" className="" />}
+              active={activeMenuItem === "/AudioDevice"}
+              onClick={() => handleMenuItemClick("/AudioDevice")}
+            >
+              Audio
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/TrackingDevice" />}
+              icon={<img src={Images.smap} alt="demo" className="" />}
+              active={activeMenuItem === "/TrackingDevice"}
+              onClick={() => handleMenuItemClick("/AudioDevice")}
+            >
+              Tracking
+            </MenuItem>
+          </SubMenu>
+
+          <MenuItem
+            component={<Link to="/Messages" />}
+            icon={
+              <img src={Images.messages} alt="demo" className="icons-side" />
+            }
+            active={activeMenuItem === "/Messages"}
+            onClick={() => handleMenuItemClick("/Messages")}
+          >
+            Messages
+          </MenuItem>
+          <MenuItem
+            component={<Link to="/Events" />}
+            icon={<img src={Images.events} alt="demo" className="icons-side" />}
+            active={activeMenuItem === "/Events"}
+            onClick={() => handleMenuItemClick("/Events")}
+          >
+            Events
+          </MenuItem>
+          <SubMenu
+            label="Media"
+            icon={<img src={Images.media} alt="demo" className="icons-side" />}
+            component={<Link to="/Media" />}
+            active={activeMenuItem === "/Media"}
+            onClick={() => handleMenuItemClick("/Media")}
+          >
+            <MenuItem
+              component={<Link to="/Photos" />}
+              icon={<img src={Images.photos} alt="demo" className="" />}
+              active={activeMenuItem === "/Photos"}
+              onClick={() => handleMenuItemClick("/Photos")}
+            >
+              Photos
+            </MenuItem>
+            <MenuItem
+              component={<Link to="/MediaVideos" />}
+              icon={<img src={Images.movies} alt="demo" className="" />}
+              active={activeMenuItem === "/MediaVideos"}
+              onClick={() => handleMenuItemClick("/MediaVideos")}
+            >
+              Videos
+            </MenuItem>
+          </SubMenu>
+
+          <MenuItem
+            component={<Link to="/Management" />}
+            icon={<img src={Images.user} alt="demo" className="icons-side" />}
+            active={activeMenuItem === "/Management"}
+            onClick={() => handleMenuItemClick("/Management")}
+          >
+            User Management
+          </MenuItem>
+          <MenuItem
+            // component={<Link to="/Singup" />}
+            icon={
+              <img src={Images.setings} alt="demo" className="icons-side" />
+            }
+            active={activeMenuItem === "/Singup"}
+            onClick={() => handleMenuItemClick("/Singup")}
+          >
+            Settings
+          </MenuItem>
+        </Menu>
+      </Sidebar>
+      <section className="container">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Singup />} />,
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Operators" element={<Operations />} />
+          <Route path="/Monitoring" element={<Monitoring />} />
+          <Route path="/Map/:item?" element={<Mapview />} />
+          <Route path="/Alarm" element={<Alarms />} />
+          <Route path="/Stream" element={<Stream />} />
+          <Route path="/MotionAlarm" element={<MotionAlarms />} />
+          <Route path="/Lisence" element={<Lisence />} />
+          <Route path="/Juricdiction" element={<Juricdiction />} />
+          <Route path="/VehiclePlates" element={<VehiclePlates />} />
+          <Route path="/Vehicle" element={<Vehicle />} />
+          <Route path="/Block" element={<Block />} />
+          <Route path="/Device" element={<Device />} />
+          <Route path="/VideoDevice" element={<VideoDevice />} />
+          <Route path="/AudioDevice" element={<AudioDevice />} />
+          <Route path="/TrackingDevice" element={<TrackingDevice />} />
+          <Route path="/Events" element={<Event />} />
+          <Route path="/Media" element={<Media />} />
+          <Route path="/Photos" element={<Photos />} />
+          <Route path="/MediaVideos" element={<Mediavideos />} />
+          <Route path="/Management" element={<Management />} />
+          <Route path="/ManagementGroup" element={<ManagementGroup />} />
+          <Route path="/Search" element={<SearchScreeen />} />
+          {/* <Route path = "/Messages" element= {<Messages /> }/> */}
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Singup" element={<Singup />} />
+        </Routes>
+      </section>
+    </div>
+  );
 }
 
 export default App;

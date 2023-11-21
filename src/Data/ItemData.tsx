@@ -18,6 +18,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "1234",
     image: Images.driving,
+    devicestatus: "block",
   },
   {
     id: "#2346",
@@ -37,6 +38,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "64884",
     image: Images.driving2,
+    devicestatus: "online",
   },
   {
     id: "#2347",
@@ -56,6 +58,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "19754",
     image: Images.driving,
+    devicestatus: "block",
   },
   {
     id: "#2348",
@@ -75,6 +78,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "14554",
     image: Images.driving2,
+    devicestatus: "online",
   },
   {
     id: "#2349",
@@ -94,6 +98,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "12387",
     image: Images.driving,
+    devicestatus: "online",
   },
   {
     id: "#2350",
@@ -112,6 +117,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "14574",
     image: Images.driving2,
+    devicestatus: "block",
   },
   {
     id: "#2351",
@@ -131,6 +137,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "78934",
     image: Images.driving,
+    devicestatus: "online",
   },
   {
     id: "#2342",
@@ -150,6 +157,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "789234",
     image: Images.driving,
+    devicestatus: "block",
   },
   {
     id: "#2353",
@@ -169,6 +177,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "1234644",
     image: Images.driving2,
+    devicestatus: "online",
   },
   {
     id: "#2354",
@@ -188,6 +197,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "12454",
     image: Images.driving,
+    devicestatus: "online",
   },
   {
     id: "#2359",
@@ -207,6 +217,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "88944",
     image: Images.driving2,
+    devicestatus: "online",
   },
 
   {
@@ -227,6 +238,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "554534",
     image: Images.driving,
+    devicestatus: "online",
   },
   {
     id: "#2444",
@@ -246,6 +258,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "987454",
     image: Images.driving,
+    devicestatus: "online",
   },
   {
     id: "#2379",
@@ -265,6 +278,7 @@ const Items = [
     date: "3/6/2023",
     alarmId: "97434",
     image: Images.driving2,
+    devicestatus: "online",
   },
 ];
 export default Items;

@@ -53,6 +53,7 @@ import group from "../images/groups.svg";
 import loginimg from "../images/loginimg.png";
 import uicon from "../images/uicon.svg";
 import lock from "../images/lock.svg";
+import notification from "../images/notification.svg";
 const Images = {
   Dashboard,
   operations,
@@ -109,5 +110,6 @@ const Images = {
   loginimg,
   uicon,
   lock,
+  notification,
 };
 export default Images;

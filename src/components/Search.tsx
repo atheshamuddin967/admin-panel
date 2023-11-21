@@ -5,7 +5,9 @@ function Search({ onChange }: any) {
   return (
     <div>
       <div className="flex2">
-        <Input onChange={onChange} placeholder={"Serach Device"} />
+        <div className="serbox">
+          <Input onChange={onChange} placeholder={"Serach Device"} />
+        </div>
         <div className="filterbox">
           <button>
             <i className="fa-solid fa-sliders"></i>

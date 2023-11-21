@@ -34,3 +34,43 @@ a {
 .space{
   padding: 30px 0;
 }
+.logs {
+  max-width: 100px;
+}
+ .css-honxw6 {
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  width: 12px !important;
+  height: 12px !important;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.container{
+  width: 100%;
+}.css-jn69v9 {
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  width: 12px !important;
+  height: 12px !important;
+}.app::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+/* Optional: Prevent background painting when scrollbar is hidden */
+.app::-webkit-scrollbar-thumb {
+  background-color: transparent !important;
+}
+
+/* Hide scrollbar for Firefox */
+.app {
+  scrollbar-width: thin !important;
+  scrollbar-color: transparent transparent !important;
+}
