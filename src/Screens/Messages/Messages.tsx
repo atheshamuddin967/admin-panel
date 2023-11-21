@@ -1,11 +1,5 @@
-import Chat from "./MessagesMin";
-
 function Messages() {
-  return (
-    <div>
-      <Chat />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Messages;
