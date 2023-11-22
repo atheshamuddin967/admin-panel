@@ -46,6 +46,8 @@ import {
 import { useState } from "react";
 import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
+import SettingScreen from "./Screens/Settings/SettingScreen";
+
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
   const handleMenuItemClick = (path: any) => {
@@ -53,7 +55,7 @@ function App() {
   };
   const { collapseSidebar } = useProSidebar();
   return (
-    <div style={{ display: "flex", height: "100vh", marginTop: "70px" }}>
+    <div style={{ display: "flex", height: "90dvh", marginTop: "70px" }}>
       <Sidebar className="app" backgroundColor="">
         <Menu
           menuItemStyles={{
@@ -288,12 +290,12 @@ function App() {
             User Management
           </MenuItem>
           <MenuItem
-            // component={<Link to="/Singup" />}
+            component={<Link to="/Settings" />}
             icon={
               <img src={Images.setings} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Singup"}
-            onClick={() => handleMenuItemClick("/Singup")}
+            active={activeMenuItem === "/Settings"}
+            onClick={() => handleMenuItemClick("/Settings")}
           >
             Settings
           </MenuItem>
@@ -329,6 +331,7 @@ function App() {
           {/* <Route path = "/Messages" element= {<Messages /> }/> */}
           <Route path="/Login" element={<Login />} />
           <Route path="/Singup" element={<Singup />} />
+          <Route path="/Settings/*" element={<SettingScreen />} />
         </Routes>
       </section>
     </div>

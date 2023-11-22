@@ -54,6 +54,12 @@ import loginimg from "../images/loginimg.png";
 import uicon from "../images/uicon.svg";
 import lock from "../images/lock.svg";
 import notification from "../images/notification.svg";
+import systeminfo from "../images/systeminfo.svg";
+import userlock from "../images/userlock.svg";
+import notisetting from "../images/notisetting.svg";
+import mediaset from "../images/mediaset.svg";
+import userset from "../images/userssetting.svg";
+import miniuser from "../images/miniuser.svg";
 const Images = {
   Dashboard,
   operations,
@@ -111,5 +117,11 @@ const Images = {
   uicon,
   lock,
   notification,
+  systeminfo,
+  userset,
+  mediaset,
+  notisetting,
+  userlock,
+  miniuser,
 };
 export default Images;

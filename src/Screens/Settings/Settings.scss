@@ -1,0 +1,259 @@
+.settinglayout{
+padding: 30px;
+
+}
+.layout{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 15px;
+    padding: 10px ;
+    nav{
+        box-shadow: unset !important;
+      }
+}
+.siders{
+    display: flex;
+    
+}
+.sider{
+    background-color: #ffff !important;
+}
+.css-1t8x7v1 >.ps-menu-button {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 50px  ;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-left: 20px;
+   
+}
+.css-dip3t8 {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 3;
+    background-color:#ffff !important;
+}
+.pro-menu-item {
+    /* Style for each menu item */
+    padding: 15px; /* Adjust padding as needed */
+    display: flex;
+    align-items: center !important;
+    text-decoration: none;
+    color: white; /* Set text color as needed */
+    transition: background-color 0.3s;
+  }
+  
+.pro-sidebar {
+    /* Set the height of the sidebar to 100% */
+    height: 100%;
+  }
+  
+  .pro-menu {
+    /* Make the menu take full height of the sidebar */
+    height: 100%;
+  }
+ .headings {
+   margin: 10px 0;
+   h6{
+    font-family: "poppins";
+    font-size: 18px;
+    font-weight: 600;
+    color: gray;
+   }
+   h5{
+    margin: 20px 0;
+    font-family: "poppins";
+    color: black;
+    font-size: 20px;
+   }
+ }
+ .Userdetails{
+  margin: 10px 0;
+  text-align: center;
+ }
+ .custom-file-upload{
+
+  input::placeholder{
+  }
+ }
+ .furtherdetails{
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 10px 0;
+ }
+ .userName{
+  font-size: 24px;
+  font-family: "poppins";
+
+ }
+ .display{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  p{
+    font-family: "poppins";
+    color: black;
+    font-size: 18px;
+  }
+ }
+ .advancedetail{
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 10px 0;
+ }
+ .display{
+  input{
+    width: 100%;
+    margin: 10px 0;
+    padding: 0px 10px;
+    border: 0;
+    font-size: 18px;
+    font-family: "poppins";
+    color: black;
+  }
+  label{
+    margin: 10px 0;
+    // padding: 10px 0;
+    font-size: 18px;
+    font-family: "poppins";
+    color: black;
+    font-weight: 600;
+  }
+  input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+ }
+ .btnsave{
+  button{
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 5px ;
+  }
+ }
+ .inpdiv{
+  position: relative;
+  button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    color: gray;
+  }
+ }
+ .searchadmin{
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 10px 0;
+ }
+ .adminbox{
+  max-width: 60%;
+  margin: 0 auto;
+ }
+ .serchadmin{
+  width: 100%;
+  border: 2px solid gray;
+  border-radius: 3px;
+  margin: 40px 0 !important;
+  input{
+    width: 100%;
+    padding: 5px 10px;
+    border: 0;
+  }
+  position: relative;
+  span{
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background-color: white;
+    font-size: 16px;
+    font-family: "poppins";
+
+
+  }
+ }
+ .adminnoti{
+
+// flex: 1;
+  
+  label{
+    // margin-right: 20px;
+    font-family: "poppins";
+    color: black;
+    font-weight: 600;
+    font-size: 18px;
+    // margin-top: 22px;
+    span{
+      font-size: 12px;
+      color: gray;
+      font-weight: 400;
+    }
+  }
+  select{
+    border: 1px solid gray !important;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 16px;
+    font-family: "poppins";
+margin: 10px 0;  }
+
+ }
+ .display2{ 
+ 
+  display: flex;
+ flex-direction: row;
+ align-items: center !important;
+ justify-content: space-between;
+ margin: 5px 0;
+
+}
+.notidisplay{
+  max-width: 60%;
+  margin: 0 auto;
+}
+.media{
+  max-width: 60%;
+  margin: 0 auto;
+}
+.selects{
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin: 10px 0;
+select{
+  flex: 1;
+  border: 1px solid gray !important;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 16px;
+    font-family: "poppins";
+margin: 10px 0;  
+}
+button{
+  background-color: black;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: 0;
+  margin-left: 10px;
+}
+}

@@ -9,6 +9,7 @@ function Login() {
   const navigate = useNavigate();
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [users] = useState(
     JSON.parse(localStorage.getItem("users") || "[]") || []
   );
@@ -26,7 +27,7 @@ function Login() {
 
     if (userFound) {
       alert("Login successful!");
-      console.log(userFound);
+      setCurrentUser(userFound);
       navigate("/Operators");
     } else {
       alert("Invalid username or password. Please try again.");

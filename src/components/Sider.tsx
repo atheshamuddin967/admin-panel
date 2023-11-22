@@ -243,12 +243,12 @@ function Sider() {
             User Management
           </MenuItem>
           <MenuItem
-            component={<Link to="/Singup" />}
+            component={<Link to="/Settings" />}
             icon={
               <img src={Images.setings} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Singup"}
-            onClick={() => handleMenuItemClick("/Singup")}
+            active={activeMenuItem === "/Settings"}
+            onClick={() => handleMenuItemClick("/Settings")}
           >
             Settings
           </MenuItem>
