@@ -1,11 +1,8 @@
 import Profile from "../../components/Profile";
 import { useState } from "react";
 function UserProfile() {
-  const [users] = useState(
-    JSON.parse(localStorage.getItem("users") || "[]") || []
-  );
-  const [username, setUsername] = useState("salman1233");
-  const [email, setEmail] = useState("salman@gmail.com");
+  const [username, setUsername] = useState("Chris-Hemsworth");
+  const [email, setEmail] = useState("Chirs@gmail.com");
   const [password, setPassword] = useState("123456");
   const [isEditable, setIsEditable] = useState(true);
   const handleEditToggle = () => {

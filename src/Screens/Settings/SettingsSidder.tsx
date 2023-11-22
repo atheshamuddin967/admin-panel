@@ -1,11 +1,14 @@
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import Images from "../../images/Images";
-import { Route, Routes, Link, Outlet } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import UserRole from "./UserRole";
 import NotifictionSetting from "./NotifictionSetting";
 import MediaSettings from "./MediaSettings";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import UserPreference from "./UserPreference";
+import Security from "./Security";
+import SystemInfo from "./SystemInfo";
 function SettingsSidder() {
   const { collapseSidebar } = useProSidebar();
   return (
@@ -27,29 +30,44 @@ function SettingsSidder() {
             </MenuItem>
             <MenuItem
               icon={<img src={Images.miniuser} alt="icon" />}
-              //   component={<Link to="/UserProfile" />}
+              component={<Link to="/Settings/UserProfile" />}
             >
-              <Link to="/Settings/UserProfile">User Profile</Link>
+              User Profile
             </MenuItem>
             <MenuItem
               icon={<img src={Images.userlock} alt="icon" />}
-              //   component={<Link to="/UserRole" />}
+              component={<Link to="/Settings/UserRole" />}
             >
-              <Link to="/Settings/UserRole">Users Roles</Link>
+              Users Roles
             </MenuItem>
-            <MenuItem icon={<img src={Images.notisetting} alt="icon" />}>
-              <Link to="/Settings/NotificationSetting">Notifications</Link>
+            <MenuItem
+              icon={<img src={Images.notisetting} alt="icon" />}
+              component={<Link to="/Settings/NotificationSetting" />}
+            >
+              Notifications
             </MenuItem>
-            <MenuItem icon={<img src={Images.mediaset} alt="icon" />}>
-              <Link to="/Settings/MediaSetting">Media Settings</Link>
+            <MenuItem
+              icon={<img src={Images.mediaset} alt="icon" />}
+              component={<Link to="/Settings/MediaSetting" />}
+            >
+              Media Settings
             </MenuItem>
-            <MenuItem icon={<img src={Images.userset} alt="icon" />}>
+            <MenuItem
+              icon={<img src={Images.userset} alt="icon" />}
+              component={<Link to="/Settings/UserPreference" />}
+            >
               User Preference
             </MenuItem>
-            <MenuItem icon={<img src={Images.lock} alt="icon" />}>
+            <MenuItem
+              icon={<img src={Images.lock} alt="icon" />}
+              component={<Link to="/Settings/Security" />}
+            >
               Security
             </MenuItem>
-            <MenuItem icon={<img src={Images.systeminfo} alt="icon" />}>
+            <MenuItem
+              icon={<img src={Images.systeminfo} alt="icon" />}
+              component={<Link to="/Settings/SystemInfo" />}
+            >
               System Info
             </MenuItem>
           </Menu>
@@ -59,11 +77,14 @@ function SettingsSidder() {
             <Route path="/" element={<UserProfile />} />
             <Route path="UserProfile" element={<UserProfile />} />
             <Route path="UserRole" element={<UserRole />} />
+            <Route path="UserPreference" element={<UserPreference />} />
             <Route
               path="NotificationSetting"
               element={<NotifictionSetting />}
             />
             <Route path="MediaSetting" element={<MediaSettings />} />
+            <Route path="Security" element={<Security />} />
+            <Route path="SystemInfo" element={<SystemInfo />} />
           </Routes>
         </section>
       </div>

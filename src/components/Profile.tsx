@@ -8,7 +8,7 @@ interface ProfileItem {
 }
 
 function Profile({ username }: any) {
-  const [image, setImage] = useState<File | null>(null);
+  // const [setImage] = useState<File | null>(null);
   const [src, setSrc] = useState<string>("");
   const [imageCrop, setImageCrop] = useState<boolean>(false);
   const [profile, setProfile] = useState<ProfileItem[]>([]);
@@ -36,11 +36,11 @@ function Profile({ username }: any) {
     const file = event.target.files?.[0];
 
     if (file && file.type.substring(0, 5) === "image") {
-      setImage(file);
+      // setImage(file);
       setSrc(URL.createObjectURL(file)); // Set src based on the selected file
       setImageCrop(true); // Show the cropping dialog
     } else {
-      setImage(null);
+      // setImage(null);
       setSrc(""); // Reset src if no valid image is selected
       console.error("Selected file is not an image.");
     }

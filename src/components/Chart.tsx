@@ -12,7 +12,7 @@ function Charts() {
           datasets: [
             {
               borderDashOffset: 0.0,
-              // label: "",
+              label: "Details",
               fill: false,
               backgroundColor: "green",
               pointHoverBackgroundColor: "rgba(75,192,192,1)",

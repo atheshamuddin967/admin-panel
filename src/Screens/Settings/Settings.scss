@@ -82,11 +82,7 @@ padding: 30px;
   margin: 10px 0;
   text-align: center;
  }
- .custom-file-upload{
 
-  input::placeholder{
-  }
- }
  .furtherdetails{
   max-width: 60%;
   margin: 0 auto;
@@ -216,7 +212,7 @@ margin: 10px 0;  }
 
  }
  .display2{ 
- 
+ width: 100%;
   display: flex;
  flex-direction: row;
  align-items: center !important;
@@ -256,4 +252,71 @@ button{
   border: 0;
   margin-left: 10px;
 }
+}
+.headings2{
+  margin: 20px 0;
+}
+.selects2{
+select{
+  width: 60%;
+  border: 1px solid gray !important;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 16px;
+    font-family: "poppins";
+margin: 10px 0;  
+}
+margin: 10px 0;
+h6{
+  font-size: 20px;
+  font-weight: 600;
+  color: #2E2E2E;
+  margin-bottom: 0;
+}
+
+}
+.savesbtn{
+text-align: center;
+margin: 10px 0;
+  button{
+    background-color: black;
+    color: white;
+    padding: 5px 35px;
+    border: 0;
+    border-radius: 5px;
+  }
+ 
+}
+.adminnoti{
+  input{
+    background-color: #E6E6E6;
+    padding: 5px 10px;
+    border-radius: 5px;
+  border: 0;
+  }
+}
+.security{
+  margin: 20px 0;
+}
+.savesbtn2{
+ float: right;
+ margin: 10px 0;
+ text-align: right;
+ width: 100%;
+ button{
+  background-color: black;
+  color: white;
+  padding: 5px 35px;
+  border: 0;
+  border-radius: 5px;
+}
+}
+.twostep{
+  margin: 20px 0;
+  h5{
+    font-size: 20px;
+   
+    font-family: "poppins";
+  }
 }
