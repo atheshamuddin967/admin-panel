@@ -2,7 +2,7 @@ import "../Screens/Operations/Operation.scss";
 import Images from "../images/Images";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../components/ItemType";
-
+import ReactPlayer from "react-player";
 function Dragitem({ item, onViewImageClick }: any) {
   const [, drag] = useDrag({
     type: ItemTypes.DRAGGABLE_ITEM,
@@ -12,9 +12,14 @@ function Dragitem({ item, onViewImageClick }: any) {
   return (
     <div ref={drag} className="itemslist">
       <p>Device id {item.id}</p>
-      <video width="100%" height="100" controls>
-        <source src={item.video} type="video/mp4" />
-      </video>
+      <div className="h">
+        <ReactPlayer
+          url={item.video}
+          style={{ maxHeight: "100px" }}
+          width={"100%"}
+          controls={false}
+        />
+      </div>
       <div className="flex">
         <ul>
           <li>

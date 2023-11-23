@@ -4,7 +4,7 @@ import "../Screens/Vehicle/Vehicle.scss";
 function VehicleHeaderPlates({ openmodal, openmodalblock }: any) {
   return (
     <div className="flex">
-      <Input placeholder={"Serach Plates "} />
+      <Input placeholder={"Search Plates "} />
 
       <div className="btns">
         <button className="add" onClick={openmodal}>

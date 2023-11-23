@@ -7,7 +7,7 @@ function Block() {
   return (
     <div>
       <div className="input">
-        <Input placeholder={"search Block Device"} />
+        <Input placeholder={"Search Block Device"} />
       </div>
       <div className="vehicle-table">
         <BlockPlatesTable data={Items} bg={"#bea8a8"} icon={Images.block} />

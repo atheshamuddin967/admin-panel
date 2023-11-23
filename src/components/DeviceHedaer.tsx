@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 function DeviceHeader({ openmodal, openmodalEdit }: any) {
   return (
     <div className="flex">
-      <Input placeholder={"Serach Devices"} />
+      <Input placeholder={"Search Devices"} />
       <div className="btns">
         <Dropdown label={" Select Device"} />
         <button className="add" onClick={openmodal}>

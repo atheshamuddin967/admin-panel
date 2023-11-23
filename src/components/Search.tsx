@@ -6,7 +6,7 @@ function Search({ onChange }: any) {
     <div>
       <div className="flex2">
         <div className="serbox">
-          <Input onChange={onChange} placeholder={"Serach Device"} />
+          <Input onChange={onChange} placeholder={"Search Device"} />
         </div>
         <div className="filterbox">
           <button>

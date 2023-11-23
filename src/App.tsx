@@ -47,6 +47,7 @@ import { useState } from "react";
 import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
+import Messages from "./Screens/Messages/Messages";
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
@@ -96,7 +97,7 @@ function App() {
             active={activeMenuItem === "/Search"}
             onClick={() => handleMenuItemClick("/Search")}
           >
-            Serach
+            Search
           </MenuItem>
           <MenuItem
             component={<Link to="/Operators" />}
@@ -328,7 +329,7 @@ function App() {
           <Route path="/Management" element={<Management />} />
           <Route path="/ManagementGroup" element={<ManagementGroup />} />
           <Route path="/Search" element={<SearchScreeen />} />
-          {/* <Route path = "/Messages" element= {<Messages /> }/> */}
+          <Route path="/Messages" element={<Messages />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Singup" element={<Singup />} />
           <Route path="/Settings/*" element={<SettingScreen />} />

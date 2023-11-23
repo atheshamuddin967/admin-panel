@@ -38,7 +38,7 @@ function Monitoring() {
   return (
     <div>
       <div className="inp">
-        <Input onChange={handleSearch} placeholder={"Serach Vehicle"} />
+        <Input onChange={handleSearch} placeholder={"Search Vehicle"} />
       </div>
       <hr />
       <div className="container">

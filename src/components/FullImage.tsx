@@ -1,5 +1,5 @@
 import Images from "../images/Images";
-
+import ReactPlayer from "react-player";
 function FullImage({
   imgboxVideoSrc,
   handleHideImageClick,
@@ -11,9 +11,7 @@ function FullImage({
       {isImgboxVisible && (
         <div className="imgbox">
           <div className="secondbox">
-            <video width="100%" height="" controls>
-              <source src={imgboxVideoSrc} type="video/mp4" />
-            </video>
+            <ReactPlayer url={imgboxVideoSrc} width={"100%"} />
             <div className="close-btns2" onClick={handleHideImageClick}>
               <i className="fas fa-times"></i>
             </div>

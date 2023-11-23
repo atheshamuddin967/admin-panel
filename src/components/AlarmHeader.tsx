@@ -4,7 +4,7 @@ function AlarmHeader() {
   return (
     <div>
       <div className="flex">
-        <Input placeholder={"Serach Alarm"} />
+        <Input placeholder={"Search Alarm"} />
         <Dropdown label={"Alarm type"} />
       </div>
     </div>

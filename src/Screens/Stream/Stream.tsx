@@ -40,7 +40,7 @@ function Stream() {
           </div>
           <div className="col-sm-4">
             <div className="vehicle-box">
-              <Input placeholder={"Serach Vehicle"} />
+              <Input placeholder={"Search Vehicle"} />
               {Items.map((item) => (
                 <StreamItem
                   key={item.id}

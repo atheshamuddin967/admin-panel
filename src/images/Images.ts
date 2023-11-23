@@ -60,6 +60,7 @@ import notisetting from "../images/notisetting.svg";
 import mediaset from "../images/mediaset.svg";
 import userset from "../images/userssetting.svg";
 import miniuser from "../images/miniuser.svg";
+import profile2 from "../images/profile2.jpg";
 const Images = {
   Dashboard,
   operations,
@@ -123,5 +124,6 @@ const Images = {
   notisetting,
   userlock,
   miniuser,
+  profile2,
 };
 export default Images;
