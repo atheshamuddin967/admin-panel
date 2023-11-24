@@ -21,8 +21,6 @@ a {
 .menuContainer{
   width: 256px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  // position: fixed;
-  
 
 
 }
@@ -52,8 +50,9 @@ a {
 }
 .container{
   width: 100%;
-  // overflow: hidden;
-}.css-jn69v9 {
+ 
+}
+.css-jn69v9 {
   display: inline-block;
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
@@ -61,17 +60,39 @@ a {
   border-bottom: 2px solid currentcolor;
   width: 12px !important;
   height: 12px !important;
-}.app::-webkit-scrollbar {
-  width: 0 !important;
+
+
+}
+.css-x12vwi::-webkit-scrollbar
+{
+    width: 0.5em !important; /* Set the width of the scrollbar */
 }
 
-/* Optional: Prevent background painting when scrollbar is hidden */
-.app::-webkit-scrollbar-thumb {
-  background-color: transparent !important;
+/* Hide the scrollbar track */
+.css-x12vwi::-webkit-scrollbar-track
+ {
+    background: transparent !important;
 }
 
-/* Hide scrollbar for Firefox */
-.app {
-  scrollbar-width: thin !important;
-  scrollbar-color: transparent transparent !important;
+/* Style the scrollbar thumb */
+.css-x12vwi::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+    outline: none !important;
 }
+  
+
+.contentcontainer {
+  width: calc(100% - 250px) !important; 
+  margin-left: 256px !important;
+  height: 100vh; 
+  overflow: scroll;
+  right: 0 !important;
+}
+  .menuContainer {
+    width: 250px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: fixed !important;
+    // position: sticky !important;
+    height: 100vh; 
+    top: 0;
+  }

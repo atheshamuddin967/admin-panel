@@ -6,8 +6,10 @@ import Images from "../../images/Images";
 function Block() {
   return (
     <div>
-      <div className="input">
-        <Input placeholder={"Search Block Device"} />
+      <div className="sheads">
+        <div className="input">
+          <Input placeholder={"Search Block Device"} />
+        </div>
       </div>
       <div className="vehicle-table">
         <BlockPlatesTable data={Items} bg={"#bea8a8"} icon={Images.block} />

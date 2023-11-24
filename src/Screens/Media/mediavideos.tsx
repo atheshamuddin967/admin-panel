@@ -2,6 +2,7 @@ import "../Media/Media.scss";
 import { useState, useEffect, useRef } from "react";
 import Items from "../../Data/ItemData";
 import MediaHeader from "../../components/MediaHeader";
+import ReactPlayer from "react-player";
 function MediaVideos() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -32,7 +33,9 @@ function MediaVideos() {
 
   return (
     <div className="container">
-      <MediaHeader />
+      <div className="shead">
+        <MediaHeader />
+      </div>
       <div className="mediacontainer">
         <div className="heading">
           {" "}
@@ -43,9 +46,15 @@ function MediaVideos() {
           {Items.map((item: any, index: number) => (
             <div className="col-sm-2">
               <div className="imgList" onClick={() => handleItemClick(index)}>
-                <video>
-                  <source src={item.video} type="video/mp4" />
-                </video>
+                <ReactPlayer
+                  url={item.video}
+                  style={{
+                    maxHeight: "100px",
+                    borderRadius: "10px !important",
+                  }}
+                  width={"100%"}
+                  controls={false}
+                />
               </div>
             </div>
           ))}

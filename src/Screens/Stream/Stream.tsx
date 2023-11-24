@@ -3,7 +3,7 @@ import StreamItem from "../../components/StreamItem";
 import "../Stream/Stream.scss";
 import Items from "../../Data/ItemData";
 import StreamList from "../../components/StreamList";
-
+import ReactPlayer from "react-player";
 import { useState, useEffect, useRef } from "react";
 
 function Stream() {
@@ -30,17 +30,21 @@ function Stream() {
       <div className="container">
         <div className="row ">
           <div className="col-sm-8">
-            <StreamList Item={selectedItem} />
-            <hr />
-            <div className="vid-box">
-              <video ref={videoRef} width="100%" height="400" controls>
-                {/* <source src={selectedItem?.video} type="video/mp4" /> */}
-              </video>
+            <div className="shead">
+              <StreamList Item={selectedItem} />
+              <hr />
+              <div className="vid-box">
+                <ReactPlayer url={selectedItem?.video} width={"100%"} />
+              </div>
             </div>
           </div>
           <div className="col-sm-4">
             <div className="vehicle-box">
-              <Input placeholder={"Search Vehicle"} />
+              <div className="shead">
+                {" "}
+                <Input placeholder={"Search Vehicle"} />
+              </div>
+
               {Items.map((item) => (
                 <StreamItem
                   key={item.id}

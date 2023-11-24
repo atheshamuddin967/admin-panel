@@ -24,10 +24,12 @@ function VehiclePlates() {
 
   return (
     <div>
-      <VehicleHeaderPlates
-        openmodal={openmodal}
-        openmodalblock={openmodalblock}
-      />
+      <div className="sheads">
+        <VehicleHeaderPlates
+          openmodal={openmodal}
+          openmodalblock={openmodalblock}
+        />
+      </div>
       <div className="vehicle-table">
         <VehiclePlatesTable data={Items} bg={"#ECECEC"} icon={Images.palte} />
       </div>

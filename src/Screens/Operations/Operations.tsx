@@ -52,15 +52,19 @@ function Operations() {
       <div className="container">
         <div className="row ">
           <div className="col-sm-7">
-            <div className="maps-box">
-              <Googlemap style={{ borderRadius: "16px" }} height={"300px"} />
-            </div>
+            <div className="staticdata">
+              <div className="maps-box">
+                <Googlemap style={{ borderRadius: "16px" }} height={"300px"} />
+              </div>
 
-            <Dragbox item={droppedItem} onDrop={handleDrop} />
+              <Dragbox item={droppedItem} onDrop={handleDrop} />
+            </div>
           </div>
           <div className="col-sm-5">
-            <div className="search">
-              <Search onChange={handleSearch} />
+            <div className="shead">
+              <div className="search">
+                <Search onChange={handleSearch} />
+              </div>
             </div>
 
             <div className="dragitem">

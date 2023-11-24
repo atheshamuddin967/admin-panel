@@ -5,7 +5,9 @@ import Items from "../../Data/ItemData";
 function SearchScreeen() {
   return (
     <div className="container">
-      <SearchHeader />
+      <div className="shead col-sm-8">
+        <SearchHeader />
+      </div>
       <hr />
       <div className="row">
         <div className="col-sm-8">

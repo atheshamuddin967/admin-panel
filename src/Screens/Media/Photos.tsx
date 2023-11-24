@@ -27,7 +27,9 @@ function Photos() {
   };
   return (
     <div className="container">
-      <MediaHeader />
+      <div className="shead">
+        <MediaHeader />
+      </div>
       <div className="mediacontainer">
         <div className="heading">
           <h6>Photos</h6>

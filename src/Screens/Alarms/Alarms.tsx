@@ -9,7 +9,9 @@ function Alarms() {
 
   return (
     <div className="container">
-      <AlarmHeader />
+      <div className="shead">
+        <AlarmHeader />
+      </div>
       <div className="alarmlist">
         <AlarmTable data={emergencyAlarms} icon={Images.alarm} bg={"#FFA2A2"} />
       </div>

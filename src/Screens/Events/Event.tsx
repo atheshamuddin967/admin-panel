@@ -8,7 +8,9 @@ function Events() {
 
   return (
     <div className="container">
-      <EventHeader />
+      <div className="shead">
+        <EventHeader />
+      </div>
       <div className="alarmlist">
         <EventTable
           data={emergencyAlarms}

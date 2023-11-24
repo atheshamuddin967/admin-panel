@@ -5,8 +5,9 @@ import Items from "../../Data/ItemData";
 function Media() {
   return (
     <div className="container">
-      <MediaHeader />
-
+      <div className="shead">
+        <MediaHeader />
+      </div>
       <div className="mediacontainer">
         <div className="headings ">
           <h6>Recent Captured</h6>

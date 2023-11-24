@@ -6,4 +6,148 @@
   }
   .chats{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; 
+    height: 90vh;
+    overflow: scroll
+    
+    ;
   }
+  .inpbg{
+    background-color: #E8E8E8 !important ;
+    padding:5px 30px !important;
+    border-radius: 20px;
+    position:absolute;
+    bottom: 0 !important;
+    width: 100%;
+    left: 0;
+    margin: 10px 0;
+    // position: relative;
+  }
+  .messagelist{
+    padding: 10px ;
+  }
+  .inpts{
+    background-color: transparent !important;
+    
+  }
+
+  .rce-input {
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #333;
+    flex: 1;
+    font-size: 14px;
+    height: 40px;
+    outline: none;
+    padding: 0 5px;
+    background: transparent;
+}
+.sent{
+  background-color: black;
+  padding: 0 0;
+  margin: 0 0;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  text-align: center !important;
+  color: white;
+  border: 0;
+  line-height: 20px !important;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 25px;
+}
+.rce-input-buttons, .rce-input-buttons>* {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.emoji{
+  position: absolute;
+  right: 60px;
+  background-color: transparent;
+  color: gray;
+  border: 0;
+  top: 3px;
+font-size: 25px;
+}
+.attach{
+  position: absolute;
+  background-color: transparent;
+  color: gray;
+  left: 10px;
+  top: 10px;
+  border: 0;
+}
+.messagelist{
+  position: relative;
+  height: 90vh !important;
+  padding: 60px  10px 10px 10px ;
+  overflow: scroll;
+}
+.flex6{
+  flex-direction: row;
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  padding: 20px 0;
+ .searchbox{
+  flex: 1;
+ }
+}
+.headerschat{
+  background-color: #F4F4F4;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+button{
+  background-color: transparent;
+  border: 0;
+  margin: 0 10px ;
+  color: #434343;
+  font-size: 25px;
+}
+
+}
+.pimage{
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p{
+    font-size: 22px;
+    font-family: "poppins";
+    margin-left: 10px;
+    margin-bottom: 0;
+  }
+}
+.chats::-webkit-scrollbar,
+.messagelist::-webkit-scrollbar {
+    width: 0.5em; /* Set the width of the scrollbar */
+}
+
+/* Hide the scrollbar track */
+.chats::-webkit-scrollbar-track,
+.messagelist::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Style the scrollbar thumb */
+.chats::-webkit-scrollbar-thumb,
+.messagelist::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    outline: none;
+}

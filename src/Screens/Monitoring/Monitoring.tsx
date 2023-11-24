@@ -36,9 +36,11 @@ function Monitoring() {
     setIsImgboxVisible(false);
   };
   return (
-    <div>
-      <div className="inp">
-        <Input onChange={handleSearch} placeholder={"Search Vehicle"} />
+    <div className="">
+      <div className="sheads">
+        <div className="inp">
+          <Input onChange={handleSearch} placeholder={"Search Vehicle"} />
+        </div>
       </div>
       <hr />
       <div className="container">

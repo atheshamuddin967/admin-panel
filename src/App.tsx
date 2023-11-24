@@ -9,7 +9,7 @@ import {
 // import Sider from "./components/Sider";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
-// import Navbar from "./components/Navbar";
+
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Operations from "./Screens/Operations/Operations";
 import Monitoring from "./Screens/Monitoring/Monitoring";
@@ -56,8 +56,14 @@ function App() {
   };
   const { collapseSidebar } = useProSidebar();
   return (
-    <div style={{ display: "flex", height: "90dvh", marginTop: "70px" }}>
-      <Sidebar className="app" backgroundColor="">
+    <div
+      style={{
+        display: "flex",
+        height: "100dvh",
+      }}
+      className="main"
+    >
+      <Sidebar className="menuContainer" backgroundColor="">
         <Menu
           menuItemStyles={{
             button: ({ level, active }) => {
@@ -302,7 +308,7 @@ function App() {
           </MenuItem>
         </Menu>
       </Sidebar>
-      <section className="container">
+      <section className=" contentcontainer">
         <Navbar />
         <Routes>
           <Route path="/" element={<Singup />} />,

@@ -24,7 +24,9 @@ function Vehicle() {
 
   return (
     <div>
-      <VehicleHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+      <div className="sheads">
+        <VehicleHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+      </div>
       <div className="vehicle-table">
         <VehicleTable data={Items} icon={Images.car2} bg={"#FCEBDB"} />
       </div>

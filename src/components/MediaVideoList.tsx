@@ -1,5 +1,6 @@
 import "../Screens/Media/Media.scss";
 import { useState, useEffect, useRef } from "react";
+import ReactPlayer from "react-player";
 interface MediaItem {
   image: string;
   video: string;
@@ -42,9 +43,12 @@ function MediaVideoList({ data }: MediaListProps) {
         {data.map((item: any, index: number) => (
           <div className="col-sm-2">
             <div className="imgList" onClick={() => handleItemClick(index)}>
-              <video>
-                <source src={item.video} type="video/mp4" />
-              </video>
+              <ReactPlayer
+                url={item.video}
+                style={{ maxHeight: "100px", borderRadius: "10px !important" }}
+                width={"100%"}
+                controls={false}
+              />
             </div>
           </div>
         ))}
@@ -56,10 +60,12 @@ function MediaVideoList({ data }: MediaListProps) {
             <div className="imgscreen">
               {data[selectedIndex] && (
                 <div>
-                  <video ref={videoRef} controls>
-                    <source src={data[selectedIndex].video} type="video/mp4" />
-                  </video>
-
+                  <ReactPlayer
+                    url={data[selectedIndex].video}
+                    width={"100%"}
+                    controls={false}
+                    // ref={videoRef}
+                  />
                   <div className="navigatebtns">
                     <div className="flex">
                       <button onClick={handleNavigateprev}>

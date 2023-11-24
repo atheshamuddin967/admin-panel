@@ -7,7 +7,9 @@ function MotionAlarms() {
 
   return (
     <div className="container">
-      <AlarmHeader />
+      <div className="shead">
+        <AlarmHeader />
+      </div>
       <div className="alarmlist">
         <AlarmTable data={Motion} icon={Images.scam} bg={"#A4CEFF"} />
       </div>

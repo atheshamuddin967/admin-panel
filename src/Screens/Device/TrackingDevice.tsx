@@ -28,7 +28,9 @@ function TrackingDevice() {
 
   return (
     <div>
-      <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+      <div className="shead">
+        <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+      </div>
       <div className="device-Table">
         <DeviceTable data={video} icon={Images.tracking} bg={"#FCDBDB"} />
       </div>

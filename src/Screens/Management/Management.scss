@@ -25,6 +25,8 @@
 }
 .managment-main{
     margin: 10px 0;
+    position: sticky !important;
+    top: 60px;
 }
 .edit-delete{
     button{
@@ -34,4 +36,8 @@
 }
 .managementTables{
     margin: 20px 0;
+}
+.shead{
+    position: sticky !important;
+    top: 50px;
 }

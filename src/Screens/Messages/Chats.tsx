@@ -1,8 +1,13 @@
-import { MessageType, ChatList, Input, Button } from "react-chat-elements";
+import { MessageType, ChatList, Input } from "react-chat-elements";
 import { MessageList } from "react-chat-elements";
 import { createRef } from "react";
 import Images from "../../images/Images";
 import "../Messages/Messages.scss";
+import { CiPaperplane } from "react-icons/ci";
+import { MdInsertEmoticon } from "react-icons/md";
+import { FaPaperclip } from "react-icons/fa";
+import Inputs from "../../components/Input";
+import ChatHeader from "../../components/ChatHeader";
 function Chats() {
   const messages: MessageType[] = [
     {
@@ -103,6 +108,12 @@ function Chats() {
       <div className="row">
         <div className="col-sm-4">
           <div className="chats">
+            <div className="flex6 mt-2 text-center">
+              <Inputs placeholder={"Search Operator"} style={{ flex: 1 }} />
+              <div className="imgox">
+                <img src={Images.filter} alt="filter" />
+              </div>
+            </div>
             <ChatList
               id={1}
               className="chat-list"
@@ -112,24 +123,43 @@ function Chats() {
           </div>
         </div>
         <div className="col-sm-8">
-          {" "}
-          <MessageList
-            referance={messageListRef}
-            dataSource={messages}
-            className="message-list"
-            toBottomHeight={"100%"}
-            lockable={true}
-          />
-          <Input
-            referance={inputReferance}
-            placeholder="Type here..."
-            multiline={true}
-            // value={inputValue}
-            maxHeight={200}
-            rightButtons={
-              <Button color="white" backgroundColor="black" text="Send" />
-            }
-          />
+          <div className="messagelist">
+            <ChatHeader />
+            <MessageList
+              referance={messageListRef}
+              dataSource={messages}
+              className="message-list"
+              toBottomHeight={"100%"}
+              lockable={true}
+            />
+            <div className="inpbg">
+              <button className="attach">
+                <FaPaperclip />
+              </button>
+              <Input
+                className="inpts"
+                referance={inputReferance}
+                placeholder="Type here..."
+                // multiline={true}
+                // value={inputValue}
+                maxHeight={200}
+                // rightButtons={
+                //   // <Button
+                //   //   color="white"
+                //   //   backgroundColor=""
+                //   //   text={}
+                //   // />
+
+                // }
+              />
+              <button className="emoji">
+                <MdInsertEmoticon />
+              </button>
+              <button className="sent">
+                <CiPaperplane />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,9 @@ function Juricdiction() {
 
   return (
     <div className="container">
-      <AlarmHeader />
+      <div className="shead">
+        <AlarmHeader />
+      </div>
       <div className="alarmlist">
         <AlarmTable data={Lisence} icon={Images.map} bg={"#dbe694"} />
       </div>

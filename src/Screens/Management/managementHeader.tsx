@@ -19,7 +19,7 @@ function ManagementHeader() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="row">
         <div className="col-sm-6">
           <div className="flex5">
