@@ -33,7 +33,7 @@ function ManagementHeader() {
         <div className="col-sm-6">
           <div className="mHeader-btns">
             <Managementselect onChange={handleSelectChange} />
-            <button>Assign</button>
+            <button className="asing">Assign</button>
           </div>
         </div>
       </div>

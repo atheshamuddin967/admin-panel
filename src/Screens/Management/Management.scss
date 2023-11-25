@@ -5,20 +5,24 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+align-items: center;
+    
+   
+}
+.asing{
+    background-color: black;
+    color: #ffff;
+    padding: 3px 30px !important ;
+    border-radius: 5px;
+    margin-left: 10px;
+    border: 0 !important;
+}
+.select{
+    padding: 3px 15px !important;
+    color: $sider-color;
+    // margin-top:5px ;
+    border-radius: 5px;
 
-    button{
-        background-color: black;
-        color: #ffff;
-        padding: 3px 15px ;
-        border-radius: 5px;
-        margin-left: 10px;
-    }
-    select{
-        padding: 3px 15px !important;
-        color: $sider-color;
-        margin-top:5px ;
-
-    }
 }
 .imgox{
     margin-left: 10px;
@@ -26,7 +30,7 @@
 .managment-main{
     margin: 10px 0;
     position: sticky !important;
-    top: 60px;
+    top: 53px;
 }
 .edit-delete{
     button{

@@ -23,8 +23,8 @@ function Vehicle() {
   };
 
   return (
-    <div>
-      <div className="sheads">
+    <div className="container">
+      <div className="shead">
         <VehicleHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
       </div>
       <div className="vehicle-table">

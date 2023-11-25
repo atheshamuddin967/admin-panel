@@ -27,7 +27,7 @@ function VideoDevice() {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="shead">
         <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
       </div>

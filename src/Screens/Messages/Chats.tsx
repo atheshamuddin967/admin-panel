@@ -104,7 +104,7 @@ function Chats() {
   const inputReferance = createRef();
 
   return (
-    <div>
+    <div className="mt-2">
       <div className="row">
         <div className="col-sm-4">
           <div className="chats">
@@ -123,7 +123,7 @@ function Chats() {
           </div>
         </div>
         <div className="col-sm-8">
-          <div className="messagelist">
+          <div className="messagelist ">
             <ChatHeader />
             <MessageList
               referance={messageListRef}

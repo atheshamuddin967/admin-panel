@@ -1,7 +1,7 @@
 import Images from "../../images/Images";
 
 import Loginbtn from "../../components/Loginbtn";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
 import { useState } from "react";
@@ -57,6 +57,11 @@ function Login() {
                   img={Images.lock}
                   onChange={(e: any) => setEnteredPassword(e.target.value)}
                 />
+
+                <div className="forget">
+                  <Link to="/"> forget password?</Link>
+                </div>
+
                 <Loginbtn title={"Sign up"} onClick={handleLoginClick} />
                 <div className="already">
                   <p>

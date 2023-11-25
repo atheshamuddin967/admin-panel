@@ -19,7 +19,7 @@ function Mapview() {
   console.log(item);
 
   return (
-    <div>
+    <div className="container">
       <div className="inp-box">
         <Input placeholder={"Search Devices"} />
       </div>

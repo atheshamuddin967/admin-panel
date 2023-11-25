@@ -36,14 +36,14 @@ function Monitoring() {
     setIsImgboxVisible(false);
   };
   return (
-    <div className="">
-      <div className="sheads">
+    <div className="container">
+      <div className="shead">
         <div className="inp">
           <Input onChange={handleSearch} placeholder={"Search Vehicle"} />
         </div>
       </div>
       <hr />
-      <div className="container">
+      <div className="">
         <div className="row">
           {filteredItems.map((item) => (
             <div className="col-sm-3">

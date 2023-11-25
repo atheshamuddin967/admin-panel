@@ -25,7 +25,8 @@ td{
 }
 .vehicle-table{
     margin: 20px 0;
-    padding: 0 20px;
+    // padding: 0 20px;
+    width: 100%;
 }
 .input{
     max-width: 250px;
@@ -96,4 +97,11 @@ border-radius: 5px;
             font-size: 25px;
         }
     }
+}
+.vflex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 0 30px;
 }

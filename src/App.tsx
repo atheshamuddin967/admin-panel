@@ -51,10 +51,15 @@ import Messages from "./Screens/Messages/Messages";
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
+  // const [openSubMenu, setOpenSubMenu] = useState(null);
   const handleMenuItemClick = (path: any) => {
     setActiveMenuItem(path);
+    if (!collapsed) {
+      collapseSidebar();
+    }
   };
-  const { collapseSidebar } = useProSidebar();
+
+  const { collapseSidebar, collapsed } = useProSidebar();
   return (
     <div
       style={{
@@ -136,7 +141,7 @@ function App() {
           <MenuItem
             component={<Link to="/Stream" />}
             icon={<img src={Images.straen} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/stream"}
+            active={activeMenuItem === "/Stream"}
             onClick={() => handleMenuItemClick("/Stream")}
           >
             Stream
@@ -159,6 +164,7 @@ function App() {
               icon={<img src={Images.semergency} alt="demo" className="" />}
               active={activeMenuItem === "/Alarm"}
               onClick={() => handleMenuItemClick("/Alarm")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Emergency
             </MenuItem>
@@ -167,6 +173,7 @@ function App() {
               icon={<img src={Images.scam} alt="demo" className="" />}
               active={activeMenuItem === "/MotionAlarm"}
               onClick={() => handleMenuItemClick("/MotionAlarm")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Motion Detection{" "}
             </MenuItem>
@@ -175,6 +182,7 @@ function App() {
               icon={<img src={Images.slisence} alt="demo" className="" />}
               active={activeMenuItem === "/Lisence"}
               onClick={() => handleMenuItemClick("/Lisence")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               License plate Alerts
             </MenuItem>
@@ -184,6 +192,7 @@ function App() {
               icon={<img src={Images.smap} alt="demo" className="" />}
               active={activeMenuItem === "/Juricdiction"}
               onClick={() => handleMenuItemClick("/Juricdiction")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Juricdiction{" "}
             </MenuItem>
@@ -200,6 +209,7 @@ function App() {
               icon={<img src={Images.palte} alt="demo" className="" />}
               active={activeMenuItem === "/VehiclePlates"}
               onClick={() => handleMenuItemClick("/VehiclePlates")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Plates
             </MenuItem>
@@ -208,6 +218,7 @@ function App() {
               icon={<img src={Images.block} alt="demo" className="" />}
               active={activeMenuItem === "/Block"}
               onClick={() => handleMenuItemClick("/Block")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Blocked
             </MenuItem>
@@ -224,6 +235,7 @@ function App() {
               icon={<img src={Images.vediosvg} alt="demo" className="" />}
               active={activeMenuItem === "/VideoDevice"}
               onClick={() => handleMenuItemClick("/VideoDevice")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Video
             </MenuItem>
@@ -232,6 +244,7 @@ function App() {
               icon={<img src={Images.audiosvg} alt="demo" className="" />}
               active={activeMenuItem === "/AudioDevice"}
               onClick={() => handleMenuItemClick("/AudioDevice")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Audio
             </MenuItem>
@@ -240,6 +253,7 @@ function App() {
               icon={<img src={Images.smap} alt="demo" className="" />}
               active={activeMenuItem === "/TrackingDevice"}
               onClick={() => handleMenuItemClick("/AudioDevice")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Tracking
             </MenuItem>
@@ -275,6 +289,7 @@ function App() {
               icon={<img src={Images.photos} alt="demo" className="" />}
               active={activeMenuItem === "/Photos"}
               onClick={() => handleMenuItemClick("/Photos")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Photos
             </MenuItem>
@@ -283,6 +298,7 @@ function App() {
               icon={<img src={Images.movies} alt="demo" className="" />}
               active={activeMenuItem === "/MediaVideos"}
               onClick={() => handleMenuItemClick("/MediaVideos")}
+              style={{ backgroundColor: "#EDEDED" }}
             >
               Videos
             </MenuItem>
@@ -308,7 +324,7 @@ function App() {
           </MenuItem>
         </Menu>
       </Sidebar>
-      <section className=" contentcontainer">
+      <section className={`contentcontainer ${collapsed ? "expanded" : ""}`}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Singup />} />,

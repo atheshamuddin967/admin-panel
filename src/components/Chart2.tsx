@@ -1,6 +1,6 @@
 import { CChart } from "@coreui/react-chartjs";
 
-function Charts() {
+function Charts2() {
   //
 
   return (
@@ -14,12 +14,13 @@ function Charts() {
               borderDashOffset: 0.0,
               label: "Details",
               fill: true,
-              backgroundColor: "#25CD2566",
+              backgroundColor: "rgba(151, 143, 237, 0.5)",
               pointHoverBackgroundColor: "rgba(75,192,192,1)",
-              borderColor: "rgba(0, 0, 0,0 )",
+              borderColor: "#978FED",
               pointBackgroundColor: "rgba(0, 0, 0,0 )",
               pointBorderColor: "rgba(0, 0, 0,0 )",
-              data: [0, 100, 150, 180, 200, 225, 270, 290],
+              data: [0, 100, 150, 90, 200, 125, 270, 290],
+              spanGaps: true,
             },
           ],
         }}
@@ -32,18 +33,18 @@ function Charts() {
           scales: {
             x: {
               grid: {
-                color: "#F1F1F1",
+                color: "",
               },
               ticks: {
-                color: "black",
+                display: false, // Hide y-axis ticks
               },
             },
             y: {
               grid: {
-                color: "#F1F1F1",
+                color: "",
               },
               ticks: {
-                // color: "#25CD25",
+                display: false, // Hide y-axis ticks
               },
             },
           },
@@ -52,4 +53,4 @@ function Charts() {
     </div>
   );
 }
-export default Charts;
+export default Charts2;

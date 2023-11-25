@@ -3,7 +3,7 @@ import "../Screens/Vehicle/Vehicle.scss";
 import Dropdown from "./Dropdown";
 function VehicleHeader({ openmodal, openmodalEdit }: any) {
   return (
-    <div className="flex">
+    <div className="vflex">
       <Input placeholder={"Search Vehicles"} />
       <div className="btns">
         <Dropdown label={" Select Vehicle"} />

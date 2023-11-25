@@ -3,7 +3,7 @@ import "react-chat-elements/dist/main.css";
 
 function Messages() {
   return (
-    <div>
+    <div className="container">
       <Chats />
     </div>
   );

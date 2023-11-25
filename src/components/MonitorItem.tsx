@@ -1,12 +1,16 @@
 import "../Screens/Operations/Operation.scss";
 // import Images from "../images/Images";
+import ReactPlayer from "react-player";
 function MonitorItem({ item, onViewImageClick }: any) {
   return (
     <div>
       <div className="itemslist">
-        <video width="100%" height="100" controls>
-          <source src={item.video} type="video/mp4" />
-        </video>
+        <ReactPlayer
+          url={item.video}
+          style={{ maxHeight: "100px" }}
+          width={"100%"}
+          controls={false}
+        />
         <div className="flex">
           <p>
             Vehicle id: <span>{item.vehicleId} </span>

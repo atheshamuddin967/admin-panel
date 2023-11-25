@@ -6,9 +6,9 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg stick ">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        {/* <Link className="navbar-brand" to="/">
           <img src={Images.logo} alt="logo" />
-        </Link>
+        </Link> */}
         <button
           className="navbar-toggler"
           type="button"

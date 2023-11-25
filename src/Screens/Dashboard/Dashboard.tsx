@@ -2,13 +2,16 @@ import Dashbox from "../../components/Dashox";
 import "./Dashboard.scss";
 import Data from "../../Data/Data";
 import Charts from "../../components/Chart";
+import Charts2 from "../../components/Chart2";
 function Dashboard() {
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <h5 className="heading">Dashboard</h5>
+            <div className="dash">
+              <h5 className="heading">Dashboard</h5>
+            </div>
           </div>
         </div>
         <div className="row">
@@ -38,7 +41,7 @@ function Dashboard() {
                 <h6>Connected device</h6>
                 <h5>220</h5>
               </div>
-              <Charts />
+              <Charts2 />
             </div>
           </div>
           <div className="col-sm-6">

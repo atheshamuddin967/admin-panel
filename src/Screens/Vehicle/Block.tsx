@@ -5,8 +5,8 @@ import Images from "../../images/Images";
 
 function Block() {
   return (
-    <div>
-      <div className="sheads">
+    <div className="container">
+      <div className="shead">
         <div className="input">
           <Input placeholder={"Search Block Device"} />
         </div>

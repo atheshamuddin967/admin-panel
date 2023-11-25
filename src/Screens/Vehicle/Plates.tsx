@@ -23,8 +23,8 @@ function VehiclePlates() {
   };
 
   return (
-    <div>
-      <div className="sheads">
+    <div className="container">
+      <div className="shead">
         <VehicleHeaderPlates
           openmodal={openmodal}
           openmodalblock={openmodalblock}

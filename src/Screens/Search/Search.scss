@@ -95,10 +95,12 @@
                 border-bottom-right-radius: 10px;
             }
 }
-.shead{
+.shead {
     position: sticky;
-    top: 60px;
+    top: 53px;
     background-color: #ffffff;
     z-index: 1;
-    padding: 10px 0;
+    padding: 15px 0;
+
+    margin: 0 0 !important;
 }
