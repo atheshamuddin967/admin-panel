@@ -4,7 +4,7 @@ import "../Screens/Management/Management.scss";
 import ManagementGroupselect from "./ManagementGroupSelect";
 import { useNavigate } from "react-router-dom";
 
-function ManagementGroupHeader({}: any) {
+function ManagementGroupHeader({ openform }: any) {
   const navigate = useNavigate();
 
   const handleSelectChange = (event: any) => {
@@ -32,7 +32,9 @@ function ManagementGroupHeader({}: any) {
         <div className="col-sm-6">
           <div className="mHeader-btns">
             <ManagementGroupselect onChange={handleSelectChange} />
-            <button>Create</button>
+            <button className="asing" onClick={openform}>
+              Create
+            </button>
           </div>
         </div>
       </div>

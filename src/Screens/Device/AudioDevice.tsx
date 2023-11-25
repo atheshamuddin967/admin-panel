@@ -37,11 +37,12 @@ function AudioDevice() {
       {open && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Add Device"}
             buttonlabel={"Add"}
             label1={"Device Id :"}
             label2={"Device type : "}
             label3={"Gps :"}
-            label4={"Vehicle Operator :"}
+            label4={"Device  Operator :"}
             placeholder1={"Abc-001"}
             placeholder2={"12345"}
             placeholder3={"55456"}
@@ -54,6 +55,7 @@ function AudioDevice() {
       {openEdit && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Edit Device"}
             buttonlabel={"Edit"}
             label1={"Device Id :"}
             label2={"Device type : "}

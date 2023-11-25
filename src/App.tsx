@@ -54,9 +54,9 @@ function App() {
   // const [openSubMenu, setOpenSubMenu] = useState(null);
   const handleMenuItemClick = (path: any) => {
     setActiveMenuItem(path);
-    if (!collapsed) {
-      collapseSidebar();
-    }
+    // if (!collapsed) {
+    //   collapseSidebar();
+    // }
   };
 
   const { collapseSidebar, collapsed } = useProSidebar();
@@ -240,7 +240,7 @@ function App() {
               Video
             </MenuItem>
             <MenuItem
-              // component={<Link to="/AudioDevice" />}
+              component={<Link to="/AudioDevice" />}
               icon={<img src={Images.audiosvg} alt="demo" className="" />}
               active={activeMenuItem === "/AudioDevice"}
               onClick={() => handleMenuItemClick("/AudioDevice")}
@@ -252,7 +252,7 @@ function App() {
               component={<Link to="/TrackingDevice" />}
               icon={<img src={Images.smap} alt="demo" className="" />}
               active={activeMenuItem === "/TrackingDevice"}
-              onClick={() => handleMenuItemClick("/AudioDevice")}
+              onClick={() => handleMenuItemClick("/TrackingDevice")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Tracking

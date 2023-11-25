@@ -33,6 +33,7 @@ function Vehicle() {
       {open && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Add Vehicle"}
             buttonlabel={"Add"}
             label1={"Vehicle Id :"}
             label2={"Device Id : "}
@@ -50,6 +51,7 @@ function Vehicle() {
       {openEdit && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Edit Vehicle"}
             buttonlabel={"Edit"}
             label1={"Vehicle Id :"}
             label2={"Device Id : "}

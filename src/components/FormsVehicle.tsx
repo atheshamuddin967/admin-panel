@@ -11,12 +11,13 @@ function FormsVehicle({
   placeholder3,
   placeholder4,
   closemodal,
+  formtitle,
 }: any) {
   return (
     <div className="fromLayout">
       <div className="formbg">
         <div className="formData">
-          <h6>Add Vehicle</h6>
+          <h6>{formtitle}</h6>
           <InputsFroms label={label1} placeholder={placeholder1} />
           <InputsFroms label={label2} placeholder={placeholder2} />
           <InputsFroms label={label3} placeholder={placeholder3} />

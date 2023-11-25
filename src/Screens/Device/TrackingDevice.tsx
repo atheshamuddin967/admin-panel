@@ -37,6 +37,7 @@ function TrackingDevice() {
       {open && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Add Device"}
             buttonlabel={"Add"}
             label1={"Device Id :"}
             label2={"Device type : "}
@@ -54,6 +55,7 @@ function TrackingDevice() {
       {openEdit && (
         <div className="formsVehicle">
           <FormsVehicle
+            formtitle={"Edit Device"}
             buttonlabel={"Edit"}
             label1={"Device Id :"}
             label2={"Device type : "}

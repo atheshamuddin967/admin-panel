@@ -26,7 +26,7 @@ function Dragitem({ item, onViewImageClick }: any) {
             <img src={Images.movie} alt="" />
           </li>
           <li>
-            <img src={Images.mic} alt="" />
+            <img src={Images.lilmic} alt="" />
           </li>
           <li>
             <img src={Images.back} alt="" />

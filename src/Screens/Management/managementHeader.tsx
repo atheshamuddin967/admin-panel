@@ -4,7 +4,7 @@ import Images from "../../images/Images";
 import "../Management/Management.scss";
 import { useNavigate } from "react-router-dom";
 
-function ManagementHeader() {
+function ManagementHeader({ openform }: any) {
   const navigate = useNavigate();
 
   const handleSelectChange = (event: any) => {
@@ -33,7 +33,9 @@ function ManagementHeader() {
         <div className="col-sm-6">
           <div className="mHeader-btns">
             <Managementselect onChange={handleSelectChange} />
-            <button className="asing">Assign</button>
+            <button className="asing" onClick={openform}>
+              Assign
+            </button>
           </div>
         </div>
       </div>

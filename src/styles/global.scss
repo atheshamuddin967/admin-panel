@@ -102,5 +102,13 @@ a {
     width: 100% !important; 
     margin-left: 70px !important;
     padding: 0 7px;
-
+.stick{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: #ffff;
+  position: sticky;
+top: 0;
+z-index: 100;
+margin-left: 5px !important;
+  
+}
   }

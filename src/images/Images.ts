@@ -61,6 +61,7 @@ import mediaset from "../images/mediaset.svg";
 import userset from "../images/userssetting.svg";
 import miniuser from "../images/miniuser.svg";
 import profile2 from "../images/profile2.jpg";
+import lilmic from "../images/lilmic.svg";
 const Images = {
   Dashboard,
   operations,
@@ -125,5 +126,6 @@ const Images = {
   userlock,
   miniuser,
   profile2,
+  lilmic,
 };
 export default Images;
