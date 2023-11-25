@@ -95,10 +95,12 @@ a {
     position: fixed !important;
     // position: sticky !important;
     height: 100vh; 
-    z-index: 100000;
+    z-index: 1;
     top: 0;
   }
   .contentcontainer.expanded {
     width: 100% !important; 
     margin-left: 70px !important;
+    padding: 0 7px;
+
   }

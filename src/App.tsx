@@ -324,7 +324,7 @@ function App() {
           </MenuItem>
         </Menu>
       </Sidebar>
-      <section className={`contentcontainer ${collapsed ? "expanded" : ""}`}>
+      <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
         <Routes>
           <Route path="/" element={<Singup />} />,
