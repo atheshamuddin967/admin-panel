@@ -62,6 +62,9 @@ import userset from "../images/userssetting.svg";
 import miniuser from "../images/miniuser.svg";
 import profile2 from "../images/profile2.jpg";
 import lilmic from "../images/lilmic.svg";
+import connector from "../images/connectors.svg";
+import Greens from "../images/green.svg";
+import red from "../images/red.svg";
 const Images = {
   Dashboard,
   operations,
@@ -127,5 +130,8 @@ const Images = {
   miniuser,
   profile2,
   lilmic,
+  connector,
+  Greens,
+  red,
 };
 export default Images;

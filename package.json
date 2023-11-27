@@ -16,6 +16,7 @@
     "antd": "^5.11.2",
     "apexcharts": "^3.44.0",
     "axios": "^1.6.2",
+    "classnames": "^2.3.2",
     "google-map-react": "^2.2.1",
     "primereact": "^10.1.1",
     "pubnub": "^7.4.4",

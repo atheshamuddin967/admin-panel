@@ -48,6 +48,7 @@ import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
 import Messages from "./Screens/Messages/Messages";
+import Operations2 from "./Screens/Operations/Operations2";
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
@@ -354,6 +355,7 @@ function App() {
           <Route path="/Messages" element={<Messages />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Singup" element={<Singup />} />
+          <Route path="/Operations2" element={<Operations2 />} />
           <Route path="/Settings/*" element={<SettingScreen />} />
         </Routes>
       </section>

@@ -15,7 +15,7 @@ function Dragitem({ item, onViewImageClick }: any) {
       <div className="h">
         <ReactPlayer
           url={item.video}
-          style={{ maxHeight: "100px" }}
+          style={{ maxHeight: "100% " }}
           width={"100%"}
           controls={false}
         />
