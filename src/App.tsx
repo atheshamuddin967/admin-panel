@@ -49,6 +49,7 @@ import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
 import Messages from "./Screens/Messages/Messages";
 import Operations2 from "./Screens/Operations/Operations2";
+import Operations3 from "./Screens/Operations/Operations3";
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
@@ -280,7 +281,7 @@ function App() {
           </MenuItem>
           <SubMenu
             label="Media"
-            icon={<img src={Images.media} alt="demo" className="icons-side" />}
+            icon={<img src={Images.media2} alt="demo" className="icons-side" />}
             component={<Link to="/Media" />}
             active={activeMenuItem === "/Media"}
             onClick={() => handleMenuItemClick("/Media")}
@@ -356,6 +357,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Singup" element={<Singup />} />
           <Route path="/Operations2" element={<Operations2 />} />
+          <Route path="/Operations3" element={<Operations3 />} />
           <Route path="/Settings/*" element={<SettingScreen />} />
         </Routes>
       </section>

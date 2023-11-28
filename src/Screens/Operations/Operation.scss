@@ -216,41 +216,18 @@ color: #3A3A3A;
 }
 .sidesopration{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    // padding: 10px;
+    
     border-radius: 10px;
     border: 1px solid gray;
+    position: sticky;
+    top: 0;
 }
 .secondlayout{
     padding: 10px ;
+    position: sticky !important;
+    top: 0;
 }
-// .drop{
-//     width: 100%;
-//     margin: 10px 0;
-//     border: 1px solid;
-//     border-radius: 10px;
-// }
-// .dropdown-toggle{
-//     width: 100%;
-//     text-align: left;
-//     margin: 10px 0;
-//     border: 1px solid gray;
-// }
-// .dropdown-toggle::after {
-//     display: inline-block;
-//     margin-left: 0.255em;
-//     vertical-align: 0.255em;
-//     content: "";
-//     border-top: 0.3em solid;
-//     border-right: 0.3em solid transparent;
-//     border-bottom: 0;
-//     border-left: 0.3em solid transparent;
-//     position: absolute;
-//     right: 22px;
-//     top: 27px;
-// }
-// .dropdown-menu {
-//     width: 100%;
-// }
+
 .dropbtn{
     display: flex;
     flex-direction: row;
@@ -353,12 +330,9 @@ font-family: "poppins";
         border: 0;
         padding: 0 0;
         margin: 0 0;
+        color: gray;
     }
-    .border{
-        width: 2px;
-        height: 20px;
-        background-color: #C2C2C2;
-    }
+  
   }
   .detailing-box{   
     padding:  0 0;
@@ -382,3 +356,140 @@ font-family: "poppins";
     border: 1px solid gray;
    
   }
+  .itemsvid{
+    padding: 0px 0;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  .itemsvid{
+    text-align: center;
+    p{
+        font-size: 14px;
+        font-family: "poppins";
+        color: #131313;
+        margin: 0 0;
+        span{
+            float: right;
+            margin-right: 5px;
+        }
+    }
+  }
+  .iconsvid{
+    img{
+        width: 15px;
+        height: 15px;
+        margin: 0 2px;
+    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .function{
+    text-align: right;
+    padding: 10px;
+    border: 1px solid gray;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    .ficon{
+        margin: 0 3px;
+        color: gray;
+        transition: all ease-in-out 0.3s;
+    }
+    .ficon:hover{
+        color: blue;
+    }
+  }
+  .activebtn{
+color:black !important ;
+  }
+  .results{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 0 0 ;
+    button{
+        width: 100%;
+        padding: 5px;
+        border: 0;
+        background-color: transparent;
+        font-family: "poppins";
+        font-size: 20px;
+    }
+    .active2{
+        background-color: #F3F3F3;
+    }
+  }
+  .optable{
+    td{
+        font-size: 12px;
+        font-family: "poppins";
+    }
+    th{
+        font-size: 12px;
+        font-family: "poppins";
+        font-weight: 600;
+    }
+  }
+  .further{
+    margin: 10px 0;
+  }
+  .live-messages{
+margin: 20px 0;
+h5{
+    font-size: 22px;
+    font-family: "poppins";
+    color: gray;
+}
+    ul{
+        margin: 0 0;
+        padding: 0 0;
+    }
+    li{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #9E9E9E;
+        justify-content: space-around;
+        padding: 5px 0;
+        border-radius: 10px;
+        position: relative;
+        button{
+            position: absolute;
+            color: gray;
+            background-color: white;
+            right: 20px;
+            bottom: -12px;
+            font-size: 18px;
+            border: 0;
+            z-index: 1;
+
+        }
+        h6{
+            font-size: 18px;
+            font-family: "poppins";
+        }
+        p{
+            margin:  0 0;
+            font-size: 16px;
+            font-family: "poppins";
+            color: #AAAAAA;
+            span{
+                color: #000000;
+            }
+        }
+    }
+  }
+  .border{
+    width: 2px;
+    height: 20px;
+    background-color: #C2C2C2;
+}
+.round2{
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 48px;
+    background-color: #D9D9D9;
+}

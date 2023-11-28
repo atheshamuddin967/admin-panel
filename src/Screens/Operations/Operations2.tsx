@@ -1,101 +1,44 @@
 import Input from "../../components/Input";
-import { FaLocationDot } from "react-icons/fa6";
-import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
-import Images from "../../images/Images";
-import Operationdata from "../../Data/OperationsData";
-import classNames from "classnames";
+import { useState, useEffect } from "react";
 import { MdRemoveRedEye } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
-
+import Items from "../../Data/ItemData";
+import FullImage from "../../components/FullImage";
+import OperationsVideo from "../../components/OperationsVideo";
+import { useNavigate } from "react-router-dom";
+import Operationsider from "../../components/Operationsider";
 function Operations2() {
-  const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
+  const navigate = useNavigate();
+  const [imgboxVideoSrc, setImgboxVideoSrc] = useState("");
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [isImgboxVisible, setIsImgboxVisible] = useState(false);
 
-  const toggleDropdown = (item: any) => {
-    if (isDropdownOpen !== item.groupname) {
-      setDropdownOpen(item.groupname);
-    } else if (isDropdownOpen === item.groupname) {
-      setDropdownOpen(false);
-    }
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+  const handleViewImageClick = (videoSrc: any) => {
+    setIsImgboxVisible(true);
+    setImgboxVideoSrc(videoSrc);
+  };
+  const handleHideImageClick = () => {
+    setIsImgboxVisible(false);
   };
 
+  const plates = () => {
+    navigate("/Operations3");
+  };
+  const videos = () => {
+    navigate("/Operations2");
+  };
   return (
     <div className="container">
       <div className="row space">
         <div className="col-sm-3">
-          <div className="sidesopration">
-            <div className="secondlayout">
-              <Input />
-              {Operationdata.map((item) => (
-                <div
-                  className="droplaout"
-                  onClick={() => {
-                    toggleDropdown(item);
-                  }}
-                >
-                  <React.Fragment>
-                    <div className="drop">
-                      <div className="dropbtn">
-                        <div>
-                          <p>
-                            <span>
-                              <FaLocationDot />
-                            </span>
-                            {item.groupname}
-                          </p>
-                        </div>
-
-                        <FaChevronDown />
-                      </div>
-                      <div className="dropbtns">
-                        <img src={Images.conected} alt="" />
-                        <p> {item.totalconnect}</p>
-
-                        <img src={Images.connector} alt="" />
-                        <p>{item.avilabel}</p>
-                      </div>
-                    </div>
-                    <hr />
-                    {isDropdownOpen === item.groupname && (
-                      <ul className="zoneul">
-                        {item.devices.map((device) => (
-                          <li>
-                            {device.status === "online" && (
-                              <>
-                                <img src={Images.Greens} alt="online" />
-                              </>
-                            )}
-                            {device.status === "ofline" && (
-                              <>
-                                <img src={Images.conected} alt="Offline" />
-                              </>
-                            )}
-                            {device.status === "emergency" && (
-                              <>
-                                <img src={Images.red} alt="Emergency" />
-                              </>
-                            )}
-                            <span
-                              className={classNames({
-                                greens: device.status === "online",
-                                grays: device.status === "ofline",
-                                reds: device.status === "emergency",
-                              })}
-                            >
-                              {device.id}
-                            </span>
-                            <hr />
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </React.Fragment>
-                </div>
-              ))}
-            </div>
-            <div className="function">
-              <MdEdit />
-            </div>
+          <div className="shead">
+            <Operationsider />
           </div>
         </div>
         <div className="col-sm-5">
@@ -113,8 +56,11 @@ function Operations2() {
 
           <div className="detailing-box">
             <div className="optionss">
-              <button>plates</button>
-              <div className="border"></div> <button>Videos</button>
+              <button onClick={plates}>plates</button>
+              <div className="border"></div>{" "}
+              <button className="activebtn" onClick={videos}>
+                Videos
+              </button>
             </div>
             <div className="sperator"></div>
             <h5>Search Results</h5>
@@ -150,8 +96,21 @@ function Operations2() {
             </div>
           </div>
         </div>
-        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
+          <div className="videoscreen">
+            <OperationsVideo
+              item={Items}
+              onViewImageClick={handleViewImageClick}
+            />
+          </div>
+        </div>
       </div>
+      <FullImage
+        imgboxVideoSrc={imgboxVideoSrc}
+        handleHideImageClick={handleHideImageClick}
+        isImgboxVisible={isImgboxVisible}
+        currentDateTime={currentDateTime}
+      />
     </div>
   );
 }

@@ -65,6 +65,10 @@ import lilmic from "../images/lilmic.svg";
 import connector from "../images/connectors.svg";
 import Greens from "../images/green.svg";
 import red from "../images/red.svg";
+import pause from "../images/pause.svg";
+import play from "../images/play.svg";
+import volume from "../images/volume.svg";
+import frontcam2 from "../images/frontcam2.svg";
 const Images = {
   Dashboard,
   operations,
@@ -133,5 +137,9 @@ const Images = {
   connector,
   Greens,
   red,
+  pause,
+  play,
+  volume,
+  frontcam2,
 };
 export default Images;
