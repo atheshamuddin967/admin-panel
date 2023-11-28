@@ -32,7 +32,7 @@ function Singup({ onLoginSuccess }: any) {
         const updatedUsers = [...prevUsers, newUser];
         localStorage.setItem("users", JSON.stringify(updatedUsers));
         alert("Sign up successful!");
-        navigate("/Operators");
+        navigate("/Operations2");
         console.log(newUser);
         console.log(updatedUsers);
         onLoginSuccess();

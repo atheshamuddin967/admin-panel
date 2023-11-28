@@ -69,6 +69,10 @@ import pause from "../images/pause.svg";
 import play from "../images/play.svg";
 import volume from "../images/volume.svg";
 import frontcam2 from "../images/frontcam2.svg";
+import vid1 from "../images/vid1.mp4";
+
+import vid3 from "../images/vid3.mp4";
+import vid4 from "../images/vid4.mp4";
 const Images = {
   Dashboard,
   operations,
@@ -141,5 +145,8 @@ const Images = {
   play,
   volume,
   frontcam2,
+  vid1,
+  vid3,
+  vid4,
 };
 export default Images;

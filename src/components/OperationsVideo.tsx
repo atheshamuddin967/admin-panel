@@ -5,7 +5,7 @@ function OperationsVideo({ item, onViewImageClick }: any) {
     <div className="container p-0">
       <div className="row p-0">
         {item.map((vid: any) => (
-          <div className="col-sm-6">
+          <div className="col-sm-4 p-0 m-0">
             <div className="itemsvid">
               <p>
                 {" "}
@@ -20,6 +20,8 @@ function OperationsVideo({ item, onViewImageClick }: any) {
                 style={{ maxHeight: "100px " }}
                 width={"100%"}
                 controls={false}
+                playing={true}
+                loop={true}
               />
               <div className="iconsvid">
                 <div>

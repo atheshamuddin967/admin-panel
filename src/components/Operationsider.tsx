@@ -20,8 +20,8 @@ function Operationsider() {
     }
   };
   return (
-    <div>
-      <div className="sidesopration">
+    <div className="sidesoprations">
+      <div className="fstlay">
         <div className="secondlayout">
           <Input />
           {Operationdata.map((item) => (
@@ -91,7 +91,7 @@ function Operationsider() {
             </div>
           ))}
         </div>
-        <div className="function">
+        <div className="functions">
           <MdEdit className="ficon" />
           <IoMdAdd className="ficon" />
           <FaRegTrashAlt className="ficon" />

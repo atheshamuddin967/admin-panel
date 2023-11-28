@@ -48,6 +48,8 @@ function MediaVideoList({ data }: MediaListProps) {
                 style={{ maxHeight: "100px", borderRadius: "10px !important" }}
                 width={"100%"}
                 controls={false}
+                playing={true}
+                loop={true}
               />
             </div>
           </div>
@@ -64,7 +66,7 @@ function MediaVideoList({ data }: MediaListProps) {
                     url={data[selectedIndex].video}
                     width={"100%"}
                     controls={false}
-                    // ref={videoRef}
+                    playing={true}
                   />
                   <div className="navigatebtns">
                     <div className="flex">

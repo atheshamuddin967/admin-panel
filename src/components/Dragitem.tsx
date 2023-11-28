@@ -8,17 +8,23 @@ function Dragitem({ item, onViewImageClick }: any) {
     type: ItemTypes.DRAGGABLE_ITEM,
     item: { id: item.id, ...item },
   });
-
+  console.log("Video URL:", `file://${item.video}`);
   return (
     <div ref={drag} className="itemslist">
       <p>Device id {item.id}</p>
       <div className="h">
         <ReactPlayer
           url={item.video}
-          style={{ maxHeight: "100% " }}
+          // style={{ maxHeight: "100% " }}
           width={"100%"}
+          height={"100px"}
           controls={false}
+          playing={true}
+          loop={true}
         />
+        {/* <video style={{ width: "100%", height: "100%" }}>
+          <source src={item.video} type="video/mp4" />
+        </video> */}
       </div>
       <div className="flex">
         <ul>

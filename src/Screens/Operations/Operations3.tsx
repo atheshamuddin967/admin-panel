@@ -16,17 +16,17 @@ function Operations3() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-sm-3">
+        <div className="col-sm-2">
           <div className="shead">
             <Operationsider />
           </div>
         </div>
-        <div className="col-sm-9">
+        <div className="col-sm-10">
           <div className="mapbox">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46830151.11795831!2d-119.8093025!3d44.24236485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2s!4v1701098720721!5m2!1sen!2s"
               width="100%"
-              height="450"
+              height="250"
               loading="lazy"
             ></iframe>
             <div className="searches">

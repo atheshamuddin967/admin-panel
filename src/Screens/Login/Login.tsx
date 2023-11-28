@@ -28,7 +28,7 @@ function Login() {
     if (userFound) {
       alert("Login successful!");
       // setCurrentUser(userFound);
-      navigate("/Operators");
+      navigate("/Operations2");
     } else {
       alert("Invalid username or password. Please try again.");
     }

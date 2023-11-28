@@ -2,7 +2,7 @@ import {
   // Outlet,
   // RouterProvider,
   Link,
-  // Router,
+  useNavigate,
   Routes,
   Route,
 } from "react-router-dom";
@@ -43,7 +43,7 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
@@ -52,16 +52,28 @@ import Operations2 from "./Screens/Operations/Operations2";
 import Operations3 from "./Screens/Operations/Operations3";
 
 function App() {
-  const [activeMenuItem, setActiveMenuItem] = useState("/Operators");
-  // const [openSubMenu, setOpenSubMenu] = useState(null);
+  const { collapseSidebar, collapsed } = useProSidebar();
+  const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
+  const navigate = useNavigate();
   const handleMenuItemClick = (path: any) => {
     setActiveMenuItem(path);
-    // if (!collapsed) {
-    //   collapseSidebar();
-    // }
+  };
+  const handeloperations = (path: any) => {
+    setActiveMenuItem(path);
+    if (!collapsed) {
+      collapseSidebar();
+    }
+    navigate("/Operations2");
   };
 
-  const { collapseSidebar, collapsed } = useProSidebar();
+  useEffect(() => {
+    collapseSidebar();
+
+    if (location.pathname === "/Operations2") {
+      collapseSidebar(true);
+    }
+  }, [location.pathname, collapseSidebar]);
+
   return (
     <div
       style={{
@@ -113,12 +125,12 @@ function App() {
             Search
           </MenuItem>
           <MenuItem
-            component={<Link to="/Operators" />}
+            component={<Link to="/Operations2" />}
             icon={
               <img src={Images.operations} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Operators"}
-            onClick={() => handleMenuItemClick("/Operators")}
+            active={activeMenuItem === "/Operations2"}
+            onClick={() => handeloperations("/Operations2")}
           >
             Operations
           </MenuItem>

@@ -54,6 +54,8 @@ function MediaVideos() {
                   }}
                   width={"100%"}
                   controls={false}
+                  playing={true}
+                  loop={true}
                 />
               </div>
             </div>

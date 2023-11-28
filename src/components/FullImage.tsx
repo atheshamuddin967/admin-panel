@@ -11,7 +11,7 @@ function FullImage({
       {isImgboxVisible && (
         <div className="imgbox">
           <div className="secondbox">
-            <ReactPlayer url={imgboxVideoSrc} width={"100%"} />
+            <ReactPlayer url={imgboxVideoSrc} width={"100%"} playing={true} />
             <div className="close-btns2" onClick={handleHideImageClick}>
               <i className="fas fa-times"></i>
             </div>

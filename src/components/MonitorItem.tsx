@@ -7,10 +7,16 @@ function MonitorItem({ item, onViewImageClick }: any) {
       <div className="itemslist">
         <ReactPlayer
           url={item.video}
-          style={{ maxHeight: "100px" }}
+          style={{ height: "100px" }}
           width={"100%"}
-          controls={false}
+          height={"100px"}
+          controls={true}
+          playing={true}
         />
+
+        {/* <video style={{ width: "100%", height: "100%" }}>
+          <source src={item.video} type="video/mp4" />
+        </video> */}
         <div className="flex">
           <p>
             Vehicle id: <span>{item.vehicleId} </span>
