@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-  ReactNode,
-  Dispatch,
-} from "react";
+import { createContext, useContext, useReducer, Dispatch } from "react";
 interface VideoContextProps {
   videoArray: any[]; // Update this to the type of your videoArray items
   dispatch: Dispatch<any>;
@@ -14,7 +7,10 @@ const initialState = {
   videoArray: [],
 };
 
-const VideoContext = createContext({ videoArray: [] });
+const VideoContext = createContext<VideoContextProps>({
+  videoArray: [],
+  dispatch: () => {},
+});
 
 export function VideoProvider({ children }: any) {
   const [state, dispatch] = useReducer(videoReducer, initialState);
