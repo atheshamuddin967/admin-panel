@@ -205,10 +205,7 @@ color: #3A3A3A;
 .serbox{
     flex: 1;
 }
-.h{
-    // max-height: 100px;
-    // overflow: hidden;
-}
+
 .staticdata{
     background-color: white;
     position: sticky;
@@ -522,4 +519,66 @@ h5{
     width: 100%;
     height: 100%;
 
+}
+.iconsvid{
+    button{
+        background-color: transparent;
+        border: 0;
+        padding: 0 0;
+    }
+}
+.addbtn{
+    float: right;
+    button{
+        background-color: #000000;
+        color: white;
+        border-radius: 8px;
+        padding: 5px 15px;
+        border: 0;
+        margin-bottom: 10px;
+
+    }
+}
+.listlayout{
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list2layout{
+    width: 90%;
+    margin: auto 0;
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+    position: relative;
+    .closebtn{
+        position: absolute;
+        top:20px;
+        right: 20px;
+    }
+
+}
+.vidlayout{
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
+    margin: 5px 0;
+    h6{
+        margin-bottom: 0;
+    }
+}
+.searchvid{
+    max-width: 300px;
+    margin: 0 auto;
 }

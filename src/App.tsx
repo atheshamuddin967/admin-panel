@@ -71,6 +71,8 @@ function App() {
 
     if (location.pathname === "/Operations2") {
       collapseSidebar(true);
+    } else {
+      collapseSidebar(false);
     }
   }, [location.pathname, collapseSidebar]);
 
