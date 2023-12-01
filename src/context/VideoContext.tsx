@@ -36,6 +36,15 @@ export function VideoProvider({ children }: any) {
         );
         return { ...state, videoArray: updatedArray };
 
+      case "SWAP_VIDEOS":
+        const { index1, index2 } = action;
+        const newArray = [...state.videoArray];
+        [newArray[index1], newArray[index2]] = [
+          newArray[index2],
+          newArray[index1],
+        ];
+        return { ...state, videoArray: newArray };
+
       default:
         return state;
     }

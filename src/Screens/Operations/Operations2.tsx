@@ -1,6 +1,8 @@
 import Input from "../../components/Input";
 import { useState, useEffect } from "react";
 import { MdRemoveRedEye } from "react-icons/md";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import FullImage from "../../components/FullImage";
 import OperationsVideo from "../../components/OperationsVideo";
@@ -11,7 +13,6 @@ function Operations2() {
   const [imgboxVideoSrc, setImgboxVideoSrc] = useState("");
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [isImgboxVisible, setIsImgboxVisible] = useState(false);
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
@@ -33,6 +34,7 @@ function Operations2() {
   const videos = () => {
     navigate("/Operations2");
   };
+
   return (
     <div className="container">
       <div className="row space">
@@ -99,11 +101,11 @@ function Operations2() {
           </div>
         </div>
         <div className="col-sm-5">
-          {/* <div className="shead"> */}
-          <div className="videoscreen">
-            <OperationsVideo onViewImageClick={handleViewImageClick} />
-            {/* </div> */}
-          </div>
+          <DndProvider backend={HTML5Backend}>
+            <div className="videoscreen">
+              <OperationsVideo onViewImageClick={handleViewImageClick} />
+            </div>
+          </DndProvider>
         </div>
       </div>
       <FullImage
