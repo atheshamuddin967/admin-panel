@@ -5,18 +5,15 @@ interface VideoContextProps {
 }
 const initialState = {
   videoArray: [],
+  dispatch: () => {},
 };
 
-const VideoContext = createContext<VideoContextProps>({
-  videoArray: [],
-  dispatch: () => {},
-});
+const VideoContext = createContext<VideoContextProps>(initialState);
 
 export function VideoProvider({ children }: any) {
   const [state, dispatch] = useReducer(videoReducer, initialState);
 
   function videoReducer(state: any, action: any) {
-    console.log("Action type:", action.type);
     switch (action.type) {
       case "ADD_TO_ARRAY":
         const existingItemIndex = state.videoArray.findIndex(

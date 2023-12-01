@@ -14,7 +14,7 @@ function OperationsVideo({ onViewImageClick }: any) {
   const [open, setOpen] = useState(false);
   const [isMuted, setIsMuted] = useState<number | null>(null);
   const [playing] = useState(true);
-  const [dropItem, setDroppedItem] = useState(videoArray);
+  const [dropItem, setDroppedItem] = useState([]);
 
   const handleMuteToggle = (vid: any) => {
     setIsMuted(vid.id === isMuted ? null : vid.id);
@@ -27,9 +27,8 @@ function OperationsVideo({ onViewImageClick }: any) {
   );
   let newvideoArray = [...dropItem];
   useEffect(() => {
-    console.log("videoArray changed:", videoArray, dropItem);
-    setDroppedItem(newvideoArray);
-  }, [dropItem, videoArray, newvideoArray]);
+    setDroppedItem(videoArray);
+  }, [videoArray]);
 
   const openmodal = () => {
     setOpen(true);
@@ -53,8 +52,6 @@ function OperationsVideo({ onViewImageClick }: any) {
     dragItem.current = null;
     dragOverItem.current = null;
     setDroppedItem(newvideoArray);
-    console.log(dragItem, dragOverItem);
-    console.log(dropItem);
   };
 
   return (
