@@ -1,7 +1,7 @@
 import Input from "../../components/Input";
 import { useState, useEffect } from "react";
 import { MdRemoveRedEye } from "react-icons/md";
-import Items from "../../Data/ItemData";
+
 import FullImage from "../../components/FullImage";
 import OperationsVideo from "../../components/OperationsVideo";
 import { useNavigate } from "react-router-dom";
@@ -99,13 +99,10 @@ function Operations2() {
           </div>
         </div>
         <div className="col-sm-5">
-          <div className="shead">
-            <div className="videoscreen">
-              <OperationsVideo
-                item={Items}
-                onViewImageClick={handleViewImageClick}
-              />
-            </div>
+          {/* <div className="shead"> */}
+          <div className="videoscreen">
+            <OperationsVideo onViewImageClick={handleViewImageClick} />
+            {/* </div> */}
           </div>
         </div>
       </div>

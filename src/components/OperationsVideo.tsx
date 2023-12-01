@@ -1,38 +1,75 @@
 import ReactPlayer from "react-player";
 import Images from "../images/Images";
+import "../Screens/Operations/Operation.scss";
 import { IoVolumeMute } from "react-icons/io5";
 import { IoVolumeMediumSharp } from "react-icons/io5";
-import { useState } from "react";
-import Items from "../Data/ItemData";
-import Input from "./Input";
-import { IoCloseSharp } from "react-icons/io5";
+import { useState, useEffect, useCallback } from "react";
+
 import { useCart } from "../context/VideoContext";
-function OperationsVideo({ item, onViewImageClick }: any) {
+import { FaRegTrashCan } from "react-icons/fa6";
+import Operationslist from "./Operationslist";
+
+function OperationsVideo({ onViewImageClick }: any) {
   const { dispatch, videoArray }: any = useCart();
-  console.log(videoArray);
+  const [open, setOpen] = useState(false);
   const [isMuted, setIsMuted] = useState<number | null>(null);
   const [playing] = useState(true);
   const handleMuteToggle = (vid: any) => {
     setIsMuted(vid.id === isMuted ? null : vid.id);
     console.log(vid.id);
   };
-  function handleAddToArray(item: any) {
-    dispatch({ type: "ADD_TO_ARRAY", payload: item });
-  }
+  const handleAddToArray = useCallback(
+    (item: any) => {
+      dispatch({ type: "ADD_TO_ARRAY", payload: item });
+    },
+    [dispatch]
+  );
+  useEffect(() => {
+    console.log("videoArray changed:", videoArray);
+  }, [videoArray]);
+
+  const openmodal = () => {
+    setOpen(true);
+  };
+  const closemodal = () => {
+    setOpen(false);
+  };
+  const handleDeleteFromArray = useCallback(
+    (item: any) => {
+      dispatch({ type: "DELETE_FROM_ARRAY", payload: item });
+    },
+    [dispatch]
+  );
   return (
     <div className="container p-0">
       <div className="row">
         <div className="col-sm-12">
           <div className="addbtn">
-            <button>Add Device</button>
+            <button onClick={openmodal}>Add Device</button>
           </div>
         </div>
+
+        {open && (
+          <div>
+            <Operationslist
+              handleAddToArray={handleAddToArray}
+              closemodal={closemodal}
+            />
+          </div>
+        )}
       </div>
       <div className="row p-0">
-        {item?.map((vid: any) => (
+        {videoArray?.map((vid: any) => (
           <div className="col-sm-4 p-0 m-0" key={vid.id}>
             <div className="itemsvid">
               <p>
+                <button
+                  onClick={() => {
+                    handleDeleteFromArray(vid);
+                  }}
+                >
+                  <FaRegTrashCan />
+                </button>
                 {vid.id}
                 <span onClick={() => onViewImageClick(vid.video)}>
                   <img src={Images.view} alt="" />
@@ -40,7 +77,7 @@ function OperationsVideo({ item, onViewImageClick }: any) {
               </p>
 
               <ReactPlayer
-                url={"vid.video"}
+                url={vid.video}
                 style={{ maxHeight: "100px " }}
                 width={"100%"}
                 controls={false}
@@ -74,48 +111,6 @@ function OperationsVideo({ item, onViewImageClick }: any) {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="listlayout">
-        <div className="list2layout">
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="shead">
-                  <div className="searchvid">
-                    <Input placeholder={"Search Device"} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              {Items.map((item: any) => (
-                <div
-                  className="col-sm-2"
-                  onClick={() => handleAddToArray(item)}
-                >
-                  <div className="vidlayout">
-                    <h6>{item.id}</h6>
-                    <ReactPlayer
-                      url={item.video}
-                      style={{ maxHeight: "100px " }}
-                      width={"100%"}
-                      controls={false}
-                      playing={false}
-                      loop={true}
-                      muted={true}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="closebtn">
-            <button>
-              <IoCloseSharp />
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

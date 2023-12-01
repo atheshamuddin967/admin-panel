@@ -16,6 +16,7 @@ export function VideoProvider({ children }: any) {
   const [state, dispatch] = useReducer(videoReducer, initialState);
 
   function videoReducer(state: any, action: any) {
+    console.log("Action type:", action.type);
     switch (action.type) {
       case "ADD_TO_ARRAY":
         const existingItemIndex = state.videoArray.findIndex(
@@ -29,7 +30,11 @@ export function VideoProvider({ children }: any) {
         const updatedVideoArray = [...state.videoArray, action.payload];
         return { ...state, videoArray: updatedVideoArray };
 
-      // Add other cases if needed
+      case "DELETE_FROM_ARRAY":
+        const updatedArray = state.videoArray.filter(
+          (item: any) => item.id !== action.payload.id
+        );
+        return { ...state, videoArray: updatedArray };
 
       default:
         return state;
