@@ -2,8 +2,16 @@ import Input from "./Input";
 import Items from "../Data/ItemData";
 import ReactPlayer from "react-player";
 import { IoCloseSharp } from "react-icons/io5";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { MdAdd } from "react-icons/md";
+
 import "../Screens/Operations/Operation.scss";
-function Operationslist({ handleAddToArray, closemodal }: any) {
+function Operationslist({
+  handleAddToArray,
+  closemodal,
+  videoArray,
+  handleDeleteFromArray,
+}: any) {
   return (
     <div className="listfirstbg">
       <div className="listsecondlayout">
@@ -18,12 +26,26 @@ function Operationslist({ handleAddToArray, closemodal }: any) {
             </div>
             <div className="row">
               {Items.map((item: any) => (
-                <div
-                  className="col-sm-2"
-                  onClick={() => handleAddToArray(item)}
-                >
+                <div className="col-sm-2">
                   <div className="vidlayout">
-                    <h6>{item.id}</h6>
+                    <h6>
+                      <span>
+                        {videoArray.includes(item) ? (
+                          <button
+                            onClick={() => {
+                              handleDeleteFromArray(item);
+                            }}
+                          >
+                            <FaRegTrashCan />
+                          </button>
+                        ) : (
+                          <button onClick={() => handleAddToArray(item)}>
+                            <MdAdd />
+                          </button>
+                        )}
+                      </span>
+                      {item.id}
+                    </h6>
                     <ReactPlayer
                       url={item.video}
                       style={{ maxHeight: "100px " }}

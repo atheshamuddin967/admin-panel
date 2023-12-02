@@ -17,6 +17,7 @@
     "apexcharts": "^3.44.0",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
+    "generate-unique-id": "^2.0.3",
     "google-map-react": "^2.2.1",
     "primereact": "^10.1.1",
     "pubnub": "^7.4.4",
@@ -33,12 +34,14 @@
     "react-player": "^2.13.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.18.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
     "@types/react-avatar-editor": "^13.0.2",
     "@types/react-dom": "^18.2.6",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-react": "^4.0.1",

@@ -1,6 +1,5 @@
 // Signup.jsx
 import { useState } from "react";
-
 import Loginbtn from "../../components/Loginbtn";
 import { useNavigate } from "react-router-dom";
 import Images from "../../images/Images";

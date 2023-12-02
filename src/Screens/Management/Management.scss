@@ -60,12 +60,12 @@ align-items: center;
 }
 .asinglayout{
     background-color: white;
-    // width: 50%;
-    // height: 60%;
+    // width: 70%;
+width: 700px;
     border-radius: 20px;
   position: relative;
     align-self: center;
-    width: 400px;
+  
     padding: 30px;
     h5{
         font-size: 22px;
@@ -131,3 +131,50 @@ font-size: 22px;
   .groupdivers.show {
     max-height: 1000px; /* Adjust the maximum height based on your content */
   }
+  .memberlist{
+    height:300px ;
+    overflow: scroll;
+    ul{
+        padding: 0 0;
+        margin:  0 0;
+    }
+    li{
+        text-align: left;
+    list-style: none;
+    width: 100%;
+    background-color: #555454;
+    padding: 5px;
+    margin: 5px 0;
+color: white;
+font-family: "poppins";
+span{
+    float: right;
+    button{
+        background-color: transparent;
+        color: white;
+        border: 0;
+        padding: 0;
+    }
+}
+}
+  }
+  
+
+  .memberlist::-webkit-scrollbar
+{
+    width: 0.5em !important; /* Set the width of the scrollbar */
+}
+
+/* Hide the scrollbar track */
+
+.memberlist::-webkit-scrollbar-track
+ {
+    background: transparent !important;
+}
+
+/* Style the scrollbar thumb */
+
+.memberlist::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+    outline: none !important;
+}

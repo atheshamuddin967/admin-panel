@@ -1,13 +1,16 @@
 import ManagementTable from "../../components/ManagementTable";
 import ManagementHeader from "./managementHeader";
-import User from "../../Data/User";
+
 import Images from "../../images/Images";
 import "../Management/Management.scss";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
-
+import { useApi } from "../../context/Api";
 function Management() {
   const [openForm, setOpenForm] = useState(false);
+  const { data } = useApi();
+  const datas: any = data;
+  console.log(datas);
   const openform = () => {
     setOpenForm(true);
   };
@@ -23,7 +26,7 @@ function Management() {
           </div>
         </div>
         <div className="managementTables">
-          <ManagementTable data={User} bg={"#fff"} icon={Images.proficon} />
+          <ManagementTable data={datas} bg={"#fff"} icon={Images.proficon} />
         </div>
         {openForm && (
           <div className="asingform">

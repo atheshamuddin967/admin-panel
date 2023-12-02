@@ -1,8 +1,5 @@
 function ManagementTable({ data, icon, bg }: any) {
-  const driverdata = data.flatMap((group: any) =>
-    group.group.flatMap((g: any) => g.drivers)
-  );
-  console.log(driverdata);
+  console.log(data);
   return (
     <div className="table-responsive">
       <table className="custom-table table table-hover text-center ">
@@ -19,7 +16,7 @@ function ManagementTable({ data, icon, bg }: any) {
         </thead>
 
         <tbody className="table-row text-center">
-          {driverdata?.map((driver: any) => (
+          {data?.users?.map((driver: any) => (
             <tr className="tr-vehicle">
               <td className="table-data">
                 <div className="round" style={{ backgroundColor: bg }}>
@@ -27,9 +24,9 @@ function ManagementTable({ data, icon, bg }: any) {
                 </div>
               </td>
               <td> {driver.username}</td>
-              <td>{driver.role}</td>
-              <td>{driver.lastlogin}</td>
-              <td>{driver.status}</td>
+              <td>{driver.role || "-"}</td>
+              <td>{driver.lastlogin || "-"}</td>
+              <td>{driver.status || "-"}</td>
 
               <td className="edit-delete">
                 <button>

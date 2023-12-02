@@ -560,6 +560,16 @@ h5{
     cursor: pointer;
     h6{
         margin-bottom: 0;
+        button{
+            background-color: transparent;
+            color: black;
+            padding: 0;
+            margin: 0;
+border: 0;
+        }
+        span{
+            float: left;
+        }
     }
     
 }

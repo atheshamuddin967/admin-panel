@@ -39,6 +39,7 @@ function OperationsVideo({ onViewImageClick }: any) {
   const handleDeleteFromArray = useCallback(
     (item: any) => {
       dispatch({ type: "DELETE_FROM_ARRAY", payload: item });
+      console.log("item delete");
     },
     [dispatch]
   );
@@ -68,6 +69,8 @@ function OperationsVideo({ onViewImageClick }: any) {
             <Operationslist
               handleAddToArray={handleAddToArray}
               closemodal={closemodal}
+              videoArray={videoArray}
+              handleDeleteFromArray={handleDeleteFromArray}
             />
           </div>
         )}

@@ -10,8 +10,9 @@ function MonitorItem({ item, onViewImageClick }: any) {
           style={{ height: "100px" }}
           width={"100%"}
           height={"100px"}
-          controls={true}
+          controls={false}
           playing={true}
+          muted={true}
         />
 
         {/* <video style={{ width: "100%", height: "100%" }}>
