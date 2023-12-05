@@ -1,30 +1,37 @@
 import { FaChevronDown } from "react-icons/fa";
 import Input from "../../src/components/Input";
 import Images from "../images/Images";
-import Operationdata from "../../src/Data/OperationsData";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-
+import { useApi } from "../context/Api";
 import { MdEdit } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { CiMicrophoneOn } from "react-icons/ci";
+
 function Operationsider() {
   const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
 
   const toggleDropdown = (item: any) => {
-    if (isDropdownOpen !== item.groupname) {
-      setDropdownOpen(item.groupname);
-    } else if (isDropdownOpen === item.groupname) {
+    if (isDropdownOpen !== item.groupName) {
+      setDropdownOpen(item.groupName);
+      console.log(item);
+    } else if (isDropdownOpen === item.groupName) {
       setDropdownOpen(false);
     }
+  };
+  const { data } = useApi();
+  const datas: any = data;
+  const isGroupEmergency = (group: any) => {
+    return group.users.some((user: any) => user.emergency_enabled);
   };
   return (
     <div className="sidesoprations">
       <div className="fstlay">
         <div className="secondlayout">
           <Input />
-          {Operationdata.map((item) => (
+          {datas?.groups?.map((item: any) => (
             <div
               className="droplaout"
               onClick={() => {
@@ -32,14 +39,18 @@ function Operationsider() {
               }}
             >
               <React.Fragment>
-                <div className="drop">
+                <div
+                  className={classNames("drop", {
+                    "emergency-group": isGroupEmergency(item),
+                  })}
+                >
                   <div className="dropbtn">
                     <div>
                       <p>
                         <span>
                           <FaLocationDot />
                         </span>
-                        {item.groupname}
+                        {item.groupName}
                       </p>
                     </div>
 
@@ -47,40 +58,45 @@ function Operationsider() {
                   </div>
                   <div className="dropbtns">
                     <img src={Images.conected} alt="" />
-                    <p> {item.totalconnect}</p>
+                    <p> {item.users.length}</p>
 
                     <img src={Images.connector} alt="" />
-                    <p>{item.avilabel}</p>
+                    <p>
+                      {
+                        item.users.filter(
+                          (user: { isOnline: boolean }) => user.isOnline
+                        ).length
+                      }
+                    </p>
+                    <div className="mic">
+                      <button className="micbtn">
+                        <CiMicrophoneOn />
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <hr />
-                {isDropdownOpen === item.groupname && (
+                {isDropdownOpen === item.groupName && (
                   <ul className="zoneul">
-                    {item.devices.map((device) => (
-                      <li>
-                        {device.status === "online" && (
-                          <>
-                            <img src={Images.Greens} alt="online" />
-                          </>
+                    {item.users.map((user: any) => (
+                      <li key={user._id}>
+                        {user.isOnline && !user.emergency_enabled && (
+                          <img src={Images.Greens} alt="Not Emergency" />
                         )}
-                        {device.status === "ofline" && (
-                          <>
-                            <img src={Images.conected} alt="Offline" />
-                          </>
+                        {user.emergency_enabled && (
+                          <img src={Images.red} alt="Emergency" />
                         )}
-                        {device.status === "emergency" && (
-                          <>
-                            <img src={Images.red} alt="Emergency" />
-                          </>
+                        {!user.isOnline && !user.emergency_enabled && (
+                          <img src={Images.conected} alt="Not Emergency" />
                         )}
                         <span
                           className={classNames({
-                            greens: device.status === "online",
-                            grays: device.status === "ofline",
-                            reds: device.status === "emergency",
+                            greens: user.isOnline && !user.emergency_enabled,
+                            grays: !user.isOnline && !user.emergency_enabled,
+                            reds: user.emergency_enabled,
                           })}
                         >
-                          {device.id}
+                          #{user.deviceCode || user.device_code} <br />
                         </span>
                         <hr />
                       </li>

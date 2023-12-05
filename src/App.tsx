@@ -36,6 +36,7 @@ import Images from "./images/Images";
 import Login from "./Screens/Login/Login";
 import Singup from "./Screens/Login/Singup";
 import SearchScreeen from "./Screens/Search/SearchScreeen";
+import Loby from "./Screens/Loby/Loby";
 import {
   Sidebar,
   Menu,
@@ -373,6 +374,7 @@ function App() {
           <Route path="/Operations2" element={<Operations2 />} />
           <Route path="/Operations3" element={<Operations3 />} />
           <Route path="/Settings/*" element={<SettingScreen />} />
+          <Route path="/Loby" element={<Loby />} />
         </Routes>
       </section>
     </div>

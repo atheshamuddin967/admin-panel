@@ -45,8 +45,6 @@ function ManagementGroup() {
 
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("Form submitted");
-    // Call the addGroup function from the context to create a new group
 
     const uniqueId = uuidv4();
     const formDataWithId = {
@@ -62,9 +60,6 @@ function ManagementGroup() {
       role: "",
       users: [],
     });
-    console.log(formData);
-    // Close the form
-    // closeform();
   };
   interface User {
     _id: string; // Change the type accordingly
@@ -83,9 +78,7 @@ function ManagementGroup() {
         users: [...prevFormData.users, user._id],
       }));
     }
-    console.log(data);
-    console.log(formData);
-    // Prevent the default form submission behavior
+
     return false;
   };
   const handleDelete = (group: string) => {

@@ -101,6 +101,9 @@ width: 700px;
         font-weight: 600;
         color: #8F8F8F;
     }
+    input:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px !important;
+    }
 }
 .asingbtns{
     margin: 30px 0;

@@ -394,7 +394,8 @@ font-family: "poppins";
     border: 1px solid gray;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    position: absolute;
+    position: sticky;
+    bottom: 0;
     bottom: 0px !important;
     width: 100%;
     background-color: white;
@@ -579,4 +580,20 @@ border: 0;
 }
 .vidlayout:hover{
     background-color: #9E9E9E;
+}
+.micbtn{
+    background-color: transparent;
+    color: black;
+    padding: 0 0;
+    border: 0;
+    float: right;
+    font-size: 18px;
+}
+.mic{
+    float: right;
+    text-align: right;
+    flex: 1;
+}
+.emergency-group{
+    color: red !important;
 }

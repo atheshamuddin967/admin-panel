@@ -1,5 +1,5 @@
 function ManagementTable({ data, icon, bg }: any) {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="table-responsive">
       <table className="custom-table table table-hover text-center ">
@@ -16,17 +16,17 @@ function ManagementTable({ data, icon, bg }: any) {
         </thead>
 
         <tbody className="table-row text-center">
-          {data?.users?.map((driver: any) => (
-            <tr className="tr-vehicle">
+          {data?.users?.map((user: any) => (
+            <tr className="tr-vehicle" key={user?._id}>
               <td className="table-data">
                 <div className="round" style={{ backgroundColor: bg }}>
                   <img src={icon} alt="alarm" />
                 </div>
               </td>
-              <td> {driver.username}</td>
-              <td>{driver.role || "-"}</td>
-              <td>{driver.lastlogin || "-"}</td>
-              <td>{driver.status || "-"}</td>
+              <td> {user?.username}</td>
+              <td>{user?.role || "-"}</td>
+              <td>{user?.lastlogin || "-"}</td>
+              <td>{user?.status || "-"}</td>
 
               <td className="edit-delete">
                 <button>
