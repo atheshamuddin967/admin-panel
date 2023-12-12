@@ -1,19 +1,37 @@
-import { createContext, useMemo, useContext } from "react";
-import { Socket, io } from "socket.io-client";
+// File: UserContext.js
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  SetStateAction,
+  Dispatch,
+} from "react";
 
-interface SocketContextProps {
-  value: Socket | null;
+interface UserContextType {
+  myuser: any[] | null;
+  setMyUser: Dispatch<SetStateAction<any[] | null>>;
 }
-const SocketContext = createContext<SocketContextProps>({ value: null });
-export const useSocket = () => {
-  const Socket = useContext(SocketContext);
-  return Socket;
+const initialState: UserContextType = {
+  myuser: [],
+  setMyUser: () => {}, // Provide a default function to satisfy the type
 };
-export const SocketProvider = (props: any) => {
-  const socket = useMemo(() => io("localhost/5174"), []);
+const UserContext = createContext(initialState);
+
+interface UserProviderProps {
+  children: ReactNode;
+}
+
+export const UserProvider = ({ children }: UserProviderProps) => {
+  const [myuser, setMyUser] = useState<UserContextType["myuser"]>(
+    initialState.myuser
+  );
+
   return (
-    <SocketContext.Provider value={{ value: socket }}>
-      {props.children}
-    </SocketContext.Provider>
+    <UserContext.Provider value={{ myuser, setMyUser }}>
+      {children}
+    </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

@@ -1,12 +1,5 @@
-import {
-  // Outlet,
-  // RouterProvider,
-  Link,
-  useNavigate,
-  Routes,
-  Route,
-} from "react-router-dom";
-// import Sider from "./components/Sider";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
+
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
 

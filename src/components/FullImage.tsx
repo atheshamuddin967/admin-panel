@@ -1,17 +1,28 @@
 import Images from "../images/Images";
-import ReactPlayer from "react-player";
+import ReactHlsPlayer from "react-hls-player";
+import { useRef } from "react";
 function FullImage({
   imgboxVideoSrc,
   handleHideImageClick,
   isImgboxVisible,
   currentDateTime,
 }: any) {
+  const playerRef = useRef(null);
   return (
     <div>
       {isImgboxVisible && (
         <div className="imgbox">
           <div className="secondbox">
-            <ReactPlayer url={imgboxVideoSrc} width={"100%"} playing={true} />
+            <ReactHlsPlayer
+              src={`http://192.168.100.44:8000/live/${imgboxVideoSrc}/index.m3u8`}
+              controls={false}
+              style={{ maxHeight: "500px ", width: "500px" }}
+              muted={true}
+              autoPlay={true}
+              width="100%"
+              height="auto"
+              playerRef={playerRef}
+            />
             <div className="close-btns2" onClick={handleHideImageClick}>
               <i className="fas fa-times"></i>
             </div>

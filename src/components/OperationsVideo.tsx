@@ -1,28 +1,31 @@
-import ReactPlayer from "react-player";
 import Images from "../images/Images";
 import "../Screens/Operations/Operation.scss";
 import { IoVolumeMute } from "react-icons/io5";
 import { IoVolumeMediumSharp } from "react-icons/io5";
 import { useState, useEffect, useCallback, useRef } from "react";
 
+import ReactPlayer from "react-player";
 import { useCart } from "../context/VideoContext";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Operationslist from "./Operationslist";
-
+// import { useUser } from "../context/Socketprovider";
 function OperationsVideo({ onViewImageClick }: any) {
   const { dispatch, videoArray }: any = useCart();
   const [open, setOpen] = useState(false);
   const [isMuted, setIsMuted] = useState<number | null>(null);
-  const [playing] = useState(true);
+  // const [playing] = useState(true);
   const [dropItem, setDroppedItem] = useState([]);
+  // const { myuser } = useUser();
 
   const handleMuteToggle = (vid: any) => {
     setIsMuted(vid.id === isMuted ? null : vid.id);
   };
   const handleAddToArray = useCallback(
     (item: any) => {
+      console.log(item);
       dispatch({ type: "ADD_TO_ARRAY", payload: item });
     },
+
     [dispatch]
   );
   let newvideoArray = [...dropItem];
@@ -43,7 +46,7 @@ function OperationsVideo({ onViewImageClick }: any) {
     },
     [dispatch]
   );
-
+  // const playerRef = useRef(null);
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
 
@@ -79,7 +82,7 @@ function OperationsVideo({ onViewImageClick }: any) {
         {dropItem?.map((vid: any, index: number) => {
           return (
             <div
-              key={vid.id}
+              key={vid.stream}
               className="col-sm-4 p-0   m-0"
               onDragEnter={() => (dragOverItem.current = index)}
               onDragStart={() => (dragItem.current = index)}
@@ -96,19 +99,18 @@ function OperationsVideo({ onViewImageClick }: any) {
                     <FaRegTrashCan />
                   </button>
                   {vid.id}
-                  <span onClick={() => onViewImageClick(vid.video)}>
+                  <span onClick={() => onViewImageClick(vid.stream)}>
                     <img src={Images.view} alt="" />
                   </span>
                 </p>
 
                 <ReactPlayer
-                  url={vid.video}
-                  style={{ maxHeight: "100px " }}
-                  width={"100%"}
-                  controls={false}
-                  playing={playing}
-                  loop={true}
+                  url={`http://192.168.100.44:8000/live/${vid.deviceCode}/index.m3u8`} // Use the dynamically set URL
+                  controls={true}
+                  playing={true}
                   muted={isMuted !== vid.id}
+                  width="100%"
+                  height="100px"
                 />
                 <div className="iconsvid">
                   <div>

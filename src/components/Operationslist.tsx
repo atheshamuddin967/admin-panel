@@ -1,17 +1,71 @@
 import Input from "./Input";
-import Items from "../Data/ItemData";
-import ReactPlayer from "react-player";
 import { IoCloseSharp } from "react-icons/io5";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { MdAdd } from "react-icons/md";
 
+// import { useRtmpApi } from "../context/RTmpProvider";
 import "../Screens/Operations/Operation.scss";
+import { useEffect, useState } from "react";
+import { useUser } from "../context/Socketprovider";
+import { useApi } from "../context/Api";
+
+import { socket } from "../context/SoccketIo";
+import ListsVideo from "./ListsVideo";
 function Operationslist({
   handleAddToArray,
   closemodal,
   videoArray,
   handleDeleteFromArray,
 }: any) {
+  const { data } = useApi();
+  const datas: any = data;
+  const { myuser, setMyUser } = useUser();
+  // State to hold video URL
+  const [playerKey, setPlayerKey] = useState<number>(0); // Add a key to force remount
+
+  useEffect(() => {
+    socket.on("tx-streaming-updated", (socketUser) => {
+      console.log("Received message:", socketUser);
+
+      const userIndex = datas.users.findIndex(
+        (user: any) => user._id === socketUser._id
+      );
+
+      if (userIndex !== -1) {
+        const updatedMyUserArray: any = [...datas.users];
+        updatedMyUserArray[userIndex] = socketUser;
+
+        setMyUser(updatedMyUserArray);
+
+        setPlayerKey((prevKey) => {
+          console.log(prevKey); // Log the previous state
+          return prevKey + 1; // Return the new state
+        });
+      }
+    });
+
+    return () => {
+      socket.off("tx-streaming-updated");
+      console.log(myuser);
+      setPlayerKey((prevKey) => {
+        console.log(prevKey); // Log the previous state
+        return prevKey + 2; // Return the new state
+      });
+      console.log((prevKey: any) => prevKey + 5);
+    };
+  }, [data, setMyUser]);
+
+  // const { Rtmpdata } = useRtmpApi();
+
+  const data2: any = datas.users;
+  const sortedData = myuser
+    ? [...myuser].sort((a, b) =>
+        a.isStreaming === b.isStreaming ? 0 : a.isStreaming ? -1 : 1
+      )
+    : [];
+  const sortedData2 = [...data2].sort((a, b) =>
+    a.isStreaming === b.isStreaming ? 0 : a.isStreaming ? -1 : 1
+  );
+  const dataToRender = sortedData.length > 0 ? sortedData : sortedData2;
+
   return (
     <div className="listfirstbg">
       <div className="listsecondlayout">
@@ -25,38 +79,14 @@ function Operationslist({
               </div>
             </div>
             <div className="row">
-              {Items.map((item: any) => (
-                <div className="col-sm-2">
-                  <div className="vidlayout">
-                    <h6>
-                      <span>
-                        {videoArray.includes(item) ? (
-                          <button
-                            onClick={() => {
-                              handleDeleteFromArray(item);
-                            }}
-                          >
-                            <FaRegTrashCan />
-                          </button>
-                        ) : (
-                          <button onClick={() => handleAddToArray(item)}>
-                            <MdAdd />
-                          </button>
-                        )}
-                      </span>
-                      {item.id}
-                    </h6>
-                    <ReactPlayer
-                      url={item.video}
-                      style={{ maxHeight: "100px " }}
-                      width={"100%"}
-                      controls={false}
-                      playing={false}
-                      loop={true}
-                      muted={true}
-                    />
-                  </div>
-                </div>
+              {dataToRender?.map((item: any) => (
+                <ListsVideo
+                  item={item}
+                  handleAddToArray={handleAddToArray}
+                  videoArray={videoArray}
+                  handleDeleteFromArray={handleDeleteFromArray}
+                  playerKey={playerKey}
+                />
               ))}
             </div>
           </div>

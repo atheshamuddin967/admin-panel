@@ -17,7 +17,7 @@ export function VideoProvider({ children }: any) {
     switch (action.type) {
       case "ADD_TO_ARRAY":
         const existingItemIndex = state.videoArray.findIndex(
-          (item: any) => item.id === action.payload.id
+          (item: any) => item._id === action.payload._id
         );
 
         if (existingItemIndex !== -1) {
@@ -29,7 +29,7 @@ export function VideoProvider({ children }: any) {
 
       case "DELETE_FROM_ARRAY":
         const updatedArray = state.videoArray.filter(
-          (item: any) => item.id !== action.payload.id
+          (item: any) => item._id !== action.payload._id
         );
         return { ...state, videoArray: updatedArray };
 

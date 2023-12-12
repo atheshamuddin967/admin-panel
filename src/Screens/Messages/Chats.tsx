@@ -140,17 +140,7 @@ function Chats() {
                 className="inpts"
                 referance={inputReferance}
                 placeholder="Type here..."
-                // multiline={true}
-                // value={inputValue}
                 maxHeight={200}
-                // rightButtons={
-                //   // <Button
-                //   //   color="white"
-                //   //   backgroundColor=""
-                //   //   text={}
-                //   // />
-
-                // }
               />
               <button className="emoji">
                 <MdInsertEmoticon />
