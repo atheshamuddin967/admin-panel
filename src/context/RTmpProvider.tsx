@@ -21,15 +21,6 @@ const RtmApiReducer = (state: any, action: any) => {
         Rtmpdata: action.payload,
       };
 
-      return {
-        ...state,
-        userData: [state.userData, action.payload],
-        data: {
-          ...state.data,
-          users: [...state.data.users, action.payload],
-        },
-      };
-
     default:
       return state;
   }
@@ -54,36 +45,6 @@ const RtmApiProvider = ({ children }: any) => {
       fetchData();
     }
   }, [state.Rtmpdata]);
-
-  //   dispatch({ type: "SET_LOADING" });
-  //   try {
-  //     const res = await axios.get(API_ENDPOINT, {
-  //       headers: {
-  //         Authorization: `Bearer ${BEARER_TOKEN}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const data = await res.data;
-
-  //     dispatch({ type: "SET_API_PRODUCTS", payload: data });
-  //   } catch (error) {
-  //     dispatch({ type: "API_ERROR" });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // Fetch data initially
-  //   fetchData();
-
-  //   // Fetch data every 3 seconds
-  //   const intervalId = setInterval(() => {
-  //     fetchData();
-  //   }, 3000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
-  // addgroup function
 
   return (
     <RtmpApiContext.Provider value={{ ...state }}>

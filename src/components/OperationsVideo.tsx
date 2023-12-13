@@ -3,7 +3,7 @@ import "../Screens/Operations/Operation.scss";
 import { IoVolumeMute } from "react-icons/io5";
 import { IoVolumeMediumSharp } from "react-icons/io5";
 import { useState, useEffect, useCallback, useRef } from "react";
-
+import { Ip } from "../context/Ip";
 import ReactPlayer from "react-player";
 import { useCart } from "../context/VideoContext";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -79,10 +79,10 @@ function OperationsVideo({ onViewImageClick }: any) {
         )}
       </div>
       <div className="row p-0">
-        {dropItem?.map((vid: any, index: number) => {
+        {dropItem?.map((item: any, index: number) => {
           return (
             <div
-              key={vid.stream}
+              key={item.deviceCode}
               className="col-sm-4 p-0   m-0"
               onDragEnter={() => (dragOverItem.current = index)}
               onDragStart={() => (dragItem.current = index)}
@@ -93,22 +93,22 @@ function OperationsVideo({ onViewImageClick }: any) {
                 <p>
                   <button
                     onClick={() => {
-                      handleDeleteFromArray(vid);
+                      handleDeleteFromArray(item);
                     }}
                   >
                     <FaRegTrashCan />
                   </button>
-                  {vid.id}
-                  <span onClick={() => onViewImageClick(vid.stream)}>
+                  {item.id}
+                  <span onClick={() => onViewImageClick(item.deviceCode)}>
                     <img src={Images.view} alt="" />
                   </span>
                 </p>
 
                 <ReactPlayer
-                  url={`http://192.168.100.44:8000/live/${vid.deviceCode}/index.m3u8`} // Use the dynamically set URL
+                  url={Ip`/live/${item.deviceCode}/index.m3u8`}
                   controls={true}
                   playing={true}
-                  muted={isMuted !== vid.id}
+                  muted={isMuted !== item.id}
                   width="100%"
                   height="100px"
                 />
@@ -116,12 +116,12 @@ function OperationsVideo({ onViewImageClick }: any) {
                   <div>
                     <img src={Images.pause} alt="" />
                     <img src={Images.play} alt="" />
-                    {isMuted === vid.id ? (
-                      <button onClick={() => handleMuteToggle(vid)}>
+                    {isMuted === item.id ? (
+                      <button onClick={() => handleMuteToggle(item)}>
                         <IoVolumeMediumSharp />
                       </button>
                     ) : (
-                      <button onClick={() => handleMuteToggle(vid)}>
+                      <button onClick={() => handleMuteToggle(item)}>
                         <IoVolumeMute />
                       </button>
                     )}

@@ -1,6 +1,7 @@
 import ReactPlayer from "react-player";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
+import { Ip } from "../context/Ip";
 function ListsVideo({
   item,
   videoArray,
@@ -32,7 +33,7 @@ function ListsVideo({
         {item.isStreaming ? (
           <ReactPlayer
             // key={playerKey}
-            url={`http://192.168.100.44:8000/live/${item.deviceCode}/index.m3u8`} // Use the dynamically set URL
+            url={Ip`/live/${item.deviceCode}/index.m3u8`} // Use the dynamically set URL
             controls={true}
             playing={true}
             muted={true}
