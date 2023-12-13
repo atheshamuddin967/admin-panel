@@ -30,15 +30,13 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
-    "react-hls-player": "^3.0.7",
     "react-map-gl": "^7.1.6",
     "react-player": "^2.13.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.18.0",
     "sass": "^1.69.5",
     "socket.io-client": "^4.7.2",
-    "uuid": "^9.0.1",
-    "webrtc": "^1.14.1"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

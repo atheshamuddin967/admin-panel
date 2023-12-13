@@ -1,7 +1,7 @@
 // import { useState, useCallback } from "react";
 
 import ReactPlayer from "react-player";
-import ReactHlsPlayer from "react-hls-player";
+
 import { useRef } from "react";
 
 function Loby() {
@@ -46,16 +46,6 @@ function Loby() {
         loop={true}
         playerRef={playerRef}
       />
-      <ReactHlsPlayer
-        src="http://192.168.100.44:8000/live/haseeb/index.m3u8"
-        controls={true}
-        muted={true}
-        autoPlay={true}
-        width="100%"
-        height="auto"
-        playerRef={playerRef}
-      />
-      ,
     </div>
   );
 }
