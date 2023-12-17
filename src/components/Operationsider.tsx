@@ -4,27 +4,32 @@ import Images from "../images/Images";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { useApi } from "../context/Api";
+
 import { MdEdit } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { CiMicrophoneOn } from "react-icons/ci";
-
-function Operationsider() {
+import { FaPlay } from "react-icons/fa6";
+import { FaWalkieTalkie } from "react-icons/fa6";
+import { webRTCAdaptor } from "./AntMedia";
+function Operationsider({ openAudio, data }: any) {
   const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
 
   const toggleDropdown = (item: any) => {
     if (isDropdownOpen !== item.groupName) {
       setDropdownOpen(item.groupName);
-      console.log(item);
     } else if (isDropdownOpen === item.groupName) {
       setDropdownOpen(false);
     }
   };
-  const { data } = useApi();
+
   const datas: any = data;
   const isGroupEmergency = (group: any) => {
     return group.users.some((user: any) => user.emergency_enabled);
+  };
+
+  const startptd = () => {
+    webRTCAdaptor.publish("ehtisham");
   };
   return (
     <div className="sidesoprations">
@@ -69,7 +74,7 @@ function Operationsider() {
                       }
                     </p>
                     <div className="mic">
-                      <button className="micbtn">
+                      <button className="micbtn" onClick={startptd}>
                         <CiMicrophoneOn />
                       </button>
                     </div>
@@ -96,8 +101,23 @@ function Operationsider() {
                             reds: user.emergency_enabled,
                           })}
                         >
-                          #{user.deviceCode || user.device_code} <br />
+                          #{user.deviceCode || user.device_code}{" "}
+                          {item.currentlySpeaking === user._id && (
+                            <div className="play">
+                              <button className="">
+                                <FaWalkieTalkie style={{ color: "green" }} />
+                              </button>
+                              <button
+                                className=""
+                                onClick={() => openAudio(item)}
+                              >
+                                <FaPlay />
+                              </button>
+                            </div>
+                          )}
+                          <br />
                         </span>
+
                         <hr />
                       </li>
                     ))}

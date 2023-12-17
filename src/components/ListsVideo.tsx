@@ -1,7 +1,9 @@
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
-import { Ip } from "../context/Ip";
+import { MdHeadphones } from "react-icons/md";
+import { MdOndemandVideo } from "react-icons/md";
+
 function ListsVideo({
   item,
   videoArray,
@@ -9,8 +11,17 @@ function ListsVideo({
 
   handleDeleteFromArray,
 }: any) {
+  const renderIcon = () => {
+    if (item.stream_type === "TX") {
+      return <MdOndemandVideo className="streamicon" />;
+    } else if (item.stream_type === "ATX") {
+      return <MdHeadphones className="streamicon" />;
+    }
+    // If item.stream_type is null or undefined, return null
+    return null;
+  };
   return (
-    <div className="col-sm-2" key={item._id}>
+    <div className="col-sm-3" key={item._id}>
       <div className="vidlayout">
         <h6>
           <span>
@@ -28,18 +39,15 @@ function ListsVideo({
               </button>
             )}
           </span>
-          {item.username}
+          {item.username} {renderIcon()}
         </h6>
         {item.isStreaming ? (
-          <ReactPlayer
-            // key={playerKey}
-            url={Ip`/live/${item.deviceCode}/index.m3u8`} // Use the dynamically set URL
-            controls={true}
-            playing={true}
-            muted={true}
+          <iframe
+            src={`http://66.135.24.9:5080/WebRTCAppEE/play.html?id=${item.deviceCode}`}
             width="100%"
-            height="100px"
-          />
+            height="150px"
+            frameBorder="0"
+          ></iframe>
         ) : (
           <div className="black">offline</div>
         )}

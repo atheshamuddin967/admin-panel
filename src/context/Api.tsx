@@ -68,61 +68,61 @@ const ApiReducer = (state: any, action: any) => {
 
 const ApiProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(ApiReducer, initialstate);
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "SET_LOADING" });
-      try {
-        const res = await axios.get(API_ENDPOINT, {
-          headers: {
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await res.data;
-
-        dispatch({ type: "SET_API_PRODUCTS", payload: data });
-      } catch (error) {
-        dispatch({ type: "API_ERROR" });
-      }
-    };
-
-    if (
-      state.data.length === 0 ||
-      state.isLoading ||
-      state.userData.length > 0
-    ) {
-      fetchData();
-    }
-  }, [state.data, state.isLoading, state.data.users]);
-
-  // const fetchData = async () => {
-  //   dispatch({ type: "SET_LOADING" });
-  //   try {
-  //     const res = await axios.get(API_ENDPOINT, {
-  //       headers: {
-  //         Authorization: `Bearer ${BEARER_TOKEN}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const data = await res.data;
-
-  //     dispatch({ type: "SET_API_PRODUCTS", payload: data });
-  //   } catch (error) {
-  //     dispatch({ type: "API_ERROR" });
-  //   }
-  // };
-
   // useEffect(() => {
-  //   // Fetch data initially
-  //   fetchData();
+  //   const fetchData = async () => {
+  //     dispatch({ type: "SET_LOADING" });
+  //     try {
+  //       const res = await axios.get(API_ENDPOINT, {
+  //         headers: {
+  //           Authorization: `Bearer ${BEARER_TOKEN}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       const data = await res.data;
 
-  //   // Fetch data every 3 seconds
-  //   const intervalId = setInterval(() => {
+  //       dispatch({ type: "SET_API_PRODUCTS", payload: data });
+  //     } catch (error) {
+  //       dispatch({ type: "API_ERROR" });
+  //     }
+  //   };
+
+  //   if (
+  //     state.data.length === 0 ||
+  //     state.isLoading ||
+  //     state.userData.length > 0
+  //   ) {
   //     fetchData();
-  //   }, 3000);
+  //   }
+  // }, [state.data, state.isLoading, state.data.users]);
 
-  //   return () => clearInterval(intervalId);
-  // }, []);
+  const fetchData = async () => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      const res = await axios.get(API_ENDPOINT, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.data;
+
+      dispatch({ type: "SET_API_PRODUCTS", payload: data });
+    } catch (error) {
+      dispatch({ type: "API_ERROR" });
+    }
+  };
+
+  useEffect(() => {
+    // Fetch data initially
+    fetchData();
+
+    // Fetch data every 3 seconds
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   // addgroup function
   const addGroup = async (formData: any) => {

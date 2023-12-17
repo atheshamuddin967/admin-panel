@@ -1,24 +1,29 @@
-import Images from "../images/Images";
+// import Images from "../images/Images";
 import "../Screens/Operations/Operation.scss";
-import { IoVolumeMute } from "react-icons/io5";
-import { IoVolumeMediumSharp } from "react-icons/io5";
+
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Ip } from "../context/Ip";
-import ReactPlayer from "react-player";
+import { GoScreenFull } from "react-icons/go";
+
 import { useCart } from "../context/VideoContext";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Operationslist from "./Operationslist";
-// import { useUser } from "../context/Socketprovider";
+
+import { MdHeadphones } from "react-icons/md";
+import { MdOndemandVideo } from "react-icons/md";
 function OperationsVideo({ onViewImageClick }: any) {
   const { dispatch, videoArray }: any = useCart();
   const [open, setOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState<number | null>(null);
-  // const [playing] = useState(true);
-  const [dropItem, setDroppedItem] = useState([]);
-  // const { myuser } = useUser();
 
-  const handleMuteToggle = (vid: any) => {
-    setIsMuted(vid.id === isMuted ? null : vid.id);
+  const [dropItem, setDroppedItem] = useState([]);
+
+  const renderIcon = (item: any) => {
+    if (item.stream_type === "TX") {
+      return <MdOndemandVideo className="streamicon" />;
+    } else if (item.stream_type === "ATX") {
+      return <MdHeadphones className="streamicon" />;
+    }
+
+    return null;
   };
   const handleAddToArray = useCallback(
     (item: any) => {
@@ -46,7 +51,7 @@ function OperationsVideo({ onViewImageClick }: any) {
     },
     [dispatch]
   );
-  // const playerRef = useRef(null);
+
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
 
@@ -98,43 +103,19 @@ function OperationsVideo({ onViewImageClick }: any) {
                   >
                     <FaRegTrashCan />
                   </button>
-                  {item.id}
-                  <span onClick={() => onViewImageClick(item.deviceCode)}>
-                    <img src={Images.view} alt="" />
+                  {item.name} {renderIcon(item)}
+                  <span onClick={() => onViewImageClick(item)}>
+                    <GoScreenFull />
                   </span>
                 </p>
 
-                <ReactPlayer
-                  url={Ip`/live/${item.deviceCode}/index.m3u8`}
-                  controls={true}
-                  playing={true}
-                  muted={isMuted !== item.id}
+                <iframe
+                  src={`http://66.135.24.9:5080/WebRTCAppEE/play.html?id=${item.deviceCode}`}
                   width="100%"
-                  height="100px"
-                />
-                <div className="iconsvid">
-                  <div>
-                    <img src={Images.pause} alt="" />
-                    <img src={Images.play} alt="" />
-                    {isMuted === item.id ? (
-                      <button onClick={() => handleMuteToggle(item)}>
-                        <IoVolumeMediumSharp />
-                      </button>
-                    ) : (
-                      <button onClick={() => handleMuteToggle(item)}>
-                        <IoVolumeMute />
-                      </button>
-                    )}
-
-                    <img src={Images.frontcam2} alt="" />
-                  </div>
-
-                  <div>
-                    <img src={Images.mic} alt="" />
-                    <img src={Images.movie} alt="" />
-                    <img src={Images.back} alt="" />
-                  </div>
-                </div>
+                  height="150px"
+                  frameBorder="0"
+                  className="custom-iframe"
+                ></iframe>
               </div>
             </div>
           );

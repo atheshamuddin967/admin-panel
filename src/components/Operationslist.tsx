@@ -1,7 +1,6 @@
 import Input from "./Input";
 import { IoCloseSharp } from "react-icons/io5";
 
-// import { useRtmpApi } from "../context/RTmpProvider";
 import "../Screens/Operations/Operation.scss";
 import { useEffect, useState } from "react";
 import { useUser } from "../context/Socketprovider";
@@ -22,7 +21,7 @@ function Operationslist({
   const [playerKey, setPlayerKey] = useState<number>(0); // Add a key to force remount
 
   useEffect(() => {
-    socket.on("tx-streaming-updated", (socketUser) => {
+    socket.on("streaming-updated", (socketUser) => {
       console.log("Received message:", socketUser);
 
       const userIndex = datas.users.findIndex(
@@ -43,8 +42,8 @@ function Operationslist({
     });
 
     return () => {
-      socket.off("tx-streaming-updated");
-      console.log(myuser);
+      socket.off("streaming-updated");
+
       setPlayerKey((prevKey) => {
         console.log(prevKey); // Log the previous state
         return prevKey + 2; // Return the new state
@@ -52,8 +51,6 @@ function Operationslist({
       console.log((prevKey: any) => prevKey + 5);
     };
   }, [data, setMyUser]);
-
-  // const { Rtmpdata } = useRtmpApi();
 
   const data2: any = datas.users;
   const sortedData = myuser

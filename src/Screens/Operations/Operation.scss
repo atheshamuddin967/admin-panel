@@ -96,32 +96,50 @@ margin: 0 0;
     background-color: rgba(0, 0, 0, 0.9);
     top: 0%;
     left: 0;
-    z-index: 10000;
-    
+    z-index: 10000 !important;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .close-btns2{
-    position: absolute;
+    // position: absolute;
     right: 5%;
     top: 5%;
+    float: right;
     z-index: 100;
     // background-color: aliceblue;
-    height: 50px;
-    width: 50px;
+    // height: 50px;
+    // width: 50px;
     border-radius: 100%;
     text-align: center;
-    line-height: 60px;
+    // line-height: 60px;
     cursor: pointer;
     i{
         font-size: 30px;
-        color: #fff;
+        color: black;
     }
 }
 .secondbox{
-    position: relative;
+    // position: relative;
     width: 60%;
     margin: 0 auto;
-    top: 10%;
+    top: 0;
     text-align: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+   
+}
+.secondbox2{
+    position: relative;
+  max-width: 300px;
+    margin: 0 auto;
+    top: 0;
+    text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
    
 }
 .bottom{
@@ -268,8 +286,10 @@ width: 100%;
 .zoneul{
     margin: 0 0;
     padding: 0 0;
+
     li{
         list-style: none;
+        position: relative;
         img{
             width: 18px;
             margin-right: 5px;
@@ -346,7 +366,9 @@ font-family: "poppins";
   }
   .itemsvid{
     padding: 0px 0;
-    background-color: #fff;
+    // background-color: #fff;
+    background-color: black;
+    color: white;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     margin: 2px 2px;
     border-radius: 5px;
@@ -357,7 +379,8 @@ font-family: "poppins";
     p{
         font-size: 14px;
         font-family: "poppins";
-        color: #131313;
+        // color: #131313;
+        color: white;
         margin: 0 0;
         span{
             float: right;
@@ -366,7 +389,7 @@ font-family: "poppins";
         }
         button{
             background-color: transparent;
-            color: gray;
+            color: white;
             border: 0;
             padding: 0;
             float: left;
@@ -599,9 +622,79 @@ border: 0;
 }
 .black{
     background-color: black;
-    height: 100px;
+    height: 150px;
     width: 100%;
     text-align: center;
-    line-height: 100px;
+    line-height: 150px;
     color: white;
+}
+.streamicon{
+    color: green;
+    font-size: 20px;
+}
+#video_info{
+    font-size: 10px !important;
+    overflow: hidden !important;
+}
+
+.itemsvid::-webkit-scrollbar
+{
+    width: 0.5em !important; /* Set the width of the scrollbar */
+}
+
+/* Hide the scrollbar track */
+
+.itemsvid::-webkit-scrollbar-track
+ {
+    background: transparent !important;
+}
+
+/* Style the scrollbar thumb */
+
+.itemsvid::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+    outline: none !important;
+}
+  
+.custom-iframe {
+    // overflow: visible !important;
+    video{
+        width: 100% !important;
+        
+    }
+  }
+.names{
+    text-align: left;
+    
+}
+.play{
+    
+    position: absolute;
+    right: 0;
+    top: 0;
+    button{background-color: transparent;
+        border: 0 ;
+        padding: 0 0;
+        margin: 0 0;
+    
+  }
+
+}
+.closebtnsaudio{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    button{
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+}
+.boxes{
+    text-align: left
+    ;
+
 }
