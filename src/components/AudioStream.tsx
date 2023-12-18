@@ -1,4 +1,6 @@
 import "../Screens/Operations/Operation.scss";
+import { IoClose } from "react-icons/io5";
+
 function AudioStream({ CloseAudio, selectedItem }: any) {
   const speakingUser = selectedItem.users.find(
     (user: any) => user._id === selectedItem.currentlySpeaking
@@ -19,7 +21,9 @@ function AudioStream({ CloseAudio, selectedItem }: any) {
           ></iframe>
           <div className="closebtnsaudio">
             {" "}
-            <button onClick={CloseAudio}>X</button>
+            <button onClick={CloseAudio}>
+              <IoClose />
+            </button>
           </div>
         </div>
       </div>

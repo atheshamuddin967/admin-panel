@@ -11,7 +11,7 @@ import { useApi } from "../../context/Api";
 
 function ManagementGroup() {
   const [openForm, setOpenForm] = useState(false);
-  const { isLoading, isError, data, addGroup, deleteGroup } = useApi();
+  const { isLoading, isError, data, addGroup } = useApi();
 
   const datas: any = data;
   const [formData, setFormData] = useState({
@@ -27,13 +27,13 @@ function ManagementGroup() {
     setOpenForm(false);
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (isError) {
-    return <p>Error fetching data</p>;
-  }
+  // if (isError) {
+  //   return <p>Error fetching data</p>;
+  // }
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -81,10 +81,7 @@ function ManagementGroup() {
 
     return false;
   };
-  const handleDelete = (group: string) => {
-    deleteGroup(group);
-    console.log(group);
-  };
+
   return (
     <div>
       <div className="container">
@@ -98,7 +95,7 @@ function ManagementGroup() {
             data={data}
             bg={"#ffff"}
             icon={Images.group}
-            handleDelete={handleDelete}
+            // handleDelete={handleDelete}
           />
         </div>
         {openForm && (

@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 import React from "react";
 import Images from "../images/Images";
 
-function ManagementGroupTable({ data, icon, bg, handleDelete }: any) {
+function ManagementGroupTable({ data, icon, bg }: any) {
   const [showGroupDiv, setShowGroupDiv] = useState(false);
 
   const toggleGroupDiv = (group: any) => {
@@ -59,7 +59,7 @@ function ManagementGroupTable({ data, icon, bg, handleDelete }: any) {
                     </button>
                     <button
                       onClick={() => {
-                        handleDelete(group._id);
+                        // handleDelete(group._id);
                       }}
                     >
                       <i className="fa-solid fa-trash"></i>

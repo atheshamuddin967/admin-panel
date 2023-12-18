@@ -10,8 +10,9 @@ import { IoMdAdd } from "react-icons/io";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { CiMicrophoneOn } from "react-icons/ci";
 import { FaPlay } from "react-icons/fa6";
-import { FaWalkieTalkie } from "react-icons/fa6";
+
 import { webRTCAdaptor } from "./AntMedia";
+import Movingbtn from "./Movingbtn";
 function Operationsider({ openAudio, data }: any) {
   const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
 
@@ -104,9 +105,7 @@ function Operationsider({ openAudio, data }: any) {
                           #{user.deviceCode || user.device_code}{" "}
                           {item.currentlySpeaking === user._id && (
                             <div className="play">
-                              <button className="">
-                                <FaWalkieTalkie style={{ color: "green" }} />
-                              </button>
+                              <Movingbtn />
                               <button
                                 className=""
                                 onClick={() => openAudio(item)}
