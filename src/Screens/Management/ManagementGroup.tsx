@@ -11,7 +11,7 @@ import { useApi } from "../../context/Api";
 
 function ManagementGroup() {
   const [openForm, setOpenForm] = useState(false);
-  const { isLoading, isError, data, addGroup } = useApi();
+  const { data, addGroup } = useApi();
 
   const datas: any = data;
   const [formData, setFormData] = useState({
