@@ -1,5 +1,5 @@
-import Googlemap from "../../components/Googlemap";
 import Input from "../../components/Input";
+import LiveMap from "../../components/LiveMap";
 import "../Mapview/Map.scss";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -24,7 +24,8 @@ function Mapview() {
         <Input placeholder={"Search Devices"} />
       </div>
 
-      <Googlemap height={"500px"} />
+      {/* <Googlemap height={"500px"} /> */}
+      <LiveMap />
     </div>
   );
 }

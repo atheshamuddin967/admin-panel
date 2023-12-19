@@ -1,10 +1,16 @@
 import "../Screens/Operations/Operation.scss";
 import { IoClose } from "react-icons/io5";
-
+import { useEffect } from "react";
 function AudioStream({ CloseAudio, selectedItem }: any) {
   const speakingUser = selectedItem.users.find(
     (user: any) => user._id === selectedItem.currentlySpeaking
   );
+
+  useEffect(() => {
+    if (selectedItem.currentlySpeaking === null) {
+      CloseAudio();
+    }
+  }, [selectedItem.currentlySpeaking, CloseAudio]);
   return (
     <div>
       <div className="imgbox">

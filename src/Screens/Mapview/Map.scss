@@ -3,3 +3,17 @@
     margin:0 auto;
     padding: 10px 0;
 }
+.marker {
+    background-color: #ff0000;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .mapvew{
+    background-color: aqua;
+  }

@@ -11,16 +11,20 @@ import OperationsVideo from "../../components/OperationsVideo";
 import { useNavigate } from "react-router-dom";
 import Operationsider from "../../components/Operationsider";
 import AudioStream from "../../components/AudioStream";
+// import { Notification } from "../../components/Notification";
+// import { toast, ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 function Operations2() {
   const navigate = useNavigate();
   const [imgboxVideoSrc, setImgboxVideoSrc] = useState("");
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [isImgboxVisible, setIsImgboxVisible] = useState(false);
   const [audioox, setAudioBox] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const { data } = useApi();
   const datas: any = data;
+
   const { setMyUser } = useUser();
   const OpenAudio = (group: any) => {
     console.log(group);
@@ -30,26 +34,38 @@ function Operations2() {
   const CloseAudio = () => {
     setAudioBox(false);
   };
-  useEffect(() => {
-    socket.on("streaming-updated", (socketUser) => {
-      console.log("Received message:", socketUser);
+  // const notifyUserStreaming = (msg: any) => {
+  //   toast.success(msg, {
+  //     position: toast.POSITION.BOTTOM_RIGHT,
+  //     autoClose: 6000,
+  //   });
+  // };
+  // useEffect(() => {
+  //   // socket.on("admin-message-recieved", (data: any) => {
+  //   //   // notifyUserStreaming(data.message);
+  //   //   console.log("admin-message-recived:", data.message);
+  //   // });
+  //   socket.on("streaming-updated", (socketUser) => {
+  //     console.log("Received message:", socketUser);
 
-      const userIndex = datas.users.findIndex(
-        (user: any) => user._id === socketUser._id
-      );
+  //     const userIndex = datas.users.findIndex(
+  //       (user: any) => user._id === socketUser._id
+  //     );
 
-      if (userIndex !== -1) {
-        const updatedMyUserArray: any = [...datas.users];
-        updatedMyUserArray[userIndex] = socketUser;
+  //     console.log(datas);
+  //     if (userIndex !== -1) {
+  //       const updatedMyUserArray: any = [...datas.users];
+  //       updatedMyUserArray[userIndex] = socketUser;
 
-        setMyUser(updatedMyUserArray);
-      }
-    });
+  //       setMyUser(updatedMyUserArray);
+  //     }
+  //   });
 
-    return () => {
-      socket.off("streaming-updated");
-    };
-  }, [data, setMyUser]);
+  //   return () => {
+  //     socket.off("streaming-updated");
+  //     socket.off("admin-message-recieved");
+  //   };
+  // }, [data, setMyUser]);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());

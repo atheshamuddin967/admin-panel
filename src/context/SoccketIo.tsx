@@ -1,4 +1,4 @@
 import { BASE_URL } from "./Api";
-import io from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
-export const socket = io(BASE_URL);
+export const socket: Socket = io(BASE_URL);

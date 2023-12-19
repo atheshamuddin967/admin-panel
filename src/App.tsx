@@ -44,7 +44,11 @@ import SettingScreen from "./Screens/Settings/SettingScreen";
 import Messages from "./Screens/Messages/Messages";
 import Operations2 from "./Screens/Operations/Operations2";
 import Operations3 from "./Screens/Operations/Operations3";
-
+import { toast, ToastContainer } from "react-toastify";
+import { socket } from "./context/SoccketIo";
+import "react-toastify/dist/ReactToastify.css";
+import { useApi } from "./context/Api";
+import { useUser } from "./context/Socketprovider";
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
@@ -69,7 +73,41 @@ function App() {
       collapseSidebar(false);
     }
   }, [location.pathname, collapseSidebar]);
+  const notifyUserStreaming = (msg: any) => {
+    toast.success(msg, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 6000,
+    });
+  };
+  const { setMyUser } = useUser();
+  const { data } = useApi();
+  const datas: any = data;
+  useEffect(() => {
+    socket.on("admin-message-recieved", (data: any) => {
+      notifyUserStreaming(data.message);
+      console.log("admin-message-recived:", data.message);
+    });
+    socket.on("streaming-updated", (socketUser) => {
+      console.log("Received message:", socketUser);
 
+      const userIndex = datas.users.findIndex(
+        (user: any) => user._id === socketUser._id
+      );
+
+      console.log(datas);
+      if (userIndex !== -1) {
+        const updatedMyUserArray: any = [...datas.users];
+        updatedMyUserArray[userIndex] = socketUser;
+
+        setMyUser(updatedMyUserArray);
+      }
+    });
+
+    return () => {
+      socket.off("streaming-updated");
+      socket.off("admin-message-recieved");
+    };
+  }, [data, setMyUser]);
   return (
     <div
       style={{
@@ -336,6 +374,7 @@ function App() {
       </Sidebar>
       <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Singup />} />,
           <Route path="/Dashboard" element={<Dashboard />} />

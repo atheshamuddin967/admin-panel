@@ -1,11 +1,9 @@
 import Input from "./Input";
 import { IoCloseSharp } from "react-icons/io5";
-
 import "../Screens/Operations/Operation.scss";
 import { useEffect, useState } from "react";
 import { useUser } from "../context/Socketprovider";
 import { useApi } from "../context/Api";
-
 import { socket } from "../context/SoccketIo";
 import ListsVideo from "./ListsVideo";
 function Operationslist({
@@ -16,41 +14,28 @@ function Operationslist({
 }: any) {
   const { data } = useApi();
   const datas: any = data;
-  const { myuser, setMyUser } = useUser();
-  // State to hold video URL
-  const [playerKey, setPlayerKey] = useState<number>(0); // Add a key to force remount
+  const { myuser } = useUser();
 
-  useEffect(() => {
-    socket.on("streaming-updated", (socketUser) => {
-      console.log("Received message:", socketUser);
+  // useEffect(() => {
+  //   socket.on("streaming-updated", (socketUser) => {
+  //     console.log("Received message:", socketUser);
 
-      const userIndex = datas.users.findIndex(
-        (user: any) => user._id === socketUser._id
-      );
+  //     const userIndex = datas.users.findIndex(
+  //       (user: any) => user._id === socketUser._id
+  //     );
 
-      if (userIndex !== -1) {
-        const updatedMyUserArray: any = [...datas.users];
-        updatedMyUserArray[userIndex] = socketUser;
+  //     if (userIndex !== -1) {
+  //       const updatedMyUserArray: any = [...datas.users];
+  //       updatedMyUserArray[userIndex] = socketUser;
 
-        setMyUser(updatedMyUserArray);
+  //       setMyUser(updatedMyUserArray);
+  //     }
+  //   });
 
-        setPlayerKey((prevKey) => {
-          console.log(prevKey); // Log the previous state
-          return prevKey + 1; // Return the new state
-        });
-      }
-    });
-
-    return () => {
-      socket.off("streaming-updated");
-
-      setPlayerKey((prevKey) => {
-        console.log(prevKey); // Log the previous state
-        return prevKey + 2; // Return the new state
-      });
-      console.log((prevKey: any) => prevKey + 5);
-    };
-  }, [data, setMyUser]);
+  //   return () => {
+  //     socket.off("streaming-updated");
+  //   };
+  // }, [data, setMyUser]);
 
   const data2: any = datas.users;
   const sortedData = myuser
@@ -82,7 +67,6 @@ function Operationslist({
                   handleAddToArray={handleAddToArray}
                   videoArray={videoArray}
                   handleDeleteFromArray={handleDeleteFromArray}
-                  playerKey={playerKey}
                 />
               ))}
             </div>

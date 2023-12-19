@@ -73,7 +73,11 @@ function Operationsider({ openAudio, data }: any) {
                       </p>
                     </div>
 
-                    <FaChevronDown />
+                    <FaChevronDown
+                      onClick={() => {
+                        toggleDropdown(item);
+                      }}
+                    />
                   </div>
                   <div className="dropbtns">
                     <img src={Images.conected} alt="" />
