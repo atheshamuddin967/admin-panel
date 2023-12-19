@@ -273,8 +273,8 @@ width: 100%;
     flex-direction: row;
     p{
         margin-bottom: 0;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 .droplaout{
@@ -722,3 +722,9 @@ color: green !important;
 //         top: 4px; /* Adjust the distance the button moves */
 //     }
 // }
+.danger{
+    color: red;
+    font-size: 20px;
+    margin-top: -2px;
+    margin-left: 5px;
+}

@@ -4,6 +4,7 @@ import Images from "../images/Images";
 import classNames from "classnames";
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { CgDanger } from "react-icons/cg";
 
 import { MdEdit } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
@@ -32,13 +33,25 @@ function Operationsider({ openAudio, data }: any) {
   const startptd = () => {
     webRTCAdaptor.publish("ehtisham");
   };
+  // Sort groups based on emergency_enabled status
+  const sortedGroups = [...(datas?.groups || [])].sort(
+    (groupA: any, groupB: any) => {
+      const hasEmergencyA = isGroupEmergency(groupA);
+      const hasEmergencyB = isGroupEmergency(groupB);
+
+      // Sort in descending order so that groups with emergency-enabled users come first
+      return hasEmergencyB - hasEmergencyA;
+    }
+  );
+
   return (
     <div className="sidesoprations">
       <div className="fstlay">
         <div className="secondlayout">
           <Input />
-          {datas?.groups?.map((item: any) => (
+          {sortedGroups?.map((item: any) => (
             <div
+              key={item.groupName}
               className="droplaout"
               onClick={() => {
                 toggleDropdown(item);
@@ -47,7 +60,7 @@ function Operationsider({ openAudio, data }: any) {
               <React.Fragment>
                 <div
                   className={classNames("drop", {
-                    "emergency-group": isGroupEmergency(item),
+                    "": isGroupEmergency(item),
                   })}
                 >
                   <div className="dropbtn">
@@ -74,6 +87,17 @@ function Operationsider({ openAudio, data }: any) {
                         ).length
                       }
                     </p>
+                    {isGroupEmergency(item) && (
+                      <span className="danger">
+                        <CgDanger />
+                        {
+                          item.users.filter(
+                            (user: { emergency_enabled: boolean }) =>
+                              user.emergency_enabled
+                          ).length
+                        }
+                      </span>
+                    )}
                     <div className="mic">
                       <button className="micbtn" onClick={startptd}>
                         <CiMicrophoneOn />
@@ -102,7 +126,7 @@ function Operationsider({ openAudio, data }: any) {
                             reds: user.emergency_enabled,
                           })}
                         >
-                          #{user.deviceCode || user.device_code}{" "}
+                          #{user.name || user.name}{" "}
                           {item.currentlySpeaking === user._id && (
                             <div className="play">
                               <Movingbtn />
