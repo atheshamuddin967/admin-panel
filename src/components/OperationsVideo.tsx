@@ -110,7 +110,7 @@ function OperationsVideo({ onViewImageClick }: any) {
                 </p>
 
                 <iframe
-                  src={`http://66.135.24.9:5080/WebRTCAppEE/play.html?id=${item.deviceCode}`}
+                  src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.deviceCode}`}
                   width="100%"
                   height="150px"
                   frameBorder="0"

@@ -16,7 +16,7 @@ function AudioStream({ CloseAudio, selectedItem }: any) {
           </div>
 
           <iframe
-            src={`http://66.135.24.9:5080/WebRTCAppEE/play.html?id=${selectedItem._id}`}
+            src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${selectedItem._id}`}
             style={{ width: "100%" }}
           ></iframe>
           <div className="closebtnsaudio">
