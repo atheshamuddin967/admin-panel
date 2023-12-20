@@ -14,8 +14,8 @@ const initialstate = {
 };
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
-// export const BASE_URL = "https://s1.hostin.one/";
 export const BASE_URL = "https://s1.hostin.one/";
+// export const BASE_URL = "http://192.168.100.44:3002/";
 const API_ENDPOINT = `${BASE_URL}user/get-users-and-groups`;
 const Api_createGroup = `${BASE_URL}user/new-group`;
 const Api_createUser = `${BASE_URL}user/create-user`;

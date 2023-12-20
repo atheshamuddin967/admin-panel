@@ -14,4 +14,5 @@ export const webRTCAdaptor: any = new WebRTCAdaptor({
     OfferToReceiveVideo: false,
   },
   localVideoId: "id-of-video-element",
+  remoteVideoElement: document.getElementById("remoteVideo"),
 });

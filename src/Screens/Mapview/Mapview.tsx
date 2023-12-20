@@ -1,31 +1,44 @@
 import Input from "../../components/Input";
 import LiveMap from "../../components/LiveMap";
 import "../Mapview/Map.scss";
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
+import { useApi } from "../../context/Api";
+// import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Mapview() {
-  const { item } = useParams();
-  const navigate = useNavigate();
+  const [SearchUser, setSearchUser] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
 
-  useEffect(() => {
-    if (!item) {
-      // Handle the case where 'item' is not available
-      console.error("Item not available. Navigating to default map screen.");
-      // You can navigate to the default map screen or handle it as needed
-      navigate("/Map");
+  const { data } = useApi();
+
+  const datas: any = data;
+  const UserData = datas.users;
+
+  const handleSearch = () => {
+    const selectedUser = UserData?.find(
+      (user: any) => user.deviceCode === searchValue
+    );
+
+    if (selectedUser) {
+      console.log("Selected User:", selectedUser);
+      setSearchUser(selectedUser);
+    } else {
+      console.log("User not found");
     }
-  }, [item, navigate]);
-
-  console.log(item);
+  };
 
   return (
     <div className="container">
       <div className="inp-box">
-        <Input placeholder={"Search Devices"} />
+        <Input
+          placeholder={"Search Devices"}
+          searchValue={searchValue}
+          onChange={(value: any) => setSearchValue(value)}
+          onSearch={handleSearch}
+        />
       </div>
 
-      {/* <Googlemap height={"500px"} /> */}
-      <LiveMap />
+      <LiveMap SearchUser={SearchUser} height={"100vh"} />
     </div>
   );
 }

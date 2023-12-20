@@ -1,53 +1,92 @@
-import {
-  GoogleMap,
-  //   useJsApiLoader,
-  useLoadScript,
-  //   MarkerF,
-} from "@react-google-maps/api";
-
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import { Mapkey } from "../context/Key";
-import { useCallback, useRef } from "react";
-// const Marker = ({ t }: any) => <div className="marker">{t}</div>;
+import { useCallback, useRef, useEffect, useState } from "react";
+import { useApi } from "../context/Api";
+function LiveMap({ height }: any) {
+  const { data } = useApi();
 
-function LiveMap() {
-  const center = {
-    lat: -3.745,
-    lng: -38.523,
-  };
+  const datas: any = data;
+  const UserData = datas.users;
+
+  const [userLocation, setUserLocation] = useState<any[]>([]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: Mapkey,
   });
-  //   const [map, setMap] = useState(null);
-  const mapRef = useRef();
+  const mapRef = useRef<google.maps.Map | null>(null);
   const onMapLoded = useCallback((map: any) => {
     mapRef.current = map;
   }, []);
-  //   const onLoad = useCallback(function callback(map: any) {
-  //     // This is just an example of getting and using the map instance!!! don't just blindly copy!
-  //     const bounds = new window.google.maps.LatLngBounds(center);
-  //     map.fitBounds(bounds);
+  useEffect(() => {
+    if (UserData) {
+      setUserLocation(
+        UserData?.map((user: any) => ({
+          lat: user.location.coordinates[0],
+          lng: user.location.coordinates[1],
+        }))
+      );
+    }
+  }, [UserData]);
 
-  //     setMap(map);
-  //   }, []);
+  // useEffect(() => {
+  //   if (SearchUser) {
+  //     console.log(SearchUser);
+  //     const [lng, lat] = SearchUser.location.coordinates;
 
-  //   const onUnmount: any = useCallback(function callback(map: any) {
-  //     setMap(null);
-  //   }, []);
+  //     setUserLocation({ lat, lng });
+  //     console.log("Updated user location:", { lat, lng });
+  //   } else {
+  //     setUserLocation(null);
+  //   }
+  // }, [SearchUser]);
   if (loadError) return "Error";
   const containerStyle = {
-    width: "400px",
-    height: "400px",
+    width: "100%",
+    height: "100%",
   };
-  if (isLoaded) return "Maps";
+
+  // const locateUser = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const userLocation = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         };
+  //         if (mapRef.current) {
+  //           mapRef.current.panTo(userLocation);
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error("Error getting user location:", error.message);
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by your browser");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (isLoaded) {
+  //     locateUser();
+  //   }
+  // }, [isLoaded]);
+
+  if (loadError) return "Error";
+
+  if (!isLoaded || !UserData) return "Loading Maps...";
+
   return (
-    <div className="mapvew" style={{ height: "100vh", width: "100%" }}>
+    <div className="mapvew" style={{ height: height, width: "100%" }}>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
+        center={userLocation[0]}
         zoom={10}
         onLoad={onMapLoded}
-        // onUnmount={onUnmount}
-      ></GoogleMap>
+      >
+        {userLocation?.map((location: any, index: number) => (
+          <MarkerF key={index} position={location} />
+        ))}
+      </GoogleMap>
     </div>
   );
 }
