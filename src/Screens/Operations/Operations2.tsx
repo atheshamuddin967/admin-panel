@@ -4,13 +4,13 @@ import { MdRemoveRedEye } from "react-icons/md";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useApi } from "../../context/Api";
-import { useUser } from "../../context/Socketprovider";
-import { socket } from "../../context/SoccketIo";
+// import { useUser } from "../../context/Socketprovider";
+// import { socket } from "../../context/SoccketIo";
 import FullImage from "../../components/FullImage";
 import OperationsVideo from "../../components/OperationsVideo";
 import { useNavigate } from "react-router-dom";
 import Operationsider from "../../components/Operationsider";
-import AudioStream from "../../components/AudioStream";
+// import AudioStream from "../../components/AudioStream";
 import LiveMap from "../../components/LiveMap";
 // import { Notification } from "../../components/Notification";
 // import { toast, ToastContainer } from "react-toastify";
@@ -20,8 +20,8 @@ function Operations2() {
   const [imgboxVideoSrc, setImgboxVideoSrc] = useState("");
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [isImgboxVisible, setIsImgboxVisible] = useState(false);
-  const [audioox, setAudioBox] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  // const [audioox, setAudioBox] = useState(false);
+  // const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const { data } = useApi();
   const datas: any = data;

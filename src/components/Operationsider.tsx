@@ -45,15 +45,15 @@ function Operationsider({ data }: any) {
   });
 
   const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
-  const [dropItme, setDropIttem] = useState<any>();
+  // const [dropItme, setDropIttem] = useState<any>();
   const toggleDropdown = (item: any) => {
     if (isDropdownOpen !== item._id) {
       setDropdownOpen(item._id);
 
-      setDropIttem(item._id);
+      // setDropIttem(item._id);
     } else if (isDropdownOpen === item._id) {
       setDropdownOpen(false);
-      setDropIttem(null);
+      // setDropIttem(null);
     }
   };
 
@@ -82,7 +82,7 @@ function Operationsider({ data }: any) {
 
   useEffect(() => {
     socket.on("ptt-detection-admin", (data) => {
-      const { group, isSpeaking } = data;
+      const { group} = data;
       // alert(group._id);
 
       webRTCAdaptor.play(group._id);
