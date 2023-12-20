@@ -82,7 +82,7 @@ function Operationsider({ data }: any) {
 
   useEffect(() => {
     socket.on("ptt-detection-admin", (data) => {
-      const { group} = data;
+      const { group } = data;
       // alert(group._id);
 
       webRTCAdaptor.play(group._id);
