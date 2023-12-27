@@ -16,7 +16,7 @@ function ManagementTable({ data, icon, bg }: any) {
         </thead>
 
         <tbody className="table-row text-center">
-          {data?.users?.map((user: any) => (
+          {data?.parols?.map((user: any) => (
             <tr className="tr-vehicle" key={user?._id}>
               <td className="table-data">
                 <div className="round" style={{ backgroundColor: bg }}>

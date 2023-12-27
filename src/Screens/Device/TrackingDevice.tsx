@@ -3,11 +3,15 @@ import DeviceTable from "../../components/DeviceTable";
 import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
 import { useState } from "react";
-import Items from "../../Data/ItemData";
+import { useApi } from "../../context/Api";
+
+// import Items from "../../Data/ItemData";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 function TrackingDevice() {
-  const video = Items.filter((item) => item.type === "tracking device");
+  const { deviceData } = useApi();
+  const data: any = deviceData;
+  const alldata = data?.data?.scoutCameras;
 
   const [open, SetOpen] = useState(false);
   const [openEdit, SetOpenEdit] = useState(false);
@@ -32,7 +36,7 @@ function TrackingDevice() {
         <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
       </div>
       <div className="device-Table">
-        <DeviceTable data={video} icon={Images.tracking} bg={"#FCDBDB"} />
+        <DeviceTable data={alldata} icon={Images.tracking} bg={"#FCDBDB"} />
       </div>
       {open && (
         <div className="formsVehicle">

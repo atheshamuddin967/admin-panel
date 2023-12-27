@@ -3,12 +3,15 @@ import DeviceTable from "../../components/DeviceTable";
 import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
 import { useState } from "react";
-import Items from "../../Data/ItemData";
+import { useApi } from "../../context/Api";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 function VideoDevice() {
-  const video = Items.filter((item) => item.type === "video device");
-
+  // const video = Items.filter((item) => item.type === "video device");
+  const { deviceData } = useApi();
+  const data: any = deviceData;
+  const alldata = data?.data.fixedCameras;
+  // console.log(data);
   const [open, SetOpen] = useState(false);
   const [openEdit, SetOpenEdit] = useState(false);
   const openmodal = () => {
@@ -32,7 +35,7 @@ function VideoDevice() {
         <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
       </div>
       <div className="device-Table">
-        <DeviceTable data={video} icon={Images.movie} bg={"#DBFAFC"} />
+        <DeviceTable data={alldata} icon={Images.movie} bg={"#DBFAFC"} />
       </div>
       {open && (
         <div className="formsVehicle">

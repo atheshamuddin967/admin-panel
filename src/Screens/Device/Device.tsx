@@ -1,16 +1,21 @@
 import DeviceTable from "../../components/DeviceTable";
-
 import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
-import { useState } from "react";
-import Items from "../../Data/ItemData";
+import { useState, useEffect } from "react";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
+import { useApi } from "../../context/Api";
+import DeviceForms from "../../components/DeviceForm";
 function Device() {
-  const video = Items.filter((item) => item.type === "video");
+  // const [data, setData] = useState([]);
+  const { deviceData } = useApi();
 
   const [open, SetOpen] = useState(false);
   const [openEdit, SetOpenEdit] = useState(false);
+
+  const data: any = deviceData;
+  const alldata = data?.data?.all;
+  // console.log(data.data);
   const openmodal = () => {
     SetOpen(true);
   };
@@ -32,11 +37,11 @@ function Device() {
         <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
       </div>
       <div className="device-Table">
-        <DeviceTable data={video} icon={Images.conected} bg={"#FCEBDB"} />
+        <DeviceTable data={alldata} icon={Images.conected} bg={"#FCEBDB"} />
       </div>
       {open && (
         <div className="formsVehicle">
-          <FormsVehicle
+          {/* <FormsVehicle
             buttonlabel={"Add"}
             label1={"Device Id :"}
             label2={"Device type : "}
@@ -47,7 +52,8 @@ function Device() {
             placeholder3={"55456"}
             placeholder4={"josh"}
             closemodal={closemodal}
-          />
+          /> */}
+          <DeviceForms closemodal={closemodal} />
         </div>
       )}
 

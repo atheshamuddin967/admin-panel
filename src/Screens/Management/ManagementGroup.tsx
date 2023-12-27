@@ -8,17 +8,18 @@ import { CiSearch } from "react-icons/ci";
 import { v4 as uuidv4 } from "uuid";
 import { IoIosAdd } from "react-icons/io";
 import { useApi } from "../../context/Api";
+import { FaMinus } from "react-icons/fa6";
 
 function ManagementGroup() {
   const [openForm, setOpenForm] = useState(false);
-  const { data, addGroup } = useApi();
+  const { data, addGroup, deleteGroup, removeParols } = useApi();
 
   const datas: any = data;
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     groupName: "",
     groupInfo: "",
     role: "",
-    users: [],
+    parols: [],
   });
   const openform = () => {
     setOpenForm(true);
@@ -27,20 +28,13 @@ function ManagementGroup() {
     setOpenForm(false);
   };
 
-  // if (isLoading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (isError) {
-  //   return <p>Error fetching data</p>;
-  // }
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
+    setFormData((prevFormData: any) => ({
       ...prevFormData,
       [name]: value,
     }));
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
@@ -58,26 +52,41 @@ function ManagementGroup() {
       groupName: "",
       groupInfo: "",
       role: "",
-      users: [],
+      parols: [],
     });
   };
-  interface User {
-    _id: string; // Change the type accordingly
-    // Other properties...
-  }
-  const handleAddUserToGroup = (user: User) => {
+
+  // const handleAddUserToGroup = (parol: User) => {
+  //   // Check if the user is already in the group
+  //   if (
+  //     !formData.parols.some(
+  //       (existingUser: User) => existingUser._id === parol._id
+  //     )
+  //   ) {
+  //     // If not, add the user to the group
+  //     setFormData((prevFormData: any) => ({
+  //       ...prevFormData,
+  //       parols: [...prevFormData.parols, parol._id],
+  //     }));
+  //     // console.log(formData);
+  //   }
+
+  //   return false;
+  // };
+
+  const handleAddUserToGroup = (user: any) => {
     // Check if the user is already in the group
-    if (
-      !formData.users.some(
-        (existingUser: User) => existingUser._id === user._id
-      )
-    ) {
-      // If not, add the user to the group
-      setFormData((prevFormData: any) => ({
-        ...prevFormData,
-        users: [...prevFormData.users, user._id],
-      }));
-    }
+    const isInGroup: any = formData.parols.includes(user._id);
+
+    // If the user is in the group, remove them; otherwise, add them
+    setFormData((prevFormData: any) => ({
+      ...prevFormData,
+      parols: isInGroup
+        ? prevFormData.parols.filter(
+            (existingUserId: string) => existingUserId !== user._id
+          )
+        : [...prevFormData.parols, user._id],
+    }));
 
     return false;
   };
@@ -95,7 +104,8 @@ function ManagementGroup() {
             data={data}
             bg={"#ffff"}
             icon={Images.group}
-            // handleDelete={handleDelete}
+            deleteGroup={deleteGroup}
+            removeParols={removeParols}
           />
         </div>
         {openForm && (
@@ -146,14 +156,18 @@ function ManagementGroup() {
                   <div className="col-sm-6">
                     <div className="memberlist">
                       <ul>
-                        {datas?.users.map((user: any) => (
+                        {datas?.parols.map((user: any) => (
                           <li>
                             {user.name}
                             <span>
                               <button
                                 onClick={() => handleAddUserToGroup(user)}
                               >
-                                <IoIosAdd />
+                                {formData.parols.includes(user._id) ? (
+                                  <FaMinus />
+                                ) : (
+                                  <IoIosAdd />
+                                )}
                               </button>
                             </span>
                           </li>

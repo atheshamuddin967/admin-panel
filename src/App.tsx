@@ -285,7 +285,7 @@ function App() {
               onClick={() => handleMenuItemClick("/VideoDevice")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              Video
+              Fixed Cam
             </MenuItem>
             <MenuItem
               component={<Link to="/AudioDevice" />}
@@ -294,7 +294,7 @@ function App() {
               onClick={() => handleMenuItemClick("/AudioDevice")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              Audio
+              Car
             </MenuItem>
             <MenuItem
               component={<Link to="/TrackingDevice" />}
@@ -303,7 +303,7 @@ function App() {
               onClick={() => handleMenuItemClick("/TrackingDevice")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              Tracking
+              Scout
             </MenuItem>
           </SubMenu>
 

@@ -4,7 +4,7 @@ import ManagementHeader from "./managementHeader";
 import Images from "../../images/Images";
 import "../Management/Management.scss";
 import { MdClose } from "react-icons/md";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useApi } from "../../context/Api";
 import { v4 as uuidv4 } from "uuid";
 function Management() {
@@ -12,16 +12,16 @@ function Management() {
     name: string;
     username: string;
     email: string;
-    deviceCode: string;
-    role: string;
+    // deviceCode: string;
+    // role: string;
     password: string;
   }
   interface UserData {
     name: string;
     username: string;
     email: string;
-    deviceCode: string;
-    role: string;
+    // deviceCode: string;
+    // role: string;
     password: string;
   }
 
@@ -30,8 +30,8 @@ function Management() {
     name: "",
     username: "",
     email: "",
-    deviceCode: "",
-    role: "",
+    // deviceCode: "",
+    // role: "",
     password: "",
   });
   const { data, AddUser } = useApi();
@@ -56,8 +56,8 @@ function Management() {
     name: "",
     username: "",
     email: "",
-    deviceCode: "",
-    role: "",
+    // deviceCode: "",
+    // role: "",
     password: "",
   });
   const validateForm = () => {
@@ -67,27 +67,27 @@ function Management() {
 
     // Check if the username, email, or device code already exists
     if (
-      datas.users.some((user: any) => user.username === userData.username) ||
-      datas.users.some((user: any) => user.email === userData.email) ||
-      datas.users.some((user: any) => user.deviceCode === userData.deviceCode)
+      datas.parols.some((user: any) => user.username === userData.username) ||
+      datas.parols.some((user: any) => user.email === userData.email)
+      // datas.users.some((user: any) => user.deviceCode === userData.deviceCode)
     ) {
       isValid = false;
 
       if (
-        datas.users.some((user: any) => user.username === userData.username)
+        datas.parols.some((user: any) => user.username === userData.username)
       ) {
         newFormErrors.username = "Username already exists";
       }
 
-      if (datas.users.some((user: any) => user.email === userData.email)) {
+      if (datas.parols.some((user: any) => user.email === userData.email)) {
         newFormErrors.email = "Email already exists";
       }
 
-      if (
-        datas.users.some((user: any) => user.deviceCode === userData.deviceCode)
-      ) {
-        newFormErrors.deviceCode = "Device code already exists";
-      }
+      // if (
+      //   datas.users.some((user: any) => user.deviceCode === userData.deviceCode)
+      // ) {
+      //   newFormErrors.deviceCode = "Device code already exists";
+      // }
     } else {
       // Check for other empty fields
       for (const key in userData) {
@@ -157,22 +157,22 @@ function Management() {
         setUserData({
           email: "",
           name: "",
-          role: "",
+          // role: "",
           username: "",
-          deviceCode: "",
+          // deviceCode: "",
           password: "",
         });
-        setOpenForm(false);
+        // setOpenForm(false);
       } catch (error) {
         console.error("Error in handleFormSubmit:", error);
       }
     }
   };
-  useEffect(() => {
-    console.log("Updated formErrors:", formErrors);
-    console.log("Updated userData:", userData);
-  }, [formErrors, userData]);
-  useEffect(() => {}, [userData, data]);
+  // useEffect(() => {
+  //   console.log("Updated formErrors:", formErrors);
+  //   console.log("Updated userData:", userData);
+  // }, [formErrors, userData]);
+  // useEffect(() => {}, [userData, data]);
   return (
     <div>
       <div className="container">
@@ -211,7 +211,7 @@ function Management() {
                 {formErrors.username && (
                   <p style={{ color: "red" }}>{formErrors.username}</p>
                 )}
-                <div className="asinginputs">
+                {/* <div className="asinginputs">
                   <input
                     type="text"
                     placeholder="Device code"
@@ -219,10 +219,10 @@ function Management() {
                     name="deviceCode"
                     value={userData.deviceCode}
                   />
-                </div>
-                {formErrors.deviceCode && (
+                </div> */}
+                {/* {formErrors.deviceCode && (
                   <p style={{ color: "red" }}>{formErrors.deviceCode}</p>
-                )}
+                )} */}
                 <div className="asinginputs">
                   <input
                     type="text"
@@ -244,7 +244,7 @@ function Management() {
                     value={userData.password}
                   />
                 </div>
-                <div className="asinginputs">
+                {/* <div className="asinginputs">
                   <input
                     type="text"
                     placeholder="Role"
@@ -252,9 +252,9 @@ function Management() {
                     name="role"
                     value={userData.role}
                   />
-                </div>
+                </div> */}
                 <div className="asingbtns">
-                  <button>Asing Role</button>
+                  <button type="submit">Asing Role</button>
                 </div>
                 {Object.values(formErrors).some((error) => !!error) && (
                   <div>

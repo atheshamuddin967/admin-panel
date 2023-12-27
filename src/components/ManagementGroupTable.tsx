@@ -4,7 +4,13 @@ import { FaChevronDown } from "react-icons/fa";
 import React from "react";
 import Images from "../images/Images";
 
-function ManagementGroupTable({ data, icon, bg }: any) {
+function ManagementGroupTable({
+  data,
+  icon,
+  bg,
+  deleteGroup,
+  removeParols,
+}: any) {
   const [showGroupDiv, setShowGroupDiv] = useState(false);
 
   const toggleGroupDiv = (group: any) => {
@@ -15,7 +21,16 @@ function ManagementGroupTable({ data, icon, bg }: any) {
       setShowGroupDiv(false);
     }
   };
-
+  const handleDeleteGroup = (groupId: string) => {
+    // Call the deleteGroup function with the group ID
+    console.log(groupId);
+    deleteGroup(groupId);
+  };
+  const handleDeleteuser = (UserId: string, groupId: string) => {
+    // Call the deleteGroup function with the group ID
+    console.log(UserId);
+    removeParols(UserId, groupId);
+  };
   return (
     <>
       <div className="table-responsive">
@@ -59,7 +74,7 @@ function ManagementGroupTable({ data, icon, bg }: any) {
                     </button>
                     <button
                       onClick={() => {
-                        // handleDelete(group._id);
+                        handleDeleteGroup(group._id);
                       }}
                     >
                       <i className="fa-solid fa-trash"></i>
@@ -69,7 +84,7 @@ function ManagementGroupTable({ data, icon, bg }: any) {
 
                 {showGroupDiv === group._id && (
                   <>
-                    {group?.users?.map((driver: any) => {
+                    {group?.parols?.map((driver: any) => {
                       return (
                         <tr className="tr-vehicle" key={driver.id}>
                           <td className="table-data">
@@ -84,7 +99,15 @@ function ManagementGroupTable({ data, icon, bg }: any) {
                           <td>{driver.role}</td>
                           <td>-</td>
                           <td>{driver.status}</td>
-                          <td className="edit-delete"></td>
+                          <td className="edit-delete">
+                            <button
+                              onClick={() => {
+                                handleDeleteuser(group._id, driver._id);
+                              }}
+                            >
+                              <i className="fa-solid fa-trash"></i>
+                            </button>
+                          </td>
                         </tr>
                       );
                     })}

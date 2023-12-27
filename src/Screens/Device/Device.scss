@@ -5,3 +5,118 @@ td{
     // box-shadow: 0 4px 8px rgba(5, 5, 5, 0.2);
 }
 }
+.dform{
+    width: 100%;
+    background-color: rgb(235, 237, 238);
+    border-radius: 10px;
+    padding:5px 10px;
+    margin: 10px 0;
+    input{
+        background-color: transparent;
+        border: 0;
+        width: 100%;   
+    }
+    select{
+        width: 100%;
+        border: 0 !important;
+        background-color: transparent;
+    }
+
+    input:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px !important;
+    }
+    select:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px !important;
+    }
+}
+.deviceinner{
+    padding: 20px;
+    position: relative;
+}
+
+
+.deviceform{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    button{
+   background-color: transparent;
+   padding: 0 0;
+   border: 0;
+    }
+}
+
+.addbtns{
+    float: right;
+    button{
+        background-color: black;
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        padding: 5px 20px;
+    }
+}
+.userlist{
+    ul{
+        margin: 0 0;
+        padding: 0 0;
+    }
+    li{
+        list-style: none;
+        width: 100%;
+        margin: 10px 0;
+        background-color: antiquewhite;
+        border-radius:5px ;
+        padding: 5px 10px;
+ button{
+    float: right;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    font-size: 20px;
+margin: 0;
+    font-weight: 600;
+ }
+    }
+height: 400px;
+    overflow: scroll;
+}
+.userlist::-webkit-scrollbar
+{
+    width: 0.5em !important; /* Set the width of the scrollbar */
+}
+
+/* Hide the scrollbar track */
+.userlist::-webkit-scrollbar-track
+ {
+    background: transparent !important;
+}
+
+/* Style the scrollbar thumb */
+.userlist::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+    outline: none !important;
+}
+  .sarbox{
+    background-color: rgb(236, 239, 241);
+    position: relative;
+    border-radius: 10px;
+    padding: 5px 10px;
+    button{
+        position: absolute;
+        border: 0;
+        padding: 0;
+        right: 5px;
+        font-size: 20px;
+        font-weight: 600;
+        top: 0;
+    }
+    input{
+        width: 100%;
+        border: 0;
+        background-color: transparent;
+
+    } input:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px !important;
+    }
+  }
