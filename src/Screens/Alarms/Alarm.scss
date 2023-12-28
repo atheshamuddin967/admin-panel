@@ -18,7 +18,7 @@ margin: 0 auto;
 // border-radius: 10px;
     // border-collapse: separate;
      td {
-vertical-align: baseline;
+vertical-align: middle;
 font-family:"poppins";
 font-size: 18px;
 font-weight: 500;
@@ -98,5 +98,6 @@ border-radius: 100%;}
 }
 .custom-table tr {
     margin-bottom: 10px;
+    align-items: center; vertical-align: middle;
   }
   

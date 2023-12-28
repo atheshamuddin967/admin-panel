@@ -59,7 +59,7 @@ function Operationsider({ data }: any) {
 
   const datas: any = data;
   const isGroupEmergency = (group: any) => {
-    return group.users.some((user: any) => user.emergency_enabled);
+    return group?.users?.some((user: any) => user?.emergency_enabled);
   };
 
   // const startPttForGroup = (group: any) => {
@@ -148,7 +148,7 @@ function Operationsider({ data }: any) {
                         <span>
                           <FaLocationDot />
                         </span>
-                        {item.groupName}
+                        {item?.groupName}
                       </p>
                     </div>
 
@@ -160,12 +160,12 @@ function Operationsider({ data }: any) {
                   </div>
                   <div className="dropbtns">
                     <img src={Images.conected} alt="" />
-                    <p> {item.users.length}</p>
+                    <p> {item?.users?.length}</p>
 
                     <img src={Images.connector} alt="" />
                     <p>
                       {
-                        item.users.filter(
+                        item?.users?.filter(
                           (user: { isOnline: boolean }) => user.isOnline
                         ).length
                       }
@@ -174,7 +174,7 @@ function Operationsider({ data }: any) {
                       <span className="danger">
                         <CgDanger />
                         {
-                          item.users.filter(
+                          item?.users?.filter(
                             (user: { emergency_enabled: boolean }) =>
                               user.emergency_enabled
                           ).length
@@ -191,7 +191,7 @@ function Operationsider({ data }: any) {
                 <hr />
                 {isDropdownOpen === item._id && (
                   <ul className="zoneul">
-                    {item.users.map((user: any) => (
+                    {item?.users?.map((user: any) => (
                       <li key={user._id}>
                         {user.isOnline && !user.emergency_enabled && (
                           <img src={Images.Greens} alt="Not Emergency" />
@@ -210,7 +210,7 @@ function Operationsider({ data }: any) {
                           })}
                         >
                           #{user.name || user.name}{" "}
-                          {item.currentlySpeaking === user._id && (
+                          {item?.currentlySpeaking === user?._id && (
                             <div className="play">
                               <Movingbtn />
                               <button className="">

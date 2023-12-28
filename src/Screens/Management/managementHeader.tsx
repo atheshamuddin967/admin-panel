@@ -34,7 +34,7 @@ function ManagementHeader({ openform }: any) {
           <div className="mHeader-btns">
             <Managementselect onChange={handleSelectChange} />
             <button className="asing" onClick={openform}>
-              Assign
+              Add Parol
             </button>
           </div>
         </div>

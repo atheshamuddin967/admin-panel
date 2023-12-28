@@ -4,7 +4,7 @@ import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
 import { useState } from "react";
 import { useApi } from "../../context/Api";
-
+import DeviceForms from "../../components/DeviceForm";
 // import Items from "../../Data/ItemData";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
@@ -40,7 +40,7 @@ function TrackingDevice() {
       </div>
       {open && (
         <div className="formsVehicle">
-          <FormsVehicle
+          {/* <FormsVehicle
             formtitle={"Add Device"}
             buttonlabel={"Add"}
             label1={"Device Id :"}
@@ -52,7 +52,8 @@ function TrackingDevice() {
             placeholder3={"55456"}
             placeholder4={"josh"}
             closemodal={closemodal}
-          />
+          /> */}
+          <DeviceForms closemodal={closemodal} />
         </div>
       )}
 

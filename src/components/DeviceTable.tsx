@@ -1,5 +1,9 @@
+import { FaTrash } from "react-icons/fa6";
+import { useApi } from "../context/Api";
 function DeviceTable({ data, icon, bg }: any) {
+  const { deleteDevice } = useApi();
   // console.log(data);
+
   return (
     <div className="table-responsive">
       <table className="custom-table table table-hover text-center ">
@@ -13,6 +17,7 @@ function DeviceTable({ data, icon, bg }: any) {
             <th>Created</th>
             <th>Role</th>
             <th>Device status</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -34,6 +39,16 @@ function DeviceTable({ data, icon, bg }: any) {
               <td className="table-end">
                 {" "}
                 {item.isOnline ? "Active" : "Offline"}
+              </td>
+              <td>
+                <button
+                  className="trash"
+                  onClick={() => {
+                    deleteDevice(item);
+                  }}
+                >
+                  <FaTrash />
+                </button>
               </td>
             </tr>
           ))}

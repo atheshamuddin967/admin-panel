@@ -20,7 +20,19 @@ function DeviceForms({ closemodal }: any) {
     parol: "",
     portNumber: "",
   });
+  const handleGpsChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    const updatedGps = [...deviceFormData.gps.coordinates];
+    updatedGps[index] = value;
 
+    setDeviceFormData((prevUserData: any) => ({
+      ...prevUserData,
+      gps: updatedGps,
+    }));
+  };
   const handleDeviceTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -52,12 +64,24 @@ function DeviceForms({ closemodal }: any) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    // setDeviceFormData((prevUserData: any) => ({
+    //   ...prevUserData,
+    //   [name]: value,
+    // }));
+    // if (name === "latitude" || name === "longitude") {
+    //   setDeviceFormData((prevUserData: any) => ({
+    //     ...prevUserData,
+    //     gps: [...prevUserData.gps, { [name]: value }],
+    //   }));
+    // } else {
     setDeviceFormData((prevUserData: any) => ({
       ...prevUserData,
       [name]: value,
     }));
     console.log(deviceFormData);
   };
+
+  // };
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -152,8 +176,7 @@ function DeviceForms({ closemodal }: any) {
                       <input
                         type="text"
                         placeholder="Ip Address"
-                        name="IpAddress
-"
+                        name="IpAddress"
                         value={deviceFormData.IpAddress}
                         onChange={handleInputChange}
                       />
@@ -170,14 +193,18 @@ function DeviceForms({ closemodal }: any) {
                       <input
                         type="text"
                         placeholder="Gps lattitude"
-                        onChange={handleInputChange}
+                        name="latitude"
+                        // onChange={handleInputChange}
+                        onChange={(e) => handleGpsChange(e, 0)}
                       />
                     </div>
                     <div className="dform">
                       <input
                         type="text"
                         placeholder="Gps logitude"
-                        onChange={handleInputChange}
+                        name="longitude"
+                        // onChange={handleInputChange}
+                        onChange={(e) => handleGpsChange(e, 1)}
                       />
                     </div>
                   </>

@@ -1,5 +1,5 @@
 import DeviceTable from "../../components/DeviceTable";
-
+import DeviceForms from "../../components/DeviceForm";
 import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
 import { useState } from "react";
@@ -10,7 +10,7 @@ function VideoDevice() {
   // const video = Items.filter((item) => item.type === "video device");
   const { deviceData } = useApi();
   const data: any = deviceData;
-  const alldata = data?.data.fixedCameras;
+  const alldata = data?.data?.fixedCameras;
   // console.log(data);
   const [open, SetOpen] = useState(false);
   const [openEdit, SetOpenEdit] = useState(false);
@@ -39,7 +39,7 @@ function VideoDevice() {
       </div>
       {open && (
         <div className="formsVehicle">
-          <FormsVehicle
+          {/* <FormsVehicle
             formtitle={"Add Device"}
             buttonlabel={"Add"}
             label1={"Device Id :"}
@@ -51,7 +51,8 @@ function VideoDevice() {
             placeholder3={"55456"}
             placeholder4={"josh"}
             closemodal={closemodal}
-          />
+          /> */}
+          <DeviceForms closemodal={closemodal} />
         </div>
       )}
 

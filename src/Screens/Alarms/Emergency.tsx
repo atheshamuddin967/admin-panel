@@ -3,20 +3,21 @@ import AlarmTable from "../../components/AlarmTable";
 
 import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
-function Lisence() {
+function Emergency() {
   const { liveAlarmData } = useApi();
   const alarmData: any = liveAlarmData;
-  const allAlarams: any = alarmData?.mdAlarms;
+  const allAlarams: any = alarmData?.emergency;
+  // console.log(allAlarams);
   return (
     <div className="container">
       <div className="shead">
         <AlarmHeader />
       </div>
       <div className="alarmlist">
-        <AlarmTable data={allAlarams} icon={Images.palte} bg={"#DBF4FF"} />
+        <AlarmTable data={allAlarams} icon={Images.alarm} bg={"#FFA2A2"} />
       </div>
     </div>
   );
 }
 
-export default Lisence;
+export default Emergency;

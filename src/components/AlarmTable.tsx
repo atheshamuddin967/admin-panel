@@ -19,7 +19,7 @@ function AlarmTable({ data, icon, bg }: any) {
           <tr>
             <th></th>
             <th>Alarm Id</th>
-            <th>Device Id</th>
+            <th>Device Code</th>
             <th>Timing</th>
             <th>Location</th>
             <th>Alarm Type</th>
@@ -29,27 +29,27 @@ function AlarmTable({ data, icon, bg }: any) {
         </thead>
 
         <tbody className="table-row">
-          {data.map((item: any) => (
+          {data?.map((item: any) => (
             <tr className="table-row">
               <td className="table-data">
                 <div className="round" style={{ backgroundColor: bg }}>
                   <img src={icon} alt="alarm" />
                 </div>
               </td>
-              <td> {item.id}</td>
-              <td>{item.deviceid}</td>
-              <td>{item.time}</td>
-              <td>{item.location}</td>
-              <td>{item.type}</td>
+              <td> {item.alarmId}</td>
+              <td>{item.device?.deviceCode}</td>
+              <td>{item.created_at}</td>
+              <td>{item.gps?.coordinates}</td>
+              <td>{item.alarmType}</td>
               <td>
-                {item.operator}
+                {item.parol?.name}
                 <br />
 
                 <button
                   className="btns"
                   onClick={() => handleTrackOnMapClick(item)}
                 >
-                  Track on map
+                  Track
                 </button>
               </td>
               <td className="table-end">

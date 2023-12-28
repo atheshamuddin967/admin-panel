@@ -1,10 +1,10 @@
 import EventHeader from "../../components/EventsHeader";
 import EventTable from "../../components/eventTable";
 
-import Items from "../../Data/ItemData";
+// import Items from "../../Data/ItemData";
 import Images from "../../images/Images";
 function Events() {
-  const emergencyAlarms = Items.filter((item) => item.alert === "emergency");
+  // const emergencyAlarms = Items.filter((item) => item.alert === "emergency");
 
   return (
     <div className="container">
@@ -13,7 +13,7 @@ function Events() {
       </div>
       <div className="alarmlist">
         <EventTable
-          data={emergencyAlarms}
+          // data={emergencyAlarms}
           icon={Images.events}
           bg={"#DBEAFC"}
         />

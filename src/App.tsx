@@ -49,6 +49,7 @@ import { socket } from "./context/SoccketIo";
 import "react-toastify/dist/ReactToastify.css";
 import { useApi } from "./context/Api";
 import { useUser } from "./context/Socketprovider";
+import Emergency from "./Screens/Alarms/Emergency";
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
@@ -208,10 +209,10 @@ function App() {
             onClick={() => handleMenuItemClick("/Alarm")}
           >
             <MenuItem
-              component={<Link to="/alarm" />}
+              component={<Link to="/Emergency" />}
               icon={<img src={Images.semergency} alt="demo" className="" />}
-              active={activeMenuItem === "/Alarm"}
-              onClick={() => handleMenuItemClick("/Alarm")}
+              active={activeMenuItem === "/Emergency"}
+              onClick={() => handleMenuItemClick("/Emergency")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Emergency
@@ -223,7 +224,7 @@ function App() {
               onClick={() => handleMenuItemClick("/MotionAlarm")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              Motion Detection{" "}
+              AOC
             </MenuItem>
             <MenuItem
               component={<Link to="/Lisence" />}
@@ -232,7 +233,7 @@ function App() {
               onClick={() => handleMenuItemClick("/Lisence")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              License plate Alerts
+              mdAlarms
             </MenuItem>
 
             <MenuItem
@@ -242,7 +243,7 @@ function App() {
               onClick={() => handleMenuItemClick("/Juricdiction")}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              Juricdiction{" "}
+              ANPR
             </MenuItem>
           </SubMenu>
           <SubMenu
@@ -382,6 +383,7 @@ function App() {
           <Route path="/Monitoring" element={<Monitoring />} />
           <Route path="/Map/:item?" element={<Mapview />} />
           <Route path="/Alarm" element={<Alarms />} />
+          <Route path="/Emergency" element={<Emergency />} />
           <Route path="/Stream" element={<Stream />} />
           <Route path="/MotionAlarm" element={<MotionAlarms />} />
           <Route path="/Lisence" element={<Lisence />} />

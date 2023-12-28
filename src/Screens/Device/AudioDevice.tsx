@@ -7,12 +7,12 @@ import { useState } from "react";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 import { useApi } from "../../context/Api";
-
+import DeviceForms from "../../components/DeviceForm";
 function AudioDevice() {
   // const video = Items.filter((item) => item.type === "audio device");
   const { deviceData } = useApi();
   const data: any = deviceData;
-  const alldata = data?.data.carBoardedCameras;
+  const alldata = data?.data?.carBoardedCameras;
   // console.log(data);
   const [open, SetOpen] = useState(false);
   const [openEdit, SetOpenEdit] = useState(false);
@@ -41,7 +41,7 @@ function AudioDevice() {
       </div>
       {open && (
         <div className="formsVehicle">
-          <FormsVehicle
+          {/* <FormsVehicle
             formtitle={"Add Device"}
             buttonlabel={"Add"}
             label1={"Device Id :"}
@@ -52,8 +52,9 @@ function AudioDevice() {
             placeholder2={"12345"}
             placeholder3={"55456"}
             placeholder4={"josh"}
-            closemodal={closemodal}
-          />
+            closemodal={closemodal} */}
+          {/* /> */}
+          <DeviceForms closemodal={closemodal} />
         </div>
       )}
 

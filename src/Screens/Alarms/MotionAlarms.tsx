@@ -1,9 +1,11 @@
 import AlarmHeader from "../../components/AlarmHeader";
 import AlarmTable from "../../components/AlarmTable";
-import AlarmsData from "../../Data/Alarm";
+import { useApi } from "../../context/Api";
 import Images from "../../images/Images";
 function MotionAlarms() {
-  const Motion = AlarmsData.filter((alarm) => alarm.type === "detaction");
+  const { liveAlarmData } = useApi();
+  const alarmData: any = liveAlarmData;
+  const allAlarams: any = alarmData?.aoc;
 
   return (
     <div className="container">
@@ -11,7 +13,7 @@ function MotionAlarms() {
         <AlarmHeader />
       </div>
       <div className="alarmlist">
-        <AlarmTable data={Motion} icon={Images.scam} bg={"#A4CEFF"} />
+        <AlarmTable data={allAlarams} icon={Images.scam} bg={"#A4CEFF"} />
       </div>
     </div>
   );

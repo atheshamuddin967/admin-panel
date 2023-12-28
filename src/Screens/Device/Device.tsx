@@ -1,7 +1,7 @@
 import DeviceTable from "../../components/DeviceTable";
 import FormsVehicle from "../../components/FormsVehicle";
 import Images from "../../images/Images";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 import { useApi } from "../../context/Api";
