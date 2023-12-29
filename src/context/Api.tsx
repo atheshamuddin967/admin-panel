@@ -1,5 +1,11 @@
 // ApiContext.js
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+} from "react";
 import axios from "axios";
 
 const initialstate = {
@@ -17,11 +23,11 @@ const initialstate = {
   AddUser: (userData: any = {}) => Promise.resolve(userData),
   removeParols: (userData: any = {}) => Promise.resolve(userData),
   addDevice: (deviceData: any = {}) => Promise.resolve(deviceData),
-  deleteDevice: (deviceId: string) => Promise.resolve(deviceId),
-  deleteEvent: (eventId: string) => Promise.resolve(eventId),
-  deleteLiveAlarm: (alarmId: string) => Promise.resolve(alarmId),
-  resolveLiveAlarm: (alarmId: string) => Promise.resolve(alarmId),
-  deleteMultimedia: (mediaId: string) => Promise.resolve(mediaId),
+  deleteDevice: (_deviceId: string) => Promise.resolve({}),
+  deleteEvent: (_eventId: string) => Promise.resolve({}),
+  deleteLiveAlarm: (_alarmId: string) => Promise.resolve({}),
+  resolveLiveAlarm: (_alarmId: string) => Promise.resolve({}),
+  deleteMultimedia: (_mediaId: string) => Promise.resolve({}),
 };
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
@@ -40,7 +46,7 @@ const API_EventListning = `${BASE_URL}events/events`;
 const API_deleteEevent = `${BASE_URL}events/remove-event`;
 const API_LiveAlarm = `${BASE_URL}livealarm/livealarms`;
 const API_deleteAlarm = `${BASE_URL}livealarm/remove-alarm`;
-const API_resolevAlarm = `${BASE_URL}livealarm/resolve-alarm`;
+const API_resolveAlarm = `${BASE_URL}livealarm/resolve-alarm`;
 const API_multiMedia = `${BASE_URL}multimedia/multimedia`;
 const API_deleteMulti = `${BASE_URL}multimedia/remove-media`;
 
@@ -171,21 +177,24 @@ const ApiReducer = (state: any, action: any) => {
     case "DELETE_LIVE_ALARM":
       return {
         ...state,
-        liveAlarmData: state.liveAlarmData.filter(
+        liveAlarmData: state.liveAlarmData?.data?.filter(
           (alarm: any) => alarm._id !== action.payload
         ),
       };
     case "RESOLVE_LIVE_ALARM":
+      const resolvedAlarmId = action.payload;
+
       return {
         ...state,
-        liveAlarmData: state.liveAlarmData.map((alarm: any) =>
-          alarm._id === action.payload ? { ...alarm, resolved: true } : alarm
+        liveAlarmData: state.liveAlarmData?.data?.map((alarm: any) =>
+          alarm._id === resolvedAlarmId ? { ...alarm, isResolved: true } : alarm
         ),
       };
+
     case "DELETE_MULTIMEDIA":
       return {
         ...state,
-        multimediaData: state.multimediaData.filter(
+        multimediaData: state.multimediaData?.filter(
           (media: any) => media._id !== action.payload
         ),
       };
@@ -270,7 +279,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const multimediaData = res.data;
-      console.log(multimediaData);
+      // console.log(multimediaData);
       dispatch({ type: "FETCH_MULTIMEDIA_SUCCESS", payload: multimediaData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -288,7 +297,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const eventData = res.data;
-      // console.log(eventData);
+
       dispatch({ type: "SET_EVENTS", payload: eventData.data });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -314,6 +323,7 @@ const ApiProvider = ({ children }: any) => {
       console.log(error);
     }
   };
+  const isMounted = useRef(true);
 
   useEffect(() => {
     // Fetch data initially
@@ -331,7 +341,10 @@ const ApiProvider = ({ children }: any) => {
       fetchLiveAlarmData();
     }, 3000);
 
-    return () => clearInterval(intervalId);
+    return () => {
+      isMounted.current = false;
+      clearInterval(intervalId);
+    };
   }, []);
 
   // addgroup function
@@ -539,7 +552,7 @@ const ApiProvider = ({ children }: any) => {
       console.log("Delete Device Response:", response);
 
       // Dispatch the "DELETE_DEVICE" action with the deviceId
-      dispatch({ type: "DELETE_DEVICE", payload: deviceId });
+      // dispatch({ type: "DELETE_DEVICE", payload: deviceId });
     } catch (error: any) {
       if (error.response) {
         console.error("Response data:", error.response.data);
@@ -595,7 +608,7 @@ const ApiProvider = ({ children }: any) => {
   // delete alarm funncion
   const deleteLiveAlarm = async (alarmId: string) => {
     try {
-      console.log("Deleting live alarm with ID:", alarmId);
+      // console.log("Deleting live alarm with ID:", alarmId);
 
       // Send a POST request to the API_deleteAlarm endpoint with the alarmId in the request body
       const response = await axios.post(
@@ -629,14 +642,12 @@ const ApiProvider = ({ children }: any) => {
   };
 
   // resolve alarm function
-  const resolveLiveAlarm = async (alarmId: string) => {
+  const resolveLiveAlarm = async (alarmId: any) => {
     try {
-      console.log("Resolving live alarm with ID:", alarmId);
-
-      // Send a POST request to the API_resolveAlarm endpoint with the alarmId in the request body
       const response = await axios.post(
-        API_resolevAlarm,
+        API_resolveAlarm,
         { alarmId: alarmId },
+
         {
           headers: {
             Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -644,6 +655,8 @@ const ApiProvider = ({ children }: any) => {
           },
         }
       );
+      console.log("Resolving live alarm with ID:", alarmId);
+
       console.log("Resolve Live Alarm Response:", response);
 
       // Dispatch the "RESOLVE_LIVE_ALARM" action with the alarmId
@@ -683,7 +696,10 @@ const ApiProvider = ({ children }: any) => {
       console.log("Delete Multimedia Response:", response);
 
       // Dispatch the "DELETE_MULTIMEDIA" action with the mediaId
-      dispatch({ type: "DELETE_MULTIMEDIA", payload: mediaId });
+      if (isMounted.current) {
+        // Dispatch the "DELETE_MULTIMEDIA" action with the mediaId
+        dispatch({ type: "DELETE_MULTIMEDIA", payload: mediaId });
+      }
     } catch (error: any) {
       if (error.response) {
         console.error("Response data:", error.response.data);

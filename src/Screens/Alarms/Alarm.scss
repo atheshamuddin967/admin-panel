@@ -23,7 +23,7 @@ font-family:"poppins";
 font-size: 18px;
 font-weight: 500;
 color: $sider-color;
-
+text-align: center;
 margin: 10px 0;
 
     }
@@ -32,24 +32,25 @@ margin: 10px 0;
         font-family: "poppins";
         color: $sider-color;
         font-size: 16px;
+        text-align: center;
         
     }
    
 button{
     background-color: transparent;
-    border: 1px solid $sider-color;
-    border-radius: 5px;
-    padding: 2px 5px;
+    // border: 1px solid $sider-color;
+    // border-radius: 5px;
+    // padding: 2px 5px;
     font-size: 16px;
     font-family: "poppins";
     font-weight: 500;
     color: $sider-color;
-    margin: 15px 5px;
-    float: right;
+    // margin: 15px 5px;
+    // float: right;
 }
 .btns{
-    float: left !important;
-    width: 80%;
+    // float: left !important;
+    // width: 80%;
 }
 
   }
@@ -100,4 +101,7 @@ border-radius: 100%;}
     margin-bottom: 10px;
     align-items: center; vertical-align: middle;
   }
-  
+  .alarmdlt{
+    border: 0 !important;
+    margin: 0px 3px !important;
+  }

@@ -2,13 +2,21 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import { Mapkey } from "../context/Key";
 import { useCallback, useRef, useEffect, useState } from "react";
 import { useApi } from "../context/Api";
-function LiveMap({ height }: any) {
-  const { data } = useApi();
 
-  const datas: any = data;
-  const UserData = datas.users;
+import cctv from "../images/walkie-talkie.png";
 
-  const [userLocation, setUserLocation] = useState<any[]>([]);
+import mapi from "../images/mapi.png";
+
+import car from "../images/car.png";
+import scout from "../images/cctv-camera.png";
+function LiveMap({ selectedDeviceType, height }: any) {
+  const { deviceData } = useApi();
+
+  const Ddata: any = deviceData;
+  const allDevices: any = Ddata?.data?.all;
+  const [userLocation, setUserLocation] = useState<
+    { lat: number; lng: number; deviceType: string }[]
+  >([]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: Mapkey,
   });
@@ -17,16 +25,24 @@ function LiveMap({ height }: any) {
     mapRef.current = map;
   }, []);
   useEffect(() => {
-    if (UserData) {
+    const filteredDevices =
+      selectedDeviceType === "All"
+        ? allDevices
+        : allDevices?.filter((device: any) =>
+            selectedDeviceType === "Online" ? device.isOnline : !device.isOnline
+          );
+
+    if (filteredDevices) {
       setUserLocation(
-        UserData?.map((user: any) => ({
-          lat: user.location.coordinates[0],
-          lng: user.location.coordinates[1],
+        filteredDevices?.map((device: any) => ({
+          lat: device?.location?.coordinates[0],
+          lng: device?.location?.coordinates[1],
+          deviceType: device?.deviceType,
         }))
       );
     }
-  }, [UserData]);
-
+  }, [selectedDeviceType, allDevices]);
+  // console.log(userLocation);
   // useEffect(() => {
   //   if (SearchUser) {
   //     console.log(SearchUser);
@@ -73,8 +89,19 @@ function LiveMap({ height }: any) {
 
   if (loadError) return "Error";
 
-  if (!isLoaded || !UserData) return "Loading Maps...";
-
+  if (!isLoaded || !allDevices) return "Loading Maps...";
+  const getMarkerIcon = (deviceType: any) => {
+    switch (deviceType) {
+      case "Fixed camera":
+        return cctv;
+      case "Scout":
+        return scout;
+      case "Car Boarded":
+        return car;
+      default:
+        return mapi;
+    }
+  };
   return (
     <div className="mapvew" style={{ height: height, width: "100%" }}>
       <GoogleMap
@@ -84,7 +111,16 @@ function LiveMap({ height }: any) {
         onLoad={onMapLoded}
       >
         {userLocation?.map((location: any, index: number) => (
-          <MarkerF key={index} position={location} />
+          <MarkerF
+            key={index}
+            position={location}
+            options={{
+              icon: {
+                url: getMarkerIcon(location.deviceType),
+                scaledSize: new window.google.maps.Size(30, 30),
+              },
+            }}
+          />
         ))}
       </GoogleMap>
     </div>

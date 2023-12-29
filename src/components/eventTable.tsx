@@ -1,7 +1,9 @@
 import Images from "../images/Images";
 import { useApi } from "../context/Api";
+import { FaTrash } from "react-icons/fa";
+
 function EventTable({ icon, bg }: any) {
-  const { eventData } = useApi();
+  const { eventData, deleteEvent } = useApi();
 
   // console.log(eventData);
 
@@ -12,13 +14,14 @@ function EventTable({ icon, bg }: any) {
           <tr>
             <th></th>
             <th>Alarm Id</th>
-            <th>Device Type</th>
+
             <th>Gps</th>
             <th>Device Operator</th>
             <th>Agency</th>
             <th>Device code</th>
             <th>Motive</th>
             <th>Media</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -31,7 +34,7 @@ function EventTable({ icon, bg }: any) {
                 </div>
               </td>
               <td> {item?.alarmId}</td>
-              <td>{item.device?.deviceType}</td>
+
               <td>{item?.gps?.coordinates}</td>
               <td>{item.parol?.name}</td>
               <td>{item.agency}</td>
@@ -39,6 +42,16 @@ function EventTable({ icon, bg }: any) {
               <td>{item.motive}</td>
               <td className="">
                 <img src={Images.media2} alt="media" />
+              </td>
+              <td>
+                <button
+                  style={{ border: 0 }}
+                  onClick={() => {
+                    deleteEvent(item);
+                  }}
+                >
+                  <FaTrash />
+                </button>
               </td>
             </tr>
           ))}

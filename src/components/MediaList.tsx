@@ -2,6 +2,8 @@ import "../Screens/Media/Media.scss";
 import ReactPlayer from "react-player";
 import { useState } from "react";
 import Images from "../images/Images";
+// import Aud from "../images/aud.mp3";
+import { FaTrash } from "react-icons/fa";
 interface MediaItem {
   image: string;
   mediaType: string;
@@ -11,8 +13,9 @@ interface MediaItem {
 
 interface MediaListProps {
   data: MediaItem[];
+  deleteMultimedia: any;
 }
-function MediaList({ data }: MediaListProps) {
+function MediaList({ data, deleteMultimedia }: MediaListProps) {
   // const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   // console.log(data);
@@ -38,19 +41,34 @@ function MediaList({ data }: MediaListProps) {
       <div className="row ">
         {data?.map((item: any, index: number) => (
           <div className="col-sm-2">
-            <div className="imgList" onClick={() => handleItemClick(index)}>
-              {item.mediaType === "image" ? (
-                <img src={item.mediaPath} alt={`item-${index}`} />
-              ) : (
-                <ReactPlayer
-                  url={Images.vid1}
-                  style={{ maxHeight: "100px", borderRadius: "10px" }}
-                  width={"100%"}
-                  controls={false}
-                  playing={false}
-                  loop={true}
-                />
-              )}
+            <div className="imgList">
+              <div onClick={() => handleItemClick(index)}>
+                {item.mediaType === "image" ? (
+                  <img src={item.mediaPath} alt={`item-${index}`} />
+                ) : (
+                  <ReactPlayer
+                    url={Images.vid1}
+                    style={{
+                      maxHeight: "100px",
+                      borderRadius: "10px",
+                    }}
+                    width={"100%"}
+                    controls={true}
+                    playing={false}
+                    loop={false}
+                  />
+                )}
+              </div>
+              <p>Device Code :{item.device?.deviceCode}</p>
+              <p>Time:{item.created_at}</p>
+              <button
+                className="mediadlt"
+                onClick={() => {
+                  deleteMultimedia(item);
+                }}
+              >
+                <FaTrash />
+              </button>
             </div>
           </div>
         ))}

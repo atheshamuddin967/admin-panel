@@ -1,6 +1,6 @@
 .inp-box{
     width: 250px;
-    margin:0 auto;
+    // margin:0 auto;
     padding: 10px 0;
 }
 .marker {
@@ -16,4 +16,13 @@
   }
   .mapvew{
     background-color: aqua;
+  }
+  .maptype{
+    margin: 10px 0;
+    float: right
+    ;
+select{
+  border-radius: 10px;
+  padding: 5px 10px;
+}
   }

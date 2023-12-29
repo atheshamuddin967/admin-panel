@@ -1,1 +1,1 @@
-export const Mapkey = "AIzaSyAIlMze-uK3POsSxeL-e4_nX3XlsD4PwNo";
+export const Mapkey = "AIzaSyBnfL28BU7quWJEmlxc1OsUxEzjnjM9OYY";

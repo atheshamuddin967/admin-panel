@@ -50,6 +50,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useApi } from "./context/Api";
 import { useUser } from "./context/Socketprovider";
 import Emergency from "./Screens/Alarms/Emergency";
+import MediaAudio from "./Screens/Media/MediaAudio";
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
@@ -351,6 +352,15 @@ function App() {
             >
               Videos
             </MenuItem>
+            <MenuItem
+              component={<Link to="/MediaAudio" />}
+              icon={<img src={Images.movies} alt="demo" className="" />}
+              active={activeMenuItem === "/MediaAudio"}
+              onClick={() => handleMenuItemClick("/MediaAudio")}
+              style={{ backgroundColor: "#EDEDED" }}
+            >
+              Audio
+            </MenuItem>
           </SubMenu>
 
           <MenuItem
@@ -409,6 +419,7 @@ function App() {
           <Route path="/Operations3" element={<Operations3 />} />
           <Route path="/Settings/*" element={<SettingScreen />} />
           <Route path="/Loby" element={<Loby />} />
+          <Route path="/MediaAudio" element={<MediaAudio />} />
         </Routes>
       </section>
     </div>

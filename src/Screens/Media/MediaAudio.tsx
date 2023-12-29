@@ -5,12 +5,13 @@ import MediaHeader from "../../components/MediaHeader";
 import ReactPlayer from "react-player";
 import { useApi } from "../../context/Api";
 import Images from "../../images/Images";
+import aud from "../../images/aud.mp3";
 import { FaTrash } from "react-icons/fa";
 
-function MediaVideos() {
+function MediaAudio() {
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
-  const allData = multi?.data?.videos;
+  const allData = multi?.data?.audios;
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -57,13 +58,13 @@ function MediaVideos() {
                 <div onClick={() => handleItemClick(index)}>
                   <ReactPlayer
                     // url={item.mediaPath}
-                    url={Images.vid1}
+                    url={aud}
                     style={{
                       maxHeight: "100px",
                       borderRadius: "10px !important",
                     }}
                     width={"100%"}
-                    controls={false}
+                    controls={true}
                     playing={false}
                     loop={false}
                   />
@@ -133,4 +134,4 @@ function MediaVideos() {
   );
 }
 
-export default MediaVideos;
+export default MediaAudio;

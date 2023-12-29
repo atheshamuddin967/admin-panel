@@ -2,10 +2,12 @@ import "../Media/Media.scss";
 import Items from "../../Data/ItemData";
 import { useState } from "react";
 import MediaHeader from "../../components/MediaHeader";
-
+import { useApi } from "../../context/Api";
 // }
 function Photos() {
-  // const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
+  const { multimediaData } = useApi();
+  const multi: any = multimediaData;
+  const allData = multi?.data?.photos;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleItemClick = (index: number) => {
@@ -35,10 +37,12 @@ function Photos() {
           <h6>Photos</h6>
         </div>
         <div className="row ">
-          {Items.map((item: any, index: number) => (
+          {allData?.map((item: any, index: number) => (
             <div className="col-sm-2">
               <div className="imgList" onClick={() => handleItemClick(index)}>
-                <img src={item.image} alt="item" />
+                <img src={item.mediaPath} alt="item" />
+                <p>Device Code :{item.device?.deviceCode}</p>
+                <p>Time:{item.created_at}</p>
               </div>
             </div>
           ))}
@@ -47,10 +51,10 @@ function Photos() {
           <div className="medialayout">
             <div className="mediaview">
               <div className="imgscreen">
-                {Items[selectedIndex] && (
+                {allData[selectedIndex] && (
                   <div>
                     <img
-                      src={Items[selectedIndex].image}
+                      src={allData[selectedIndex].mediaPath}
                       alt={`selected-item-${selectedIndex}`}
                     />
                     <div className="navigatebtns">
