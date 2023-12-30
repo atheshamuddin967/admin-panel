@@ -387,7 +387,7 @@ function App() {
         <Navbar />
         <ToastContainer />
         <Routes>
-          <Route path="/" element={<Singup />} />,
+          <Route path="/" element={<Login />} />,
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Operators" element={<Operations />} />
           <Route path="/Monitoring" element={<Monitoring />} />

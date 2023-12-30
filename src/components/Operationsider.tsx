@@ -59,7 +59,7 @@ function Operationsider({ data }: any) {
 
   const datas: any = data;
   const isGroupEmergency = (group: any) => {
-    return group?.users?.some((user: any) => user?.emergency_enabled);
+    return group?.parols?.some((user: any) => user?.emergency_enabled);
   };
 
   // const startPttForGroup = (group: any) => {
@@ -165,7 +165,7 @@ function Operationsider({ data }: any) {
                     <img src={Images.connector} alt="" />
                     <p>
                       {
-                        item?.users?.filter(
+                        item?.parols?.filter(
                           (user: { isOnline: boolean }) => user.isOnline
                         ).length
                       }
@@ -191,7 +191,7 @@ function Operationsider({ data }: any) {
                 <hr />
                 {isDropdownOpen === item._id && (
                   <ul className="zoneul">
-                    {item?.users?.map((user: any) => (
+                    {item?.parols?.map((user: any) => (
                       <li key={user._id}>
                         {user.isOnline && !user.emergency_enabled && (
                           <img src={Images.Greens} alt="Not Emergency" />

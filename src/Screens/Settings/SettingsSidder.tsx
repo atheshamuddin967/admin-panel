@@ -9,6 +9,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import UserPreference from "./UserPreference";
 import Security from "./Security";
 import SystemInfo from "./SystemInfo";
+import AdmimRole from "./AdmimRole";
 function SettingsSidder() {
   const { collapseSidebar } = useProSidebar();
   return (
@@ -36,9 +37,15 @@ function SettingsSidder() {
             </MenuItem>
             <MenuItem
               icon={<img src={Images.userlock} alt="icon" />}
+              component={<Link to="/Settings/AdminRole" />}
+            >
+              Admin Role
+            </MenuItem>
+            <MenuItem
+              icon={<img src={Images.userlock} alt="icon" />}
               component={<Link to="/Settings/UserRole" />}
             >
-              Users Roles
+              Sub Admin
             </MenuItem>
             <MenuItem
               icon={<img src={Images.notisetting} alt="icon" />}
@@ -76,6 +83,7 @@ function SettingsSidder() {
           <Routes>
             <Route path="/" element={<UserProfile />} />
             <Route path="UserProfile" element={<UserProfile />} />
+            <Route path="AdminRole" element={<AdmimRole />} />
             <Route path="UserRole" element={<UserRole />} />
             <Route path="UserPreference" element={<UserPreference />} />
             <Route

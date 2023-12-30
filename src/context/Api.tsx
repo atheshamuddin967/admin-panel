@@ -7,6 +7,8 @@ import {
   useRef,
 } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
 
 const initialstate = {
   isLoading: false,
@@ -18,6 +20,9 @@ const initialstate = {
   userData: [],
   multimediaData: [],
   liveAlarmData: [],
+  adminRoles: [],
+  adminData: [],
+  admin: [],
   addGroup: (formData: any = {}) => Promise.resolve(formData),
   deleteGroup: (group: any = {}) => Promise.resolve(group),
   AddUser: (userData: any = {}) => Promise.resolve(userData),
@@ -28,6 +33,9 @@ const initialstate = {
   deleteLiveAlarm: (_alarmId: string) => Promise.resolve({}),
   resolveLiveAlarm: (_alarmId: string) => Promise.resolve({}),
   deleteMultimedia: (_mediaId: string) => Promise.resolve({}),
+  adminLogin: (credentials: { email: string; password: string }) =>
+    Promise.resolve(credentials),
+  createAdminRole: (adminRoleData: any) => Promise.resolve(adminRoleData),
 };
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
@@ -49,6 +57,13 @@ const API_deleteAlarm = `${BASE_URL}livealarm/remove-alarm`;
 const API_resolveAlarm = `${BASE_URL}livealarm/resolve-alarm`;
 const API_multiMedia = `${BASE_URL}multimedia/multimedia`;
 const API_deleteMulti = `${BASE_URL}multimedia/remove-media`;
+const API_creaateAdmin = `${BASE_URL}admin/admin-role`;
+const API_AdminRoles = `${BASE_URL}admin/admin-roles`;
+// const API_RemoveAdmin = `${BASE_URL}admin/remove-adminrole`;
+const API_Admin_Login = `${BASE_URL}admin/login-admin`;
+// const API_createSubADmin = `${BASE_URL}admin/create-admin`;
+// const API_SystemConfig = `${BASE_URL}system/system-config`;
+// const API_EditSystem = `${BASE_URL}system/edit-systemconf`;
 
 const ApiContext = createContext(initialstate);
 const ApiReducer = (state: any, action: any) => {
@@ -124,11 +139,6 @@ const ApiReducer = (state: any, action: any) => {
     case "ADD_DEVICE_SUCCESS":
       return {
         ...state,
-        deviceData: [...state.deviceData, action.payload],
-        data: {
-          ...state.deviceData,
-          deviceData: [...state.deviceData?.data, action.payload],
-        },
       };
 
     case "ADD_DEVICE_ERROR":
@@ -198,6 +208,42 @@ const ApiReducer = (state: any, action: any) => {
           (media: any) => media._id !== action.payload
         ),
       };
+
+    case "SET_ADMIN_ROLES":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        adminRoles: action.payload,
+      };
+    case "ADMIN_LOGIN_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        admin: action.payload,
+        loginError: null,
+      };
+    case "ADMIN_LOGIN_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        loginError: action.payload,
+      };
+    case "CREATE_ADMIN_ROLE_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+      };
+    case "CREATE_ADMIN_ROLE_ERROR":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        error: action.payload,
+      };
     default:
       return state;
   }
@@ -261,7 +307,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const deviceData = res.data;
-      // console.log(deviceData);
+      console.log(deviceData);
       dispatch({ type: "ADD_DEVICE", payload: deviceData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -297,7 +343,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const eventData = res.data;
-
+      // console.log(eventData);
       dispatch({ type: "SET_EVENTS", payload: eventData.data });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -323,6 +369,25 @@ const ApiProvider = ({ children }: any) => {
       console.log(error);
     }
   };
+
+  // fetch Admin ROle
+  const fetchAdminRoles = async () => {
+    try {
+      const response = await axios.get(API_AdminRoles, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const adminRoles = response?.data?.data;
+      console.log(adminRoles);
+      dispatch({ type: "SET_ADMIN_ROLES", payload: adminRoles });
+    } catch (error) {
+      dispatch({ type: "API_ERROR" });
+      console.error("Error fetching admin roles:", error);
+    }
+  };
+
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -332,6 +397,7 @@ const ApiProvider = ({ children }: any) => {
     fetchMultimediaData();
     fetchEventData();
     fetchLiveAlarmData();
+    fetchAdminRoles();
     // Fetch data every 3 seconds
     const intervalId = setInterval(() => {
       fetchData();
@@ -339,7 +405,8 @@ const ApiProvider = ({ children }: any) => {
       fetchMultimediaData();
       fetchEventData();
       fetchLiveAlarmData();
-    }, 3000);
+      fetchAdminRoles();
+    }, 3000000);
 
     return () => {
       isMounted.current = false;
@@ -473,31 +540,13 @@ const ApiProvider = ({ children }: any) => {
     }
   };
 
-  // add device function
-
-  // const addDevice = async (deviceData: any) => {
-  //   try {
-  //     dispatch({ type: "SET_LOADING" });
-
-  //     const response = await axios.post(API_AddDevice, deviceData, {
-  //       headers: {
-  //         Authorization: `Bearer ${BEARER_TOKEN}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     const newDevice = response?.data?.data;
-
-  //     dispatch({ type: "ADD_DEVICE_SUCCESS", payload: newDevice.data });
-  //   } catch (error: any) {
-  //     dispatch({ type: "ADD_DEVICE_ERROR" });
   const addDevice = async (deviceData: any) => {
     try {
       dispatch({ type: "SET_LOADING" });
 
       // Extract GPS data from the array
-      const [latitude, longitude] = deviceData.gps.coordinates;
-
+      const [latitude, longitude] = deviceData.gps;
+      console.log(deviceData);
       const response = await axios.post(
         API_AddDevice,
         {
@@ -511,10 +560,15 @@ const ApiProvider = ({ children }: any) => {
           },
         }
       );
+      toast.success(response.data.message, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 6000,
+      });
 
-      const newDevice = response?.data?.data;
+      const newDevice = response?.data;
 
-      dispatch({ type: "ADD_DEVICE_SUCCESS", payload: newDevice.data });
+      // dispatch({ type: "ADD_DEVICE_SUCCESS", payload: newDevice });
+      fetchDeviceData();
     } catch (error: any) {
       dispatch({ type: "ADD_DEVICE_ERROR" });
 
@@ -715,6 +769,60 @@ const ApiProvider = ({ children }: any) => {
       }
     }
   };
+  //  admin authentication
+  const adminLogin = async (credentials: {
+    email: string;
+    password: string;
+  }) => {
+    try {
+      dispatch({ type: "SET_LOADING" });
+
+      // Call your admin login API
+      const response = await axios.post(API_Admin_Login, credentials, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("its resposnse is", response);
+      if (response.status === 200) {
+        const admin = response?.data?.user;
+        console.log(admin);
+        dispatch({ type: "ADMIN_LOGIN_SUCCESS", payload: admin });
+      } else {
+        dispatch({ type: "ADMIN_LOGIN_ERROR", payload: "Login failed" });
+      }
+    } catch (error: any) {
+      // Dispatch an error action or handle the error accordingly
+      dispatch({ type: "ADMIN_LOGIN_ERROR", payload: error.message });
+    }
+  };
+
+  // admin role create
+  const createAdminRole = async (adminRoleData: any) => {
+    try {
+      dispatch({ type: "SET_LOADING" });
+      console.log(API_creaateAdmin);
+      const response = await axios.post(API_creaateAdmin, adminRoleData, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const newAdminRole = response?.data;
+      toast.success(response.data.message, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 6000,
+      });
+      fetchAdminRoles();
+      console.log("s ", newAdminRole);
+      dispatch({ type: "CREATE_ADMIN_ROLE_SUCCESS", payload: newAdminRole });
+    } catch (error: any) {
+      dispatch({ type: "CREATE_ADMIN_ROLE_ERROR", payload: error.message });
+      console.log("error is", error, error.message);
+    }
+  };
 
   return (
     <ApiContext.Provider
@@ -730,6 +838,8 @@ const ApiProvider = ({ children }: any) => {
         deleteLiveAlarm,
         resolveLiveAlarm,
         deleteMultimedia,
+        adminLogin,
+        createAdminRole,
       }}
     >
       {children}

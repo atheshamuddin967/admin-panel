@@ -25,7 +25,7 @@ function DeviceForms({ closemodal }: any) {
     index: number
   ) => {
     const { value } = e.target;
-    const updatedGps = [...deviceFormData.gps.coordinates];
+    const updatedGps = [...deviceFormData.gps];
     updatedGps[index] = value;
 
     setDeviceFormData((prevUserData: any) => ({

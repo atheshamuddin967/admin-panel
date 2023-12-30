@@ -1,39 +1,35 @@
 import Images from "../../images/Images";
-
+import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
 import { useState } from "react";
 function Login() {
+  const { adminLogin, admin } = useApi();
   const navigate = useNavigate();
+
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+  const avilableAdmin: any = admin;
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
 
-  const [users] = useState(
-    JSON.parse(localStorage.getItem("users") || "[]") || []
-  );
+    try {
+      adminLogin({
+        email: enteredUsername,
+        password: enteredPassword,
+      });
 
-  const handleSignUpClick = () => {
-    navigate("/Singup");
-  };
-
-  const handleLoginClick = () => {
-    // Check if the entered username and password match any user in the stored data
-    const userFound = users.find(
-      (user: any) =>
-        user.username === enteredUsername && user.password === enteredPassword
-    );
-
-    if (userFound) {
-      alert("Login successful!");
-      // setCurrentUser(userFound);
-      navigate("/Operations2");
-    } else {
-      alert("Invalid username or password. Please try again.");
+      if (avilableAdmin && avilableAdmin?.email === enteredUsername) {
+        navigate("/Operations2");
+      } else {
+        console.error("Login failed: Incorrect username or password");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
-
   return (
     <div className="layouts">
       <div className="container">
@@ -44,31 +40,26 @@ function Login() {
                 <div className="logos">
                   <img src={Images.logo} alt="" />
                 </div>
+                <form action="" onSubmit={handleLogin}>
+                  <Singupinput
+                    placeholder={"Email"}
+                    type={"email"}
+                    img={Images.uicon}
+                    onChange={(e: any) => setEnteredUsername(e.target.value)}
+                  />
+                  <Singupinput
+                    placeholder={"Password"}
+                    type={"password"}
+                    img={Images.lock}
+                    onChange={(e: any) => setEnteredPassword(e.target.value)}
+                  />
 
-                <Singupinput
-                  placeholder={"Username"}
-                  type={"text"}
-                  img={Images.uicon}
-                  onChange={(e: any) => setEnteredUsername(e.target.value)}
-                />
-                <Singupinput
-                  placeholder={"Password"}
-                  type={"password"}
-                  img={Images.lock}
-                  onChange={(e: any) => setEnteredPassword(e.target.value)}
-                />
+                  <div className="forget">
+                    <Link to="/"> forget password?</Link>
+                  </div>
 
-                <div className="forget">
-                  <Link to="/"> forget password?</Link>
-                </div>
-
-                <Loginbtn title={"Sign up"} onClick={handleLoginClick} />
-                <div className="already">
-                  <p>
-                    Dont Have an account?
-                    <button onClick={handleSignUpClick}>Sign up</button>
-                  </p>
-                </div>
+                  <Loginbtn title={"Sign up"} onClick={handleLogin} />
+                </form>
               </div>
             </div>
           </div>
