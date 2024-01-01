@@ -7,7 +7,9 @@ import { useApi } from "../../context/Api";
 import Images from "../../images/Images";
 import aud from "../../images/aud.mp3";
 import { FaTrash } from "react-icons/fa";
+import { IoMdDownload } from "react-icons/io";
 
+import moment from "moment";
 function MediaAudio() {
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
@@ -39,7 +41,28 @@ function MediaAudio() {
   const handleCloseButtonClick = () => {
     setSelectedIndex(null);
   };
+  const handleDownloadClick = async (mediaPath: string, filename: string) => {
+    try {
+      const response = await fetch(mediaPath);
+      const blob = await response.blob();
 
+      // Create a temporary link element
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Trigger a click on the link
+      link.click();
+
+      // Remove the link from the body
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
   return (
     <div className="container">
       <div className="shead">
@@ -72,14 +95,44 @@ function MediaAudio() {
                 <p>Device Code :{item.device?.deviceCode}</p>
                 <p>Time:{item.created_at}</p>
 
-                <button
-                  className="mediadlt"
-                  onClick={() => {
-                    deleteMultimedia(item);
-                  }}
-                >
-                  <FaTrash />
-                </button>
+                <div className="det">
+                  <p>
+                    Operator: <span> {item?.parol?.name}</span>
+                  </p>
+                  <p>
+                    Device Code : <span>{item.device?.deviceCode}</span>{" "}
+                  </p>
+                  <p>
+                    Time:
+                    <span>
+                      {moment(item.created_at).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}
+                    </span>
+                  </p>
+                  <p>
+                    FileSize: <span>{item.sizeInBytes}Bytes</span>{" "}
+                  </p>
+                </div>
+
+                <div className="mediadlt">
+                  <button
+                    className="dwnl"
+                    onClick={() =>
+                      handleDownloadClick(item?.mediaPath, "media")
+                    }
+                  >
+                    <IoMdDownload />
+                  </button>
+                  <button
+                    className="dlts"
+                    onClick={() => {
+                      deleteMultimedia(item);
+                    }}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
             </div>
           ))}

@@ -3,9 +3,12 @@ import Items from "../../Data/ItemData";
 import { useState } from "react";
 import MediaHeader from "../../components/MediaHeader";
 import { useApi } from "../../context/Api";
-// }
+import { IoMdDownload } from "react-icons/io";
+import { FaTrash } from "react-icons/fa";
+
+import moment from "moment";
 function Photos() {
-  const { multimediaData } = useApi();
+  const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
   const allData = multi?.data?.photos;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -27,6 +30,29 @@ function Photos() {
   const handleCloseButtonClick = () => {
     setSelectedIndex(null);
   };
+
+  const handleDownloadClick = async (mediaPath: string, filename: string) => {
+    try {
+      const response = await fetch(mediaPath);
+      const blob = await response.blob();
+
+      // Create a temporary link element
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = filename;
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Trigger a click on the link
+      link.click();
+
+      // Remove the link from the body
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
   return (
     <div className="container">
       <div className="shead">
@@ -38,11 +64,48 @@ function Photos() {
         </div>
         <div className="row ">
           {allData?.map((item: any, index: number) => (
-            <div className="col-sm-2">
-              <div className="imgList" onClick={() => handleItemClick(index)}>
-                <img src={item.mediaPath} alt="item" />
-                <p>Device Code :{item.device?.deviceCode}</p>
-                <p>Time:{item.created_at}</p>
+            <div className="col-sm-3">
+              <div className="imgList">
+                <div onClick={() => handleItemClick(index)}>
+                  <img src={item.mediaPath} alt="item" />
+                </div>
+                <div className="det">
+                  <p>
+                    Operator: <span> {item?.parol?.name}</span>
+                  </p>
+                  <p>
+                    Device Code : <span>{item.device?.deviceCode}</span>{" "}
+                  </p>
+                  <p>
+                    Time:
+                    <span>
+                      {moment(item.created_at).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}
+                    </span>
+                  </p>
+                  <p>
+                    FileSize: <span>{item.sizeInBytes}Bytes</span>{" "}
+                  </p>
+                </div>
+                <div className="mediadlt">
+                  <button
+                    className="dwnl"
+                    onClick={() =>
+                      handleDownloadClick(item?.mediaPath, "media")
+                    }
+                  >
+                    <IoMdDownload />
+                  </button>
+                  <button
+                    className="dlts"
+                    onClick={() => {
+                      deleteMultimedia(item);
+                    }}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
             </div>
           ))}

@@ -359,7 +359,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const multimediaData = res.data;
-      // console.log(multimediaData);
+      console.log(multimediaData);
       dispatch({ type: "FETCH_MULTIMEDIA_SUCCESS", payload: multimediaData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
