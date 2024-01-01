@@ -1,33 +1,39 @@
 import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
-import { useNavigate, Link } from "react-router-dom";
+// import {  Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
 import { useState } from "react";
 function Login() {
-  const { adminLogin, admin } = useApi();
-  const navigate = useNavigate();
+  const { adminLogin } = useApi();
 
-  const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const avilableAdmin: any = admin;
+  const [loginData, setLogindata] = useState<any>({ email: "", password: "" });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLogindata((prevData: any) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(loginData);
+  };
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
     try {
-      adminLogin({
-        email: enteredUsername,
-        password: enteredPassword,
-      });
+      // Call your admin login function
+      await adminLogin(loginData);
 
-      if (avilableAdmin && avilableAdmin?.email === enteredUsername) {
-        navigate("/Operations2");
-      } else {
-        console.error("Login failed: Incorrect username or password");
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
+      // If login is successful, navigate to "/Operations2"
+      // navigate("/Operations2");
+    } catch (error: any) {
+      // If login fails, handle the error
+      // You can also display an error message to the user
+      console.error("Login failed:", error.message);
     }
   };
   return (
@@ -45,18 +51,22 @@ function Login() {
                     placeholder={"Email"}
                     type={"email"}
                     img={Images.uicon}
-                    onChange={(e: any) => setEnteredUsername(e.target.value)}
+                    onChange={handleInputChange}
+                    name="email"
+                    value={loginData.email}
                   />
                   <Singupinput
                     placeholder={"Password"}
                     type={"password"}
                     img={Images.lock}
-                    onChange={(e: any) => setEnteredPassword(e.target.value)}
+                    onChange={handleInputChange}
+                    name="password"
+                    value={loginData.password}
                   />
 
-                  <div className="forget">
+                  {/* <div className="forget">
                     <Link to="/"> forget password?</Link>
-                  </div>
+                  </div> */}
 
                   <Loginbtn title={"Sign up"} onClick={handleLogin} />
                 </form>
@@ -64,6 +74,7 @@ function Login() {
             </div>
           </div>
           <div className="col-sm-6">
+            <ToastContainer style={{ zIndex: 1000001 }} />
             <div className="imglogin">
               <img src={Images.loginimg} alt="login" />{" "}
             </div>

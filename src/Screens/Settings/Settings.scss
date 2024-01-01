@@ -166,7 +166,13 @@ padding: 30px;
   width: 100%;
   border: 2px solid gray;
   border-radius: 3px;
-  margin: 40px 0 !important;
+  margin: 20px 0 !important;
+
+  select{
+    width: 100%;
+    padding: 5px 10px;
+    border: 0;
+  }
   input{
     width: 100%;
     padding: 5px 10px;
@@ -183,6 +189,13 @@ padding: 30px;
 
 
   }
+
+  input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+select:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}
  }
  .adminnoti{
 
@@ -441,3 +454,44 @@ h6{
   font-weight: 600;
 }
   }
+  .infobox{
+    margin: 10px 0 !important;
+    .row{
+      align-items: center;
+    }
+    button{
+      float: right;
+      margin: 10px;
+      padding: 5px 20px;
+      background-color: black;
+      border: 0;
+      color: white;
+      border-radius: 10px;
+    }
+    input{
+      width: 100%;
+      background-color: transparent;
+      border: 0;
+    }
+    select{
+      width: 100%;
+      background-color: transparent;
+      border: 0;
+    }
+    .infoinput{
+      background-color: rgb(241, 241, 240);
+      padding: 5px 10px;
+      border-radius:10px ;
+    }
+  }
+  .infoboxmain{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 0 ;
+  }
+  input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+select:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}

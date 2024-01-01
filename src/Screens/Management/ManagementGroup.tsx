@@ -9,9 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import { IoIosAdd } from "react-icons/io";
 import { useApi } from "../../context/Api";
 import { FaMinus } from "react-icons/fa6";
-
+import Loader from "../../components/Loader";
 function ManagementGroup() {
   const [openForm, setOpenForm] = useState(false);
+  const [apiLoading, SetApiLoading] = useState(false);
   const { data, addGroup, deleteGroup, removeParols } = useApi();
 
   const datas: any = data;
@@ -45,34 +46,22 @@ function ManagementGroup() {
       ...formData,
       groupId: uniqueId,
     };
-    console.log("Form data reset");
-    await addGroup(formDataWithId);
+    try {
+      SetApiLoading(true);
+      await addGroup(formDataWithId);
 
-    setFormData({
-      groupName: "",
-      groupInfo: "",
-      role: "",
-      parols: [],
-    });
+      setFormData({
+        groupName: "",
+        groupInfo: "",
+        role: "",
+        parols: [],
+      });
+    } catch (error) {
+      console.error("Error in handleFormSubmit:", error);
+    } finally {
+      SetApiLoading(false); // Set isLoading to false after completing the operation
+    }
   };
-
-  // const handleAddUserToGroup = (parol: User) => {
-  //   // Check if the user is already in the group
-  //   if (
-  //     !formData.parols.some(
-  //       (existingUser: User) => existingUser._id === parol._id
-  //     )
-  //   ) {
-  //     // If not, add the user to the group
-  //     setFormData((prevFormData: any) => ({
-  //       ...prevFormData,
-  //       parols: [...prevFormData.parols, parol._id],
-  //     }));
-  //     // console.log(formData);
-  //   }
-
-  //   return false;
-  // };
 
   const handleAddUserToGroup = (user: any) => {
     // Check if the user is already in the group
@@ -147,9 +136,13 @@ function ManagementGroup() {
                       <div className="asinginputs">
                         <CiSearch className="serches" />
                         <input type="text" placeholder="Add Members" />
-                      </div>
+                      </div>{" "}
                       <div className="asingbtns">
-                        <button>Create Group</button>
+                        {apiLoading ? (
+                          <Loader />
+                        ) : (
+                          <button>Create Group</button>
+                        )}
                       </div>
                     </form>
                   </div>

@@ -2,13 +2,15 @@ import { CiSearch } from "react-icons/ci";
 import { useApi } from "../context/Api";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Loader from "./Loader";
 function DeviceForms({ closemodal }: any) {
   const { data, addDevice } = useApi();
   const datas: any = data;
   const users = datas.parols;
-  const [selectedDeviceType, setSelectedDeviceType] = useState<any>();
-  const [payId, setPayId] = useState("");
-  const [parol, setParol] = useState("");
+  // const [selectedDeviceType, setSelectedDeviceType] = useState<any>();
+  // const [payId, setPayId] = useState("");
+  // const [parol, setParol] = useState("");
+  const [apiLoading, SetApiLoading] = useState(false);
 
   const [deviceFormData, setDeviceFormData] = useState<any>({
     deviceCode: "",
@@ -36,7 +38,7 @@ function DeviceForms({ closemodal }: any) {
   const handleDeviceTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedDeviceType(event.target.value);
+    // setSelectedDeviceType(event.target.value);
 
     setDeviceFormData((prevUserData: any) => ({
       ...prevUserData,
@@ -46,8 +48,6 @@ function DeviceForms({ closemodal }: any) {
 
   const Addparol = (item: any) => {
     // console.log(item);
-    setPayId(item._id);
-    setParol(item);
 
     setDeviceFormData((prevUserData: any) => {
       const updatedFormData = {
@@ -56,7 +56,7 @@ function DeviceForms({ closemodal }: any) {
         parol: item,
       };
 
-      console.log(updatedFormData); // Log the updated form data
+      // console.log(updatedFormData);
 
       return updatedFormData;
     });
@@ -64,21 +64,12 @@ function DeviceForms({ closemodal }: any) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // setDeviceFormData((prevUserData: any) => ({
-    //   ...prevUserData,
-    //   [name]: value,
-    // }));
-    // if (name === "latitude" || name === "longitude") {
-    //   setDeviceFormData((prevUserData: any) => ({
-    //     ...prevUserData,
-    //     gps: [...prevUserData.gps, { [name]: value }],
-    //   }));
-    // } else {
+
     setDeviceFormData((prevUserData: any) => ({
       ...prevUserData,
       [name]: value,
     }));
-    console.log(deviceFormData);
+    // console.log(deviceFormData);
   };
 
   // };
@@ -94,6 +85,8 @@ function DeviceForms({ closemodal }: any) {
     };
 
     try {
+      SetApiLoading(true);
+
       await addDevice(userDataWithId);
       setDeviceFormData({
         deviceCode: "",
@@ -108,6 +101,8 @@ function DeviceForms({ closemodal }: any) {
       // setOpenForm(false);
     } catch (error) {
       console.error("Error in handleFormSubmit:", error);
+    } finally {
+      SetApiLoading(false); // Set isLoading to false after completing the operation
     }
   };
 
@@ -210,7 +205,11 @@ function DeviceForms({ closemodal }: any) {
                   </>
                 )}
                 <div className="addbtns">
-                  <button type="submit">Add Device</button>
+                  {apiLoading ? (
+                    <Loader />
+                  ) : (
+                    <button type="submit">Add Device</button>
+                  )}
                 </div>
               </form>
             </div>

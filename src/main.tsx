@@ -9,18 +9,18 @@ import RtmApiProvider from "./context/RTmpProvider.tsx";
 import { UserProvider } from "./context/Socketprovider.tsx";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ApiProvider>
-      <RtmApiProvider>
-        <VideoProvider>
-          <BrowserRouter>
+    <BrowserRouter>
+      <ApiProvider>
+        <RtmApiProvider>
+          <VideoProvider>
             <UserProvider>
               <ProSidebarProvider>
                 <App />
               </ProSidebarProvider>
             </UserProvider>
-          </BrowserRouter>
-        </VideoProvider>
-      </RtmApiProvider>
-    </ApiProvider>
+          </VideoProvider>
+        </RtmApiProvider>
+      </ApiProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

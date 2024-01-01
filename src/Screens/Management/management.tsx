@@ -1,6 +1,6 @@
 import ManagementTable from "../../components/ManagementTable";
 import ManagementHeader from "./managementHeader";
-
+import Loader from "../../components/Loader";
 import Images from "../../images/Images";
 import "../Management/Management.scss";
 import { MdClose } from "react-icons/md";
@@ -24,7 +24,7 @@ function Management() {
     // role: string;
     password: string;
   }
-
+  const [apiLoading, SetApiLoading] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -82,12 +82,6 @@ function Management() {
       if (datas.parols.some((user: any) => user.email === userData.email)) {
         newFormErrors.email = "Email already exists";
       }
-
-      // if (
-      //   datas.users.some((user: any) => user.deviceCode === userData.deviceCode)
-      // ) {
-      //   newFormErrors.deviceCode = "Device code already exists";
-      // }
     } else {
       // Check for other empty fields
       for (const key in userData) {
@@ -116,35 +110,12 @@ function Management() {
     }));
   };
 
-  // const handleFormSubmit = async (e: { preventDefault: () => void }) => {
-  //   e.preventDefault();
-
-  //   const uniqueId = uuidv4();
-  //   const userDataWithId = {
-  //     ...userData,
-  //     userId: uniqueId,
-  //   };
-  //   console.log("Form data before POST request:", userDataWithId);
-  //   try {
-  //     await AddUser(userDataWithId);
-  //     setUserData({
-  //       email: "",
-  //       name: "",
-  //       role: "",
-  //       username: "",
-  //       deviceCode: "",
-  //       password: "",
-  //     });
-  //     console.log(userData);
-  //   } catch (error) {
-  //     console.error("Error in handleFormSubmit:", error);
-  //   }
-  // };
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formErrors);
     if (validateForm()) {
       await new Promise((resolve) => setTimeout(resolve, 0));
+
       console.log(formErrors);
       const uniqueId = uuidv4();
       const userDataWithId = {
@@ -153,26 +124,23 @@ function Management() {
       };
 
       try {
+        SetApiLoading(true);
         await AddUser(userDataWithId);
         setUserData({
           email: "",
           name: "",
-          // role: "",
           username: "",
-          // deviceCode: "",
           password: "",
         });
         // setOpenForm(false);
       } catch (error) {
         console.error("Error in handleFormSubmit:", error);
+      } finally {
+        SetApiLoading(false); // Set isLoading to false after completing the operation
       }
     }
   };
-  // useEffect(() => {
-  //   console.log("Updated formErrors:", formErrors);
-  //   console.log("Updated userData:", userData);
-  // }, [formErrors, userData]);
-  // useEffect(() => {}, [userData, data]);
+
   return (
     <div>
       <div className="container">
@@ -187,7 +155,13 @@ function Management() {
         {openForm && (
           <div className="asingform">
             <div className="asinglayout">
-              <h5>Asing Role</h5>
+              <h5>Add new parol</h5>
+
+              {/* {apiLoading && (
+                <div className="loader">
+                  <Loader />
+                </div>
+              )} */}
               <form action="" onSubmit={handleFormSubmit}>
                 <div className="asinginputs">
                   <input
@@ -211,18 +185,7 @@ function Management() {
                 {formErrors.username && (
                   <p style={{ color: "red" }}>{formErrors.username}</p>
                 )}
-                {/* <div className="asinginputs">
-                  <input
-                    type="text"
-                    placeholder="Device code"
-                    onChange={handleInputChange}
-                    name="deviceCode"
-                    value={userData.deviceCode}
-                  />
-                </div> */}
-                {/* {formErrors.deviceCode && (
-                  <p style={{ color: "red" }}>{formErrors.deviceCode}</p>
-                )} */}
+
                 <div className="asinginputs">
                   <input
                     type="text"
@@ -244,17 +207,13 @@ function Management() {
                     value={userData.password}
                   />
                 </div>
-                {/* <div className="asinginputs">
-                  <input
-                    type="text"
-                    placeholder="Role"
-                    onChange={handleInputChange}
-                    name="role"
-                    value={userData.role}
-                  />
-                </div> */}
+
                 <div className="asingbtns">
-                  <button type="submit">Asing Role</button>
+                  {apiLoading ? (
+                    <Loader />
+                  ) : (
+                    <button type="submit">submit</button>
+                  )}
                 </div>
                 {Object.values(formErrors).some((error) => !!error) && (
                   <div>

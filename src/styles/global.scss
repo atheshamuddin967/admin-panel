@@ -167,4 +167,27 @@ padding: 20px 0;
     background-color: transparent !important;
     outline: none !important;
 }
+
+.loader{
+  text-align: center;
+
+}
+  .loading{
+padding: 5px 0;
+   width: 100%;
+   background-color: black;
+    // height: 500px;
+    // left: 30%;
+    // top: 10%;
+    text-align: center;
   
+    // background-color: rgba(0, 0, 0, 0.1);
+    // margin: 0 auto  !important;
+ 
+    border-radius: 10px;
+  }
+  .spinner-border{
+    color: white;
+   height: 1rem !important;
+   width: 1rem !important;
+  }

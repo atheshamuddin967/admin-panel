@@ -51,6 +51,7 @@ import { useApi } from "./context/Api";
 import { useUser } from "./context/Socketprovider";
 import Emergency from "./Screens/Alarms/Emergency";
 import MediaAudio from "./Screens/Media/MediaAudio";
+import Loader from "./components/Loader";
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
   const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
@@ -386,6 +387,9 @@ function App() {
       <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
         <ToastContainer />
+        {/* {isLoading && ( */}
+
+        {/* )} */}
         <Routes>
           <Route path="/" element={<Login />} />,
           <Route path="/Dashboard" element={<Dashboard />} />

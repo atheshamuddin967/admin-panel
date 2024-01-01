@@ -1,9 +1,11 @@
 import { useApi } from "../../context/Api";
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
-
+import Loader from "../../components/Loader";
 function AdmimRole() {
-  const { createAdminRole, adminRoles } = useApi();
+  const [apiLoading, SetApiLoading] = useState(false);
+
+  const { createAdminRole, adminRoles, removeAdminRole } = useApi();
   const [formData, setFormData] = useState<any>({
     roleName: "",
     permissions: [],
@@ -30,10 +32,21 @@ function AdmimRole() {
     setFormData({ ...formData, roleName: value });
   };
 
-  const handleAddRoleClick = (e: any) => {
+  const handleAddRoleClick = async (e: any) => {
     e.preventDefault();
-
-    createAdminRole(formData);
+    try {
+      SetApiLoading(true);
+      await createAdminRole(formData);
+      setFormData({
+        roleName: "",
+        permissions: [],
+        isSuperAdmin: false,
+      });
+    } catch (error) {
+      console.error("Error in handleFormSubmit:", error);
+    } finally {
+      SetApiLoading(false); // Set isLoading to false after completing the operation
+    }
   };
 
   return (
@@ -61,7 +74,11 @@ function AdmimRole() {
                         <li>{perm},</li>
                       ))}
                     </ul>
-                    <button>
+                    <button
+                      onClick={() => {
+                        removeAdminRole(role);
+                      }}
+                    >
                       <FaTrash />
                     </button>
                   </li>
@@ -76,6 +93,7 @@ function AdmimRole() {
                   type="text"
                   placeholder="Add Role"
                   onChange={handleRoleNameChange}
+                  value={formData.roleName}
                 />
               </div>
 
@@ -106,6 +124,7 @@ function AdmimRole() {
                           id={permission}
                           name={permission}
                           onChange={handleCheckboxChange}
+                          checked={formData.permissions.includes(permission)}
                         />
                         <label htmlFor={permission}>{permission}</label>
                       </div>
@@ -120,11 +139,17 @@ function AdmimRole() {
                   name="super"
                   id="super"
                   onChange={handleCheckboxChange}
+                  checked={formData.isSuperAdmin}
                 />
                 <label htmlFor="super">Make super administrator</label>
               </div>
               <div className="addrole">
-                <button onClick={handleAddRoleClick}>Add Role</button>
+                {" "}
+                {apiLoading ? (
+                  <Loader />
+                ) : (
+                  <button onClick={handleAddRoleClick}>Add Role</button>
+                )}
               </div>
             </form>
           </div>
