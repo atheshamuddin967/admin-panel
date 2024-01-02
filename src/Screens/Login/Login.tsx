@@ -2,12 +2,14 @@ import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
 // import {  Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-
+import { ToastContainer } from "react-toastify";
+import Loader from "../../components/Loader";
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
 import { useState } from "react";
 function Login() {
+  const [apiLoading, SetApiLoading] = useState(false);
+
   const { adminLogin } = useApi();
 
   const [loginData, setLogindata] = useState<any>({ email: "", password: "" });
@@ -25,6 +27,7 @@ function Login() {
     e.preventDefault();
 
     try {
+      SetApiLoading(true);
       // Call your admin login function
       await adminLogin(loginData);
 
@@ -34,6 +37,8 @@ function Login() {
       // If login fails, handle the error
       // You can also display an error message to the user
       console.error("Login failed:", error.message);
+    } finally {
+      SetApiLoading(false); // Set isLoading to false after completing the operation
     }
   };
   return (
@@ -67,8 +72,14 @@ function Login() {
                   {/* <div className="forget">
                     <Link to="/"> forget password?</Link>
                   </div> */}
-
-                  <Loginbtn title={"Sign up"} onClick={handleLogin} />
+                  <div>
+                    {" "}
+                    {apiLoading ? (
+                      <Loader />
+                    ) : (
+                      <Loginbtn title={"Login"} onClick={handleLogin} />
+                    )}
+                  </div>
                 </form>
               </div>
             </div>

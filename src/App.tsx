@@ -1,7 +1,8 @@
-import { Link, useNavigate, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
+import { FaCar } from "react-icons/fa";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Operations from "./Screens/Operations/Operations";
@@ -37,7 +38,7 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
@@ -51,21 +52,24 @@ import { useApi } from "./context/Api";
 import { useUser } from "./context/Socketprovider";
 import Emergency from "./Screens/Alarms/Emergency";
 import MediaAudio from "./Screens/Media/MediaAudio";
-import Loader from "./components/Loader";
+import { TbMapPinOff } from "react-icons/tb";
+import { MdCarCrash } from "react-icons/md";
+import { MdSensors } from "react-icons/md";
+import { BiCctv } from "react-icons/bi";
+import { TbDeviceComputerCamera } from "react-icons/tb";
+
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
-  const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
-  const navigate = useNavigate();
-  const handleMenuItemClick = (path: any) => {
-    setActiveMenuItem(path);
-  };
-  const handeloperations = (path: any) => {
-    setActiveMenuItem(path);
-    if (!collapsed) {
-      collapseSidebar();
-    }
-    navigate("/Operations2");
-  };
+  // const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
+  // const navigate = useNavigate();
+
+  // const handeloperations = (path: any) => {
+  //   // setActiveMenuItem(path);
+  //   if (!collapsed) {
+  //     collapseSidebar();
+  //   }
+  //   navigate("/Operations2");
+  // };
 
   useEffect(() => {
     collapseSidebar();
@@ -111,6 +115,8 @@ function App() {
       socket.off("admin-message-recieved");
     };
   }, [data, setMyUser]);
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <div
       style={{
@@ -126,7 +132,7 @@ function App() {
               // only apply styles on first level elements of the tree
               if (level === 0)
                 return {
-                  color: active ? "#686868" : "##686868",
+                  color: active ? "#686868" : "#686868",
                   backgroundColor: active ? "#EDEDED" : undefined,
                 };
             },
@@ -144,60 +150,57 @@ function App() {
             <img src={Images.logo} alt="logo" className="logs" />
           </MenuItem>
           <MenuItem
+            active={isActive("/Dashboard")}
             component={<Link to="/Dashboard" />}
             icon={
               <img src={Images.Dashboard} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Dashboard"}
-            onClick={() => handleMenuItemClick("/Dashboard")}
+            // active={activeMenuItem === "/Dashboard"}
+            // onClick={() => handleMenuItemClick("/Dashboard")}
           >
             <Link to="/Dashboard">Dashboard</Link>
           </MenuItem>
           <MenuItem
+            active={isActive("/Search")}
             component={<Link to="/Search" />}
             icon={<img src={Images.serach} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/Search"}
-            onClick={() => handleMenuItemClick("/Search")}
           >
             Search
           </MenuItem>
           <MenuItem
+            active={isActive("/Operations2")}
             component={<Link to="/Operations2" />}
             icon={
               <img src={Images.operations} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Operations2"}
-            onClick={() => handeloperations("/Operations2")}
           >
             Operations
           </MenuItem>
           <MenuItem
+            active={isActive("/Monitoring")}
             component={<Link to="/Monitoring" />}
             icon={
               <img src={Images.monitor} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Monitoring"}
-            onClick={() => handleMenuItemClick("/Monitoring")}
           >
             Monitoring
           </MenuItem>
           <MenuItem
+            active={isActive("/Map")}
             component={<Link to="/Map" />}
             icon={<img src={Images.map} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/Map"}
-            onClick={() => handleMenuItemClick("/Map")}
           >
             Map View
           </MenuItem>
           <MenuItem
+            active={isActive("/Stream")}
             component={<Link to="/Stream" />}
             icon={<img src={Images.straen} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/Stream"}
-            onClick={() => handleMenuItemClick("/Stream")}
           >
             Stream
           </MenuItem>
           <SubMenu
+            active={isActive("/Alarm")}
             component={<Link to="/Alarm" />}
             label="Alarm"
             icon={
@@ -207,103 +210,89 @@ function App() {
                 className="icons-side"
               />
             }
-            active={activeMenuItem === "/Alarm"}
-            onClick={() => handleMenuItemClick("/Alarm")}
           >
             <MenuItem
+              active={isActive("/Emergency")}
               component={<Link to="/Emergency" />}
               icon={<img src={Images.semergency} alt="demo" className="" />}
-              active={activeMenuItem === "/Emergency"}
-              onClick={() => handleMenuItemClick("/Emergency")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Emergency
             </MenuItem>
             <MenuItem
+              active={isActive("/MotionAlarm")}
               component={<Link to="/MotionAlarm" />}
-              icon={<img src={Images.scam} alt="demo" className="" />}
-              active={activeMenuItem === "/MotionAlarm"}
-              onClick={() => handleMenuItemClick("/MotionAlarm")}
+              icon={<TbMapPinOff className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
               AOC
             </MenuItem>
             <MenuItem
+              active={isActive("/Lisence")}
               component={<Link to="/Lisence" />}
-              icon={<img src={Images.slisence} alt="demo" className="" />}
-              active={activeMenuItem === "/Lisence"}
-              onClick={() => handleMenuItemClick("/Lisence")}
+              icon={<MdSensors className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
-              mdAlarms
+              MD Alarms
             </MenuItem>
 
             <MenuItem
+              active={isActive("/Juricdiction")}
               component={<Link to="/Juricdiction" />}
-              icon={<img src={Images.smap} alt="demo" className="" />}
-              active={activeMenuItem === "/Juricdiction"}
-              onClick={() => handleMenuItemClick("/Juricdiction")}
+              icon={<MdCarCrash className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
               ANPR
             </MenuItem>
           </SubMenu>
           <SubMenu
+            active={isActive("/Vehicle")}
             label="Vehicle"
             icon={<img src={Images.car} alt="demo" className="icons-side" />}
             component={<Link to="/Vehicle" />}
-            active={activeMenuItem === "/Vehicle"}
-            onClick={() => handleMenuItemClick("/Vehicle")}
           >
             <MenuItem
+              active={isActive("/VehiclePlates")}
               component={<Link to="/VehiclePlates" />}
               icon={<img src={Images.palte} alt="demo" className="" />}
-              active={activeMenuItem === "/VehiclePlates"}
-              onClick={() => handleMenuItemClick("/VehiclePlates")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Plates
             </MenuItem>
             <MenuItem
+              active={isActive("/Block")}
               component={<Link to="/Block" />}
               icon={<img src={Images.block} alt="demo" className="" />}
-              active={activeMenuItem === "/Block"}
-              onClick={() => handleMenuItemClick("/Block")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Blocked
             </MenuItem>
           </SubMenu>
           <SubMenu
+            active={isActive("/Vehicle")}
             label="Device"
             icon={<img src={Images.device} alt="demo" className="icons-side" />}
             component={<Link to="/Device" />}
-            active={activeMenuItem === "/Device"}
-            onClick={() => handleMenuItemClick("/Device")}
           >
             <MenuItem
+              active={isActive("/VideoDevice")}
               component={<Link to="/VideoDevice" />}
-              icon={<img src={Images.vediosvg} alt="demo" className="" />}
-              active={activeMenuItem === "/VideoDevice"}
-              onClick={() => handleMenuItemClick("/VideoDevice")}
+              icon={<BiCctv className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Fixed Cam
             </MenuItem>
             <MenuItem
+              active={isActive("/AudioDevice")}
               component={<Link to="/AudioDevice" />}
-              icon={<img src={Images.audiosvg} alt="demo" className="" />}
-              active={activeMenuItem === "/AudioDevice"}
-              onClick={() => handleMenuItemClick("/AudioDevice")}
+              icon={<FaCar className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Car
             </MenuItem>
             <MenuItem
               component={<Link to="/TrackingDevice" />}
-              icon={<img src={Images.smap} alt="demo" className="" />}
-              active={activeMenuItem === "/TrackingDevice"}
-              onClick={() => handleMenuItemClick("/TrackingDevice")}
+              icon={<TbDeviceComputerCamera className="iconsapp" />}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Scout
@@ -311,53 +300,47 @@ function App() {
           </SubMenu>
 
           <MenuItem
+            active={isActive("/Messages")}
             component={<Link to="/Messages" />}
             icon={
               <img src={Images.messages} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Messages"}
-            onClick={() => handleMenuItemClick("/Messages")}
           >
             Messages
           </MenuItem>
           <MenuItem
+            active={isActive("/Events")}
             component={<Link to="/Events" />}
             icon={<img src={Images.events} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/Events"}
-            onClick={() => handleMenuItemClick("/Events")}
           >
             Events
           </MenuItem>
           <SubMenu
+            active={isActive("/Media")}
             label="Media"
             icon={<img src={Images.media2} alt="demo" className="icons-side" />}
             component={<Link to="/Media" />}
-            active={activeMenuItem === "/Media"}
-            onClick={() => handleMenuItemClick("/Media")}
           >
             <MenuItem
+              active={isActive("/Photos")}
               component={<Link to="/Photos" />}
               icon={<img src={Images.photos} alt="demo" className="" />}
-              active={activeMenuItem === "/Photos"}
-              onClick={() => handleMenuItemClick("/Photos")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Photos
             </MenuItem>
             <MenuItem
+              active={isActive("/MediaVideos")}
               component={<Link to="/MediaVideos" />}
               icon={<img src={Images.movies} alt="demo" className="" />}
-              active={activeMenuItem === "/MediaVideos"}
-              onClick={() => handleMenuItemClick("/MediaVideos")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Videos
             </MenuItem>
             <MenuItem
+              active={isActive("/MediaAudio")}
               component={<Link to="/MediaAudio" />}
               icon={<img src={Images.movies} alt="demo" className="" />}
-              active={activeMenuItem === "/MediaAudio"}
-              onClick={() => handleMenuItemClick("/MediaAudio")}
               style={{ backgroundColor: "#EDEDED" }}
             >
               Audio
@@ -365,20 +348,18 @@ function App() {
           </SubMenu>
 
           <MenuItem
+            active={isActive("/Management")}
             component={<Link to="/Management" />}
             icon={<img src={Images.user} alt="demo" className="icons-side" />}
-            active={activeMenuItem === "/Management"}
-            onClick={() => handleMenuItemClick("/Management")}
           >
             User Management
           </MenuItem>
           <MenuItem
+            active={isActive("/Settings")}
             component={<Link to="/Settings" />}
             icon={
               <img src={Images.setings} alt="demo" className="icons-side" />
             }
-            active={activeMenuItem === "/Settings"}
-            onClick={() => handleMenuItemClick("/Settings")}
           >
             Settings
           </MenuItem>

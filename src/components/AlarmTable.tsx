@@ -1,85 +1,119 @@
-import Images from "../images/Images";
-import { useNavigate } from "react-router-dom";
 import { useApi } from "../context/Api";
 import { FaTrash } from "react-icons/fa6";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { useState } from "react";
+import { TbMapPinOff } from "react-icons/tb";
+import { TiInfo } from "react-icons/ti";
+import Infobox from "./Infobox";
+import { MdCarCrash } from "react-icons/md";
 
-function AlarmTable({ data, icon, bg }: any) {
+import { MdSensors } from "react-icons/md";
+import { RiAlarmWarningLine } from "react-icons/ri";
+
+function AlarmTable({ data, bg }: any) {
+  const [openInfo, setOpenInfo] = useState(false);
+  const [infoData, setInfoData] = useState<any>();
+  const openinfobox = (item: any) => {
+    setOpenInfo(true);
+    setInfoData(item);
+  };
+  const closeinfobox = () => {
+    setOpenInfo(false);
+  };
+  function getAlarmTypeIcon(alarmType: any) {
+    switch (alarmType) {
+      case "Emergency":
+        return <RiAlarmWarningLine />;
+      case "Motion Detection":
+        return <MdSensors />;
+      case "ANPR":
+        return <MdCarCrash />; // Replace with the actual ANPR icon
+      case "Area of Competence":
+        return <TbMapPinOff />;
+
+      default:
+        return <RiAlarmWarningLine />;
+    }
+  }
+
   const { deleteLiveAlarm, resolveLiveAlarm } = useApi();
 
-  const navigate = useNavigate();
-
-  const handleTrackOnMapClick = (item: string) => {
-    const serializedItem = JSON.stringify(item);
-
-    // Navigate to the map screen with the serialized item data
-    navigate(`/Map/${encodeURIComponent(serializedItem)}`);
-    console.log(item);
-  };
-
   return (
-    <div className="table-responsive">
-      <table className="custom-table table table-hover">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Alarm Id</th>
+    <div>
+      {" "}
+      <div className="table-responsive">
+        <table className="custom-table table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Alarm Id</th>
 
-            <th>Timing</th>
-            <th>Location</th>
-            <th>Alarm Type</th>
-            <th>Operator</th>
-            <th>Media</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+              <th>Timing</th>
+              <th>Location</th>
+              <th>Alarm Type</th>
+              <th>Operator</th>
 
-        <tbody className="table-row">
-          {data?.map((item: any) => (
-            <tr className="table-row" key={item._id}>
-              <td className="table-data">
-                <div className="round" style={{ backgroundColor: bg }}>
-                  <img src={icon} alt="alarm" />
-                </div>
-              </td>
-              <td> {item.alarmId}</td>
-
-              <td>{item.created_at}</td>
-              <td>{item.gps?.coordinates}</td>
-              <td>{item.alarmType}</td>
-              <td>{item.parol?.name}</td>
-              <td>
-                <img src={Images.medias} alt="media" />
-              </td>
-              <td className="table-end">
-                <button
-                  className="alarmdlt"
-                  onClick={() => {
-                    resolveLiveAlarm(item);
-                  }}
-                >
-                  <IoCheckmarkDoneSharp />
-                </button>
-                <button
-                  className="alarmdlt"
-                  onClick={() => handleTrackOnMapClick(item)}
-                >
-                  <FaMapMarkerAlt />
-                </button>{" "}
-                <button
-                  onClick={() => {
-                    deleteLiveAlarm(item);
-                  }}
-                  className="alarmdlt"
-                >
-                  <FaTrash />
-                </button>
-              </td>
+              <th>Action</th>
+              <th>More info</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="table-row">
+            {data?.map((item: any) => (
+              <tr className="table-row" key={item._id}>
+                <td className="table-data">
+                  <div className="round" style={{ backgroundColor: bg }}>
+                    {getAlarmTypeIcon(item.alarmType)}
+                  </div>
+                </td>
+                <td> {item.alarmId}</td>
+
+                <td>{item.created_at}</td>
+                <td>{item.gps?.coordinates}</td>
+                <td>{item.alarmType}</td>
+                <td>{item.parol?.name}</td>
+                <td>
+                  <button
+                    className="alarmresolve"
+                    onClick={() => {
+                      resolveLiveAlarm(item);
+                    }}
+                  >
+                    {item.isResolved ? "Resolved" : "resolve"}
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={{ fontSize: 20, border: 0 }}
+                    onClick={() => {
+                      openinfobox(item);
+                    }}
+                  >
+                    <TiInfo />
+                  </button>
+                </td>
+                <td className="table-end">
+                  <button
+                    onClick={() => {
+                      deleteLiveAlarm(item);
+                    }}
+                    className="alarmdlt"
+                  >
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>{" "}
+      {openInfo && (
+        <Infobox
+          data={infoData}
+          closeinfobox={closeinfobox}
+          title={"Alarm Info"}
+        />
+      )}
     </div>
   );
 }

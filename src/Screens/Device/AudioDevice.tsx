@@ -9,7 +9,8 @@ import "../Device/Device.scss";
 import { useApi } from "../../context/Api";
 import DeviceForms from "../../components/DeviceForm";
 function AudioDevice() {
-  // const video = Items.filter((item) => item.type === "audio device");
+  const [selectedFilter, setSelectedFilter] = useState("All");
+
   const { deviceData } = useApi();
   const data: any = deviceData;
   const alldata = data?.data?.carBoardedCameras;
@@ -34,26 +35,22 @@ function AudioDevice() {
   return (
     <div className="container">
       <div className="shead">
-        <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+        <DeviceHeader
+          openmodal={openmodal}
+          openmodalEdit={openmodalEdit}
+          onFilterChange={(value: any) => setSelectedFilter(value)}
+        />
       </div>
       <div className="device-Table">
-        <DeviceTable data={alldata} icon={Images.mic} bg={"#DBFAFC"} />
+        <DeviceTable
+          data={alldata}
+          icon={Images.mic}
+          bg={"#DBFAFC"}
+          selectedFilter={selectedFilter}
+        />
       </div>
       {open && (
         <div className="formsVehicle">
-          {/* <FormsVehicle
-            formtitle={"Add Device"}
-            buttonlabel={"Add"}
-            label1={"Device Id :"}
-            label2={"Device type : "}
-            label3={"Gps :"}
-            label4={"Device  Operator :"}
-            placeholder1={"Abc-001"}
-            placeholder2={"12345"}
-            placeholder3={"55456"}
-            placeholder4={"josh"}
-            closemodal={closemodal} */}
-          {/* /> */}
           <DeviceForms closemodal={closemodal} />
         </div>
       )}

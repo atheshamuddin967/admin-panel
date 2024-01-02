@@ -191,3 +191,67 @@ padding: 5px 0;
    height: 1rem !important;
    width: 1rem !important;
   }
+  .inofobox{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    z-index: 1000;
+    left: 0;
+    padding: 30px;
+  }
+  .layoutinfo{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1000;
+  }
+  .infoclose{
+   
+    button{
+      background-color: transparent;
+      border: 0;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+    }
+  }
+  .infodetails{
+    p{
+      margin-bottom:5px ;
+      // text-align: center;
+     
+      span{
+        // float: right;
+       font-weight: 600;
+        
+      }
+    }
+  }
+  .notavil{
+    background-color: black;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    
+  }
+  .infoimgBox{
+    img{
+      max-width: 100%;
+    }
+    video{
+      max-width: 100%;
+    }
+  }
+  .iconsapp{
+    color: #686868; font-size: 20px;
+  }

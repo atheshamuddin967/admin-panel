@@ -341,7 +341,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const deviceData = res.data;
-      // console.log(deviceData);
+      console.log(deviceData);
       dispatch({ type: "ADD_DEVICE", payload: deviceData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -359,7 +359,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const multimediaData = res.data;
-      console.log(multimediaData);
+      // console.log(multimediaData);
       dispatch({ type: "FETCH_MULTIMEDIA_SUCCESS", payload: multimediaData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });

@@ -9,6 +9,8 @@ import DeviceForms from "../../components/DeviceForm";
 import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 function TrackingDevice() {
+  const [selectedFilter, setSelectedFilter] = useState("All");
+
   const { deviceData } = useApi();
   const data: any = deviceData;
   const alldata = data?.data?.scoutCameras;
@@ -33,10 +35,19 @@ function TrackingDevice() {
   return (
     <div className="container">
       <div className="shead">
-        <DeviceHeader openmodal={openmodal} openmodalEdit={openmodalEdit} />
+        <DeviceHeader
+          openmodal={openmodal}
+          openmodalEdit={openmodalEdit}
+          onFilterChange={(value: any) => setSelectedFilter(value)}
+        />
       </div>
       <div className="device-Table">
-        <DeviceTable data={alldata} icon={Images.tracking} bg={"#FCDBDB"} />
+        <DeviceTable
+          data={alldata}
+          icon={Images.tracking}
+          bg={"#FCDBDB"}
+          selectedFilter={selectedFilter}
+        />
       </div>
       {open && (
         <div className="formsVehicle">
