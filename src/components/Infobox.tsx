@@ -161,7 +161,7 @@ function Infobox({ data, closeinfobox, title }: any) {
                 <div className="infoimgBox">
                   {data?.multimedia?.mediaPath ? (
                     <div>
-                      {data?.multimedia?.mediatype === "photo" ? (
+                      {data?.multimedia?.mediaType === "image" ? (
                         <img
                           src={data.multimedia.mediaPath}
                           alt=""
@@ -202,20 +202,145 @@ function Infobox({ data, closeinfobox, title }: any) {
             </div>
           </div>
         );
+      case "Multimedia Info":
+        return (
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-4">
+                <div className="infodetails">
+                  <p>
+                    Parol Name:{" "}
+                    <span>{data?.parol ? data?.parol?.name : "--"}</span>
+                  </p>
+                  <p>
+                    Device Code:{" "}
+                    <span>
+                      {data?.device?.deviceCode
+                        ? data?.device?.deviceCode
+                        : "--"}
+                    </span>
+                  </p>
+                  <p>
+                    Device Type:{" "}
+                    <span>
+                      {data?.device?.deviceType
+                        ? data?.device?.deviceType
+                        : "--"}
+                    </span>
+                  </p>
+                  <p>
+                    Device Status:{" "}
+                    <span>{data?.isOnline ? "Active" : "Offline"}</span>
+                  </p>
+                  <p>
+                    Device Role:{" "}
+                    <span>
+                      {data?.device?.role ? data?.device?.role : "--"}
+                    </span>
+                  </p>
+                  <p>
+                    Device Created:{" "}
+                    <span>
+                      {" "}
+                      {data?.device?.created_at
+                        ? moment(data.device?.created_at).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                          )
+                        : "--"}
+                    </span>
+                  </p>
+                  <p>
+                    Device Streaming{" "}
+                    <span>
+                      {data?.device?.isStreaming
+                        ? "Streaming Avilable"
+                        : "Not  Avilable"}
+                    </span>
+                  </p>
+                  <p>
+                    Media Time:{" "}
+                    <span>
+                      {" "}
+                      {data?.created_at
+                        ? moment(data.created_at).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                          )
+                        : "--"}
+                    </span>
+                  </p>
+                  <p>
+                    Media Size:{" "}
+                    <span>
+                      {data?.sizeInBytes ? data?.sizeInBytes : "--"} Bytes
+                    </span>
+                  </p>
+                  <p>
+                    Media Type:{" "}
+                    <span>{data?.mediaType ? data?.mediaType : "--"} </span>
+                  </p>
+                </div>
+              </div>
 
+              <div className="col-sm-4">
+                <h4 className="text-center">Multimedia</h4>
+                <div className="infoimgBox">
+                  {data?.mediaPath ? (
+                    <div>
+                      {data?.mediaType === "image" ? (
+                        <img
+                          src={data?.mediaPath}
+                          alt=""
+                          style={{
+                            borderRadius: "10px",
+                            maxWidth: "100%",
+                          }}
+                        />
+                      ) : (
+                        <ReactPlayer
+                          url={Images.vid1}
+                          style={{
+                            maxHeight: "250px",
+                            width: "100%",
+                            maxWidth: "100%",
+                            padding: 0,
+                          }}
+                          controls={true}
+                          playing={false}
+                          loop={false}
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <div className="notavil">
+                      <h5>Media Not Available</h5>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="col-sm-4">
+                <h4 className="text-center">Location</h4>
+                <div className="infomapbox">
+                  <InfoBoxMap height={"250px"} data={data?.device} />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       // Add more cases as needed
 
       default:
         return null; // Render nothing for unknown titles
     }
   };
-
+  console.log(data);
   return (
     <div className="inofobox">
       <div className="layoutinfo">
         <h2 className="text-center">{title}</h2>
         <hr />
         {renderContainer()}
+
         <div className="infoclose">
           <button onClick={closeinfobox}>
             <IoClose />

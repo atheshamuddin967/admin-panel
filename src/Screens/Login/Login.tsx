@@ -1,16 +1,16 @@
 import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
-// import {  Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Loader from "../../components/Loader";
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Login() {
   const [apiLoading, SetApiLoading] = useState(false);
-
-  const { adminLogin } = useApi();
+  const navigate = useNavigate();
+  const { adminLogin, admin } = useApi();
 
   const [loginData, setLogindata] = useState<any>({ email: "", password: "" });
 
@@ -20,7 +20,6 @@ function Login() {
       ...prevData,
       [name]: value,
     }));
-    console.log(loginData);
   };
 
   const handleLogin = async (e: any) => {
@@ -30,6 +29,7 @@ function Login() {
       SetApiLoading(true);
       // Call your admin login function
       await adminLogin(loginData);
+      localStorage.setItem("loggedInUser", JSON.stringify(loginData));
 
       // If login is successful, navigate to "/Operations2"
       // navigate("/Operations2");
@@ -41,6 +41,24 @@ function Login() {
       SetApiLoading(false); // Set isLoading to false after completing the operation
     }
   };
+  useEffect(() => {
+    // Check if there are saved credentials in local storage
+    const savedCredentials = localStorage.getItem("loggedInUser");
+
+    if (savedCredentials) {
+      try {
+        const parsedCredentials = JSON.parse(savedCredentials);
+
+        // Automatically log in with saved credentials
+        adminLogin(parsedCredentials);
+
+        // Navigate to "/Operations2"
+        // navigate("/Operations2");
+      } catch (error: any) {
+        console.error("Error parsing saved credentials:", error.message);
+      }
+    }
+  }, []);
   return (
     <div className="layouts">
       <div className="container">

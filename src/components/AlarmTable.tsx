@@ -8,10 +8,15 @@ import { MdCarCrash } from "react-icons/md";
 
 import { MdSensors } from "react-icons/md";
 import { RiAlarmWarningLine } from "react-icons/ri";
-
+import DeleteModal from "./DeleteModal";
+import ResolveAlarmModal from "./ResolveAlarmModal";
 function AlarmTable({ data, bg }: any) {
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [resolveModal, setResolveModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState("");
+
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
@@ -19,6 +24,7 @@ function AlarmTable({ data, bg }: any) {
   const closeinfobox = () => {
     setOpenInfo(false);
   };
+
   function getAlarmTypeIcon(alarmType: any) {
     switch (alarmType) {
       case "Emergency":
@@ -36,6 +42,21 @@ function AlarmTable({ data, bg }: any) {
   }
 
   const { deleteLiveAlarm, resolveLiveAlarm } = useApi();
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
+
+  const openDeleteModal = (item: any) => {
+    setResolveModal(true);
+    setDeleteItem(item);
+  };
+  const closeDeleteModal = () => {
+    setResolveModal(false);
+  };
 
   return (
     <div>
@@ -76,7 +97,7 @@ function AlarmTable({ data, bg }: any) {
                   <button
                     className="alarmresolve"
                     onClick={() => {
-                      resolveLiveAlarm(item);
+                      openDeleteModal(item);
                     }}
                   >
                     {item.isResolved ? "Resolved" : "resolve"}
@@ -95,7 +116,7 @@ function AlarmTable({ data, bg }: any) {
                 <td className="table-end">
                   <button
                     onClick={() => {
-                      deleteLiveAlarm(item);
+                      openDelete(item);
                     }}
                     className="alarmdlt"
                   >
@@ -112,6 +133,22 @@ function AlarmTable({ data, bg }: any) {
           data={infoData}
           closeinfobox={closeinfobox}
           title={"Alarm Info"}
+        />
+      )}
+      {deleteModal && (
+        <DeleteModal
+          title={"event"}
+          button={deleteLiveAlarm}
+          closeDelete={closeDelete}
+          item={deleteItem}
+        />
+      )}
+      {resolveModal && (
+        <ResolveAlarmModal
+          title={"alarm"}
+          button={resolveLiveAlarm}
+          closeDelete={closeDeleteModal}
+          item={deleteItem}
         />
       )}
     </div>

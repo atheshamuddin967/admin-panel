@@ -11,7 +11,7 @@ function UserRole() {
     password: "",
     role: "",
   });
-  // console.log(adminRoles);
+
   const handleInputChange = (e: any) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -49,72 +49,75 @@ function UserRole() {
       SetApiLoading(false); // Set isLoading to false after completing the operation
     }
   };
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">
-          <div className="headings text-center">
-            <h6> Add Sub-Admin</h6>
-          </div>
-          {/* <div className="searchadmin">
+    <div>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <div className="headings text-center">
+              <h6> Add Sub-Admin</h6>
+            </div>
+            {/* <div className="searchadmin">
             <Input placeholder={"Search Sub-Admin"} />
           </div> */}
-          <form action="" onSubmit={handleAddSubAdmin}>
-            <div className="adminbox">
-              <div className="serchadmin">
-                <input
-                  type="email"
-                  name="email"
-                  onChange={handleInputChange}
-                  value={subAdminData.email}
-                />
-                <span>Email</span>
-              </div>
-              <div className="serchadmin">
-                <input
-                  type="text"
-                  name="name"
-                  value={subAdminData.name}
-                  onChange={handleInputChange}
-                />
-                <span>Name</span>
-              </div>
-              <div className="serchadmin">
-                <input
-                  type="password"
-                  name="password"
-                  value={subAdminData.password}
-                  onChange={handleInputChange}
-                />
-                <span>Password</span>
-              </div>
-              <div className="serchadmin">
-                <select
-                  name="role"
-                  id=""
-                  form="carform"
-                  onChange={handleInputChange}
-                  value={subAdminData.role}
-                >
-                  <option value="Select Role" disabled selected>
-                    Select Role
-                  </option>
-                  {adminRoles?.map((role: any) => (
-                    <option value={role._id}>{role.roleName}</option>
-                  ))}
-                </select>
-              </div>
+            <form action="" onSubmit={handleAddSubAdmin}>
+              <div className="adminbox">
+                <div className="serchadmin">
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleInputChange}
+                    value={subAdminData.email}
+                  />
+                  <span>Email</span>
+                </div>
+                <div className="serchadmin">
+                  <input
+                    type="text"
+                    name="name"
+                    value={subAdminData.name}
+                    onChange={handleInputChange}
+                  />
+                  <span>Name</span>
+                </div>
+                <div className="serchadmin">
+                  <input
+                    type="password"
+                    name="password"
+                    value={subAdminData.password}
+                    onChange={handleInputChange}
+                  />
+                  <span>Password</span>
+                </div>
+                <div className="serchadmin">
+                  <select
+                    name="role"
+                    id=""
+                    form="carform"
+                    onChange={handleInputChange}
+                    value={subAdminData.role}
+                  >
+                    <option value="Select Role" disabled selected>
+                      Select Role
+                    </option>
+                    {adminRoles?.map((role: any) => (
+                      <option value={role._id}>{role.roleName}</option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="btnsave">
-                {" "}
-                {apiLoading ? (
-                  <Loader />
-                ) : (
-                  <button onClick={handleAddSubAdmin}>Add</button>
-                )}
+                <div className="btnsave">
+                  {" "}
+                  {apiLoading ? (
+                    <Loader />
+                  ) : (
+                    <button onClick={handleAddSubAdmin}>Add</button>
+                  )}
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

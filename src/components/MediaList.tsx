@@ -3,15 +3,16 @@ import ReactPlayer from "react-player";
 import { useState } from "react";
 import Images from "../images/Images";
 import moment from "moment";
-// import Aud from "../images/aud.mp3";
+import DeleteModal from "./DeleteModal";
 import { FaTrash } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
+import { TiInfo } from "react-icons/ti";
 
+import Infobox from "./Infobox";
 interface MediaItem {
   image: string;
   mediaType: string;
   mediaPath: any;
-  // Add other properties if needed
 }
 
 interface MediaListProps {
@@ -62,6 +63,24 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
     }
   };
 
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
+  const [openInfo, setOpenInfo] = useState(false);
+  const [infoData, setInfoData] = useState<any>();
+  const openinfobox = (item: any) => {
+    setOpenInfo(true);
+    setInfoData(item);
+  };
+  const closeinfobox = () => {
+    setOpenInfo(false);
+  };
   return (
     <div>
       <div className="row ">
@@ -69,8 +88,8 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
           <div className="col-sm-3">
             <div className="imgList">
               <div onClick={() => handleItemClick(index)}>
-                {item.mediaType === "image" ? (
-                  <img src={item.mediaPath} alt={`item-${index}`} />
+                {item?.mediaType === "image" ? (
+                  <img src={item?.mediaPath} alt={`item-${index}`} />
                 ) : (
                   // <video width="100%" height="200px" controls autoPlay>
                   //   <source src={Images.vid1} type="video/mp4" />
@@ -99,29 +118,42 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
                   Operator: <span> {item?.parol?.name}</span>
                 </p>
                 <p>
-                  Device Code : <span>{item.device?.deviceCode}</span>{" "}
+                  Device Code : <span>{item?.device?.deviceCode}</span>{" "}
                 </p>
                 <p>
                   Time:
                   <span>
-                    {moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}
+                    {moment(item?.created_at).format("MMMM Do YYYY, h:mm:ss a")}
                   </span>
                 </p>
                 <p>
-                  FileSize: <span>{item.sizeInBytes}Bytes</span>{" "}
+                  FileSize: <span>{item?.sizeInBytes}Bytes</span>{" "}
                 </p>
               </div>
               <div className="mediadlt">
-                <button
-                  className="dwnl"
-                  onClick={() => handleDownloadClick(item?.mediaPath, "media")}
-                >
-                  <IoMdDownload />
-                </button>
+                <div>
+                  {" "}
+                  <button
+                    className="dwnl"
+                    onClick={() =>
+                      handleDownloadClick(item?.mediaPath, "media")
+                    }
+                  >
+                    <IoMdDownload />
+                  </button>
+                  <button
+                    onClick={() => {
+                      openinfobox(item);
+                    }}
+                  >
+                    <TiInfo />
+                  </button>
+                </div>
+
                 <button
                   className="dlts"
                   onClick={() => {
-                    deleteMultimedia(item);
+                    openDelete(item);
                   }}
                 >
                   <FaTrash />
@@ -155,6 +187,7 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
                       <button onClick={handleNavigateprev}>
                         <i className="fa-solid fa-angle-left"></i>
                       </button>
+
                       <button onClick={handleNavigateNext}>
                         <i className="fa-solid fa-angle-right"></i>
                       </button>
@@ -170,6 +203,23 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
             </div>
           </div>
         </div>
+      )}
+
+      {deleteModal && (
+        <DeleteModal
+          title={"media"}
+          button={deleteMultimedia}
+          closeDelete={closeDelete}
+          item={deleteItem}
+        />
+      )}
+
+      {openInfo && (
+        <Infobox
+          data={infoData}
+          closeinfobox={closeinfobox}
+          title={"Multimedia Info"}
+        />
       )}
     </div>
   );

@@ -4,15 +4,26 @@ import { FaTrash } from "react-icons/fa";
 import { TiInfo } from "react-icons/ti";
 import Infobox from "./Infobox";
 import { useState } from "react";
+import DeleteModal from "./DeleteModal";
 function EventTable({ eventData, icon, bg, deleteEvent }: any) {
+  const [deleteModal, setDeleteModal] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
+  const [deleteItem, setDeleteItem] = useState("");
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
   };
   const closeinfobox = () => {
     setOpenInfo(false);
+  };
+
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
   };
   return (
     <div className="div">
@@ -69,7 +80,7 @@ function EventTable({ eventData, icon, bg, deleteEvent }: any) {
                   <button
                     style={{ border: 0 }}
                     onClick={() => {
-                      deleteEvent(item);
+                      openDelete(item);
                     }}
                   >
                     <FaTrash />
@@ -85,6 +96,14 @@ function EventTable({ eventData, icon, bg, deleteEvent }: any) {
           data={infoData}
           closeinfobox={closeinfobox}
           title={"Event Info"}
+        />
+      )}
+      {deleteModal && (
+        <DeleteModal
+          title={"event"}
+          button={deleteEvent}
+          closeDelete={closeDelete}
+          item={deleteItem}
         />
       )}
     </div>

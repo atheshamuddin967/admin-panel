@@ -87,7 +87,7 @@ function OperationsVideo({ onViewImageClick }: any) {
         {dropItem?.map((item: any, index: number) => {
           return (
             <div
-              key={item.deviceCode}
+              key={item?.deviceCode}
               className="col-sm-4 p-0   m-0"
               onDragEnter={() => (dragOverItem.current = index)}
               onDragStart={() => (dragItem.current = index)}
@@ -103,7 +103,7 @@ function OperationsVideo({ onViewImageClick }: any) {
                   >
                     <FaRegTrashCan />
                   </button>
-                  {item.name} {renderIcon(item)}
+                  {item?.name} {renderIcon(item)}
                   <span onClick={() => onViewImageClick(item)}>
                     <GoScreenFull />
                   </span>

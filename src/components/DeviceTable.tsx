@@ -4,6 +4,7 @@ import { FaCar } from "react-icons/fa";
 import { TiInfo } from "react-icons/ti";
 import { BiCctv } from "react-icons/bi";
 import { TbDeviceComputerCamera } from "react-icons/tb";
+import DeleteModal from "./DeleteModal";
 import Infobox from "./Infobox";
 import moment from "moment";
 import { useState } from "react";
@@ -43,6 +44,16 @@ function DeviceTable({ data, bg, selectedFilter }: any) {
     }
     return false;
   });
+
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
 
   return (
     <div>
@@ -98,7 +109,7 @@ function DeviceTable({ data, bg, selectedFilter }: any) {
                   <button
                     className="trash"
                     onClick={() => {
-                      deleteDevice(item);
+                      openDelete(item);
                     }}
                   >
                     <FaTrash />
@@ -114,6 +125,15 @@ function DeviceTable({ data, bg, selectedFilter }: any) {
           data={infoData}
           closeinfobox={closeinfobox}
           title={"Device Info"}
+        />
+      )}
+
+      {deleteModal && (
+        <DeleteModal
+          title={"Device"}
+          button={deleteDevice}
+          closeDelete={closeDelete}
+          item={deleteItem}
         />
       )}
     </div>

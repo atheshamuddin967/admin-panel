@@ -10,8 +10,38 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
+interface InitialStateType {
+  isLoading: boolean;
+  isError: boolean;
+  data: any[];
+  groupData: any[]; // Update with the actual type
+  deviceData: any[];
+  eventData: any[];
+  userData: any[];
+  multimediaData: any[];
+  liveAlarmData: any[];
+  adminRoles: any[];
+  systemConfig: any | null;
+  admin: any[]; // Update with the actual type
+  dispatch: any;
+  addGroup: (formData: any) => Promise<any>;
+  deleteGroup: (group: any) => Promise<any>;
+  AddUser: (userData: any) => Promise<any>;
+  removeParols: (userData: any) => Promise<any>;
+  addDevice: (deviceData: any) => Promise<any>;
+  deleteDevice: (deviceId: string) => Promise<any>;
+  deleteEvent: (eventId: string) => Promise<any>;
+  deleteLiveAlarm: (alarmId: string) => Promise<any>;
+  resolveLiveAlarm: (alarmId: string) => Promise<any>;
+  deleteMultimedia: (mediaId: string) => Promise<any>;
+  adminLogin: (credentials: any) => Promise<any>;
+  createAdminRole: (adminRoleData: any) => Promise<any>;
+  removeAdminRole: (adminRoleId: string) => Promise<any>;
+  createSubAdmin: (subadmin: any) => Promise<any>;
+  editSystemConfig: (editconfig: any) => Promise<any>;
+}
 
-const initialstate = {
+const initialstate: InitialStateType = {
   isLoading: false,
   isError: false,
   data: [],
@@ -25,7 +55,9 @@ const initialstate = {
   // adminData: [],
   systemConfig: null,
   admin: [],
-
+  dispatch: (action: any) => {
+    console.log("Dispatching action:", action);
+  },
   addGroup: (formData: any = {}) => Promise.resolve(formData),
   deleteGroup: (group: any = {}) => Promise.resolve(group),
   AddUser: (userData: any = {}) => Promise.resolve(userData),
@@ -566,6 +598,7 @@ const ApiProvider = ({ children }: any) => {
         autoClose: 6000,
       });
       dispatch({ type: "ADD_USER", payload: newUser });
+      fetchData();
     } catch (error: any) {
       if (error.response) {
         console.error("Response data:", error.response.data);
@@ -611,6 +644,7 @@ const ApiProvider = ({ children }: any) => {
         type: "REMOVE_PAROLS_FROM_GROUP",
         payload: { groupId: groupId, parolIds: parolIds },
       });
+      fetchData();
     } catch (error: any) {
       // ... (error handling code)
     }
@@ -856,6 +890,7 @@ const ApiProvider = ({ children }: any) => {
         // Dispatch the "DELETE_MULTIMEDIA" action with the mediaId
         dispatch({ type: "DELETE_MULTIMEDIA", payload: mediaId });
       }
+      fetchMultimediaData();
       toast.success(response.data.message, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 6000,
@@ -880,7 +915,7 @@ const ApiProvider = ({ children }: any) => {
     try {
       dispatch({ type: "SET_LOADING" });
 
-      console.log("Before API call");
+      // console.log("Before API call");
 
       dispatch({ type: "SET_LOADING" });
 
@@ -892,7 +927,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
 
-      console.log("its resposnse is", response);
+      // console.log("its resposnse is", response);
 
       const admin = response?.data?.user;
       console.log(admin);
@@ -903,7 +938,6 @@ const ApiProvider = ({ children }: any) => {
       });
 
       dispatch({ type: "ADMIN_LOGIN_SUCCESS", payload: admin });
-
       if (admin) {
         navigate("/Operations2");
       } else {
@@ -995,7 +1029,7 @@ const ApiProvider = ({ children }: any) => {
         autoClose: 6000,
       });
       // Optionally, you can fetch the updated admin data here
-      // fetchAdminData();
+      fetchAdminRoles();
 
       dispatch({ type: "CREATE_SUB_ADMIN_SUCCESS", payload: newSubAdmin });
     } catch (error: any) {
@@ -1047,6 +1081,7 @@ const ApiProvider = ({ children }: any) => {
         removeAdminRole,
         createSubAdmin,
         editSystemConfig,
+        dispatch,
       }}
     >
       {children}

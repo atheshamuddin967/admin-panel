@@ -8,7 +8,9 @@ import Images from "../../images/Images";
 import { FaTrash } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 import moment from "moment";
-
+import DeleteModal from "../../components/DeleteModal";
+import { TiInfo } from "react-icons/ti";
+import Infobox from "../../components/Infobox";
 function MediaVideos() {
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
@@ -63,7 +65,25 @@ function MediaVideos() {
       console.error("Error downloading file:", error);
     }
   };
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
 
+  const [openInfo, setOpenInfo] = useState(false);
+  const [infoData, setInfoData] = useState<any>();
+  const openinfobox = (item: any) => {
+    setOpenInfo(true);
+    setInfoData(item);
+  };
+  const closeinfobox = () => {
+    setOpenInfo(false);
+  };
   return (
     <div className="container">
       <div className="shead">
@@ -114,18 +134,28 @@ function MediaVideos() {
                 </div>
 
                 <div className="mediadlt">
-                  <button
-                    className="dwnl"
-                    onClick={() =>
-                      handleDownloadClick(item?.mediaPath, "media")
-                    }
-                  >
-                    <IoMdDownload />
-                  </button>
+                  <div>
+                    {" "}
+                    <button
+                      className="dwnl"
+                      onClick={() =>
+                        handleDownloadClick(item?.mediaPath, "media")
+                      }
+                    >
+                      <IoMdDownload />
+                    </button>
+                    <button
+                      onClick={() => {
+                        openinfobox(item);
+                      }}
+                    >
+                      <TiInfo />
+                    </button>
+                  </div>
                   <button
                     className="dlts"
                     onClick={() => {
-                      deleteMultimedia(item);
+                      openDelete(item);
                     }}
                   >
                     <FaTrash />
@@ -181,6 +211,22 @@ function MediaVideos() {
           </div>
         )}
       </div>
+
+      {deleteModal && (
+        <DeleteModal
+          title={"Multimedia"}
+          button={deleteMultimedia}
+          closeDelete={closeDelete}
+          item={deleteItem}
+        />
+      )}
+      {openInfo && (
+        <Infobox
+          data={infoData}
+          closeinfobox={closeinfobox}
+          title={"Multimedia Info"}
+        />
+      )}
     </div>
   );
 }

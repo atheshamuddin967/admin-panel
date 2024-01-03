@@ -2,6 +2,7 @@ import { useApi } from "../../context/Api";
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Loader from "../../components/Loader";
+import DeleteModal from "../../components/DeleteModal";
 function AdmimRole() {
   const [apiLoading, SetApiLoading] = useState(false);
 
@@ -49,6 +50,16 @@ function AdmimRole() {
     }
   };
 
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -76,7 +87,7 @@ function AdmimRole() {
                     </ul>
                     <button
                       onClick={() => {
-                        removeAdminRole(role);
+                        openDelete(role);
                       }}
                     >
                       <FaTrash />
@@ -155,6 +166,15 @@ function AdmimRole() {
           </div>
         </div>
       </div>
+
+      {deleteModal && (
+        <DeleteModal
+          title={"Device"}
+          button={removeAdminRole}
+          closeDelete={closeDelete}
+          item={deleteItem}
+        />
+      )}
     </div>
   );
 }

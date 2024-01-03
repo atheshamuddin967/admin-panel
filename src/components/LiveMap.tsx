@@ -114,9 +114,9 @@ function LiveMap({ selectedDeviceType, height }: any) {
   const getMarkerIcon = (deviceType: any) => {
     switch (deviceType) {
       case "Fixed camera":
-        return cctv;
-      case "Scout":
         return scout;
+      case "Scout":
+        return cctv;
       case "Car Boarded":
         return car;
       default:

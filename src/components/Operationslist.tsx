@@ -37,7 +37,7 @@ function Operationslist({
   //   };
   // }, [data, setMyUser]);
 
-  const data2: any = datas.users;
+  const data2: any = datas?.parols;
   const sortedData = myuser
     ? [...myuser].sort((a, b) =>
         a.isStreaming === b.isStreaming ? 0 : a.isStreaming ? -1 : 1

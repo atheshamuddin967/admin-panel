@@ -3,7 +3,9 @@ import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import React from "react";
 import Images from "../images/Images";
-
+import DeleteModal from "./DeleteModal";
+import moment from "moment";
+import UserDeleteModal from "./UserDeleteModal";
 function ManagementGroupTable({
   data,
   icon,
@@ -12,7 +14,18 @@ function ManagementGroupTable({
   removeParols,
 }: any) {
   const [showGroupDiv, setShowGroupDiv] = useState(false);
-
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deletelist, setDeleteList] = useState("");
+  const [deletelist1, setDeleteList1] = useState("");
+  const [modal, setModal] = useState(false);
+  const openDelete = (item: any) => {
+    setDeleteModal(true);
+    setDeleteItem(item);
+  };
+  const closeDelete = () => {
+    setDeleteModal(false);
+  };
   const toggleGroupDiv = (group: any) => {
     if (showGroupDiv !== group._id) {
       setShowGroupDiv(group._id);
@@ -31,8 +44,18 @@ function ManagementGroupTable({
     console.log(UserId);
     removeParols(UserId, groupId);
   };
+
+  const openListModal = (groupId: any, userId: any) => {
+    setDeleteList(groupId);
+    setDeleteList1(userId);
+    setModal(true);
+  };
+  const closeListModal = () => {
+    setModal(false);
+  };
+
   return (
-    <>
+    <div>
       <div className="table-responsive">
         <table className="custom-table table table-hover text-center ">
           <thead>
@@ -58,7 +81,9 @@ function ManagementGroupTable({
                   </td>
                   <td> {group.groupName}</td>
                   <td>{group.role}</td>
-                  <td>{group.createdOn}</td>
+                  <td>
+                    {moment(group.createdOn).format("MMMM Do YYYY, h:mm:ss a")}
+                  </td>
                   <td>{group.status}</td>
 
                   <td className="edit-delete">
@@ -74,7 +99,7 @@ function ManagementGroupTable({
                     </button>
                     <button
                       onClick={() => {
-                        handleDeleteGroup(group._id);
+                        openDelete(group._id);
                       }}
                     >
                       <i className="fa-solid fa-trash"></i>
@@ -102,7 +127,7 @@ function ManagementGroupTable({
                           <td className="edit-delete">
                             <button
                               onClick={() => {
-                                handleDeleteuser(group._id, driver._id);
+                                openListModal(group._id, driver._id);
                               }}
                             >
                               <i className="fa-solid fa-trash"></i>
@@ -118,7 +143,25 @@ function ManagementGroupTable({
           </tbody>
         </table>
       </div>
-    </>
+
+      {deleteModal && (
+        <DeleteModal
+          title={"Group"}
+          button={handleDeleteGroup}
+          closeDelete={closeDelete}
+          item={deleteItem}
+        />
+      )}
+      {modal && (
+        <UserDeleteModal
+          title={" user from Group "}
+          button={handleDeleteuser}
+          closeDelete={closeListModal}
+          item={deletelist}
+          itemId={deletelist1}
+        />
+      )}
+    </div>
   );
 }
 

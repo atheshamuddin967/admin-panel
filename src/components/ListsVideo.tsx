@@ -8,20 +8,18 @@ function ListsVideo({
   item,
   videoArray,
   handleAddToArray,
-
   handleDeleteFromArray,
 }: any) {
   const renderIcon = () => {
-    if (item.stream_type === "TX") {
+    if (item?.stream_type === "TX") {
       return <MdOndemandVideo className="streamicon" />;
-    } else if (item.stream_type === "ATX") {
+    } else if (item?.stream_type === "ATX") {
       return <MdHeadphones className="streamicon" />;
     }
-    // If item.stream_type is null or undefined, return null
     return null;
   };
   return (
-    <div className="col-sm-3" key={item._id}>
+    <div className="col-sm-3" key={item?._id}>
       <div className="vidlayout">
         <h6>
           <span>
@@ -39,9 +37,9 @@ function ListsVideo({
               </button>
             )}
           </span>
-          {item.username} {renderIcon()}
+          {item?.username} {renderIcon()}
         </h6>
-        {item.isStreaming ? (
+        {item?.isStreaming ? (
           <iframe
             src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.deviceCode}`}
             width="100%"

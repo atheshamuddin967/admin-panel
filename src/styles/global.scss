@@ -247,11 +247,60 @@ padding: 5px 0;
   .infoimgBox{
     img{
       max-width: 100%;
+      width: 100%;
+      height: 250px !important;
     }
     video{
       max-width: 100%;
+      height: 250px;
     }
   }
   .iconsapp{
     color: #686868; font-size: 20px;
+  }
+  .deletlayout{
+    position: absolute;
+    background-color: white;
+    width: 400px;
+    height: 150px;
+    margin: 0 auto;
+    top:10%;
+    left: 50%;
+    // border: 1px solid black;
+    // border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    z-index: 100;
+    padding: 0;
+    button{
+      float: right;
+      margin: 20px 5px 0 5px;
+      background-color: black;
+      border: 0;
+      color: white;
+      padding: 5px 10px;
+     border-radius: 10px;
+   
+    }
+    .cancel{
+background-color: transparent !important;
+color: blue !important;
+    }
+  }
+  .headerdelte{
+    background-color: black;
+    height: 30px;
+    button{
+      float: right;
+      border: 0;
+      background-color: transparent;
+      padding: 0 !important;
+      color: white;
+      margin: 0 10px !important
+      ;
+    }
+  }
+  .Headerdetails{
+    padding: 10px;
+
+
   }

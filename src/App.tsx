@@ -1,9 +1,7 @@
-import { Link, Routes, Route } from "react-router-dom";
-
+import { Link, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import "./styles/global.scss";
 import { FaCar } from "react-icons/fa";
-
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Operations from "./Screens/Operations/Operations";
 import Monitoring from "./Screens/Monitoring/Monitoring";
@@ -28,7 +26,7 @@ import Management from "./Screens/Management/management";
 import ManagementGroup from "./Screens/Management/ManagementGroup";
 import Images from "./images/Images";
 import Login from "./Screens/Login/Login";
-import Singup from "./Screens/Login/Singup";
+
 import SearchScreeen from "./Screens/Search/SearchScreeen";
 import Loby from "./Screens/Loby/Loby";
 import {
@@ -60,16 +58,6 @@ import { TbDeviceComputerCamera } from "react-icons/tb";
 
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
-  // const [activeMenuItem, setActiveMenuItem] = useState("/Operations2");
-  // const navigate = useNavigate();
-
-  // const handeloperations = (path: any) => {
-  //   // setActiveMenuItem(path);
-  //   if (!collapsed) {
-  //     collapseSidebar();
-  //   }
-  //   navigate("/Operations2");
-  // };
 
   useEffect(() => {
     collapseSidebar();
@@ -87,8 +75,10 @@ function App() {
     });
   };
   const { setMyUser } = useUser();
-  const { data } = useApi();
+  const { data, eventData, multimediaData, liveAlarmData, dispatch, admin } =
+    useApi();
   const datas: any = data;
+  const Admins: any = admin;
   useEffect(() => {
     socket.on("admin-message-recieved", (data: any) => {
       notifyUserStreaming(data.message);
@@ -101,7 +91,6 @@ function App() {
         (user: any) => user._id === socketUser._id
       );
 
-      console.log(datas);
       if (userIndex !== -1) {
         const updatedMyUserArray: any = [...datas.users];
         updatedMyUserArray[userIndex] = socketUser;
@@ -110,13 +99,39 @@ function App() {
       }
     });
 
+    socket.on("livealarm-detected", (data) => {
+      notifyUserStreaming(data.message);
+      const updatedLiveAlarm = [...liveAlarmData, data];
+      dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
+      console.log("Live alarm detected:", data.message);
+
+      console.log("Live alarm detected:", data.message);
+    });
+
+    // Event listener for "event-detected"
+    socket.on("event-detected", (data) => {
+      notifyUserStreaming(data.message);
+      // Handle the event-detected event, e.g., update events state
+      console.log("Event detected:", data);
+    });
+
+    // Event listener for "multimedia-detected"
+    socket.on("multimedia-detected", (data) => {
+      notifyUserStreaming(data.message);
+      // Handle the multimedia-detected event, e.g., update multimedia state
+      console.log("Multimedia detected:", data);
+    });
+
     return () => {
       socket.off("streaming-updated");
       socket.off("admin-message-recieved");
+      socket.off("livealarm-detected");
+      socket.off("event-detected");
+      socket.off("multimedia-detected");
     };
   }, [data, setMyUser]);
   const isActive = (path: string) => location.pathname === path;
-
+  const isAuthenticated = Admins?.email;
   return (
     <div
       style={{
@@ -368,43 +383,46 @@ function App() {
       <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
         <ToastContainer />
-        {/* {isLoading && ( */}
 
-        {/* )} */}
         <Routes>
           <Route path="/" element={<Login />} />,
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Operators" element={<Operations />} />
-          <Route path="/Monitoring" element={<Monitoring />} />
-          <Route path="/Map/:item?" element={<Mapview />} />
-          <Route path="/Alarm" element={<Alarms />} />
-          <Route path="/Emergency" element={<Emergency />} />
-          <Route path="/Stream" element={<Stream />} />
-          <Route path="/MotionAlarm" element={<MotionAlarms />} />
-          <Route path="/Lisence" element={<Lisence />} />
-          <Route path="/Juricdiction" element={<Juricdiction />} />
-          <Route path="/VehiclePlates" element={<VehiclePlates />} />
-          <Route path="/Vehicle" element={<Vehicle />} />
-          <Route path="/Block" element={<Block />} />
-          <Route path="/Device" element={<Device />} />
-          <Route path="/VideoDevice" element={<VideoDevice />} />
-          <Route path="/AudioDevice" element={<AudioDevice />} />
-          <Route path="/TrackingDevice" element={<TrackingDevice />} />
-          <Route path="/Events" element={<Event />} />
-          <Route path="/Media" element={<Media />} />
-          <Route path="/Photos" element={<Photos />} />
-          <Route path="/MediaVideos" element={<Mediavideos />} />
-          <Route path="/Management" element={<Management />} />
-          <Route path="/ManagementGroup" element={<ManagementGroup />} />
-          <Route path="/Search" element={<SearchScreeen />} />
-          <Route path="/Messages" element={<Messages />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Singup" element={<Singup />} />
-          <Route path="/Operations2" element={<Operations2 />} />
-          <Route path="/Operations3" element={<Operations3 />} />
-          <Route path="/Settings/*" element={<SettingScreen />} />
-          <Route path="/Loby" element={<Loby />} />
-          <Route path="/MediaAudio" element={<MediaAudio />} />
+          {isAuthenticated ? (
+            <>
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/Operators" element={<Operations />} />
+              <Route path="/Monitoring" element={<Monitoring />} />
+              <Route path="/Map/:item?" element={<Mapview />} />
+              <Route path="/Alarm" element={<Alarms />} />
+              <Route path="/Emergency" element={<Emergency />} />
+              <Route path="/Stream" element={<Stream />} />
+              <Route path="/MotionAlarm" element={<MotionAlarms />} />
+              <Route path="/Lisence" element={<Lisence />} />
+              <Route path="/Juricdiction" element={<Juricdiction />} />
+              <Route path="/VehiclePlates" element={<VehiclePlates />} />
+              <Route path="/Vehicle" element={<Vehicle />} />
+              <Route path="/Block" element={<Block />} />
+              <Route path="/Device" element={<Device />} />
+              <Route path="/VideoDevice" element={<VideoDevice />} />
+              <Route path="/AudioDevice" element={<AudioDevice />} />
+              <Route path="/TrackingDevice" element={<TrackingDevice />} />
+              <Route path="/Events" element={<Event />} />
+              <Route path="/Media" element={<Media />} />
+              <Route path="/Photos" element={<Photos />} />
+              <Route path="/MediaVideos" element={<Mediavideos />} />
+              <Route path="/Management" element={<Management />} />
+              <Route path="/ManagementGroup" element={<ManagementGroup />} />
+              <Route path="/Search" element={<SearchScreeen />} />
+              <Route path="/Messages" element={<Messages />} />
+              <Route path="/Operations2" element={<Operations2 />} />
+              <Route path="/Operations3" element={<Operations3 />} />
+              <Route path="/Settings/*" element={<SettingScreen />} />
+              <Route path="/Loby" element={<Loby />} />
+              <Route path="/MediaAudio" element={<MediaAudio />} />
+            </>
+          ) : (
+            <Route path="/*" element={<Navigate to="/Login" />} />
+          )}
         </Routes>
       </section>
     </div>
