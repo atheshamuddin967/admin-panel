@@ -10,7 +10,7 @@ import { MdSensors } from "react-icons/md";
 import { RiAlarmWarningLine } from "react-icons/ri";
 import DeleteModal from "./DeleteModal";
 import ResolveAlarmModal from "./ResolveAlarmModal";
-function AlarmTable({ data, bg }: any) {
+function AlarmTable({ data, bg, selectedDeviceId }: any) {
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
   const [deleteModal, setDeleteModal] = useState(false);
@@ -57,6 +57,12 @@ function AlarmTable({ data, bg }: any) {
   const closeDeleteModal = () => {
     setResolveModal(false);
   };
+  const filteredData: any =
+    selectedDeviceId === "All"
+      ? data
+      : data.filter(
+          (item: any) => item.device?.deviceCode === selectedDeviceId
+        );
 
   return (
     <div>
@@ -80,7 +86,7 @@ function AlarmTable({ data, bg }: any) {
           </thead>
 
           <tbody className="table-row">
-            {data?.map((item: any) => (
+            {filteredData?.map((item: any) => (
               <tr className="table-row" key={item._id}>
                 <td className="table-data">
                   <div className="round" style={{ backgroundColor: bg }}>

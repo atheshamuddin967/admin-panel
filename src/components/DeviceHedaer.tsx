@@ -1,14 +1,40 @@
-import Input from "../components/Input";
 import "../Screens/Vehicle/Vehicle.scss";
-
-function DeviceHeader({ openmodal, openmodalEdit, onFilterChange }: any) {
+import { useState } from "react";
+function DeviceHeader({
+  openmodal,
+  openmodalEdit,
+  onFilterChange,
+  search,
+  searchValue,
+  setSearchValue,
+}: any) {
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     onFilterChange(value);
   };
+
+  // Debounced search function
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    console.log(searchValue);
+  };
+
   return (
     <div className="flex">
-      <Input placeholder={"Search Devices"} />
+      <div className="sboxs">
+        <div className="searchbox">
+          <input
+            type="text"
+            placeholder={"Search Devices"}
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
+          <button onClick={search}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
       <div className="btns">
         <div className="devicefilter">
           <select

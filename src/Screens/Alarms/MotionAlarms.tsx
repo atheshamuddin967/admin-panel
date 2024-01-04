@@ -8,6 +8,7 @@ function MotionAlarms() {
   const alarmData: any = liveAlarmData;
   const allAlarams: any = alarmData?.aoc;
   const [selectedFilter, setSelectedFilter] = useState("false");
+  const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
 
   const [filteredAlarms, setFilteredAlarms] = useState(allAlarams);
   useEffect(() => {
@@ -24,13 +25,24 @@ function MotionAlarms() {
       setFilteredAlarms(filtered);
     }
   };
+  const handleDeviceChange = (deviceCode: string | null) => {
+    setSelectedDeviceId(deviceCode);
+  };
   return (
     <div className="container">
       <div className="shead">
-        <AlarmHeader onFilterChange={handleFilterChange} />
+        <AlarmHeader
+          onFilterChange={handleFilterChange}
+          data={filteredAlarms}
+          onDeviceChange={handleDeviceChange}
+        />
       </div>
       <div className="alarmlist">
-        <AlarmTable data={filteredAlarms} bg={"#FFA2A2"} />
+        <AlarmTable
+          data={filteredAlarms}
+          bg={"#FFA2A2"}
+          selectedDeviceId={selectedDeviceId}
+        />
       </div>
     </div>
   );

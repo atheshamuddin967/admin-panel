@@ -5,11 +5,19 @@ import { TiInfo } from "react-icons/ti";
 import Infobox from "./Infobox";
 import { useState } from "react";
 import DeleteModal from "./DeleteModal";
-function EventTable({ eventData, icon, bg, deleteEvent }: any) {
+function EventTable({
+  eventData,
+  icon,
+  bg,
+  deleteEvent,
+  selectedDeviceId,
+  searchValue,
+}: any) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
   const [deleteItem, setDeleteItem] = useState("");
+
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
@@ -25,6 +33,22 @@ function EventTable({ eventData, icon, bg, deleteEvent }: any) {
   const closeDelete = () => {
     setDeleteModal(false);
   };
+
+  const filteredData: any = eventData.filter((item: any) => {
+    const matchesDevice =
+      selectedDeviceId === "All" ||
+      item.device?.deviceCode === selectedDeviceId;
+    const matchesSearch =
+      searchValue === "" ||
+      item.alarmId.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.eventType.toLowerCase().includes(searchValue.toLowerCase()) ||
+      // Add more fields to search if needed
+      // ...
+      false;
+
+    return matchesDevice && matchesSearch;
+  });
+
   return (
     <div className="div">
       <div className="table-responsive">
@@ -48,7 +72,7 @@ function EventTable({ eventData, icon, bg, deleteEvent }: any) {
           </thead>
 
           <tbody className="table-row text-center">
-            {eventData?.map((item: any) => (
+            {filteredData?.map((item: any) => (
               <tr className="tr-vehicle">
                 <td className="table-data">
                   <div className="round" style={{ backgroundColor: bg }}>

@@ -135,9 +135,7 @@ function Management() {
         // setOpenForm(false);
       } catch (error) {
         console.error("Error in handleFormSubmit:", error);
-      } finally {
-        SetApiLoading(false); // Set isLoading to false after completing the operation
-      }
+      } 
     }
   };
 

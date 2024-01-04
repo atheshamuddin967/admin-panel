@@ -23,7 +23,7 @@ function LiveMap({ selectedDeviceType, height }: any) {
     setSelectedMarker(marker);
     console.log(selectedMarker);
   };
-  console.log(selectedMarker);
+  // console.log(selectedMarker);
   const closeInfoWindow = () => {
     setSelectedMarker(null);
   };
@@ -48,7 +48,7 @@ function LiveMap({ selectedDeviceType, height }: any) {
           );
 
     if (filteredDevices) {
-      console.log(filteredDevices);
+      // console.log(filteredDevices);
       setUserLocation(
         filteredDevices?.map((device: any) => ({
           lat: device?.location?.coordinates[0],

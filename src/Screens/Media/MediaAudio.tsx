@@ -13,11 +13,16 @@ import moment from "moment";
 import Infobox from "../../components/Infobox";
 import { TiInfo } from "react-icons/ti";
 function MediaAudio() {
+  const [openInfo, setOpenInfo] = useState(false);
+  const [infoData, setInfoData] = useState<any>();
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
   const allData = multi?.data?.audios;
 
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
@@ -66,8 +71,6 @@ function MediaAudio() {
     }
   };
 
-  const [deleteItem, setDeleteItem] = useState("");
-  const [deleteModal, setDeleteModal] = useState(false);
   const openDelete = (item: any) => {
     setDeleteModal(true);
     setDeleteItem(item);
@@ -75,8 +78,7 @@ function MediaAudio() {
   const closeDelete = () => {
     setDeleteModal(false);
   };
-  const [openInfo, setOpenInfo] = useState(false);
-  const [infoData, setInfoData] = useState<any>();
+
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
@@ -84,21 +86,32 @@ function MediaAudio() {
   const closeinfobox = () => {
     setOpenInfo(false);
   };
+  const handleDeviceChange = (deviceCode: string | null) => {
+    setSelectedDeviceId(deviceCode);
+  };
+
+  const filteredData: any =
+    selectedDeviceId === "All"
+      ? allData
+      : allData.filter(
+          (item: any) => item.device?.deviceCode === selectedDeviceId
+        );
+
   return (
     <div>
       <div className="container">
         <div className="shead">
-          <MediaHeader />
+          <MediaHeader data={allData} onDeviceChange={handleDeviceChange} />
         </div>
         <div className="mediacontainer">
           <div className="heading">
             {" "}
-            <h6>Videos</h6>
+            <h6>Audios</h6>
           </div>
 
           <div className="row ">
-            {allData?.map((item: any, index: number) => (
-              <div className="col-sm-2">
+            {filteredData?.map((item: any, index: number) => (
+              <div className="col-sm-3">
                 <div className="imgList">
                   <div onClick={() => handleItemClick(index)}>
                     <ReactPlayer
@@ -107,6 +120,7 @@ function MediaAudio() {
                       style={{
                         maxHeight: "100px",
                         borderRadius: "10px !important",
+                        height: "100px",
                       }}
                       width={"100%"}
                       controls={true}
@@ -114,10 +128,10 @@ function MediaAudio() {
                       loop={false}
                     />
                   </div>
-                  <p>Device Code :{item.device?.deviceCode}</p>
-                  <p>Time:{item.created_at}</p>
 
                   <div className="det">
+                    <p>Device Code :{item.device?.deviceCode}</p>
+                    <p>Time:{item.created_at}</p>
                     <p>
                       Operator: <span> {item?.parol?.name}</span>
                     </p>
@@ -126,11 +140,7 @@ function MediaAudio() {
                     </p>
                     <p>
                       Time:
-                      <span>
-                        {moment(item.created_at).format(
-                          "MMMM Do YYYY, h:mm:ss a"
-                        )}
-                      </span>
+                      <span>{moment(item.created_at).format("lll")}</span>
                     </p>
                     <p>
                       FileSize: <span>{item.sizeInBytes}Bytes</span>{" "}

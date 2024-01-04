@@ -10,10 +10,16 @@ import moment from "moment";
 import { TiInfo } from "react-icons/ti";
 import Infobox from "../../components/Infobox";
 function Photos() {
+  const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
+
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [deleteItem, setDeleteItem] = useState("");
+  const [openInfo, setOpenInfo] = useState(false);
+  const [infoData, setInfoData] = useState<any>();
+  const [deleteModal, setDeleteModal] = useState(false);
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
   const allData = multi?.data?.photos;
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
@@ -56,8 +62,6 @@ function Photos() {
     }
   };
 
-  const [deleteItem, setDeleteItem] = useState("");
-  const [deleteModal, setDeleteModal] = useState(false);
   const openDelete = (item: any) => {
     setDeleteModal(true);
     setDeleteItem(item);
@@ -65,8 +69,7 @@ function Photos() {
   const closeDelete = () => {
     setDeleteModal(false);
   };
-  const [openInfo, setOpenInfo] = useState(false);
-  const [infoData, setInfoData] = useState<any>();
+
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
@@ -74,17 +77,26 @@ function Photos() {
   const closeinfobox = () => {
     setOpenInfo(false);
   };
+  const handleDeviceChange = (deviceCode: string | null) => {
+    setSelectedDeviceId(deviceCode);
+  };
+  const filteredData: any =
+    selectedDeviceId === "All"
+      ? allData
+      : allData.filter(
+          (item: any) => item.device?.deviceCode === selectedDeviceId
+        );
   return (
     <div className="container">
       <div className="shead">
-        <MediaHeader />
+        <MediaHeader data={allData} onDeviceChange={handleDeviceChange} />
       </div>
       <div className="mediacontainer">
         <div className="heading">
           <h6>Photos</h6>
         </div>
         <div className="row ">
-          {allData?.map((item: any, index: number) => (
+          {filteredData?.map((item: any, index: number) => (
             <div className="col-sm-3">
               <div className="imgList">
                 <div onClick={() => handleItemClick(index)}>
@@ -99,11 +111,7 @@ function Photos() {
                   </p>
                   <p>
                     Time:
-                    <span>
-                      {moment(item.created_at).format(
-                        "MMMM Do YYYY, h:mm:ss a"
-                      )}
-                    </span>
+                    <span>{moment(item.created_at).format("lll")}</span>
                   </p>
                   <p>
                     FileSize: <span>{item.sizeInBytes}Bytes</span>{" "}

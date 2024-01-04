@@ -1,7 +1,7 @@
 import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Loader from "../../components/Loader";
 import "./Login.scss";
@@ -9,8 +9,8 @@ import Singupinput from "../../components/Singupinput";
 import { useState, useEffect } from "react";
 function Login() {
   const [apiLoading, SetApiLoading] = useState(false);
-  const navigate = useNavigate();
-  const { adminLogin, admin } = useApi();
+  // const navigate = useNavigate();
+  const { adminLogin } = useApi();
 
   const [loginData, setLogindata] = useState<any>({ email: "", password: "" });
 

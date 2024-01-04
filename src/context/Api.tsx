@@ -39,6 +39,8 @@ interface InitialStateType {
   removeAdminRole: (adminRoleId: string) => Promise<any>;
   createSubAdmin: (subadmin: any) => Promise<any>;
   editSystemConfig: (editconfig: any) => Promise<any>;
+  searchEvents: (search: string, eventType: string) => Promise<any>;
+  searchDevices: (search: string, deviceType: string) => Promise<any>;
 }
 
 const initialstate: InitialStateType = {
@@ -52,7 +54,7 @@ const initialstate: InitialStateType = {
   multimediaData: [],
   liveAlarmData: [],
   adminRoles: [],
-  // adminData: [],
+  // searchData: [],
   systemConfig: null,
   admin: [],
   dispatch: (action: any) => {
@@ -73,6 +75,8 @@ const initialstate: InitialStateType = {
   removeAdminRole: (_adminRoleid: any) => Promise.resolve({}),
   createSubAdmin: (subadmin: any = {}) => Promise.resolve(subadmin),
   editSystemConfig: (_editconfig: any) => Promise.resolve({}),
+  searchEvents: (_search: string, _eventType: string) => Promise.resolve({}),
+  searchDevices: (_search: string, _deviceType: string) => Promise.resolve({}),
 };
 
 const BEARER_TOKEN =
@@ -101,8 +105,9 @@ const API_RemoveAdmin = `${BASE_URL}admin/remove-adminrole`;
 const API_Admin_Login = `${BASE_URL}admin/login-admin`;
 const API_createSubADmin = `${BASE_URL}admin/create-admin`;
 const API_SystemConfig = `${BASE_URL}system/system-config`;
-const API_EditSystem = "http://185.31.67.243/system/edit-systemconf";
-
+const API_EditSystem = `${BASE_URL}system/edit-systemconf`;
+const API_EventSearch = `${BASE_URL}events/search-events`;
+const API_SearchDevice = `${BASE_URL}devices/search-devices`;
 const ApiContext = createContext(initialstate);
 const ApiReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -332,6 +337,20 @@ const ApiReducer = (state: any, action: any) => {
         isError: true,
         error: action.payload,
       };
+    case "SEARCH_EVENTS_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        eventData: action.payload, // Assuming payload contains the search results
+      };
+    case "SEARCH_DEVICES_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        deviceData: action.payload, // Assuming payload contains the search results
+      };
 
     default:
       return state;
@@ -373,7 +392,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const deviceData = res.data;
-      console.log(deviceData);
+      // console.log(deviceData);
       dispatch({ type: "ADD_DEVICE", payload: deviceData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -391,7 +410,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const multimediaData = res.data;
-      // console.log(multimediaData);
+      console.log(multimediaData);
       dispatch({ type: "FETCH_MULTIMEDIA_SUCCESS", payload: multimediaData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -1062,6 +1081,79 @@ const ApiProvider = ({ children }: any) => {
     }
   };
 
+  // search event function
+  const searchEvents = async (
+    search: string,
+    eventType: string
+  ): Promise<any> => {
+    try {
+      dispatch({ type: "SET_LOADING" });
+
+      const response = await axios.get(API_EventSearch, {
+        params: {
+          search,
+          eventType,
+        },
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const eventData = response?.data;
+      console.log(eventData);
+
+      dispatch({ type: "SEARCH_EVENTS_SUCCESS", payload: eventData });
+
+      // Do further processing or handle the data as needed
+
+      return eventData; // Return the data if needed by the caller
+    } catch (error: any) {
+      // Dispatch an error action or handle the error accordingly
+      dispatch({
+        type: "SEARCH_EVENTS_ERROR",
+        payload: "Search events failed",
+      });
+      console.error("Search events failed:", error);
+      throw error; // Re-throw the error to propagate it to the caller if needed
+    }
+  };
+
+  // search device funtion
+
+  const searchDevices = async (search: string, deviceType: string) => {
+    try {
+      dispatch({ type: "SET_LOADING" });
+      console.log("API Request Params:", { search, deviceType });
+
+      const response = await axios.get(API_SearchDevice, {
+        params: {
+          search,
+          deviceType,
+        },
+
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      // const deviceData = response?.data;
+      // console.log(deviceData);
+
+      // dispatch({ type: "SEARCH_DEVICES_SUCCESS", payload: deviceData });
+      // fetchDeviceData();
+      // return deviceData;
+    } catch (error: any) {
+      dispatch({
+        type: "SEARCH_DEVICES_ERROR",
+        payload: "Search devices failed",
+      });
+      console.error("Search devices failed:", error);
+      throw error;
+    }
+  };
+
   return (
     <ApiContext.Provider
       value={{
@@ -1082,6 +1174,8 @@ const ApiProvider = ({ children }: any) => {
         createSubAdmin,
         editSystemConfig,
         dispatch,
+        searchEvents,
+        searchDevices,
       }}
     >
       {children}

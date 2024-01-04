@@ -13,13 +13,19 @@ interface MediaItem {
   image: string;
   mediaType: string;
   mediaPath: any;
+  device: any;
 }
 
 interface MediaListProps {
   data: MediaItem[];
   deleteMultimedia: any;
+  selectedDeviceId: any;
 }
-function MediaList({ data, deleteMultimedia }: MediaListProps) {
+function MediaList({
+  data,
+  deleteMultimedia,
+  selectedDeviceId,
+}: MediaListProps) {
   // const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   // console.log(data);
@@ -81,10 +87,16 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
   const closeinfobox = () => {
     setOpenInfo(false);
   };
+
+  const filteredData: any =
+    selectedDeviceId === "All"
+      ? data
+      : data.filter((item) => item.device?.deviceCode === selectedDeviceId);
+
   return (
     <div>
       <div className="row ">
-        {data?.map((item: any, index: number) => (
+        {filteredData?.map((item: any, index: number) => (
           <div className="col-sm-3">
             <div className="imgList">
               <div onClick={() => handleItemClick(index)}>
@@ -122,9 +134,7 @@ function MediaList({ data, deleteMultimedia }: MediaListProps) {
                 </p>
                 <p>
                   Time:
-                  <span>
-                    {moment(item?.created_at).format("MMMM Do YYYY, h:mm:ss a")}
-                  </span>
+                  <span>{moment(item?.created_at).format("lll")}</span>
                 </p>
                 <p>
                   FileSize: <span>{item?.sizeInBytes}Bytes</span>{" "}

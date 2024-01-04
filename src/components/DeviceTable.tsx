@@ -8,7 +8,7 @@ import DeleteModal from "./DeleteModal";
 import Infobox from "./Infobox";
 import moment from "moment";
 import { useState } from "react";
-function DeviceTable({ data, bg, selectedFilter }: any) {
+function DeviceTable({ data, bg, selectedFilter, searchValue }: any) {
   const { deleteDevice } = useApi();
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
