@@ -143,7 +143,7 @@ function AlarmTable({ data, bg, selectedDeviceId }: any) {
       )}
       {deleteModal && (
         <DeleteModal
-          title={"event"}
+          title={"alarm"}
           button={deleteLiveAlarm}
           closeDelete={closeDelete}
           item={deleteItem}

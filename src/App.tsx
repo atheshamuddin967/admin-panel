@@ -99,10 +99,10 @@ function App() {
       }
     });
 
-    socket.on("livealarm-detected", (data) => {
+    socket.on("livealarm-detected", (data: any) => {
       notifyUserStreaming(data.message);
-      const updatedLiveAlarm = [...liveAlarmData, data];
-      dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
+      const updatedLiveAlarm: any = [...liveAlarmData, data];
+      dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm.data });
       console.log("Live alarm detected:", data.message);
 
       console.log("Live alarm detected:", data.message);

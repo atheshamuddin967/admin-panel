@@ -229,7 +229,7 @@ function MediaAudio() {
 
       {deleteModal && (
         <DeleteModal
-          title={"Multimedia"}
+          title={"media"}
           button={deleteMultimedia}
           closeDelete={closeDelete}
           item={deleteItem}

@@ -59,7 +59,7 @@ function ManagementTable({ data, icon, bg }: any) {
 
       {deleteModal && (
         <DeleteModal
-          title={"event"}
+          title={"parol"}
           button={"deleteEvent"}
           closeDelete={closeDelete}
           item={deleteItem}

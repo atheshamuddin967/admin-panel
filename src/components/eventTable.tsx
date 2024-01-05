@@ -40,8 +40,13 @@ function EventTable({
       item.device?.deviceCode === selectedDeviceId;
     const matchesSearch =
       searchValue === "" ||
-      item.alarmId.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.eventType.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.alarmId?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.eventType?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.agency?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.parol?.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.device?.deviceCode
+        ?.toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
       // Add more fields to search if needed
       // ...
       false;

@@ -14,7 +14,7 @@ function DeleteModal({ title, button, item, closeDelete }: any) {
         </button>
       </div>
       <div className="Headerdetails">
-        <p>Do you want to delete this {title}</p>
+        <p>Do you want to delete this {title} ?</p>
         <button
           onClick={() => {
             handledelete(item);

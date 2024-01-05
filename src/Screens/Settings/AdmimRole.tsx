@@ -169,7 +169,7 @@ function AdmimRole() {
 
       {deleteModal && (
         <DeleteModal
-          title={"Device"}
+          title={"role"}
           button={removeAdminRole}
           closeDelete={closeDelete}
           item={deleteItem}

@@ -507,11 +507,11 @@ const ApiProvider = ({ children }: any) => {
     const intervalId = setInterval(() => {
       fetchData();
       fetchDeviceData();
-      fetchMultimediaData();
-      fetchEventData();
-      fetchLiveAlarmData();
-      fetchAdminRoles();
-    }, 3000000);
+      // fetchMultimediaData();
+      // fetchEventData();
+      // fetchLiveAlarmData();
+      // fetchAdminRoles();
+    }, 3000);
 
     return () => {
       isMounted.current = false;

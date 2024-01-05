@@ -130,7 +130,7 @@ function DeviceTable({ data, bg, selectedFilter, searchValue }: any) {
 
       {deleteModal && (
         <DeleteModal
-          title={"Device"}
+          title={"device"}
           button={deleteDevice}
           closeDelete={closeDelete}
           item={deleteItem}

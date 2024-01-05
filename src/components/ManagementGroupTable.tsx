@@ -146,7 +146,7 @@ function ManagementGroupTable({
 
       {deleteModal && (
         <DeleteModal
-          title={"Group"}
+          title={"group"}
           button={handleDeleteGroup}
           closeDelete={closeDelete}
           item={deleteItem}
@@ -154,7 +154,7 @@ function ManagementGroupTable({
       )}
       {modal && (
         <UserDeleteModal
-          title={" user from Group "}
+          title={" user from group "}
           button={handleDeleteuser}
           closeDelete={closeListModal}
           item={deletelist}
