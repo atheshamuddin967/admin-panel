@@ -36,7 +36,7 @@ function EventHeader({ onSelectEventType, data, onDeviceChange, search }: any) {
   };
 
   const handleSearchClick = () => {
-    debouncedSearch(searchValue);
+    // debouncedSearch(searchValue);
   };
   return (
     <div>

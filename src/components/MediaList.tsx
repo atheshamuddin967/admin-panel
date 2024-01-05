@@ -20,11 +20,13 @@ interface MediaListProps {
   data: MediaItem[];
   deleteMultimedia: any;
   selectedDeviceId: any;
+  searchValue: any;
 }
 function MediaList({
   data,
   deleteMultimedia,
   selectedDeviceId,
+  searchValue,
 }: MediaListProps) {
   // const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -88,10 +90,33 @@ function MediaList({
     setOpenInfo(false);
   };
 
-  const filteredData: any =
-    selectedDeviceId === "All"
-      ? data
-      : data.filter((item) => item.device?.deviceCode === selectedDeviceId);
+  // const filteredData: any =
+  //   selectedDeviceId === "All"
+  //     ? data
+  //     : data.filter((item) => item.device?.deviceCode === selectedDeviceId);
+
+  const filteredData: any = data?.filter((item: any) => {
+    const searchTermLower = searchValue.toLowerCase();
+    const matchesDevice =
+      selectedDeviceId === "All" ||
+      item?.device?.deviceCode === selectedDeviceId;
+    const matchesSearch =
+      searchTermLower === "" ||
+      item?.mediaType?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.parol?.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      moment(item?.created_at)
+        .format("lll")
+        .toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
+      item?.device?.deviceCode
+        ?.toLowerCase()
+        .includes(searchValue.toLowerCase());
+    // Add more fields to search if needed
+    // ...
+    false;
+
+    return matchesDevice && matchesSearch;
+  });
 
   return (
     <div>

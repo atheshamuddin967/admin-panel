@@ -8,7 +8,9 @@ import DeviceHeader from "../../components/DeviceHedaer";
 import "../Device/Device.scss";
 function VideoDevice() {
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const { deviceData } = useApi();
+  const [searchValue, setSearchValue] = useState("");
+
+  const { deviceData, searchDevices } = useApi();
   const data: any = deviceData;
   const alldata = data?.data?.fixedCameras;
   // console.log(data);
@@ -28,11 +30,17 @@ function VideoDevice() {
   const closemodalEdit = () => {
     SetOpenEdit(false);
   };
-
+  const handleSearch = () => {
+    searchDevices(searchValue, "all");
+  };
   return (
     <div className="container">
       <div className="shead">
         <DeviceHeader
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          data={alldata}
+          search={handleSearch}
           openmodal={openmodal}
           openmodalEdit={openmodalEdit}
           onFilterChange={(value: any) => setSelectedFilter(value)}
@@ -41,9 +49,10 @@ function VideoDevice() {
       <div className="device-Table">
         <DeviceTable
           data={alldata}
-          icon={Images.movie}
-          bg={"#DBFAFC"}
+          icon={Images.conected}
+          bg={"#FCEBDB"}
           selectedFilter={selectedFilter}
+          searchValue={searchValue}
         />
       </div>
       {open && (

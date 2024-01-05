@@ -37,7 +37,7 @@ function EventTable({
   const filteredData: any = eventData.filter((item: any) => {
     const matchesDevice =
       selectedDeviceId === "All" ||
-      item.device?.deviceCode === selectedDeviceId;
+      item?.device?.deviceCode === selectedDeviceId;
     const matchesSearch =
       searchValue === "" ||
       item?.alarmId?.toLowerCase().includes(searchValue.toLowerCase()) ||

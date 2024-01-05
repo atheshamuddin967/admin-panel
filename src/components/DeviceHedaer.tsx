@@ -1,5 +1,5 @@
 import "../Screens/Vehicle/Vehicle.scss";
-import { useState } from "react";
+import { useEffect } from "react";
 function DeviceHeader({
   openmodal,
   openmodalEdit,
@@ -14,12 +14,30 @@ function DeviceHeader({
   };
 
   // Debounced search function
+  const debounce = (fn: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    return function (...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn(...args), delay);
+    };
+  };
+
+  // Debounced search function
+  const debouncedSearch = debounce((value: string) => search(value), 300);
+
+  useEffect(() => {
+    // Call the debounced search function when searchValue changes
+    debouncedSearch(searchValue);
+  }, [searchValue, debouncedSearch]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
     console.log(searchValue);
   };
 
+  const handleSearchClick = () => {
+    debouncedSearch(searchValue);
+  };
   return (
     <div className="flex">
       <div className="sboxs">
@@ -30,7 +48,7 @@ function DeviceHeader({
             value={searchValue}
             onChange={handleSearchChange}
           />
-          <button onClick={search}>
+          <button onClick={handleSearchClick}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>

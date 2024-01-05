@@ -12,6 +12,8 @@ function DeviceTable({ data, bg, selectedFilter, searchValue }: any) {
   const { deleteDevice } = useApi();
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
+  const [deleteItem, setDeleteItem] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
   const openinfobox = (item: any) => {
     setOpenInfo(true);
     setInfoData(item);
@@ -32,21 +34,54 @@ function DeviceTable({ data, bg, selectedFilter, searchValue }: any) {
     }
   }
 
+  // const filteredData = data?.filter((item: any) => {
+  //   if (selectedFilter === "All") {
+  //     return true; // Show all data
+  //   } else if (selectedFilter === "Online") {
+  //     return item.isOnline;
+  //   } else if (selectedFilter === "Offline") {
+  //     return !item.isOnline;
+  //   } else if (selectedFilter === "Lost") {
+  //     return item.isLost;
+  //   }
+  //   return false;
+  // });
+
   const filteredData = data?.filter((item: any) => {
+    const searchTermLower = searchValue.toLowerCase();
+
+    const matchesSearch =
+      searchTermLower === "" ||
+      moment(item?.created_at)
+        .format("MMMM Do YYYY, h:mm:ss a")
+        ?.toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
+      item?.role?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.deviceType?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.parol?.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.deviceCode?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.isOnline
+        ? "Active"
+        : "Offline"?.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item?.emergency_enabled
+        ? "Active"
+        : "Deactive"?.toLowerCase().includes(searchValue.toLowerCase());
+
+    // ...
+
     if (selectedFilter === "All") {
-      return true; // Show all data
+      return matchesSearch; // Show all data
     } else if (selectedFilter === "Online") {
-      return item.isOnline;
+      return item.isOnline && matchesSearch;
     } else if (selectedFilter === "Offline") {
-      return !item.isOnline;
+      return !item.isOnline && matchesSearch;
     } else if (selectedFilter === "Lost") {
-      return item.isLost;
+      return item.isLost && matchesSearch;
     }
+
     return false;
   });
 
-  const [deleteItem, setDeleteItem] = useState("");
-  const [deleteModal, setDeleteModal] = useState(false);
   const openDelete = (item: any) => {
     setDeleteModal(true);
     setDeleteItem(item);

@@ -87,7 +87,7 @@ function OperationsVideo({ onViewImageClick }: any) {
         {dropItem?.map((item: any, index: number) => {
           return (
             <div
-              key={item?.deviceCode}
+              key={item?.assignedDevice?.deviceCode}
               className="col-sm-4 p-0   m-0"
               onDragEnter={() => (dragOverItem.current = index)}
               onDragStart={() => (dragItem.current = index)}
@@ -103,19 +103,21 @@ function OperationsVideo({ onViewImageClick }: any) {
                   >
                     <FaRegTrashCan />
                   </button>
-                  {item?.name} {renderIcon(item)}
+                  {item?.username}
+                  {renderIcon(item)}
                   <span onClick={() => onViewImageClick(item)}>
                     <GoScreenFull />
                   </span>
                 </p>
 
                 <iframe
-                  src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.deviceCode}`}
+                  src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.assignedDevice.deviceCode}`}
                   width="100%"
                   height="150px"
                   frameBorder="0"
                   className="custom-iframe"
                 ></iframe>
+                <p> {item?.assignedDevice?.deviceCode} </p>
               </div>
             </div>
           );

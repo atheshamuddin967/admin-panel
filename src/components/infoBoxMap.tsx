@@ -52,19 +52,43 @@ function InfoBoxMap({ height, data }: any) {
     if (data) {
       setUserLocation([
         {
-          lat: data?.location?.coordinates[0],
-          lng: data?.location?.coordinates[1],
-          deviceType: data.deviceType,
+          lat: data?.gps?.coordinates[0],
+          lng: data?.gps?.coordinates[1],
+          deviceType: data?.device?.deviceType,
           parol: data?.parol?.name,
           status: data?.isOnline ? "Online" : "Offline",
-          deviceCode: data?.deviceCode,
+          deviceCode: data?.device?.deviceCode,
           Created: moment(data?.created_at).format("MMMM Do YYYY, h:mm:ss a"),
-          role: data?.role,
+          role: data?.device?.role,
         },
       ]);
     }
   }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const coordinates =
+  //       data.gps && data.gps.coordinates
+  //         ? data.gps.coordinates
+  //         : data.location && data.location.coordinates
+  //         ? data.location.coordinates
+  //         : null;
 
+  //     if (coordinates) {
+  //       setUserLocation([
+  //         {
+  //           lat: coordinates[0],
+  //           lng: coordinates[1],
+  //           deviceType: data?.device?.deviceType,
+  //           parol: data?.parol?.name,
+  //           status: data?.isOnline ? "Online" : "Offline",
+  //           deviceCode: data?.device?.deviceCode,
+  //           Created: moment(data?.created_at).format("MMMM Do YYYY, h:mm:ss a"),
+  //           role: data?.device?.role,
+  //         },
+  //       ]);
+  //     }
+  //   }
+  // }, [data]);
   if (loadError) return "Error";
   const containerStyle = {
     width: "100%",

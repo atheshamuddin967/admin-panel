@@ -39,8 +39,14 @@ interface InitialStateType {
   removeAdminRole: (adminRoleId: string) => Promise<any>;
   createSubAdmin: (subadmin: any) => Promise<any>;
   editSystemConfig: (editconfig: any) => Promise<any>;
-  searchEvents: (search: string, eventType: string) => Promise<any>;
-  searchDevices: (search: string, deviceType: string) => Promise<any>;
+  // searchEvents: (search: string, eventType: string) => Promise<any>;
+  // searchDevices: (search: string, deviceType: string) => Promise<any>;
+  searchDatafunction: any;
+  searchData: any;
+  fetchLiveAlarmData: any;
+  fetchEventData: any;
+  fetchDeviceData: any;
+  fetchMultimediaData: any;
 }
 
 const initialstate: InitialStateType = {
@@ -54,7 +60,7 @@ const initialstate: InitialStateType = {
   multimediaData: [],
   liveAlarmData: [],
   adminRoles: [],
-  // searchData: [],
+  searchData: [],
   systemConfig: null,
   admin: [],
   dispatch: (action: any) => {
@@ -75,14 +81,20 @@ const initialstate: InitialStateType = {
   removeAdminRole: (_adminRoleid: any) => Promise.resolve({}),
   createSubAdmin: (subadmin: any = {}) => Promise.resolve(subadmin),
   editSystemConfig: (_editconfig: any) => Promise.resolve({}),
-  searchEvents: (_search: string, _eventType: string) => Promise.resolve({}),
-  searchDevices: (_search: string, _deviceType: string) => Promise.resolve({}),
+  // searchEvents: (_search: string, _eventType: string) => Promise.resolve({}),
+  // searchDevices: (_search: string, _deviceType: string) => Promise.resolve({}),
+  searchDatafunction: (_serach: string) => Promise.resolve({}),
+  fetchLiveAlarmData: () => Promise.resolve(),
+  fetchEventData: () => Promise.resolve(),
+  fetchDeviceData: () => Promise.resolve(),
+  fetchMultimediaData: () => Promise.resolve(),
 };
 
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
 // export const BASE_URL = "https://s1.hostin.one/";
-export const BASE_URL = "http://185.31.67.243/";
+// export const BASE_URL = "http://185.31.67.243/";
+export const BASE_URL = "http://192.168.100.44:3002/";
 // const API_ENDPOINT = `${BASE_URL}user/get-users-and-groups`;
 const API_ENDPOINT = `${BASE_URL}groups/get-parols-and-groups`;
 const Api_createGroup = `${BASE_URL}groups/new-group`;
@@ -107,7 +119,9 @@ const API_createSubADmin = `${BASE_URL}admin/create-admin`;
 const API_SystemConfig = `${BASE_URL}system/system-config`;
 const API_EditSystem = `${BASE_URL}system/edit-systemconf`;
 const API_EventSearch = `${BASE_URL}events/search-events`;
-const API_SearchDevice = `${BASE_URL}devices/search-devices`;
+// const API_SearchDevice = `${BASE_URL}devices/search-devices`;
+const API_genralSearch = `${BASE_URL}search`;
+
 const ApiContext = createContext(initialstate);
 const ApiReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -351,7 +365,13 @@ const ApiReducer = (state: any, action: any) => {
         isError: false,
         deviceData: action.payload, // Assuming payload contains the search results
       };
-
+    case "SET_SEARCH_DATA":
+      return {
+        ...state,
+        searchData: action.payload,
+        isLoading: false,
+        isError: false,
+      };
     default:
       return state;
   }
@@ -410,7 +430,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const multimediaData = res.data;
-      console.log(multimediaData);
+      // console.log(multimediaData);
       dispatch({ type: "FETCH_MULTIMEDIA_SUCCESS", payload: multimediaData });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -447,7 +467,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const liveAlarmData = res.data;
-      // console.log(liveAlarmData);
+      console.log(liveAlarmData);
       dispatch({ type: "SET_LIVE_ALARMS", payload: liveAlarmData.data });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -818,14 +838,15 @@ const ApiProvider = ({ children }: any) => {
           },
         }
       );
-      console.log("Delete Live Alarm Response:", response);
-      fetchLiveAlarmData();
+      // console.log("Delete Live Alarm Response:", response);
+
       // Dispatch the "DELETE_LIVE_ALARM" action with the alarmId
       dispatch({ type: "DELETE_LIVE_ALARM", payload: alarmId });
       toast.success(response.data.message, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 6000,
       });
+      fetchLiveAlarmData();
     } catch (error: any) {
       if (error.response) {
         console.error("Response data:", error.response.data);
@@ -936,9 +957,6 @@ const ApiProvider = ({ children }: any) => {
 
       // console.log("Before API call");
 
-      dispatch({ type: "SET_LOADING" });
-
-      // Call your admin login API
       const response = await axios.post(API_Admin_Login, credentials, {
         headers: {
           Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -946,10 +964,9 @@ const ApiProvider = ({ children }: any) => {
         },
       });
 
-      // console.log("its resposnse is", response);
-
       const admin = response?.data?.user;
-      console.log(admin);
+      // console.log(response);
+      // console.log(admin);
 
       toast.success(response?.data?.message, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -1082,75 +1099,94 @@ const ApiProvider = ({ children }: any) => {
   };
 
   // search event function
-  const searchEvents = async (
-    search: string,
-    eventType: string
-  ): Promise<any> => {
-    try {
-      dispatch({ type: "SET_LOADING" });
+  // const searchEvents = async (
+  //   search: string,
+  //   eventType: string
+  // ): Promise<any> => {
+  //   try {
+  //     dispatch({ type: "SET_LOADING" });
 
-      const response = await axios.get(API_EventSearch, {
-        params: {
-          search,
-          eventType,
-        },
-        headers: {
-          Authorization: `Bearer ${BEARER_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
+  //     const response = await axios.get(API_EventSearch, {
+  //       params: {
+  //         search,
+  //         eventType,
+  //       },
+  //       headers: {
+  //         Authorization: `Bearer ${BEARER_TOKEN}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-      const eventData = response?.data;
-      console.log(eventData);
+  //     const eventData = response?.data;
+  //     console.log(eventData);
 
-      dispatch({ type: "SEARCH_EVENTS_SUCCESS", payload: eventData });
+  //     dispatch({ type: "SEARCH_EVENTS_SUCCESS", payload: eventData });
 
-      // Do further processing or handle the data as needed
+  //     // Do further processing or handle the data as needed
 
-      return eventData; // Return the data if needed by the caller
-    } catch (error: any) {
-      // Dispatch an error action or handle the error accordingly
-      dispatch({
-        type: "SEARCH_EVENTS_ERROR",
-        payload: "Search events failed",
-      });
-      console.error("Search events failed:", error);
-      throw error; // Re-throw the error to propagate it to the caller if needed
-    }
-  };
+  //     return eventData; // Return the data if needed by the caller
+  //   } catch (error: any) {
+  //     // Dispatch an error action or handle the error accordingly
+  //     dispatch({
+  //       type: "SEARCH_EVENTS_ERROR",
+  //       payload: "Search events failed",
+  //     });
+  //     console.error("Search events failed:", error);
+  //     throw error; // Re-throw the error to propagate it to the caller if needed
+  //   }
+  // };
 
   // search device funtion
 
-  const searchDevices = async (search: string, deviceType: string) => {
+  // const searchDevices = async (search: string, deviceType: string) => {
+  //   try {
+  //     dispatch({ type: "SET_LOADING" });
+  //     console.log("API Request Params:", { search, deviceType });
+
+  //     const response = await axios.get(API_SearchDevice, {
+  //       params: {
+  //         search,
+  //         deviceType,
+  //       },
+
+  //       headers: {
+  //         Authorization: `Bearer ${BEARER_TOKEN}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     // console.log(response.data);
+  //     // const deviceData = response?.data;
+  //     // console.log(deviceData);
+
+  //     dispatch({ type: "SEARCH_DEVICES_SUCCESS", payload: deviceData });
+  //     // fetchDeviceData();
+  //     // return deviceData;
+  //   } catch (error: any) {
+  //     dispatch({
+  //       type: "SEARCH_DEVICES_ERROR",
+  //       payload: "Search devices failed",
+  //     });
+  //     console.error("Search devices failed:", error);
+  //     throw error;
+  //   }
+  // };
+
+  const searchDatafunction = async (search: string): Promise<void> => {
+    console.log("object");
     try {
-      dispatch({ type: "SET_LOADING" });
-      console.log("API Request Params:", { search, deviceType });
-
-      const response = await axios.get(API_SearchDevice, {
-        params: {
-          search,
-          deviceType,
-        },
-
-        headers: {
-          Authorization: `Bearer ${BEARER_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.data);
-      // const deviceData = response?.data;
-      // console.log(deviceData);
-
-      // dispatch({ type: "SEARCH_DEVICES_SUCCESS", payload: deviceData });
-      // fetchDeviceData();
-      // return deviceData;
-    } catch (error: any) {
-      dispatch({
-        type: "SEARCH_DEVICES_ERROR",
-        payload: "Search devices failed",
-      });
-      console.error("Search devices failed:", error);
-      throw error;
+      dispatch({ type: "SET_LOADING", payload: true });
+      const response = await fetch(`${API_genralSearch}?search=${search}`);
+      const searchData = await response.json();
+      console.log(searchData);
+      if (searchData.success) {
+        dispatch({ type: "SET_SEARCH_DATA", payload: searchData });
+      } else {
+        dispatch({ type: "SET_ERROR", payload: true });
+      }
+    } catch (error) {
+      dispatch({ type: "SET_ERROR", payload: true });
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
@@ -1174,8 +1210,13 @@ const ApiProvider = ({ children }: any) => {
         createSubAdmin,
         editSystemConfig,
         dispatch,
-        searchEvents,
-        searchDevices,
+        // searchEvents,
+        // searchDevices,
+        searchDatafunction,
+        fetchLiveAlarmData,
+        fetchEventData,
+        fetchDeviceData,
+        fetchMultimediaData,
       }}
     >
       {children}

@@ -59,9 +59,11 @@ function Operationsider({ data }: any) {
 
   const datas: any = data;
   const isGroupEmergency = (group: any) => {
-    return group?.parols?.some((user: any) => user?.emergency_enabled);
+    return group?.parols?.some(
+      (user: any) => user?.assignedDevice?.emergency_enabled
+    );
   };
-
+  // console.log(datas);
   // const startPttForGroup = (group: any) => {
   //   const speakingUserId = group.currentlySpeaking;
   //   if (speakingUserId) {
@@ -160,7 +162,7 @@ function Operationsider({ data }: any) {
                   </div>
                   <div className="dropbtns">
                     <img src={Images.conected} alt="" />
-                    <p> {item?.users?.length}</p>
+                    <p> {item?.parols?.length}</p>
 
                     <img src={Images.connector} alt="" />
                     <p>
@@ -174,7 +176,7 @@ function Operationsider({ data }: any) {
                       <span className="danger">
                         <CgDanger />
                         {
-                          item?.users?.filter(
+                          item?.parol?.assignedDevice?.filter(
                             (user: { emergency_enabled: boolean }) =>
                               user.emergency_enabled
                           ).length
@@ -193,20 +195,26 @@ function Operationsider({ data }: any) {
                   <ul className="zoneul">
                     {item?.parols?.map((user: any) => (
                       <li key={user._id}>
-                        {user.isOnline && !user.emergency_enabled && (
-                          <img src={Images.Greens} alt="Not Emergency" />
-                        )}
-                        {user.emergency_enabled && (
+                        {user.isOnline &&
+                          !user?.assignedDevice?.emergency_enabled && (
+                            <img src={Images.Greens} alt="Not Emergency" />
+                          )}
+                        {user?.assignedDevice?.emergency_enabled && (
                           <img src={Images.red} alt="Emergency" />
                         )}
-                        {!user.isOnline && !user.emergency_enabled && (
-                          <img src={Images.conected} alt="Not Emergency" />
-                        )}
+                        {!user?.isOnline &&
+                          !user?.assignedDevice?.emergency_enabled && (
+                            <img src={Images.conected} alt="Not Emergency" />
+                          )}
                         <span
                           className={classNames({
-                            greens: user.isOnline && !user.emergency_enabled,
-                            grays: !user.isOnline && !user.emergency_enabled,
-                            reds: user.emergency_enabled,
+                            greens:
+                              user?.isOnline &&
+                              !user?.assignedDevice?.emergency_enabled,
+                            grays:
+                              !user?.isOnline &&
+                              !user?.assignedDevice?.emergency_enabled,
+                            reds: user?.assignedDevice?.emergency_enabled,
                           })}
                         >
                           #{user.name || user.name}{" "}

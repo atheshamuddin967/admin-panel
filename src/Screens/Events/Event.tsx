@@ -1,11 +1,11 @@
 import EventHeader from "../../components/EventsHeader";
 import EventTable from "../../components/eventTable";
 import { useApi } from "../../context/Api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Images from "../../images/Images";
 function Events() {
   // const emergencyAlarms = Items.filter((item) => item.alert === "emergency");
-  const { eventData, deleteEvent, searchEvents } = useApi();
+  const { eventData, deleteEvent } = useApi();
   const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
   const [searchValue, setSearchValue] = useState("");
 
@@ -28,9 +28,13 @@ function Events() {
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
-    const defaultEventType: any = eventData;
-    searchEvents(value, defaultEventType);
+    // const defaultEventType: any = eventData;
+    // searchEvents(value, defaultEventType);
   };
+  useEffect(() => {
+    // Update filtered events when eventData changes
+    setFilteredEvents(eventData);
+  }, [eventData]);
   return (
     <div className="container">
       <div className="shead">

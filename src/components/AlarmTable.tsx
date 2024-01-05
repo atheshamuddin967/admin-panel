@@ -5,12 +5,12 @@ import { TbMapPinOff } from "react-icons/tb";
 import { TiInfo } from "react-icons/ti";
 import Infobox from "./Infobox";
 import { MdCarCrash } from "react-icons/md";
-
+import moment from "moment";
 import { MdSensors } from "react-icons/md";
 import { RiAlarmWarningLine } from "react-icons/ri";
 import DeleteModal from "./DeleteModal";
 import ResolveAlarmModal from "./ResolveAlarmModal";
-function AlarmTable({ data, bg, selectedDeviceId }: any) {
+function AlarmTable({ data, bg, selectedDeviceId, searchValue }: any) {
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
   const [deleteModal, setDeleteModal] = useState(false);
@@ -57,12 +57,28 @@ function AlarmTable({ data, bg, selectedDeviceId }: any) {
   const closeDeleteModal = () => {
     setResolveModal(false);
   };
-  const filteredData: any =
-    selectedDeviceId === "All"
-      ? data
-      : data.filter(
-          (item: any) => item.device?.deviceCode === selectedDeviceId
-        );
+  const filteredData: any = data?.filter((item: any) => {
+    const matchesDevice =
+      selectedDeviceId === "All" ||
+      item?.device?.deviceCode === selectedDeviceId;
+    const matchesSearch =
+      searchValue === "" ||
+      item?.alarmId?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.alarmType?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      moment(item?.created_at)
+        .format("MMMM Do YYYY, h:mm:ss a")
+        .toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
+      item?.parol?.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.device?.deviceCode
+        ?.toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
+      // Add more fields to search if needed
+      // ...
+      false;
+
+    return matchesDevice && matchesSearch;
+  });
 
   return (
     <div>
@@ -95,7 +111,9 @@ function AlarmTable({ data, bg, selectedDeviceId }: any) {
                 </td>
                 <td> {item.alarmId}</td>
 
-                <td>{item.created_at}</td>
+                <td>
+                  {moment(item?.created_at).format("MMMM Do YYYY, h:mm:ss a")}
+                </td>
                 <td>{item.gps?.coordinates}</td>
                 <td>{item.alarmType}</td>
                 <td>{item.parol?.name}</td>

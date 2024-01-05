@@ -7,15 +7,14 @@ function Alarms() {
   const alarmData: any = liveAlarmData;
   const allAlarams: any = alarmData?.all;
   // console.log(allAlarams);
-  const [selectedFilter, setSelectedFilter] = useState("false");
+  // const [selectedFilter, setSelectedFilter] = useState("false");
   const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
+  const [searchValue, setSearchValue] = useState("");
 
   const [filteredAlarms, setFilteredAlarms] = useState(allAlarams);
-  useEffect(() => {
-    handleFilterChange(selectedFilter); // Initial setup on component mount
-  }, [liveAlarmData]);
+
   const handleFilterChange = (value: any) => {
-    setSelectedFilter(value);
+    // setSelectedFilter(value);
     if (value === "All") {
       setFilteredAlarms(allAlarams);
     } else {
@@ -28,6 +27,12 @@ function Alarms() {
   const handleDeviceChange = (deviceCode: string | null) => {
     setSelectedDeviceId(deviceCode);
   };
+
+  useEffect(() => {
+    // Update filtered alarms when liveAlarmData changes
+    setFilteredAlarms(allAlarams);
+  }, [liveAlarmData, allAlarams]);
+
   return (
     <div className="container">
       <div className="shead">
@@ -35,6 +40,8 @@ function Alarms() {
           onFilterChange={handleFilterChange}
           data={filteredAlarms}
           onDeviceChange={handleDeviceChange}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
       </div>
       <div className="alarmlist">
@@ -42,6 +49,7 @@ function Alarms() {
           data={filteredAlarms}
           bg={"#FFA2A2"}
           selectedDeviceId={selectedDeviceId}
+          searchValue={searchValue}
         />
       </div>
     </div>

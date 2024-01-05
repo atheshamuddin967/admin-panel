@@ -75,14 +75,23 @@ function App() {
     });
   };
   const { setMyUser } = useUser();
-  const { data, eventData, multimediaData, liveAlarmData, dispatch, admin } =
-    useApi();
+  const {
+    data,
+    eventData,
+    multimediaData,
+    liveAlarmData,
+    dispatch,
+    admin,
+    fetchLiveAlarmData,
+    fetchEventData,
+    fetchMultimediaData,
+  } = useApi();
   const datas: any = data;
   const Admins: any = admin;
   useEffect(() => {
     socket.on("admin-message-recieved", (data: any) => {
       notifyUserStreaming(data.message);
-      console.log("admin-message-recived:", data.message);
+      // console.log("admin-message-recived:", data.message);
     });
     socket.on("streaming-updated", (socketUser) => {
       console.log("Received message:", socketUser);
@@ -101,16 +110,51 @@ function App() {
 
     socket.on("livealarm-detected", (data: any) => {
       notifyUserStreaming(data.message);
-      const updatedLiveAlarm: any = [...liveAlarmData, data];
-      dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm.data });
-      console.log("Live alarm detected:", data.message);
+      console.log("line 104", liveAlarmData);
+      fetchLiveAlarmData();
+      // const recievedAlarmType = data.alarmType;
+      // if (recievedAlarmType == "Emergency") {
+      //   console.log("line 108 called");
+      //   const updatedLiveAlarm: any = [...liveAlarmData.emergency, data];
 
-      console.log("Live alarm detected:", data.message);
+      //   dispatch({
+      //     type: "SET_LIVE_ALARMS",
+      //     payload: {
+      //       ...liveAlarmData,
+      //       emergency: updatedLiveAlarm,
+      //     },
+      //   });
+      // } else if (recievedAlarmType == "Motion Detection") {
+      //   console.log("line 112 called");
+
+      //   const updatedLiveAlarm: any = [...liveAlarmData.mdAlarms, data];
+      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
+      // } else if (recievedAlarmType == "ANPR") {
+      //   console.log("line 117 called");
+
+      //   const updatedLiveAlarm: any = [...liveAlarmData.anpr, data];
+      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
+      // } else if (recievedAlarmType == "Area of Competence") {
+      //   console.log("line 122 called");
+
+      //   const updatedLiveAlarm: any = [...liveAlarmData.aoc, data];
+      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
+      // }
+      // const updatedLiveAlarm: any = [...liveAlarmData.all, data];
+      // dispatch({
+      //   type: "SET_LIVE_ALARMS",
+      //   payload: {
+      //     ...liveAlarmData,
+      //     all: updatedLiveAlarm,
+      //   },
+      // });
+      // console.log("Liene 129", liveAlarmData);
     });
 
     // Event listener for "event-detected"
     socket.on("event-detected", (data) => {
       notifyUserStreaming(data.message);
+      fetchEventData();
       // Handle the event-detected event, e.g., update events state
       console.log("Event detected:", data);
     });
@@ -118,6 +162,7 @@ function App() {
     // Event listener for "multimedia-detected"
     socket.on("multimedia-detected", (data) => {
       notifyUserStreaming(data.message);
+      fetchMultimediaData();
       // Handle the multimedia-detected event, e.g., update multimedia state
       console.log("Multimedia detected:", data);
     });

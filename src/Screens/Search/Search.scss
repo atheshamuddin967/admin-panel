@@ -23,10 +23,12 @@
     input:focus-visible {
         outline: -webkit-focus-ring-color auto 0px;
     }
-    i{
+    button{
         position: absolute;
         right: 10px;
-        top: 5px;
+        top: 0px;
+        border: 0;
+        background-color: transparent;
     }
     position: relative;
 }
@@ -60,7 +62,7 @@
         font-weight: 500;
         color: $sider-color;
         margin: 5px 0;
-        float: right;
+        // float: right;
     }
     td {
         vertical-align: baseline;

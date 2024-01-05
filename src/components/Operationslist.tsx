@@ -40,14 +40,22 @@ function Operationslist({
   const data2: any = datas?.parols;
   const sortedData = myuser
     ? [...myuser].sort((a, b) =>
-        a.isStreaming === b.isStreaming ? 0 : a.isStreaming ? -1 : 1
+        a?.assignedDevice?.isStreaming === b?.assignedDevice?.isStreaming
+          ? 0
+          : a?.assignedDevice?.isStreaming
+          ? -1
+          : 1
       )
     : [];
   const sortedData2 = [...data2].sort((a, b) =>
-    a.isStreaming === b.isStreaming ? 0 : a.isStreaming ? -1 : 1
+    a?.assignedDevice?.isStreaming === b?.assignedDevice?.isStreaming
+      ? 0
+      : a?.assignedDevice?.isStreaming
+      ? -1
+      : 1
   );
   const dataToRender = sortedData.length > 0 ? sortedData : sortedData2;
-
+  // console.log(dataToRender);
   return (
     <div className="listfirstbg">
       <div className="listsecondlayout">

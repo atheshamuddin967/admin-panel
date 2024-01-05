@@ -10,20 +10,24 @@ function ListsVideo({
   handleAddToArray,
   handleDeleteFromArray,
 }: any) {
+  // console.log(item);
   const renderIcon = () => {
-    if (item?.stream_type === "TX") {
+    if (item?.assignedDevice?.stream_type === "TX") {
       return <MdOndemandVideo className="streamicon" />;
-    } else if (item?.stream_type === "ATX") {
+    } else if (item?.assignedDevice?.stream_type === "ATX") {
       return <MdHeadphones className="streamicon" />;
     }
     return null;
   };
+  // console.log(item);
   return (
     <div className="col-sm-3" key={item?._id}>
       <div className="vidlayout">
         <h6>
           <span>
-            {videoArray.includes(item) ? (
+            {videoArray?.some(
+              (videoItem: any) => videoItem?._id === item?._id
+            ) ? (
               <button
                 onClick={() => {
                   handleDeleteFromArray(item);
@@ -39,9 +43,9 @@ function ListsVideo({
           </span>
           {item?.username} {renderIcon()}
         </h6>
-        {item?.isStreaming ? (
+        {item?.assignedDevice?.isStreaming ? (
           <iframe
-            src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.deviceCode}`}
+            src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=${item.assignedDevice.deviceCode}`}
             width="100%"
             height="150px"
             frameBorder="0"

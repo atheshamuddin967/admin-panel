@@ -102,6 +102,11 @@ function Infobox({ data, closeinfobox, title }: any) {
                     Alarm Status:{" "}
                     <span>{data?.isResolved ? "Resolved" : "Not Resolve"}</span>
                   </p>
+
+                  <p>
+                    Event Type:{" "}
+                    <span>{data?.eventType ? data?.eventType : "--"}</span>
+                  </p>
                   <p>
                     Plate:{" "}
                     <span>
@@ -196,7 +201,7 @@ function Infobox({ data, closeinfobox, title }: any) {
               <div className="col-sm-4">
                 <h4 className="text-center">Location</h4>
                 <div className="infomapbox">
-                  <InfoBoxMap height={"250px"} data={data?.device} />
+                  <InfoBoxMap height={"250px"} data={data} />
                 </div>
               </div>
             </div>

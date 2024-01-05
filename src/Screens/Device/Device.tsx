@@ -55,6 +55,7 @@ function Device() {
           icon={Images.conected}
           bg={"#FCEBDB"}
           selectedFilter={selectedFilter}
+          searchValue={searchValue}
         />
       </div>
       {open && (

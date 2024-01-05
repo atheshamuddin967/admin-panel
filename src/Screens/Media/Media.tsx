@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useApi } from "../../context/Api";
 function Media() {
   const { multimediaData, deleteMultimedia } = useApi();
+  const [searchValue, setSearchValue] = useState("");
+
   const multi: any = multimediaData;
   const allData = multi?.data?.all;
   // console.log(allData);
@@ -12,11 +14,19 @@ function Media() {
   const handleDeviceChange = (deviceCode: string | null) => {
     setSelectedDeviceId(deviceCode);
   };
-
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    // const defaultEventType: any = eventData;
+    // searchEvents(value, defaultEventType);
+  };
   return (
     <div className="container">
       <div className="shead">
-        <MediaHeader data={allData} onDeviceChange={handleDeviceChange} />
+        <MediaHeader
+          data={allData}
+          onDeviceChange={handleDeviceChange}
+          search={handleSearch}
+        />
       </div>
       <div className="mediacontainer">
         <div className="headings ">
@@ -26,6 +36,7 @@ function Media() {
           data={allData}
           deleteMultimedia={deleteMultimedia}
           selectedDeviceId={selectedDeviceId}
+          searchValue={searchValue}
         />
       </div>
     </div>

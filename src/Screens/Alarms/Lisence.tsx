@@ -9,6 +9,7 @@ function Lisence() {
   const allAlarams: any = alarmData?.mdAlarms;
   const [selectedFilter, setSelectedFilter] = useState("false");
   const [selectedDeviceId, setSelectedDeviceId] = useState<any>("All");
+  const [searchValue, setSearchValue] = useState("");
 
   const [filteredAlarms, setFilteredAlarms] = useState(allAlarams);
   useEffect(() => {
@@ -28,6 +29,10 @@ function Lisence() {
   const handleDeviceChange = (deviceCode: string | null) => {
     setSelectedDeviceId(deviceCode);
   };
+  useEffect(() => {
+    // Update filtered alarms when liveAlarmData changes
+    setFilteredAlarms(allAlarams);
+  }, [liveAlarmData, allAlarams]);
   return (
     <div className="container">
       <div className="shead">
@@ -35,6 +40,8 @@ function Lisence() {
           onFilterChange={handleFilterChange}
           data={filteredAlarms}
           onDeviceChange={handleDeviceChange}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
       </div>
       <div className="alarmlist">
@@ -42,6 +49,7 @@ function Lisence() {
           data={filteredAlarms}
           bg={"#FFA2A2"}
           selectedDeviceId={selectedDeviceId}
+          searchValue={searchValue}
         />
       </div>
     </div>

@@ -17,6 +17,8 @@ function Photos() {
   const [openInfo, setOpenInfo] = useState(false);
   const [infoData, setInfoData] = useState<any>();
   const [deleteModal, setDeleteModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   const { multimediaData, deleteMultimedia } = useApi();
   const multi: any = multimediaData;
   const allData = multi?.data?.photos;
@@ -80,16 +82,41 @@ function Photos() {
   const handleDeviceChange = (deviceCode: string | null) => {
     setSelectedDeviceId(deviceCode);
   };
-  const filteredData: any =
-    selectedDeviceId === "All"
-      ? allData
-      : allData.filter(
-          (item: any) => item.device?.deviceCode === selectedDeviceId
-        );
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    // const defaultEventType: any = eventData;
+    // searchEvents(value, defaultEventType);
+  };
+  const filteredData: any = allData?.filter((item: any) => {
+    const searchTermLower = searchValue.toLowerCase();
+    const matchesDevice =
+      selectedDeviceId === "All" ||
+      item?.device?.deviceCode === selectedDeviceId;
+    const matchesSearch =
+      searchTermLower === "" ||
+      item?.mediaType?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item?.parol?.name?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      moment(item?.created_at)
+        .format("lll")
+        .toLowerCase()
+        .includes(searchValue.toLowerCase()) ||
+      item?.device?.deviceCode
+        ?.toLowerCase()
+        .includes(searchValue.toLowerCase());
+    // Add more fields to search if needed
+    // ...
+    false;
+
+    return matchesDevice && matchesSearch;
+  });
   return (
     <div className="container">
       <div className="shead">
-        <MediaHeader data={allData} onDeviceChange={handleDeviceChange} />
+        <MediaHeader
+          data={allData}
+          onDeviceChange={handleDeviceChange}
+          search={handleSearch}
+        />
       </div>
       <div className="mediacontainer">
         <div className="heading">
