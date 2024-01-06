@@ -103,7 +103,7 @@ function Login() {
             </div>
           </div>
           <div className="col-sm-6">
-            <ToastContainer style={{ zIndex: 1000001 }} />
+            {/* <ToastContainer style={{ zIndex: 1000001 }} /> */}
             <div className="imglogin">
               <img src={Images.loginimg} alt="login" />{" "}
             </div>

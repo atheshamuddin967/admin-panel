@@ -3,7 +3,12 @@ import "./Dashboard.scss";
 import Data from "../../Data/Data";
 import Charts from "../../components/Chart";
 import Charts2 from "../../components/Chart2";
+import { useApi } from "../../context/Api";
 function Dashboard() {
+  const { DashboardData } = useApi();
+  // console.log(DashboardData);
+  const data: any = DashboardData;
+  // console.log(data?.data?.connectedCams);
   return (
     <div>
       <div className="container">
@@ -15,9 +20,23 @@ function Dashboard() {
           </div>
         </div>
         <div className="row">
-          {Data.map((data: any) => (
-            <Dashbox data={data} />
-          ))}
+          <Dashbox data={data?.data?.connectedCams} title={"Connected Cams"} />
+          <Dashbox
+            data={data?.data?.connectedDevices}
+            title={"Connected Devices"}
+          />
+          <Dashbox data={data?.data?.totalDevices} title={"Total Devices"} />
+          <Dashbox
+            data={data?.data?.totalOperators}
+            title={"Total Operators"}
+          />
+          <Dashbox
+            data={data?.data?.totalMultimedia}
+            title={"Total Multimedia"}
+          />
+          <Dashbox data={data?.data?.totalAlarms} title={"Total Alarms"} />
+          <Dashbox data={data?.data?.totalGroups} title={"Total Groups"} />
+          <Dashbox data={data?.data?.supervisors} title={"Supervisors"} />
         </div>
         <div className="row">
           <div className="col-sm-6">

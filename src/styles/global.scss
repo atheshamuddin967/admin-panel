@@ -307,3 +307,19 @@ color: blue !important;
   .sboxs{
     max-width: 300px;
   }
+  .ink{
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    // background-color: red !important;
+    // z-index: 1000;
+    padding: 0;
+    video{
+      width: 0px !important;
+      height: 0px !important;
+    }
+  }
+  .red-toast {
+  background-color: red !important; // Set the background color to red
+  color: white; // Set the text color to white
+}

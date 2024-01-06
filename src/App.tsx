@@ -36,7 +36,7 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../src/styles/global.scss";
 import Navbar from "./components/Navbar";
 import SettingScreen from "./Screens/Settings/SettingScreen";
@@ -55,9 +55,12 @@ import { MdCarCrash } from "react-icons/md";
 import { MdSensors } from "react-icons/md";
 import { BiCctv } from "react-icons/bi";
 import { TbDeviceComputerCamera } from "react-icons/tb";
-
+import beepSound from "./images/beepsound.mp3";
+import notiSound from "./images/notisound.mp3";
 function App() {
   const { collapseSidebar, collapsed } = useProSidebar();
+  const [notificationSound] = useState(new Audio(notiSound));
+  const [EmergencySound] = useState(new Audio(beepSound));
 
   useEffect(() => {
     collapseSidebar();
@@ -68,12 +71,36 @@ function App() {
       collapseSidebar(false);
     }
   }, [location.pathname, collapseSidebar]);
-  const notifyUserStreaming = (msg: any) => {
+  const playNotificationSound = () => {
+    // Set the volume level if needed (value between 0 and 1)
+    notificationSound.volume = 0.1;
+
+    // Play the notification sound
+    notificationSound.play();
+  };
+
+  const playEmergencySound = () => {
+    // Set the volume level if needed (value between 0 and 1)
+    EmergencySound.volume = 0.1;
+
+    // Play the notification sound
+    EmergencySound.play();
+  };
+
+  const notifyAdmin = (msg: any) => {
+    playNotificationSound();
     toast.success(msg, {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 6000,
     });
   };
+  const notifyAdminerror = (msg: any) => {
+    toast.error(msg, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 6000,
+    });
+  };
+
   const { setMyUser } = useUser();
   const {
     data,
@@ -82,20 +109,23 @@ function App() {
     liveAlarmData,
     dispatch,
     admin,
-    fetchLiveAlarmData,
-    fetchEventData,
     fetchMultimediaData,
+    fetchEventData,
   } = useApi();
   const datas: any = data;
   const Admins: any = admin;
+  const livealarm: any = liveAlarmData;
+  const event: any = eventData;
+  const media: any = multimediaData;
   useEffect(() => {
     socket.on("admin-message-recieved", (data: any) => {
-      notifyUserStreaming(data.message);
+      notifyAdmin(data.message);
+      playNotificationSound();
       // console.log("admin-message-recived:", data.message);
     });
     socket.on("streaming-updated", (socketUser) => {
       console.log("Received message:", socketUser);
-
+      playNotificationSound();
       const userIndex = datas.users.findIndex(
         (user: any) => user._id === socketUser._id
       );
@@ -109,60 +139,107 @@ function App() {
     });
 
     socket.on("livealarm-detected", (data: any) => {
-      notifyUserStreaming(data.message);
-      console.log("line 104", liveAlarmData);
-      fetchLiveAlarmData();
-      // const recievedAlarmType = data.alarmType;
-      // if (recievedAlarmType == "Emergency") {
-      //   console.log("line 108 called");
-      //   const updatedLiveAlarm: any = [...liveAlarmData.emergency, data];
+      notifyAdminerror(data.message);
+      playEmergencySound();
+      console.log("line 104", livealarm);
+      // fetchLiveAlarmData();
+      const receivedAlarmType = data.alarmType;
+      const updatedLiveAlarm: any = { ...liveAlarmData }; // Create a copy of the existing state
 
-      //   dispatch({
-      //     type: "SET_LIVE_ALARMS",
-      //     payload: {
-      //       ...liveAlarmData,
-      //       emergency: updatedLiveAlarm,
-      //     },
-      //   });
-      // } else if (recievedAlarmType == "Motion Detection") {
-      //   console.log("line 112 called");
+      if (receivedAlarmType === "Emergency") {
+        console.log("line 108 called");
 
-      //   const updatedLiveAlarm: any = [...liveAlarmData.mdAlarms, data];
-      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
-      // } else if (recievedAlarmType == "ANPR") {
-      //   console.log("line 117 called");
+        updatedLiveAlarm.emergency = [...livealarm.emergency, data];
+      } else if (receivedAlarmType === "Motion Detection") {
+        console.log("line 112 called");
+        updatedLiveAlarm.mdAlarms = [...livealarm.mdAlarms, data];
+      } else if (receivedAlarmType === "ANPR") {
+        console.log("line 117 called");
+        updatedLiveAlarm.anpr = [...livealarm.anpr, data];
+      } else if (receivedAlarmType === "Area of Competence") {
+        console.log("line 122 called");
+        updatedLiveAlarm.aoc = [...livealarm.aoc, data];
+      }
 
-      //   const updatedLiveAlarm: any = [...liveAlarmData.anpr, data];
-      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
-      // } else if (recievedAlarmType == "Area of Competence") {
-      //   console.log("line 122 called");
+      // Update the "all" array regardless of the type
+      updatedLiveAlarm.all = [...livealarm.all, data];
 
-      //   const updatedLiveAlarm: any = [...liveAlarmData.aoc, data];
-      //   dispatch({ type: "SET_LIVE_ALARMS", payload: updatedLiveAlarm });
-      // }
-      // const updatedLiveAlarm: any = [...liveAlarmData.all, data];
-      // dispatch({
-      //   type: "SET_LIVE_ALARMS",
-      //   payload: {
-      //     ...liveAlarmData,
-      //     all: updatedLiveAlarm,
-      //   },
-      // });
-      // console.log("Liene 129", liveAlarmData);
+      dispatch({
+        type: "SET_LIVE_ALARMS",
+        payload: updatedLiveAlarm,
+      });
+
+      console.log("Line 129", updatedLiveAlarm);
+
+      console.log("Liene 129", liveAlarmData);
     });
 
     // Event listener for "event-detected"
     socket.on("event-detected", (data) => {
-      notifyUserStreaming(data.message);
+      notifyAdmin(data.message);
+      playNotificationSound();
       fetchEventData();
-      // Handle the event-detected event, e.g., update events state
-      console.log("Event detected:", data);
+      // const receivedEventType = data.eventType;
+      // const updatedEvent: any = { ...eventData };
+      // updatedEvent.all = [...eventData, data];
+
+      // dispatch({
+      //   type: "SET_EVENTS",
+      //   payload: updatedEvent,
+      // });
+
+      // console.log("Event detected:", data);
     });
 
     // Event listener for "multimedia-detected"
     socket.on("multimedia-detected", (data) => {
-      notifyUserStreaming(data.message);
+      notifyAdmin(data.message);
       fetchMultimediaData();
+      playNotificationSound();
+      // const recievedMediaType = data.mediaType;
+      // if (recievedMediaType == "image") {
+      //   console.log("line 108 called");
+      //   const updatedMedia: any = [...media.image, data];
+
+      //   dispatch({
+      //     type: "FETCH_MULTIMEDIA_SUCCESS",
+      //     payload: {
+      //       ...multimediaData,
+      //       image: updatedMedia,
+      //     },
+      //   });
+      // } else if (recievedMediaType == "video") {
+      //   console.log("line 112 called");
+
+      //   const updatedMedia: any = [...media.video, data];
+      //   dispatch({
+      //     type: "FETCH_MULTIMEDIA_SUCCESS",
+      //     payload: {
+      //       ...multimediaData,
+      //       video: updatedMedia,
+      //     },
+      //   });
+      // } else if (recievedMediaType == "audio") {
+      //   console.log("line 117 called");
+
+      //   const updatedMedia: any = [...media.audio, data];
+      //   dispatch({
+      //     type: "FETCH_MULTIMEDIA_SUCCESS",
+      //     payload: {
+      //       ...multimediaData,
+      //       audio: updatedMedia,
+      //     },
+      //   });
+      // }
+      // const updatedMedia: any = [...media.all, data];
+      // dispatch({
+      //   type: "FETCH_MULTIMEDIA_SUCCESS",
+      //   payload: {
+      //     ...multimediaData,
+      //     all: updatedMedia,
+      //   },
+      // });
+
       // Handle the multimedia-detected event, e.g., update multimedia state
       console.log("Multimedia detected:", data);
     });
@@ -428,6 +505,15 @@ function App() {
       <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
         <ToastContainer />
+        {/* 
+        <div className="ink">
+          <video
+            src={Images.beep}
+            controls={false}
+            loop={true}
+            autoPlay={true}
+          />
+        </div> */}
 
         <Routes>
           <Route path="/" element={<Login />} />,

@@ -47,6 +47,7 @@ interface InitialStateType {
   fetchEventData: any;
   fetchDeviceData: any;
   fetchMultimediaData: any;
+  DashboardData: [];
 }
 
 const initialstate: InitialStateType = {
@@ -63,6 +64,7 @@ const initialstate: InitialStateType = {
   searchData: [],
   systemConfig: null,
   admin: [],
+  DashboardData: [],
   dispatch: (action: any) => {
     console.log("Dispatching action:", action);
   },
@@ -93,8 +95,8 @@ const initialstate: InitialStateType = {
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
 // export const BASE_URL = "https://s1.hostin.one/";
-// export const BASE_URL = "http://185.31.67.243/";
-export const BASE_URL = "http://192.168.100.44:3002/";
+export const BASE_URL = "http://185.31.67.243/";
+// export const BASE_URL = "http://192.168.100.44:3002/";
 // const API_ENDPOINT = `${BASE_URL}user/get-users-and-groups`;
 const API_ENDPOINT = `${BASE_URL}groups/get-parols-and-groups`;
 const Api_createGroup = `${BASE_URL}groups/new-group`;
@@ -118,9 +120,10 @@ const API_Admin_Login = `${BASE_URL}admin/login-admin`;
 const API_createSubADmin = `${BASE_URL}admin/create-admin`;
 const API_SystemConfig = `${BASE_URL}system/system-config`;
 const API_EditSystem = `${BASE_URL}system/edit-systemconf`;
-const API_EventSearch = `${BASE_URL}events/search-events`;
+// const API_EventSearch = `${BASE_URL}events/search-events`;
 // const API_SearchDevice = `${BASE_URL}devices/search-devices`;
 const API_genralSearch = `${BASE_URL}search`;
+const API_Dashboard = `${BASE_URL}dashboard`;
 
 const ApiContext = createContext(initialstate);
 const ApiReducer = (state: any, action: any) => {
@@ -372,6 +375,14 @@ const ApiReducer = (state: any, action: any) => {
         isLoading: false,
         isError: false,
       };
+    case "SET_DASHBOARD_DATA":
+      return {
+        ...state,
+        DashboardData: action.payload,
+        isLoading: false,
+        isError: false,
+      };
+
     default:
       return state;
   }
@@ -395,6 +406,7 @@ const ApiProvider = ({ children }: any) => {
       // console.log(data);
 
       fetchSystemConfig();
+      fetchDashboardData();
       dispatch({ type: "SET_API_PRODUCTS", payload: data });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -448,7 +460,7 @@ const ApiProvider = ({ children }: any) => {
         },
       });
       const eventData = res.data;
-      // console.log(eventData);
+      console.log(eventData);
       dispatch({ type: "SET_EVENTS", payload: eventData.data });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -513,6 +525,37 @@ const ApiProvider = ({ children }: any) => {
     }
   };
 
+  // fetch dashboard data
+  const fetchDashboardData = async () => {
+    try {
+      // Set isLoading to true to indicate that the data is being fetched
+      dispatch({ type: "SET_LOADING", payload: true });
+
+      // Make a GET request to the API_Dashboard endpoint
+      const response = await axios.get(API_Dashboard, {
+        headers: {
+          Authorization: `Bearer ${BEARER_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Extract dashboard data from the response
+      const dashboardData = response?.data;
+      // console.log(dashboardData);
+      // Dispatch the dashboard data to the state
+      dispatch({ type: "SET_DASHBOARD_DATA", payload: dashboardData });
+
+      // Set isLoading to false to indicate that the data fetching is complete
+      dispatch({ type: "SET_LOADING", payload: false });
+    } catch (error) {
+      // Handle errors by dispatching an API_ERROR action and logging the error
+      dispatch({ type: "API_ERROR" });
+      console.error("Error fetching dashboard data:", error);
+
+      // Set isLoading to false in case of an error
+      dispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
   const isMounted = useRef(true);
 
   useEffect(() => {
