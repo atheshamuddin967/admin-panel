@@ -12,7 +12,7 @@ function TrackingDevice() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchValue, setSearchValue] = useState("");
 
-  const { deviceData, searchDevices } = useApi();
+  const { deviceData, searchDevices }: any = useApi();
   const data: any = deviceData;
   const alldata = data?.data?.scoutCameras;
 

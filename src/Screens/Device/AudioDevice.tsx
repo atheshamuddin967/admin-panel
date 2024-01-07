@@ -11,7 +11,7 @@ import DeviceForms from "../../components/DeviceForm";
 function AudioDevice() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchValue, setSearchValue] = useState("");
-  const { deviceData, searchDevices } = useApi();
+  const { deviceData } = useApi();
   const data: any = deviceData;
   const alldata = data?.data?.carBoardedCameras;
   // console.log(data);
@@ -31,9 +31,9 @@ function AudioDevice() {
   const closemodalEdit = () => {
     SetOpenEdit(false);
   };
-  const handleSearch = () => {
-    searchDevices(searchValue, "all");
-  };
+  // const handleSearch = () => {
+  //   searchDevices(searchValue, "all");
+  // };
   return (
     <div className="container">
       <div className="shead">
@@ -41,7 +41,7 @@ function AudioDevice() {
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           data={alldata}
-          search={handleSearch}
+          // search={handleSearch}
           openmodal={openmodal}
           openmodalEdit={openmodalEdit}
           onFilterChange={(value: any) => setSelectedFilter(value)}

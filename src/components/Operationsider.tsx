@@ -18,31 +18,38 @@ import Movingbtn from "./Movingbtn";
 import { WebRTCAdaptor } from "@antmedia/webrtc_adaptor";
 
 function Operationsider({ data }: any) {
-  const webRTCAdaptor: any = new WebRTCAdaptor({
-    websocket_url: "ws://66.135.24.9:5080/WebRTCAppEE/websocket",
-    mediaConstraints: {
-      audio: true,
-    },
+  const [antadaptor,setAntAdaptor]:any = useState(null);
 
-    peerconnection_config: {
-      iceServers: [
-        {
-          urls: "stun:s1.hostin.one:5349",
-        },
-        {
-          urls: "turn:s1.hostin.one:5349",
-          username: "bammin",
-          credential: "q)TBn%T1.7$MCubuF1",
-        },
-      ],
-    },
-    sdp_constraints: {
-      OfferToReceiveAudio: false,
-      OfferToReceiveVideo: false,
-    },
-    localVideoId: "id-of-video-element",
-    remoteVideoElement: document.getElementById("remoteVideo"),
-  });
+  useEffect(() => {
+    const webRTCAdaptor: any = new WebRTCAdaptor({
+      // bappmedia.creativeaid.it:5443/WebRTCAppEE
+      websocket_url: "ws://bappmedia.creativeaid.it:5080/WebRTCAppEE/websocket",
+      mediaConstraints: {
+        audio: true,
+      },
+  
+      peerconnection_config: {
+        iceServers: [
+          {
+            urls: "stun:s1.hostin.one:5349",
+          },
+          {
+            urls: "turn:s1.hostin.one:5349",
+            username: "bammin",
+            credential: "q)TBn%T1.7$MCubuF1",
+          },
+        ],
+      },
+      sdp_constraints: {
+        OfferToReceiveAudio: false,
+        OfferToReceiveVideo: false,
+      },
+      localVideoId: "id-of-video-element",
+      remoteVideoElement: document.getElementById("remoteVideo"),
+    });
+    setAntAdaptor(webRTCAdaptor);
+  
+  },[])
 
   const [isDropdownOpen, setDropdownOpen] = useState<string | boolean>(false);
   // const [dropItme, setDropIttem] = useState<any>();
@@ -84,10 +91,14 @@ function Operationsider({ data }: any) {
 
   useEffect(() => {
     socket.on("ptt-detection-admin", (data) => {
+      console.log('event detected')
       const { group } = data;
+      console.log(group?._id)
+      if(antadaptor) {
+        antadaptor.play(group?._id);
+      }
       // alert(group._id);
-
-      webRTCAdaptor.play(group._id);
+      // antadaptor.play(group._id);
       // console.log(dropItme == group._id, dropItme, group._id, isDropdownOpen);
 
       // if (isDropdownOpen == dropItme && dropItme == group?._id) {
@@ -106,7 +117,7 @@ function Operationsider({ data }: any) {
     // return () => {
     //   socket.off("ptt-detection-admin", handlePttDetection);
     // };
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen,antadaptor]);
 
   // Sort groups based on emergency_enabled status
   const sortedGroups = [...(datas?.groups || [])].sort(
@@ -119,6 +130,14 @@ function Operationsider({ data }: any) {
     }
   );
 
+  const playAudioSt = () => {
+    try {
+      antadaptor.play("659740f87dc9a16dbb19265a");
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <div className="sidesoprations">
       <div className="fstlay">
@@ -140,12 +159,21 @@ function Operationsider({ data }: any) {
                 >
                   <div className="dropbtn">
                     <div>
+                      {/* <iframe
+                        src={`https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=659740f87dc9a16dbb19265a`}
+                        width="50%"
+                        height="50%"
+                        frameBorder="0"
+                        id="remoteVideo"
+                      ></iframe> */}
                       <video
                         id="remoteVideo"
                         autoPlay
-                        width="1"
-                        height="1"
-                      ></video>
+                        width="30%"
+                        style={{borderWidth:2}}
+                        height="20%"
+                        // source="https://bappmedia.creativeaid.it:5443/WebRTCAppEE/play.html?id=659740f87dc9a16dbb19265a"
+                      />
                       <p>
                         <span>
                           <FaLocationDot />
@@ -185,7 +213,9 @@ function Operationsider({ data }: any) {
                     )}
                     <div className="mic">
                       <button className="micbtn">
-                        <CiMicrophoneOn />
+                        <CiMicrophoneOn
+                          onClick={playAudioSt}
+                        />
                       </button>
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import Dashbox from "../../components/Dashox";
 import "./Dashboard.scss";
-import Data from "../../Data/Data";
+// import Data from "../../Data/Data";
 import Charts from "../../components/Chart";
 import Charts2 from "../../components/Chart2";
 import { useApi } from "../../context/Api";

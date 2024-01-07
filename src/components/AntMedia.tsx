@@ -1,7 +1,7 @@
 import { WebRTCAdaptor } from "@antmedia/webrtc_adaptor";
 
 export const webRTCAdaptor: any = new WebRTCAdaptor({
-  websocket_url: "ws://66.135.24.9:5080/WebRTCAppEE/websocket",
+  websocket_url: "ws://bappmedia.creativeaid.it:5080/WebRTCAppEE/websocket",
   mediaConstraints: {
     audio: true,
   },

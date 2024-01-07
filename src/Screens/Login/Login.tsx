@@ -2,7 +2,7 @@ import Images from "../../images/Images";
 import { useApi } from "../../context/Api";
 import Loginbtn from "../../components/Loginbtn";
 // import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import Loader from "../../components/Loader";
 import "./Login.scss";
 import Singupinput from "../../components/Singupinput";
@@ -36,7 +36,7 @@ function Login() {
     } catch (error: any) {
       // If login fails, handle the error
       // You can also display an error message to the user
-      console.error("Login failed:", error.message);
+      console.log("Login failed:", error);
     } finally {
       SetApiLoading(false); // Set isLoading to false after completing the operation
     }

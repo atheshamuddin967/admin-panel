@@ -95,8 +95,8 @@ const initialstate: InitialStateType = {
 const BEARER_TOKEN =
   "a6b4d9aba8128a07146dc3c6892805112c99172ca050fb09c0be38cef2b35ae3";
 // export const BASE_URL = "https://s1.hostin.one/";
-export const BASE_URL = "http://185.31.67.243/";
-// export const BASE_URL = "http://192.168.100.44:3002/";
+export const BASE_URL = "https://api.verior.co/";
+// export const BASE_URL = "http://192.168.100.9:3002/";
 // const API_ENDPOINT = `${BASE_URL}user/get-users-and-groups`;
 const API_ENDPOINT = `${BASE_URL}groups/get-parols-and-groups`;
 const Api_createGroup = `${BASE_URL}groups/new-group`;
@@ -999,10 +999,10 @@ const ApiProvider = ({ children }: any) => {
       dispatch({ type: "SET_LOADING" });
 
       // console.log("Before API call");
-
+      console.log(credentials)
       const response = await axios.post(API_Admin_Login, credentials, {
         headers: {
-          Authorization: `Bearer ${BEARER_TOKEN}`,
+          // Authorization: `Bearer ${BEARER_TOKEN}`,
           "Content-Type": "application/json",
         },
       });
@@ -1024,8 +1024,12 @@ const ApiProvider = ({ children }: any) => {
         console.error("Login failed: Incorrect username or password");
       }
     } catch (error: any) {
+      toast.error(error?.response?.data?.message, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 6000,
+      });
       // Dispatch an error action or handle the error accordingly
-      dispatch({ type: "ADMIN_LOGIN_ERROR", payload: "Login failed" });
+      dispatch({ type: "ADMIN_LOGIN_ERROR", payload:error?.response?.data?.message });
     }
   };
 

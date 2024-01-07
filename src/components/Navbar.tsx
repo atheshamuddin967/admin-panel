@@ -29,8 +29,11 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                <img src={Images.logout} alt="logout" className="logout" />
+              <Link 
+              className="nav-link" to="/">
+                <img
+                onClick={() => localStorage.removeItem("loggedInUser")}
+                src={Images.logout} alt="logout" className="logout" />
               </Link>
             </li>
           </ul>

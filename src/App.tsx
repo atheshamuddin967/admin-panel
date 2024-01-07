@@ -104,8 +104,8 @@ function App() {
   const { setMyUser } = useUser();
   const {
     data,
-    eventData,
-    multimediaData,
+    // eventData,
+    // multimediaData,
     liveAlarmData,
     dispatch,
     admin,
@@ -115,8 +115,8 @@ function App() {
   const datas: any = data;
   const Admins: any = admin;
   const livealarm: any = liveAlarmData;
-  const event: any = eventData;
-  const media: any = multimediaData;
+  // const event: any = eventData;
+  // const media: any = multimediaData;
   useEffect(() => {
     socket.on("admin-message-recieved", (data: any) => {
       notifyAdmin(data.message);

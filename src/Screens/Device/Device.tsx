@@ -8,7 +8,7 @@ import { useApi } from "../../context/Api";
 import DeviceForms from "../../components/DeviceForm";
 function Device() {
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const { deviceData, searchDevices } = useApi();
+  const { deviceData } = useApi();
   const [searchValue, setSearchValue] = useState("");
 
   const [open, SetOpen] = useState(false);
@@ -32,9 +32,9 @@ function Device() {
   const closemodalEdit = () => {
     SetOpenEdit(false);
   };
-  const handleSearch = () => {
-    searchDevices(searchValue, "all");
-  };
+  // const handleSearch = () => {
+  //   searchDevices(searchValue, "all");
+  // };
 
   return (
     <div className="container">
@@ -43,7 +43,7 @@ function Device() {
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           data={alldata}
-          search={handleSearch}
+          // search={handleSearch}
           openmodal={openmodal}
           openmodalEdit={openmodalEdit}
           onFilterChange={(value: any) => setSelectedFilter(value)}
