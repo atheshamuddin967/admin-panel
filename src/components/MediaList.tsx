@@ -1,12 +1,13 @@
 import "../Screens/Media/Media.scss";
 import ReactPlayer from "react-player";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Images from "../images/Images";
 import moment from "moment";
 import DeleteModal from "./DeleteModal";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaForward, FaBackward } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
 import { TiInfo } from "react-icons/ti";
+import html2canvas from "html2canvas";
 
 import Infobox from "./Infobox";
 interface MediaItem {
@@ -30,6 +31,8 @@ function MediaList({
 }: MediaListProps) {
   // const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [playedSeconds, setPlayedSeconds] = useState(0);
+
   // console.log(data);
   const handleItemClick = (index: number) => {
     setSelectedIndex(index);
@@ -117,6 +120,83 @@ function MediaList({
 
     return matchesDevice && matchesSearch;
   });
+  // const playerRef: any = useRef(null);
+  // // const [currentTime, setCurrentTime] = useState(0);
+  // const handleBackward = () => {
+  //   if (playerRef.current) {
+  //     const currentTime = playerRef.current.getCurrentTime();
+  //     const newTime = Math.max(0, currentTime - 10);
+  //     playerRef.current.seekTo(newTime, "seconds");
+  //   }
+  // };
+
+  // const handleForward = () => {
+  //   if (playerRef.current) {
+  //     const currentTime = playerRef.current.getCurrentTime();
+  //     const newTime = currentTime + 10;
+  //     playerRef.current.seekTo(newTime, "seconds");
+  //   }
+  // };
+
+  // const handleProgress = (progress: any) => {
+  //   if (progress.playedSeconds) {
+  //     setPlayedSeconds(progress.playedSeconds);
+  //   }
+  // };
+  function useRefArray<T>(
+    length: number,
+    initializer: () => React.RefObject<T>
+  ): React.RefObject<T>[] {
+    return Array.from({ length }, initializer);
+  }
+  const playerRefs: React.RefObject<ReactPlayer>[] = useRefArray(
+    data?.length,
+    () => useRef<ReactPlayer>(null)
+  );
+  const [rotationAngle, setRotationAngle] = useState<number>(0);
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
+
+  const handleRotate = (angle: number, index: number) => {
+    const playerRef = playerRefs[index];
+    // Rest of the rotation logic...
+  };
+
+  const handleSpeedChange = (speed: number, index: number) => {
+    const playerRef = playerRefs[index];
+    // Rest of the speed change logic...
+  };
+
+  // const handleScreenshot = () => {
+  //   if (playerRef.current) {
+  //     html2canvas(playerRef.current.getInternalPlayer() as HTMLElement, {
+  //       logging: true,
+  //       // letterRendering,
+  //       useCORS: true,
+  //     }).then((canvas: any) => {
+  //       const link = document.createElement("a");
+  //       link.href = canvas.toDataURL();
+  //       link.download = "screenshot.png";
+  //       link.click();
+  //     });
+  //   }
+  // };
+
+  const handleFastForward = (index: number) => {
+    const playerRef = playerRefs[index];
+    if (playerRef.current) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime + 5, "seconds");
+    }
+  };
+
+  const handleFastBackward = (index: number) => {
+    const playerRef = playerRefs[index];
+
+    if (playerRef.current) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime - 5, "seconds");
+    }
+  };
 
   return (
     <div>
@@ -133,7 +213,7 @@ function MediaList({
                   // </video>
 
                   <ReactPlayer
-                    url={Images.vid1}
+                    url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                     style={{
                       maxHeight: "150px",
                       // height: "200px",
@@ -141,14 +221,49 @@ function MediaList({
                       margin: 0,
                       maxWidth: "100%",
                       padding: 0,
+                      transform: `rotate(${rotationAngle}deg)`,
                     }}
-                    // width={"100%"}
-
-                    controls={true}
+                    ref={playerRefs[index]}
                     playing={false}
-                    loop={false}
+                    controls
+                    playbackRate={playbackSpeed}
                   />
                 )}
+              </div>
+              <div>
+                <button onClick={() => handleRotate(90, index)}>
+                  Rotate 90
+                </button>
+                <button onClick={() => handleRotate(180, index)}>
+                  Rotate 180
+                </button>
+                <button onClick={() => handleRotate(270, index)}>
+                  Rotate 270
+                </button>
+                <button onClick={() => handleRotate(360, index)}>
+                  Rotate 360
+                </button>
+              </div>
+
+              <div>
+                <button onClick={() => handleSpeedChange(0.5, index)}>
+                  0.5x Speed
+                </button>
+                <button onClick={() => handleSpeedChange(1, index)}>
+                  1x Speed
+                </button>
+                <button onClick={() => handleSpeedChange(1.5, index)}>
+                  1.5x Speed
+                </button>
+              </div>
+
+              <div>
+                <button onClick={() => handleFastBackward(index)}>
+                  Backward
+                </button>
+                <button onClick={() => handleFastForward(index)}>
+                  Forward
+                </button>
               </div>
               <div className="det">
                 <p>

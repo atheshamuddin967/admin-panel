@@ -999,7 +999,7 @@ const ApiProvider = ({ children }: any) => {
       dispatch({ type: "SET_LOADING" });
 
       // console.log("Before API call");
-      console.log(credentials)
+      console.log(credentials);
       const response = await axios.post(API_Admin_Login, credentials, {
         headers: {
           // Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -1029,7 +1029,10 @@ const ApiProvider = ({ children }: any) => {
         autoClose: 6000,
       });
       // Dispatch an error action or handle the error accordingly
-      dispatch({ type: "ADMIN_LOGIN_ERROR", payload:error?.response?.data?.message });
+      dispatch({
+        type: "ADMIN_LOGIN_ERROR",
+        payload: error?.response?.data?.message,
+      });
     }
   };
 

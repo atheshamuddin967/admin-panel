@@ -104,8 +104,8 @@ function App() {
   const { setMyUser } = useUser();
   const {
     data,
-    // eventData,
-    // multimediaData,
+    eventData,
+    multimediaData,
     liveAlarmData,
     dispatch,
     admin,
@@ -115,8 +115,8 @@ function App() {
   const datas: any = data;
   const Admins: any = admin;
   const livealarm: any = liveAlarmData;
-  // const event: any = eventData;
-  // const media: any = multimediaData;
+  const event: any = eventData;
+  const media: any = multimediaData;
   useEffect(() => {
     socket.on("admin-message-recieved", (data: any) => {
       notifyAdmin(data.message);
@@ -505,15 +505,6 @@ function App() {
       <section className={`contentcontainer  ${collapsed ? "expanded " : ""}`}>
         <Navbar />
         <ToastContainer />
-        {/* 
-        <div className="ink">
-          <video
-            src={Images.beep}
-            controls={false}
-            loop={true}
-            autoPlay={true}
-          />
-        </div> */}
 
         <Routes>
           <Route path="/" element={<Login />} />,
